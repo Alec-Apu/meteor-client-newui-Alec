@@ -2,7 +2,7 @@
 
 基于 NoSetViolin/meteor-client-newui-xh 的 26.2 源码适配，保留原有自定义界面。
 
-本分支作者顺序：第一作者小涵（[Alec-Apu](https://github.com/Alec-Apu/meteor-client-newui-Alec)），第二作者 [NoSetViolin](https://github.com/NoSetViolin)，第三作者 Codex（OpenAI，本次适配与验证协助）。上游 Meteor Client 版权与 GPL-3.0 许可证保留。
+维护者：[Alec（Alec-Apu）](https://github.com/Alec-Apu)。上游 Meteor Client 版权与 GPL-3.0 许可证保留。
 
 ## 安装
 

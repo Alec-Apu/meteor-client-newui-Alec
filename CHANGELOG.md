@@ -2,11 +2,7 @@
 
 ## Minecraft 26.3 适配 — 2026-10-07
 
-### 作者
-
-1. 小涵（Alec-Apu）— 第一作者：[项目仓库](https://github.com/Alec-Apu/meteor-client-newui-Alec)
-2. NoSetViolin — 第二作者：[GitHub](https://github.com/NoSetViolin)
-3. Codex（OpenAI）— 第三作者，本次 26.3 适配与验证协助。
+维护者：[Alec（Alec-Apu）](https://github.com/Alec-Apu)。
 
 ### 更新
 
