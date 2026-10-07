@@ -42,6 +42,13 @@ public abstract class LivingEntityMixin extends Entity {
         super(type, world);
     }
 
+    @Inject(method = "drop", at = @At("HEAD"), cancellable = true)
+    private void onDropItem(ItemStack itemStack, boolean thrownFromHand, net.minecraft.util.Prediction prediction, CallbackInfoReturnable<net.minecraft.world.entity.item.ItemEntity> cir) {
+        if (level().isClientSide() && !itemStack.isEmpty()) {
+            if (MeteorClient.EVENT_BUS.post(meteordevelopment.meteorclient.events.entity.DropItemsEvent.get(itemStack)).isCancelled()) cir.setReturnValue(null);
+        }
+    }
+
     @ModifyReturnValue(method = "canStandOnFluid", at = @At("RETURN"))
     private boolean onCanWalkOnFluid(boolean original, FluidState fluid) {
         if ((Object) this != mc.player) return original;
@@ -56,7 +63,7 @@ public abstract class LivingEntityMixin extends Entity {
         if (noRender.noEatParticles() && itemStack.getComponents().has(DataComponents.FOOD)) ci.cancel();
     }
 
-    @ModifyVariable(method = "swing(Lnet/minecraft/world/InteractionHand;)V", at = @At("HEAD"), argsOnly = true, name = "hand")
+    @ModifyVariable(method = "swing(Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/component/SwingAnimation;Z)Z", at = @At("HEAD"), argsOnly = true, name = "hand")
     private InteractionHand setHand(InteractionHand hand) {
         if ((Object) this != mc.player) return hand;
 
@@ -69,7 +76,7 @@ public abstract class LivingEntityMixin extends Entity {
         return hand;
     }
 
-    @ModifyExpressionValue(method = "getCurrentSwingDuration", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/component/SwingAnimation;duration()I"))
+    @ModifyExpressionValue(method = "getModifiedSwingDuration", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/component/SwingAnimation;duration()I"))
     private int getHandSwingDuration(int original) {
         if ((Object) this != mc.player) return original;
 

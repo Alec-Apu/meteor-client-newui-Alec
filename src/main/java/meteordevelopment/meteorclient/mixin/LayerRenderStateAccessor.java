@@ -12,6 +12,9 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(ItemStackRenderState.LayerRenderState.class)
 public interface LayerRenderStateAccessor {
+    @Accessor("quads")
+    net.minecraft.client.resources.model.geometry.ItemQuads meteor$getQuads();
+
     @Accessor("itemTransform")
     ItemTransform meteor$getTransform();
 }

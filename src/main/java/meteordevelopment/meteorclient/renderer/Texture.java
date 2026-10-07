@@ -5,12 +5,12 @@
 
 package meteordevelopment.meteorclient.renderer;
 
-import com.mojang.blaze3d.GpuFormat;
+import com.mojang.renderpearl.api.GpuFormat;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.platform.TextureUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.textures.AddressMode;
-import com.mojang.blaze3d.textures.FilterMode;
+import com.mojang.renderpearl.api.textures.AddressMode;
+import com.mojang.renderpearl.api.textures.FilterMode;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import org.jspecify.annotations.NonNull;
 import org.lwjgl.BufferUtils;
@@ -48,7 +48,11 @@ public class Texture extends AbstractTexture {
         buffer.rewind();
         MemoryUtil.memCopy(MemoryUtil.memAddress(buffer), image.getPointer(), buffer.remaining());
 
-        RenderSystem.getDevice().createCommandEncoder().writeToTexture(texture, image);
+        var encoder = RenderSystem.getDevice().createCommandEncoder();
+
+        encoder.writeToTexture(texture, image);
+
+        encoder.submit();
 
         image.close();
     }

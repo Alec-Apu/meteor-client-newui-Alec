@@ -288,7 +288,7 @@ public class DiscordPresence extends Module {
     @Override
     public WWidget getWidget(GuiTheme theme) {
         WButton help = theme.button("Open documentation.");
-        help.action = () -> Util.getPlatform().openUri("https://github.com/MeteorDevelopment/meteor-client/wiki/Starscript");
+        help.action = () -> org.lwjgl.sdl.SDLMisc.SDL_OpenURL("https://github.com/MeteorDevelopment/meteor-client/wiki/Starscript");
 
         return help;
     }

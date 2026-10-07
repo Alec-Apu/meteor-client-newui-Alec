@@ -47,12 +47,6 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
         super(world, profile);
     }
 
-    @Inject(method = "drop", at = @At("HEAD"), cancellable = true)
-    private void onDrop(boolean all, CallbackInfoReturnable<Boolean> cir) {
-        if (MeteorClient.EVENT_BUS.post(DropItemsEvent.get(getMainHandItem())).isCancelled())
-            cir.setReturnValue(false);
-    }
-
     @ModifyExpressionValue(method = "handlePortalTransitionEffect", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;screen()Lnet/minecraft/client/gui/screens/Screen;", ordinal = 0))
     private Screen modifyPortalTransitionEffect(Screen original) {
         if (Modules.get().isActive(Portals.class)) return null;
@@ -86,7 +80,7 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
         }
     }
 
-    @ModifyExpressionValue(method = "tick", at = @At(value = "FIELD", target = "Lnet/minecraft/client/player/ClientInput;keyPresses:Lnet/minecraft/world/entity/player/Input;", opcode = Opcodes.GETFIELD))
+    @ModifyExpressionValue(method = "sendChanges", at = @At(value = "FIELD", target = "Lnet/minecraft/client/player/ClientInput;keyPresses:Lnet/minecraft/world/entity/player/Input;", opcode = Opcodes.GETFIELD))
     private Input isSneaking(Input original) {
         if (Modules.get().get(Sneak.class).doPacket() || Modules.get().get(NoSlow.class).airStrict()) {
             return new Input(
@@ -172,7 +166,7 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
         MeteorClient.EVENT_BUS.post(SendMovementPacketsEvent.Pre.get());
     }
 
-    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/ClientPacketListener;send(Lnet/minecraft/network/protocol/Packet;)V", ordinal = 1))
+    @Inject(method = "sendChanges", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/ClientPacketListener;send(Lnet/minecraft/network/protocol/Packet;)V", ordinal = 1))
     private void onTickHasVehicleBeforeSendPackets(CallbackInfo ci) {
         MeteorClient.EVENT_BUS.post(SendMovementPacketsEvent.Pre.get());
     }
@@ -182,7 +176,7 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
         MeteorClient.EVENT_BUS.post(SendMovementPacketsEvent.Post.get());
     }
 
-    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/ClientPacketListener;send(Lnet/minecraft/network/protocol/Packet;)V", ordinal = 1, shift = At.Shift.AFTER))
+    @Inject(method = "sendChanges", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/ClientPacketListener;send(Lnet/minecraft/network/protocol/Packet;)V", ordinal = 1, shift = At.Shift.AFTER))
     private void onTickHasVehicleAfterSendPackets(CallbackInfo ci) {
         MeteorClient.EVENT_BUS.post(SendMovementPacketsEvent.Post.get());
     }

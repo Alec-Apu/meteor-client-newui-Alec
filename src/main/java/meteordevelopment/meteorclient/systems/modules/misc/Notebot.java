@@ -834,7 +834,7 @@ public class Notebot extends Module {
         }
 
         if (swingArm.get()) {
-            mc.player.swing(InteractionHand.MAIN_HAND);
+            mc.player.swing(InteractionHand.MAIN_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, false);
         }
 
         int iterations = 0;
@@ -904,7 +904,7 @@ public class Notebot extends Module {
 
             // Swing arm
             if (swingArm.get()) {
-                mc.player.swing(InteractionHand.MAIN_HAND);
+                mc.player.swing(InteractionHand.MAIN_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, false);
             }
 
             // Play notes

@@ -185,7 +185,7 @@ public class AntiAFK extends Module {
 
         // Swing
         if (swing.get() && random.nextInt(99) == 0) {
-            mc.player.swing(mc.player.getUsedItemHand());
+            mc.player.swing(mc.player.getUsedItemHand(), net.minecraft.world.item.component.SwingAnimation.DEFAULT, false);
         }
 
         // Sneak

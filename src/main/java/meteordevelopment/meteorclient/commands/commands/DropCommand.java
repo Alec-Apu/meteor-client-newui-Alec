@@ -32,7 +32,7 @@ public class DropCommand extends Command {
     @Override
     public void build(LiteralArgumentBuilder<ClientSuggestionProvider> builder) {
         // Main Hand
-        builder.then(literal("hand").executes(_ -> drop(player -> player.drop(true))));
+        builder.then(literal("hand").executes(_ -> drop(player -> mc.gameMode.dropItem(player, true))));
 
         // Offhand
         builder.then(literal("offhand").executes(_ -> drop(_ -> InvUtils.drop().slotOffhand())));

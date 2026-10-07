@@ -58,7 +58,7 @@ public class MicrosoftLogin {
 
         startServer();
         String url = "https://login.live.com/oauth20_authorize.srf?client_id=" + CLIENT_ID + "&response_type=code&redirect_uri=http://127.0.0.1:" + PORT + "&scope=XboxLive.signin%20offline_access&prompt=select_account";
-        Util.getPlatform().openUri(url);
+        org.lwjgl.sdl.SDLMisc.SDL_OpenURL(url);
 
         return url;
     }

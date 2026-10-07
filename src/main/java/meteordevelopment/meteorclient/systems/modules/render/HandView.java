@@ -207,9 +207,9 @@ public class HandView extends Module {
     }
 
     private void rotate(PoseStack matrix, Vector3d rotation) {
-        matrix.mulPose(Axis.XP.rotationDegrees((float) rotation.x));
-        matrix.mulPose(Axis.YP.rotationDegrees((float) rotation.y));
-        matrix.mulPose(Axis.ZP.rotationDegrees((float) rotation.z));
+        matrix.rotate(Axis.XP.rotationDegrees((float) rotation.x));
+        matrix.rotate(Axis.YP.rotationDegrees((float) rotation.y));
+        matrix.rotate(Axis.ZP.rotationDegrees((float) rotation.z));
     }
 
     private void scale(PoseStack matrix, Vector3d scale) {
@@ -221,8 +221,8 @@ public class HandView extends Module {
     }
 
     private void applyServerRotations(PoseStack matrix) {
-        matrix.mulPose(Axis.XP.rotationDegrees(mc.player.getXRot() - Rotations.serverPitch));
-        matrix.mulPose(Axis.YP.rotationDegrees(mc.player.getYRot() - Rotations.serverYaw));
+        matrix.rotate(Axis.XP.rotationDegrees(mc.player.getXRot() - Rotations.serverPitch));
+        matrix.rotate(Axis.YP.rotationDegrees(mc.player.getYRot() - Rotations.serverYaw));
     }
 
     public boolean oldAnimations() {

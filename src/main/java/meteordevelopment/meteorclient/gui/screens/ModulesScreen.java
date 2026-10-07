@@ -6,7 +6,7 @@
 package meteordevelopment.meteorclient.gui.screens;
 
 import com.mojang.blaze3d.platform.MacosUtil;
-import com.mojang.blaze3d.textures.GpuTextureView;
+import com.mojang.renderpearl.api.textures.GpuTextureView;
 import meteordevelopment.meteorclient.gui.GuiTheme;
 import meteordevelopment.meteorclient.gui.renderer.GuiRenderer;
 import meteordevelopment.meteorclient.gui.tabs.TabScreen;
@@ -38,7 +38,7 @@ import java.util.Locale;
 import static meteordevelopment.meteorclient.MeteorClient.mc;
 import static meteordevelopment.meteorclient.utils.Utils.getWindowHeight;
 import static meteordevelopment.meteorclient.utils.Utils.getWindowWidth;
-import static org.lwjgl.glfw.GLFW.*;
+import static com.mojang.blaze3d.platform.InputConstants.*;
 
 public class ModulesScreen extends TabScreen {
     private static String lastNavigationTitle = "Combat";
@@ -58,8 +58,8 @@ public class ModulesScreen extends TabScreen {
     public boolean keyPressed(@NonNull KeyEvent value) {
         if (locked) return false;
 
-        boolean control = MacosUtil.IS_MACOS ? value.modifiers() == GLFW_MOD_SUPER : value.modifiers() == GLFW_MOD_CONTROL;
-        if (control && value.key() == GLFW_KEY_F && panel != null) {
+        boolean control = MacosUtil.IS_MACOS ? value.modifiers() == MOD_SUPER : value.modifiers() == MOD_CONTROL;
+        if (control && value.key() == KEY_F && panel != null) {
             panel.focusSearch();
             return true;
         }
@@ -420,7 +420,7 @@ public class ModulesScreen extends TabScreen {
 
         @Override
         public boolean onMouseClicked(MouseButtonEvent click, boolean doubled) {
-            if (click.button() == GLFW_MOUSE_BUTTON_LEFT && click.x() >= x && click.x() <= x + width
+            if (click.button() == MOUSE_BUTTON_LEFT && click.x() >= x && click.x() <= x + width
                 && click.y() >= y && click.y() <= y + headerHeight()) {
                 dragging = true;
                 dragOffsetX = click.x() - x;
@@ -432,7 +432,7 @@ public class ModulesScreen extends TabScreen {
 
         @Override
         public boolean onMouseReleased(MouseButtonEvent click) {
-            if (dragging && click.button() == GLFW_MOUSE_BUTTON_LEFT) {
+            if (dragging && click.button() == MOUSE_BUTTON_LEFT) {
                 dragging = false;
                 return true;
             }
@@ -459,7 +459,7 @@ public class ModulesScreen extends TabScreen {
 
             @Override
             protected void onPressed(int button) {
-                if (button == GLFW_MOUSE_BUTTON_LEFT) toggleMode();
+                if (button == MOUSE_BUTTON_LEFT) toggleMode();
             }
 
             @Override
@@ -482,7 +482,7 @@ public class ModulesScreen extends TabScreen {
 
             @Override
             protected void onPressed(int button) {
-                if (button == GLFW_MOUSE_BUTTON_LEFT) select(item);
+                if (button == MOUSE_BUTTON_LEFT) select(item);
             }
 
             @Override
@@ -538,8 +538,8 @@ public class ModulesScreen extends TabScreen {
 
             @Override
             protected void onPressed(int button) {
-                if (button == GLFW_MOUSE_BUTTON_LEFT) module.toggle();
-                else if (button == GLFW_MOUSE_BUTTON_RIGHT) mc.gui.setScreen(theme.moduleScreen(module));
+                if (button == MOUSE_BUTTON_LEFT) module.toggle();
+                else if (button == MOUSE_BUTTON_RIGHT) mc.gui.setScreen(theme.moduleScreen(module));
             }
 
             @Override

@@ -17,6 +17,20 @@
     <img src="https://img.shields.io/endpoint?url=https://ghloc.vercel.app/api/MeteorDevelopment/meteor-client/badge?filter=.java$&label=lines%20of%20code&color=blue" alt="GitHub lines of code"/>
 </div>
 
+## Minecraft 26.3 更新
+
+本分支已从 Minecraft 26.2 适配至 **26.3**，保留自定义界面。运行环境：Java 25、Fabric Loader 0.19.3 或更新版本。
+
+### 本分支作者（按指定顺序）
+
+1. **小涵（Alec-Apu）** — 第一作者：[meteor-client-newui-Alec](https://github.com/Alec-Apu/meteor-client-newui-Alec)
+2. **NoSetViolin** — 第二作者：[GitHub](https://github.com/NoSetViolin)
+3. **Codex（OpenAI）** — 第三作者，协助完成本次 26.3 适配与验证。
+
+上游 Meteor Client 的版权、贡献者署名和 GPL-3.0 许可证继续保留。
+
+更新内容见 [更新日志](CHANGELOG.md)，安装、测试范围和已知限制见 [26.3 适配说明](MIGRATION_26.3.md)。
+
 ## Usage
 
 ### Building

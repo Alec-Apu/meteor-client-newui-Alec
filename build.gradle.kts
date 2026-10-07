@@ -94,6 +94,13 @@ dependencies {
     jij(libs.netty.handler.proxy) { isTransitive = false }
     jij(libs.netty.codec.socks) { isTransitive = false }
     jij(libs.waybackauthlib)
+
+    // Minecraft 26.3 no longer provides tinyfd; keep file dialogs available.
+    jij("org.lwjgl:lwjgl-tinyfd:3.4.3")
+    listOf("natives-windows", "natives-windows-arm64", "natives-linux", "natives-macos", "natives-macos-arm64").forEach {
+        implementation("org.lwjgl:lwjgl-tinyfd:3.4.3:$it")
+        include("org.lwjgl:lwjgl-tinyfd:3.4.3:$it")
+    }
 }
 
 java {

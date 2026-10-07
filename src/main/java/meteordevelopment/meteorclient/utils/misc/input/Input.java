@@ -9,7 +9,7 @@ import meteordevelopment.meteorclient.gui.GuiKeyEvents;
 import meteordevelopment.meteorclient.mixin.KeyMappingAccessor;
 import meteordevelopment.meteorclient.utils.misc.CursorStyle;
 import net.minecraft.client.KeyMapping;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 
 import static meteordevelopment.meteorclient.MeteorClient.mc;
 
@@ -35,38 +35,41 @@ public class Input {
     }
 
     public static void setKeyState(KeyMapping bind, boolean pressed) {
-        setKeyState(getKey(bind), pressed);
+        var key = ((KeyMappingAccessor) bind).meteor$getKey();
+        if (key.getType() == InputConstants.Type.MOUSE) setButtonState(key.getValue(), pressed);
+        else setKeyState(key.getValue(), pressed);
     }
 
     public static boolean isPressed(KeyMapping bind) {
-        return isKeyPressed(getKey(bind)) || isButtonPressed(getKey(bind));
+        var key = ((KeyMappingAccessor) bind).meteor$getKey();
+        return key.getType() == InputConstants.Type.MOUSE ? isButtonPressed(key.getValue()) : isKeyPressed(key.getValue());
     }
 
     public static boolean isKeyPressed(int key) {
         if (!GuiKeyEvents.canUseKeys) return false;
 
-        if (key == GLFW.GLFW_KEY_UNKNOWN) return false;
-        return key < keys.length && keys[key];
+        if (key == InputConstants.UNKNOWN.getValue()) return false;
+        return key >= 0 && key < keys.length && keys[key];
     }
 
     public static boolean isButtonPressed(int button) {
         if (button == -1) return false;
-        return button < buttons.length && buttons[button];
+        return button >= 0 && button < buttons.length && buttons[button];
     }
 
     public static void setCursorStyle(CursorStyle style) {
         if (lastCursorStyle != style) {
-            GLFW.glfwSetCursor(mc.getWindow().handle(), style.getGlfwCursor());
+            mc.getWindow().selectCursor(style.getCursor());
             lastCursorStyle = style;
         }
     }
 
     public static int getModifier(int key) {
         return switch (key) {
-            case GLFW.GLFW_KEY_LEFT_SHIFT, GLFW.GLFW_KEY_RIGHT_SHIFT -> GLFW.GLFW_MOD_SHIFT;
-            case GLFW.GLFW_KEY_LEFT_CONTROL, GLFW.GLFW_KEY_RIGHT_CONTROL -> GLFW.GLFW_MOD_CONTROL;
-            case GLFW.GLFW_KEY_LEFT_ALT, GLFW.GLFW_KEY_RIGHT_ALT -> GLFW.GLFW_MOD_ALT;
-            case GLFW.GLFW_KEY_LEFT_SUPER, GLFW.GLFW_KEY_RIGHT_SUPER -> GLFW.GLFW_MOD_SUPER;
+            case InputConstants.KEY_LSHIFT, InputConstants.KEY_RSHIFT -> InputConstants.MOD_SHIFT;
+            case InputConstants.KEY_LCONTROL, InputConstants.KEY_RCONTROL -> InputConstants.MOD_CONTROL;
+            case InputConstants.KEY_LALT, InputConstants.KEY_RALT -> InputConstants.MOD_ALT;
+            case InputConstants.KEY_LGUI, InputConstants.KEY_RGUI -> InputConstants.MOD_SUPER;
             default -> 0;
         };
     }

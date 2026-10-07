@@ -1,23 +1,22 @@
 package meteordevelopment.meteorclient.utils.render.postprocess;
 
-import com.mojang.blaze3d.GpuFormat;
+import com.mojang.renderpearl.api.GpuFormat;
 import com.mojang.blaze3d.buffers.Std140Builder;
 import com.mojang.blaze3d.buffers.Std140SizeCalculator;
-import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.renderpearl.api.pipeline.RenderPipeline;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.textures.FilterMode;
+import com.mojang.renderpearl.api.textures.FilterMode;
 import meteordevelopment.meteorclient.MeteorClient;
 import meteordevelopment.meteorclient.renderer.MeshRenderer;
-import net.minecraft.client.renderer.DynamicUniformStorage;
+import meteordevelopment.meteorclient.renderer.DynamicUniformStorage;
 import org.joml.Vector4f;
 import org.jspecify.annotations.NonNull;
 
 import java.nio.ByteBuffer;
 
 import static meteordevelopment.meteorclient.MeteorClient.mc;
-import static org.lwjgl.glfw.GLFW.glfwGetTime;
 
 public abstract class PostProcessShader {
     protected final RenderPipeline pipeline;
@@ -25,8 +24,8 @@ public abstract class PostProcessShader {
 
     protected PostProcessShader(RenderPipeline pipeline) {
         this.pipeline = pipeline;
-        this.framebuffer = new TextureTarget(MeteorClient.NAME + " PostProcessShader " + this.getClass().getSimpleName(), mc.getWindow().getWidth(), mc.getWindow().getHeight(), true,
-            GpuFormat.RGBA8_UNORM);
+        this.framebuffer = new TextureTarget(MeteorClient.NAME + " PostProcessShader " + this.getClass().getSimpleName(), mc.getWindow().getWidth(), mc.getWindow().getHeight(),
+            GpuFormat.RGBA8_UNORM, GpuFormat.D32_FLOAT);
     }
 
     protected abstract boolean shouldDraw();
@@ -41,7 +40,9 @@ public abstract class PostProcessShader {
 
     public void clearTexture() {
         if (this.shouldDraw()) {
-            RenderSystem.getDevice().createCommandEncoder().clearColorTexture(framebuffer.getColorTexture(), new Vector4f(0));
+            var encoder = RenderSystem.getDevice().createCommandEncoder();
+            encoder.clearColorTexture(framebuffer.getColorTexture(), new Vector4f(0));
+            encoder.submit();
         }
     }
 
@@ -62,7 +63,7 @@ public abstract class PostProcessShader {
             .fullscreen()
             .uniform("PostData", UNIFORM_STORAGE.writeUniform(new UniformData(
                 (float) mc.getWindow().getWidth(), (float) mc.getWindow().getHeight(),
-                (float) glfwGetTime()
+                (float) (net.minecraft.util.Util.getNanos() / 1_000_000_000.0)
             )))
             .sampler("u_Texture", framebuffer.getColorTextureView(), RenderSystem.getSamplerCache().getClampToEdge(FilterMode.NEAREST));
 

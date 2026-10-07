@@ -1,0 +1,36 @@
+# 更新日志
+
+## Minecraft 26.3 适配 — 2026-10-07
+
+### 作者
+
+1. 小涵（Alec-Apu）— 第一作者：[项目仓库](https://github.com/Alec-Apu/meteor-client-newui-Alec)
+2. NoSetViolin — 第二作者：[GitHub](https://github.com/NoSetViolin)
+3. Codex（OpenAI）— 第三作者，本次 26.3 适配与验证协助。
+
+### 更新
+
+- 将 Minecraft 26.2 版本适配到 26.3，运行环境为 Java 25、Fabric Loader ≥0.19.3。
+- 更新 Fabric API 及可选模组编译依赖，保留自定义界面。
+- 将 GPU 管线、uniform 存储、纹理、渲染命令和裁剪接口迁移至 RenderPearl。
+- 更新 GLSL 声明和顶点格式，修复新编译器下的着色器兼容问题。
+- 将 GLFW 输入迁移至 SDL，自动转换旧配置中的键盘、鼠标及修饰键编码。
+- 适配第一人称手部状态、实体渲染、物品模型、粒子、数据包和 Authlib 接口变化。
+- 修复初始化首帧访问未初始化模块，以及界面动画中零面积裁剪导致的异常。
+- 随模组打包 tinyfd 及各平台原生库，继续提供文件选择器。
+
+### 验证
+
+- 完整 Gradle build 和访问声明校验通过。
+- Meteor 初始化、Mixin 加载检查及着色器预编译通过。
+- 自动打开并运行 Meteor 界面，然后进入隔离单人世界。
+- 世界运行 200 个游戏刻，成功绘制 576 帧自定义线面与深度几何并正常退出。
+- 旧快捷键转换及序列化往返检查通过；发布包已移除临时测试代码。
+
+### 已知限制
+
+- TheAltening 登录暂不可用。
+- Minecraft 26.3 已删除旧挥手数据包，仅发送该数据包的旧行为不再生效；本地挥手保留。
+- 尚未逐项验证所有模块、多人服务器、Vulkan 及第三方模组组合；Baritone 26.3 兼容性未验证。
+
+详细说明见 [MIGRATION_26.3.md](MIGRATION_26.3.md)。上游版权与 GPL-3.0 许可证保留。

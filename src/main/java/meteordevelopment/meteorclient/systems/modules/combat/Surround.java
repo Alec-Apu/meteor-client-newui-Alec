@@ -27,7 +27,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.protocol.game.ClientboundPlayerCombatKillPacket;
 import net.minecraft.network.protocol.game.ServerboundAttackPacket;
-import net.minecraft.network.protocol.game.ServerboundSwingPacket;
 import net.minecraft.server.level.BlockDestructionProgress;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -400,8 +399,6 @@ public class Surround extends Module {
                 } else {
                     mc.player.connection.send(new ServerboundAttackPacket(crystal.getId()));
                 }
-
-                mc.getConnection().send(new ServerboundSwingPacket(InteractionHand.MAIN_HAND));
             }
         }
 

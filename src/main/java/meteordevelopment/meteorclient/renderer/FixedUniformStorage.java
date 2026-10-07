@@ -5,11 +5,11 @@
 
 package meteordevelopment.meteorclient.renderer;
 
-import com.mojang.blaze3d.buffers.GpuBuffer;
-import com.mojang.blaze3d.buffers.GpuBufferSlice;
-import com.mojang.blaze3d.systems.GpuDevice;
+import com.mojang.renderpearl.api.buffers.GpuBuffer;
+import com.mojang.renderpearl.api.buffers.GpuBufferSlice;
+import com.mojang.renderpearl.api.device.GpuDevice;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.renderer.DynamicUniformStorage;
+import meteordevelopment.meteorclient.renderer.DynamicUniformStorage;
 import net.minecraft.client.renderer.MappableRingBuffer;
 import net.minecraft.util.Mth;
 

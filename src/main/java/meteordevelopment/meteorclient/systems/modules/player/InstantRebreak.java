@@ -19,7 +19,6 @@ import meteordevelopment.orbit.EventHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
-import net.minecraft.network.protocol.game.ServerboundSwingPacket;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 
@@ -109,8 +108,6 @@ public class InstantRebreak extends Module {
                 if (rotate.get())
                     Rotations.rotate(Rotations.getYaw(blockPos), Rotations.getPitch(blockPos), this::sendPacket);
                 else sendPacket();
-
-                mc.getConnection().send(new ServerboundSwingPacket(InteractionHand.MAIN_HAND));
             }
         } else {
             ticks++;

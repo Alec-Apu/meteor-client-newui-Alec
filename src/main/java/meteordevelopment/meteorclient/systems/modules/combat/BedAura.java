@@ -28,7 +28,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BedItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.phys.BlockHitResult;
@@ -225,7 +224,7 @@ public class BedAura extends Module {
 
         // Auto move
         if (autoMove.get()) {
-            FindItemResult bed = InvUtils.find(itemStack -> itemStack.getItem() instanceof BedItem);
+            FindItemResult bed = InvUtils.find(itemStack -> itemStack.is(net.minecraft.tags.ItemTags.BEDS));
 
             if (bed.found() && bed.slot() != autoMoveSlot.get() - 1) {
                 InvUtils.move().from(bed.slot()).toHotbar(autoMoveSlot.get() - 1);
@@ -248,7 +247,7 @@ public class BedAura extends Module {
     }
 
     private BlockPos findPlace(Player target) {
-        if (!InvUtils.find(itemStack -> itemStack.getItem() instanceof BedItem).found()) return null;
+        if (!InvUtils.find(itemStack -> itemStack.is(net.minecraft.tags.ItemTags.BEDS)).found()) return null;
 
         for (int index = 0; index < 3; index++) {
             int i = index == 0 ? 1 : index == 1 ? 0 : 2;
@@ -301,7 +300,7 @@ public class BedAura extends Module {
     private boolean placeBed(BlockPos pos) {
         if (pos == null) return false;
 
-        FindItemResult bed = InvUtils.findInHotbar(itemStack -> itemStack.getItem() instanceof BedItem);
+        FindItemResult bed = InvUtils.findInHotbar(itemStack -> itemStack.is(net.minecraft.tags.ItemTags.BEDS));
         if (bed.getHand() == null && !autoSwitch.get()) return false;
 
         double yaw = switch (direction) {

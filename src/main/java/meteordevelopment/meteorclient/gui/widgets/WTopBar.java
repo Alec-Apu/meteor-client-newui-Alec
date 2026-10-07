@@ -15,7 +15,6 @@ import meteordevelopment.meteorclient.utils.render.color.Color;
 import net.minecraft.client.gui.screens.Screen;
 
 import static meteordevelopment.meteorclient.MeteorClient.mc;
-import static org.lwjgl.glfw.GLFW.glfwSetCursorPos;
 
 public abstract class WTopBar extends WHorizontalList {
     protected abstract Color getButtonColor(boolean pressed, boolean hovered);
@@ -57,7 +56,7 @@ public abstract class WTopBar extends WHorizontalList {
                 double mouseY = mc.mouseHandler.ypos();
 
                 tab.openScreen(theme);
-                glfwSetCursorPos(mc.getWindow().handle(), mouseX, mouseY);
+                org.lwjgl.sdl.SDLMouse.SDL_WarpMouseInWindow(mc.getWindow().handle(), (float) (mouseX), (float) (mouseY));
             }
         }
 

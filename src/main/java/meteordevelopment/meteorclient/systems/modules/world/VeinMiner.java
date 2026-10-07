@@ -221,7 +221,7 @@ public class VeinMiner extends Module {
 
         public void mine() {
             if (!mining) {
-                mc.player.swing(InteractionHand.MAIN_HAND);
+                mc.player.swing(InteractionHand.MAIN_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, false);
                 mining = true;
             }
             if (rotate.get())

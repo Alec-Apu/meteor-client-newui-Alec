@@ -49,6 +49,8 @@ public class OutlineRenderCommandQueue extends SubmitNodeStorage {
 
     @NullMarked
     private class OutlineBatchingRenderCommandQueue extends SubmitNodeCollection {
+        private OutlineBatchingRenderCommandQueue() { super(false, OutlineRenderCommandQueue.this.seeThrough()); }
+
         @Override
         public void submitShadow(PoseStack poseStack, float shadowRadius, List<EntityRenderState.ShadowPiece> shadowPieces) {
         }
@@ -70,13 +72,13 @@ public class OutlineRenderCommandQueue extends SubmitNodeStorage {
         }
 
         @Override
-        public <S> void submitModel(Model<? super S> model, S state, PoseStack poseStack, RenderType renderType, int lightCoords, int overlayCoords, int tintedColor, @Nullable TextureAtlasSprite sprite, int outlineColor, ModelFeatureRenderer.@Nullable CrumblingOverlay crumblingOverlay) {
-            super.submitModel(model, state, poseStack, renderType, lightCoords, overlayCoords, color, sprite, color, crumblingOverlay);
+        public <S> void submitModel(Model<? super S> model, S state, PoseStack poseStack, RenderType renderType, int lightCoords, int overlayCoords, int tintedColor, net.minecraft.client.renderer.texture.@Nullable UvMapping sprite, int outlineColor) {
+            super.submitModel(model, state, poseStack, renderType, lightCoords, overlayCoords, color, sprite, color);
         }
 
         @Override
-        public void submitModelPart(ModelPart part, PoseStack poseStack, RenderType renderType, int lightCoords, int overlayCoords, @Nullable TextureAtlasSprite sprite, int tintedColor, ModelFeatureRenderer.@Nullable CrumblingOverlay crumblingOverlay, int outlineColor) {
-            super.submitModelPart(part, poseStack, renderType, lightCoords, overlayCoords, sprite, color, crumblingOverlay, color);
+        public void submitModelPart(ModelPart part, PoseStack poseStack, RenderType renderType, int lightCoords, int overlayCoords, net.minecraft.client.renderer.texture.@Nullable UvMapping sprite, int tintedColor, int outlineColor) {
+            super.submitModelPart(part, poseStack, renderType, lightCoords, overlayCoords, sprite, color, color);
         }
 
         @Override
@@ -90,11 +92,11 @@ public class OutlineRenderCommandQueue extends SubmitNodeStorage {
         }
 
         @Override
-        public void submitBreakingBlockModel(PoseStack poseStack, List<BlockStateModelPart> modelParts, int progress) {
+        public void submitBreakingBlockModel(PoseStack poseStack, List<BlockStateModelPart> modelParts, int progress, boolean showPartial) {
         }
 
         @Override
-        public void submitItem(PoseStack poseStack, ItemDisplayContext displayContext, int lightCoords, int overlayCoords, int outlineColor, int[] tintLayers, List<BakedQuad> quads, ItemStackRenderState.FoilType foilType) {
+        public void submitItem(PoseStack poseStack, ItemDisplayContext displayContext, int lightCoords, int overlayCoords, int outlineColor, int[] tintLayers, net.minecraft.client.resources.model.geometry.ItemQuads quads, ItemStackRenderState.FoilType foilType) {
             if (tints == null || tints[0] != color) {
                 tints = new int[]{color, color, color, color};
             }

@@ -5,7 +5,7 @@
 
 package meteordevelopment.meteorclient.gui.screens;
 
-import com.mojang.blaze3d.textures.GpuTextureView;
+import com.mojang.renderpearl.api.textures.GpuTextureView;
 import meteordevelopment.meteorclient.events.meteor.ModuleBindChangedEvent;
 import meteordevelopment.meteorclient.gui.GuiTheme;
 import meteordevelopment.meteorclient.gui.WidgetScreen;
@@ -41,7 +41,7 @@ import java.util.function.Supplier;
 import static meteordevelopment.meteorclient.MeteorClient.mc;
 import static meteordevelopment.meteorclient.utils.Utils.getWindowHeight;
 import static meteordevelopment.meteorclient.utils.Utils.getWindowWidth;
-import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_LEFT;
+import static com.mojang.blaze3d.platform.InputConstants.MOUSE_BUTTON_LEFT;
 
 public class ModuleScreen extends WidgetScreen {
     private static final Color ACCENT = new Color(0, 245, 255);
@@ -386,7 +386,7 @@ public class ModuleScreen extends WidgetScreen {
 
         @Override
         public boolean onMouseClicked(MouseButtonEvent click, boolean doubled) {
-            if (click.button() == GLFW_MOUSE_BUTTON_LEFT && click.x() >= x && click.x() <= x + width
+            if (click.button() == MOUSE_BUTTON_LEFT && click.x() >= x && click.x() <= x + width
                 && click.y() >= y && click.y() <= y + theme.scale(76)) {
                 dragging = true;
                 dragOffsetX = click.x() - x;
@@ -398,7 +398,7 @@ public class ModuleScreen extends WidgetScreen {
 
         @Override
         public boolean onMouseReleased(MouseButtonEvent click) {
-            if (dragging && click.button() == GLFW_MOUSE_BUTTON_LEFT) {
+            if (dragging && click.button() == MOUSE_BUTTON_LEFT) {
                 dragging = false;
                 return true;
             }
@@ -426,7 +426,7 @@ public class ModuleScreen extends WidgetScreen {
 
         @Override
         protected void onPressed(int button) {
-            if (button == GLFW_MOUSE_BUTTON_LEFT) mc.gui.setScreen(ModuleScreen.this.parent);
+            if (button == MOUSE_BUTTON_LEFT) mc.gui.setScreen(ModuleScreen.this.parent);
         }
 
         @Override
@@ -460,7 +460,7 @@ public class ModuleScreen extends WidgetScreen {
 
         @Override
         protected void onPressed(int button) {
-            if (button == GLFW_MOUSE_BUTTON_LEFT) action.run();
+            if (button == MOUSE_BUTTON_LEFT) action.run();
         }
 
         @Override
@@ -481,7 +481,7 @@ public class ModuleScreen extends WidgetScreen {
 
         @Override
         protected void onPressed(int button) {
-            if (button == GLFW_MOUSE_BUTTON_LEFT) module.toggle();
+            if (button == MOUSE_BUTTON_LEFT) module.toggle();
         }
 
         @Override

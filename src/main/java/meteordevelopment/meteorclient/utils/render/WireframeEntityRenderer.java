@@ -80,9 +80,8 @@ public class WireframeEntityRenderer {
             int lightCoords,
             int overlayCoords,
             int tintedColor,
-            TextureAtlasSprite sprite,
-            int outlineColor,
-            ModelFeatureRenderer.CrumblingOverlay crumblingOverlay
+            net.minecraft.client.renderer.texture.UvMapping sprite,
+            int outlineColor
         ) {
             if (renderType.isOutline()) return;
             model.renderToBuffer(poseStack, vertexConsumer, lightCoords, overlayCoords, tintedColor);
@@ -149,6 +148,8 @@ public class WireframeEntityRenderer {
         public @NonNull VertexConsumer setUv2(int u, int v) {
             return this;
         }
+
+        public @NonNull VertexConsumer setUv3(float u, float v) { return this; }
 
         @Override
         public @NonNull VertexConsumer setNormal(float x, float y, float z) {

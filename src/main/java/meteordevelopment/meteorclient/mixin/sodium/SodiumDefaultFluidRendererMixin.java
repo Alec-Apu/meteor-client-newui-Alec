@@ -74,8 +74,9 @@ public abstract class SodiumDefaultFluidRendererMixin {
         return !otherState.getFluidState().getType().isSame(fluid.getType());
     }
 
-    @ModifyReturnValue(method = "isFluidSideExposed(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/Direction;F)Z", at = @At("RETURN"))
-    private boolean onIsFluidSideExposed(boolean original, BlockState ownBlockState, BlockState neighborBlockState, Direction facing, float height) {
+    @ModifyReturnValue(method = "isFluidSideExposed", at = @At("RETURN"))
+    private boolean onIsFluidSideExposed(boolean original, BlockAndTintGetter level, BlockState ownBlockState, BlockPos selfPos, Direction facing, float height) {
+        BlockState neighborBlockState = level.getBlockState(selfPos.relative(facing));
         if (original || !forceXrayFluidSides || facing.getAxis().isVertical()) return original;
         if (!xray.isBlocked(neighborBlockState.getBlock(), null)) return false;
 

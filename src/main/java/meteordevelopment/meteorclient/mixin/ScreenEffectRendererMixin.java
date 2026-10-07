@@ -25,12 +25,12 @@ public abstract class ScreenEffectRendererMixin {
     }
 
     @Inject(method = "submitWater", at = @At("HEAD"), cancellable = true)
-    private static void onRenderUnderwaterOverlay(Minecraft minecraft, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CallbackInfo ci) {
+    private static void onRenderUnderwaterOverlay(CallbackInfo ci) {
         if (Modules.get().get(NoRender.class).noLiquidOverlay()) ci.cancel();
     }
 
     @Inject(method = "submitBlockSprite", at = @At("HEAD"), cancellable = true)
-    private static void render(TextureAtlasSprite sprite, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int color, CallbackInfo ci) {
+    private static void render(CallbackInfo ci) {
         if (Modules.get().get(NoRender.class).noInWallOverlay()) ci.cancel();
     }
 }

@@ -73,8 +73,7 @@ public abstract class BannerRendererMixin {
             -1,
             sprite,
             sprites,
-            0,
-            breakProgress
+            0
         );
     }
 }
