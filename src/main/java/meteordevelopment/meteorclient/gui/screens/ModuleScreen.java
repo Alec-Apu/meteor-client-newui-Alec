@@ -76,6 +76,7 @@ public class ModuleScreen extends WidgetScreen {
     @Override
     public void tick() {
         super.tick();
+        if (module instanceof meteordevelopment.meteorclient.systems.modules.misc.Carpet carpet) carpet.tickWidget();
         if (panel != null && panel.visibilityChanged()) panel.refreshContent();
     }
 
@@ -205,7 +206,7 @@ public class ModuleScreen extends WidgetScreen {
             }
 
             // The notebook's controls occupy the settings area of its own native module panel.
-            if (module instanceof meteordevelopment.meteorclient.systems.modules.misc.CommandBookModule && custom != null) {
+            if ((module instanceof meteordevelopment.meteorclient.systems.modules.misc.CommandBookModule || module instanceof meteordevelopment.meteorclient.systems.modules.misc.Carpet) && custom != null) {
                 left.add(custom).expandX();
                 leftWeight += 9;
                 custom = null;

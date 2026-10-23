@@ -10,7 +10,7 @@ base {
     archivesName = archivesBaseName
     group = mavenGroup
 
-    val suffix = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.8")
+    val suffix = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.9")
     version = "${libs.versions.minecraft.get()}-$suffix"
 }
 
@@ -164,7 +164,7 @@ fun toMinecraftCompat(version: String): String {
 
 tasks {
     processResources {
-        val buildNumber = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.8")
+        val buildNumber = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.9")
         val commit = providers.gradleProperty("commit").getOrElse("")
 
         val propertyMap = mapOf(
@@ -288,3 +288,17 @@ val commandBookTest = tasks.register<JavaExec>("commandBookTest") {
     })
 }
 tasks.named("check") { dependsOn(commandBookTest) }
+
+val carpetTests = sourceSets.create("carpetTests") {
+    java.srcDir("src/test-carpet/java")
+    compileClasspath += sourceSets.main.get().output
+    runtimeClasspath += sourceSets.main.get().output
+}
+val carpetTest = tasks.register<JavaExec>("carpetTest") {
+    group = "verification"
+    dependsOn(tasks.named(carpetTests.classesTaskName))
+    classpath = carpetTests.runtimeClasspath
+    mainClass.set("meteordevelopment.meteorclient.systems.modules.misc.carpet.CarpetStateTest")
+    javaLauncher.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(25)) })
+}
+tasks.named("check") { dependsOn(carpetTest) }
