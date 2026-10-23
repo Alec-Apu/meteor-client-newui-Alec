@@ -37,13 +37,13 @@ import static meteordevelopment.meteorclient.MeteorClient.mc;
 
 public class ProxiesScreen extends WindowScreen {
     private final List<WCheckbox> checkboxes = new ArrayList<>();
-    private final WButton refreshButton = theme.button("Refresh");
+    private final WButton refreshButton = theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Refresh"));
     private final WConfirmedButton cleanButton = theme.confirmedButton("Cleanup", "Confirm");
     private Map<Proxy, WLabel> statuses = new HashMap<>();
     private int timer = 0;
 
     public ProxiesScreen(GuiTheme theme) {
-        super(theme, "Proxies");
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Proxies"));
     }
 
     @Override
@@ -56,7 +56,7 @@ public class ProxiesScreen extends WindowScreen {
         WHorizontalList l = add(theme.horizontalList()).expandX().widget();
 
         // New
-        WButton newBtn = l.add(theme.button("New")).expandX().widget();
+        WButton newBtn = l.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("New"))).expandX().widget();
         newBtn.action = () -> mc.gui.setScreen(new EditProxyScreen(theme, null, this::reload));
 
         // Import
@@ -67,7 +67,7 @@ public class ProxiesScreen extends WindowScreen {
         filters.put(txtFilter);
         filters.rewind();
 
-        WButton importBtn = l.add(theme.button("Import")).expandX().widget();
+        WButton importBtn = l.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Import"))).expandX().widget();
         importBtn.action = () -> {
             String selectedFile = TinyFileDialogs.tinyfd_openFileDialog("Import Proxies", null, filters, null, false);
             if (selectedFile != null) {
@@ -88,7 +88,7 @@ public class ProxiesScreen extends WindowScreen {
 
         WButton configButton = l.add(theme.button(GuiRenderer.EDIT)).widget();
         configButton.action = () -> mc.gui.setScreen(new ConfigScreen(theme));
-        configButton.tooltip = "Proxies Config";
+        configButton.tooltip = meteordevelopment.meteorclient.utils.misc.Localization.text("Proxies Config");
     }
 
     private void initTable(WTable table) {
@@ -127,7 +127,7 @@ public class ProxiesScreen extends WindowScreen {
 
             WButton refresh = table.add(theme.button(GuiRenderer.RESET)).widget();
             refresh.action = () -> MeteorExecutor.execute(proxy::checkStatus);
-            refresh.tooltip = "Refresh";
+            refresh.tooltip = meteordevelopment.meteorclient.utils.misc.Localization.text("Refresh");
 
             WButton edit = table.add(theme.button(GuiRenderer.EDIT)).widget();
             edit.action = () -> mc.gui.setScreen(new EditProxyScreen(theme, proxy, this::reload));
@@ -219,7 +219,7 @@ public class ProxiesScreen extends WindowScreen {
         private WContainer settingsContainer;
 
         public ConfigScreen(GuiTheme theme) {
-            super(theme, "Proxies Config");
+            super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Proxies Config"));
         }
 
         @Override

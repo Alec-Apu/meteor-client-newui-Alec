@@ -5,8 +5,6 @@
 
 package meteordevelopment.meteorclient.systems.accounts.types;
 
-import com.mojang.authlib.Environment;
-import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.util.UndashedUuid;
 import meteordevelopment.meteorclient.MeteorClient;
 import meteordevelopment.meteorclient.systems.accounts.Account;
@@ -23,8 +21,6 @@ import java.util.UUID;
 import static meteordevelopment.meteorclient.MeteorClient.mc;
 
 public class TheAlteningAccount extends Account<TheAlteningAccount> implements TokenAccount {
-    private static final Environment ENVIRONMENT = new Environment("http://sessionserver.thealtening.com", "http://authserver.thealtening.com", "https://api.mojang.com", "The Altening");
-    private static final YggdrasilAuthenticationService SERVICE = new YggdrasilAuthenticationService(mc.getProxy(), ENVIRONMENT);
     private String token;
     private String accessToken;
 
@@ -56,20 +52,12 @@ public class TheAlteningAccount extends Account<TheAlteningAccount> implements T
 
     @Override
     public boolean login() {
-        if (accessToken == null || cache.username.isEmpty() || cache.uuid.isEmpty()) return false;
-        applyLoginEnvironment(SERVICE);
-
-        try {
-            setSession(new User(cache.username, UndashedUuid.fromStringLenient(cache.uuid), accessToken, Optional.empty(), Optional.empty()));
-            return true;
-        } catch (Exception _) {
-            MeteorClient.LOG.error("Failed to login with TheAltening.");
-            return false;
-        }
+        MeteorClient.LOG.error("TheAltening login is unavailable with Minecraft 26.3 service discovery.");
+        return false;
     }
 
     private AuthResponse authenticate() {
-        return Http.post(ENVIRONMENT.servicesHost() + "/authenticate")
+        return Http.post("http://authserver.thealtening.com/authenticate")
             .bodyJson(new AuthRequest("MINECRAFT", token, "Meteor on Crack!", UUID.randomUUID().toString(), true))
             .sendJson(AuthResponse.class);
     }

@@ -27,48 +27,48 @@ public class ActiveModulesHud extends HudElement {
 
     private final Setting<Sort> sort = sgGeneral.add(new EnumSetting.Builder<Sort>()
         .name("sort")
-        .description("How to sort active modules.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How to sort active modules."))
         .defaultValue(Sort.Biggest)
         .build()
     );
 
     private final Setting<List<Module>> hiddenModules = sgGeneral.add(new ModuleListSetting.Builder()
         .name("hidden-modules")
-        .description("Which modules not to show in the list.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which modules not to show in the list."))
         .build()
     );
 
     private final Setting<Boolean> activeInfo = sgGeneral.add(new BoolSetting.Builder()
         .name("module-info")
-        .description("Shows info from the module next to the name in the active modules list.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows info from the module next to the name in the active modules list."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> showKeybind = sgGeneral.add(new BoolSetting.Builder()
         .name("show-keybind")
-        .description("Shows the module's keybind next to its name.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows the module's keybind next to its name."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> shadow = sgGeneral.add(new BoolSetting.Builder()
         .name("shadow")
-        .description("Renders shadow behind text.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Renders shadow behind text."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> outlines = sgGeneral.add(new BoolSetting.Builder()
         .name("outlines")
-        .description("Whether or not to render outlines")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to render outlines"))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Integer> outlineWidth = sgGeneral.add(new IntSetting.Builder()
         .name("outline-width")
-        .description("Outline width")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Outline width"))
         .defaultValue(2)
         .min(1)
         .sliderMin(1)
@@ -78,7 +78,7 @@ public class ActiveModulesHud extends HudElement {
 
     private final Setting<Alignment> alignment = sgGeneral.add(new EnumSetting.Builder<Alignment>()
         .name("alignment")
-        .description("Horizontal alignment.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Horizontal alignment."))
         .defaultValue(Alignment.Auto)
         .build()
     );
@@ -87,14 +87,14 @@ public class ActiveModulesHud extends HudElement {
 
     private final Setting<ColorMode> colorMode = sgColor.add(new EnumSetting.Builder<ColorMode>()
         .name("color-mode")
-        .description("What color to use for active modules.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("What color to use for active modules."))
         .defaultValue(ColorMode.Rainbow)
         .build()
     );
 
     private final Setting<SettingColor> flatColor = sgColor.add(new ColorSetting.Builder()
         .name("flat-color")
-        .description("Color for flat color mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color for flat color mode."))
         .defaultValue(new SettingColor(225, 25, 25))
         .visible(() -> colorMode.get() == ColorMode.Flat)
         .build()
@@ -102,7 +102,7 @@ public class ActiveModulesHud extends HudElement {
 
     private final Setting<Double> rainbowSpeed = sgColor.add(new DoubleSetting.Builder()
         .name("rainbow-speed")
-        .description("Rainbow speed of rainbow color mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Rainbow speed of rainbow color mode."))
         .defaultValue(0.05)
         .sliderMin(0.01)
         .sliderMax(0.2)
@@ -113,7 +113,7 @@ public class ActiveModulesHud extends HudElement {
 
     private final Setting<Double> rainbowSpread = sgColor.add(new DoubleSetting.Builder()
         .name("rainbow-spread")
-        .description("Rainbow spread of rainbow color mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Rainbow spread of rainbow color mode."))
         .defaultValue(0.01)
         .sliderMin(0.001)
         .sliderMax(0.05)
@@ -140,7 +140,7 @@ public class ActiveModulesHud extends HudElement {
 
     private final Setting<SettingColor> moduleInfoColor = sgColor.add(new ColorSetting.Builder()
         .name("module-info-color")
-        .description("Color of module info text.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color of module info text."))
         .defaultValue(new SettingColor(175, 175, 175))
         .visible(activeInfo::get)
         .build()
@@ -150,14 +150,14 @@ public class ActiveModulesHud extends HudElement {
 
     private final Setting<Boolean> customScale = sgScale.add(new BoolSetting.Builder()
         .name("custom-scale")
-        .description("Applies a custom scale to this hud element.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Applies a custom scale to this hud element."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Double> scale = sgScale.add(new DoubleSetting.Builder()
         .name("scale")
-        .description("Custom scale.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Custom scale."))
         .visible(customScale::get)
         .defaultValue(1)
         .min(0.5)
@@ -169,14 +169,14 @@ public class ActiveModulesHud extends HudElement {
 
     private final Setting<Boolean> background = sgBackground.add(new BoolSetting.Builder()
         .name("background")
-        .description("Displays background.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Displays background."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<SettingColor> backgroundColor = sgBackground.add(new ColorSetting.Builder()
         .name("background-color")
-        .description("Color used for the background.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color used for the background."))
         .visible(background::get)
         .defaultValue(new SettingColor(25, 25, 25, 50))
         .build()
@@ -207,7 +207,7 @@ public class ActiveModulesHud extends HudElement {
 
         if (modules.isEmpty()) {
             if (isInEditor()) {
-                setSize(renderer.textWidth("Active Modules", shadow.get(), getScale()), renderer.textHeight(shadow.get(), getScale()));
+                setSize(renderer.textWidth(meteordevelopment.meteorclient.utils.misc.Localization.text("Active Modules"), shadow.get(), getScale()), renderer.textHeight(shadow.get(), getScale()));
             }
             return;
         }
@@ -236,7 +236,7 @@ public class ActiveModulesHud extends HudElement {
 
         if (modules.isEmpty()) {
             if (isInEditor()) {
-                renderer.text("Active Modules", x, y, WHITE, shadow.get(), getScale());
+                renderer.text(meteordevelopment.meteorclient.utils.misc.Localization.text("Active Modules"), x, y, WHITE, shadow.get(), getScale());
             }
             return;
         }

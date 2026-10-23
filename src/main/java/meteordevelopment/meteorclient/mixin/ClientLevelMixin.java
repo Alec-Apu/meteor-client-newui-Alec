@@ -48,8 +48,8 @@ public abstract class ClientLevelMixin {
         if (Modules.get().get(NoRender.class).noParticle(ParticleTypes.BLOCK)) ci.cancel();
     }
 
-    @Inject(method = "addBreakingBlockEffect", at = @At("HEAD"), cancellable = true)
-    private void onAddBlockBreakingParticles(BlockPos pos, Direction direction, CallbackInfo ci) {
+    @Inject(method = "addBreakingBlockEffects", at = @At("HEAD"), cancellable = true)
+    private void onAddBlockBreakingParticles(BlockPos pos, Direction direction, boolean showPartial, CallbackInfo ci) {
         if (Modules.get().get(NoRender.class).noParticle(ParticleTypes.BLOCK)) ci.cancel();
     }
 

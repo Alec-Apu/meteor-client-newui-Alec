@@ -6,7 +6,7 @@
 package meteordevelopment.meteorclient.mixin;
 
 import com.mojang.authlib.minecraft.UserApiService;
-import com.mojang.authlib.yggdrasil.ProfileResult;
+import com.mojang.authlib.services.ProfileResult;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.social.PlayerSocialManager;
 import net.minecraft.client.ResourceLoadStateTracker;

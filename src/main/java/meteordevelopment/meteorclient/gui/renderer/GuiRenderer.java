@@ -6,8 +6,8 @@
 package meteordevelopment.meteorclient.gui.renderer;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.textures.FilterMode;
-import com.mojang.blaze3d.textures.GpuTextureView;
+import com.mojang.renderpearl.api.textures.FilterMode;
+import com.mojang.renderpearl.api.textures.GpuTextureView;
 import it.unimi.dsi.fastutil.Stack;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import meteordevelopment.meteorclient.MeteorClient;
@@ -241,8 +241,96 @@ public class GuiRenderer {
         quad(widget.x, widget.y, widget.width, widget.height, color);
     }
 
+    public void line(double x1, double y1, double x2, double y2, Color color) {
+        r.line(x1, y1, x2, y2, color);
+    }
+
     public void quad(double x, double y, double width, double height, GuiTexture texture, Color color) {
         rTex.texQuad(x, y, width, height, texture.get(width, height), color);
+    }
+
+    /**
+     * Draws an anti-aliased rounded rectangle using non-overlapping body quads and
+     * quarter-circle texture samples. Unlike the old horizontal-band approximation,
+     * the edge quality does not depend on a small fixed segment count.
+     */
+    public void roundedQuad(double x, double y, double width, double height, double radius, Color color) {
+        radius = clampRadius(radius, width, height, true, true);
+        if (radius <= 0) {
+            quad(x, y, width, height, color);
+            return;
+        }
+
+        quad(x + radius, y, width - radius * 2, height, color);
+        quad(x, y + radius, radius, height - radius * 2, color);
+        quad(x + width - radius, y + radius, radius, height - radius * 2, color);
+
+        circleQuarter(x, y, radius, Corner.TopLeft, color);
+        circleQuarter(x + width - radius, y, radius, Corner.TopRight, color);
+        circleQuarter(x + width - radius, y + height - radius, radius, Corner.BottomRight, color);
+        circleQuarter(x, y + height - radius, radius, Corner.BottomLeft, color);
+    }
+
+    /** Draws a rectangle with only its top two corners rounded. */
+    public void roundedTopQuad(double x, double y, double width, double height, double radius, Color color) {
+        radius = clampRadius(radius, width, height, true, false);
+        if (radius <= 0) {
+            quad(x, y, width, height, color);
+            return;
+        }
+
+        quad(x, y + radius, width, height - radius, color);
+        quad(x + radius, y, width - radius * 2, radius, color);
+        circleQuarter(x, y, radius, Corner.TopLeft, color);
+        circleQuarter(x + width - radius, y, radius, Corner.TopRight, color);
+    }
+
+    /** Draws a rectangle with only its left two corners rounded. */
+    public void roundedLeftQuad(double x, double y, double width, double height, double radius, Color color) {
+        radius = clampRadius(radius, width, height, false, true);
+        if (radius <= 0) {
+            quad(x, y, width, height, color);
+            return;
+        }
+
+        quad(x + radius, y, width - radius, height, color);
+        quad(x, y + radius, radius, height - radius * 2, color);
+        circleQuarter(x, y, radius, Corner.TopLeft, color);
+        circleQuarter(x, y + height - radius, radius, Corner.BottomLeft, color);
+    }
+
+    private double clampRadius(double radius, double width, double height, boolean bothX, boolean bothY) {
+        if (width <= 0 || height <= 0) return 0;
+        double maxX = bothX ? width / 2 : width;
+        double maxY = bothY ? height / 2 : height;
+        return Math.max(0, Math.min(radius, Math.min(maxX, maxY)));
+    }
+
+    private void circleQuarter(double x, double y, double radius, Corner corner, Color color) {
+        var region = CIRCLE.get(radius * 2 * mc.getWindow().getGuiScale(), radius * 2 * mc.getWindow().getGuiScale());
+        double midX = (region.x1 + region.x2) / 2;
+        double midY = (region.y1 + region.y2) / 2;
+
+        double u1 = corner.left ? region.x1 : midX;
+        double u2 = corner.left ? midX : region.x2;
+        double v1 = corner.top ? region.y1 : midY;
+        double v2 = corner.top ? midY : region.y2;
+        rTex.texQuad(x, y, radius, radius, 0, u1, v1, u2, v2, color);
+    }
+
+    private enum Corner {
+        TopLeft(true, true),
+        TopRight(false, true),
+        BottomRight(false, false),
+        BottomLeft(true, false);
+
+        private final boolean left;
+        private final boolean top;
+
+        Corner(boolean left, boolean top) {
+            this.left = left;
+            this.top = top;
+        }
     }
 
     public void rotatedQuad(double x, double y, double width, double height, double rotation, GuiTexture texture, Color color) {

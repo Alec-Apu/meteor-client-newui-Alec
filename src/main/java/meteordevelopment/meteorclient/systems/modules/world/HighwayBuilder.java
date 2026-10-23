@@ -121,7 +121,7 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Integer> width = sgGeneral.add(new IntSetting.Builder()
         .name("width")
-        .description("Width of the highway.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Width of the highway."))
         .defaultValue(4)
         .range(1, 5)
         .sliderRange(1, 5)
@@ -130,7 +130,7 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Integer> height = sgGeneral.add(new IntSetting.Builder()
         .name("height")
-        .description("Height of the highway.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Height of the highway."))
         .defaultValue(3)
         .range(2, 5)
         .sliderRange(2, 5)
@@ -139,21 +139,21 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Floor> floor = sgGeneral.add(new EnumSetting.Builder<Floor>()
         .name("floor")
-        .description("What floor placement mode to use.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("What floor placement mode to use."))
         .defaultValue(Floor.Replace)
         .build()
     );
 
     private final Setting<Boolean> railings = sgGeneral.add(new BoolSetting.Builder()
         .name("railings")
-        .description("Builds railings next to the highway.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Builds railings next to the highway."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> cornerBlock = sgGeneral.add(new BoolSetting.Builder()
         .name("corner-support-block")
-        .description("Places a support block underneath the railings, to prevent air placing.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Places a support block underneath the railings, to prevent air placing."))
         .defaultValue(true)
         .visible(railings::get)
         .build()
@@ -161,35 +161,35 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Boolean> mineAboveRailings = sgGeneral.add(new BoolSetting.Builder()
         .name("mine-above-railings")
-        .description("Mines blocks above railings.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Mines blocks above railings."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Rotation> rotation = sgGeneral.add(new EnumSetting.Builder<Rotation>()
         .name("rotation")
-        .description("Mode of rotation.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Mode of rotation."))
         .defaultValue(Rotation.Both)
         .build()
     );
 
     private final Setting<Boolean> disconnectOnToggle = sgGeneral.add(new BoolSetting.Builder()
         .name("disconnect-on-toggle")
-        .description("Automatically disconnects when the module is turned off, for example for not having enough blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically disconnects when the module is turned off, for example for not having enough blocks."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> pauseOnLag = sgGeneral.add(new BoolSetting.Builder()
         .name("pause-on-lag")
-        .description("Pauses the current process while the server stops responding.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Pauses the current process while the server stops responding."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> destroyCrystalTraps = sgGeneral.add(new BoolSetting.Builder()
         .name("destroy-crystal-traps")
-        .description("Use a bow to defuse crystal traps safely from a distance. An infinity bow is recommended.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Use a bow to defuse crystal traps safely from a distance. An infinity bow is recommended."))
         .defaultValue(true)
         .build()
     );
@@ -198,14 +198,14 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Boolean> doubleMine = sgDigging.add(new BoolSetting.Builder()
         .name("double-mine")
-        .description("Whether to double mine blocks when applicable (normal mine and packet mine simultaneously).")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to double mine blocks when applicable (normal mine and packet mine simultaneously)."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> fastBreak = sgDigging.add(new BoolSetting.Builder()
         .name("fast-break")
-        .description("Whether to finish breaking blocks faster than normal while double mining.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to finish breaking blocks faster than normal while double mining."))
         .defaultValue(true)
         .visible(doubleMine::get)
         .build()
@@ -213,14 +213,14 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Boolean> dontBreakTools = sgDigging.add(new BoolSetting.Builder()
         .name("dont-break-tools")
-        .description("Don't break tools.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Don't break tools."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Integer> breakDurability = sgDigging.add(new IntSetting.Builder()
         .name("durability-percentage")
-        .description("The durability percentage at which to stop using a tool.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The durability percentage at which to stop using a tool."))
         .defaultValue(2)
         .range(1, 100)
         .sliderRange(1, 100)
@@ -230,7 +230,7 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Integer> savePickaxes = sgDigging.add(new IntSetting.Builder()
         .name("save-pickaxes")
-        .description("How many pickaxes to ensure are saved. Hitting this number in your inventory will trigger a restock or the module toggling off.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How many pickaxes to ensure are saved. Hitting this number in your inventory will trigger a restock or the module toggling off."))
         .defaultValue(1)
         .range(0, 36)
         .sliderRange(0, 36)
@@ -240,7 +240,7 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Integer> breakDelay = sgDigging.add(new IntSetting.Builder()
         .name("break-delay")
-        .description("The delay between breaking blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The delay between breaking blocks."))
         .defaultValue(0)
         .min(0)
         .build()
@@ -248,7 +248,7 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Integer> blocksPerTick = sgDigging.add(new IntSetting.Builder()
         .name("blocks-per-tick")
-        .description("The maximum amount of blocks that can be mined in a tick. Only applies to blocks instantly breakable.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The maximum amount of blocks that can be mined in a tick. Only applies to blocks instantly breakable."))
         .defaultValue(1)
         .range(1, 100)
         .sliderRange(1, 25)
@@ -259,7 +259,7 @@ public class HighwayBuilder extends Module {
 
     public final Setting<List<Block>> blocksToPlace = sgPaving.add(new BlockListSetting.Builder()
         .name("blocks-to-place")
-        .description("Blocks it is allowed to place.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Blocks it is allowed to place."))
         .defaultValue(Blocks.OBSIDIAN)
         .filter(block -> Block.isShapeFullBlock(block.defaultBlockState().getCollisionShape(EmptyBlockGetter.INSTANCE, BlockPos.ZERO)))
         .build()
@@ -267,7 +267,7 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Double> placeRange = sgPaving.add(new DoubleSetting.Builder()
         .name("place-range")
-        .description("The maximum distance at which you can place blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The maximum distance at which you can place blocks."))
         .defaultValue(4.5)
         .sliderMax(5.5)
         .build()
@@ -275,7 +275,7 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Integer> placeDelay = sgPaving.add(new IntSetting.Builder()
         .name("place-delay")
-        .description("The delay between placing blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The delay between placing blocks."))
         .defaultValue(0)
         .min(0)
         .build()
@@ -283,7 +283,7 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Integer> placementsPerTick = sgPaving.add(new IntSetting.Builder()
         .name("placements-per-tick")
-        .description("The maximum amount of blocks that can be placed in a tick.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The maximum amount of blocks that can be placed in a tick."))
         .defaultValue(1)
         .min(1)
         .build()
@@ -293,7 +293,7 @@ public class HighwayBuilder extends Module {
 
     private final Setting<List<Item>> trashItems = sgInventory.add(new ItemListSetting.Builder()
         .name("trash-items")
-        .description("Items that are considered trash and can be thrown out.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Items that are considered trash and can be thrown out."))
         .defaultValue(
             Items.NETHERRACK, Items.QUARTZ, Items.GOLD_NUGGET, Items.GOLDEN_SWORD, Items.GLOWSTONE_DUST,
             Items.GLOWSTONE, Items.BLACKSTONE, Items.BASALT, Items.GHAST_TEAR, Items.SOUL_SAND, Items.SOUL_SOIL,
@@ -304,7 +304,7 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Integer> inventoryDelay = sgInventory.add(new IntSetting.Builder()
         .name("inventory-delay")
-        .description("Delay in ticks on inventory interactions.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Delay in ticks on inventory interactions."))
         .defaultValue(3)
         .min(0)
         .build()
@@ -312,28 +312,28 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Boolean> ejectUselessShulkers = sgInventory.add(new BoolSetting.Builder()
         .name("eject-useless-shulkers")
-        .description("Whether you should eject useless shulkers. Warning - will throw out any shulkers that don't contain blocks to place, pickaxes, or food. Be careful with your kits.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether you should eject useless shulkers. Warning - will throw out any shulkers that don't contain blocks to place, pickaxes, or food. Be careful with your kits."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> searchEnderChest = sgInventory.add(new BoolSetting.Builder()
         .name("search-ender-chest")
-        .description("Searches your ender chest to find items to use. Be careful with this one, especially if you let it search through shulkers.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Searches your ender chest to find items to use. Be careful with this one, especially if you let it search through shulkers."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> searchShulkers = sgInventory.add(new BoolSetting.Builder()
         .name("search-shulkers")
-        .description("Searches through shulkers to find items to use.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Searches through shulkers to find items to use."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Integer> minEmpty = sgInventory.add(new IntSetting.Builder()
         .name("minimum-empty-slots")
-        .description("The minimum amount of empty slots you want left after mining obsidian.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The minimum amount of empty slots you want left after mining obsidian."))
         .defaultValue(3)
         .sliderRange(0, 9)
         .min(0)
@@ -342,14 +342,14 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Boolean> mineEnderChests = sgInventory.add(new BoolSetting.Builder()
         .name("mine-ender-chests")
-        .description("Mines ender chests for obsidian.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Mines ender chests for obsidian."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<BlockadeType> blockadeType = sgInventory.add(new EnumSetting.Builder<BlockadeType>()
         .name("echest-blockade-type")
-        .description("What blockade type to use (the structure placed when mining echests).")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("What blockade type to use (the structure placed when mining echests)."))
         .defaultValue(BlockadeType.Full)
         .visible(mineEnderChests::get)
         .build()
@@ -357,7 +357,7 @@ public class HighwayBuilder extends Module {
 
     public final Setting<Integer> saveEchests = sgInventory.add(new IntSetting.Builder()
         .name("save-ender-chests")
-        .description("How many ender chests to ensure are saved. Hitting this number in your inventory will trigger a restock or the module toggling off.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How many ender chests to ensure are saved. Hitting this number in your inventory will trigger a restock or the module toggling off."))
         .defaultValue(2)
         .range(0, 64)
         .sliderRange(0, 64)
@@ -367,7 +367,7 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Boolean> rebreakEchests = sgInventory.add(new BoolSetting.Builder()
         .name("instantly-rebreak-echests")
-        .description("Whether or not to use the instant rebreak exploit to break echests.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to use the instant rebreak exploit to break echests."))
         .defaultValue(false)
         .visible(mineEnderChests::get)
         .build()
@@ -375,7 +375,7 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Integer> rebreakTimer = sgInventory.add(new IntSetting.Builder()
         .name("rebreak-delay")
-        .description("Delay between rebreak attempts.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Delay between rebreak attempts."))
         .defaultValue(0)
         .sliderMax(20)
         .visible(() -> mineEnderChests.get() && rebreakEchests.get())
@@ -386,28 +386,28 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Boolean> renderMine = sgRenderDigging.add(new BoolSetting.Builder()
         .name("render-blocks-to-mine")
-        .description("Render blocks to be mined.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Render blocks to be mined."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<ShapeMode> renderMineShape = sgRenderDigging.add(new EnumSetting.Builder<ShapeMode>()
         .name("blocks-to-mine-shape-mode")
-        .description("How the blocks to be mined are rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How the blocks to be mined are rendered."))
         .defaultValue(ShapeMode.Both)
         .build()
     );
 
     private final Setting<SettingColor> renderMineSideColor = sgRenderDigging.add(new ColorSetting.Builder()
         .name("blocks-to-mine-side-color")
-        .description("Color of blocks to be mined.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color of blocks to be mined."))
         .defaultValue(new SettingColor(225, 25, 25, 25))
         .build()
     );
 
     private final Setting<SettingColor> renderMineLineColor = sgRenderDigging.add(new ColorSetting.Builder()
         .name("blocks-to-mine-line-color")
-        .description("Color of blocks to be mined.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color of blocks to be mined."))
         .defaultValue(new SettingColor(225, 25, 25))
         .build()
     );
@@ -416,28 +416,28 @@ public class HighwayBuilder extends Module {
 
     private final Setting<Boolean> renderPlace = sgRenderPaving.add(new BoolSetting.Builder()
         .name("render-blocks-to-place")
-        .description("Render blocks to be placed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Render blocks to be placed."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<ShapeMode> renderPlaceShape = sgRenderPaving.add(new EnumSetting.Builder<ShapeMode>()
         .name("blocks-to-place-shape-mode")
-        .description("How the blocks to be placed are rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How the blocks to be placed are rendered."))
         .defaultValue(ShapeMode.Both)
         .build()
     );
 
     private final Setting<SettingColor> renderPlaceSideColor = sgRenderPaving.add(new ColorSetting.Builder()
         .name("blocks-to-place-side-color")
-        .description("Color of blocks to be placed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color of blocks to be placed."))
         .defaultValue(new SettingColor(25, 25, 225, 25))
         .build()
     );
 
     private final Setting<SettingColor> renderPlaceLineColor = sgRenderPaving.add(new ColorSetting.Builder()
         .name("blocks-to-place-line-color")
-        .description("Color of blocks to be placed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color of blocks to be placed."))
         .defaultValue(new SettingColor(25, 25, 225))
         .build()
     );
@@ -499,18 +499,18 @@ public class HighwayBuilder extends Module {
         restockTask.complete();
 
         if (blocksPerTick.get() > 1 && rotation.get().mine)
-            warning("With rotations enabled, you can break at most 1 block per tick.");
+            warning(meteordevelopment.meteorclient.utils.misc.Localization.text("With rotations enabled, you can break at most 1 block per tick."));
         if (placementsPerTick.get() > 1 && rotation.get().place)
-            warning("With rotations enabled, you can place at most 1 block per tick.");
+            warning(meteordevelopment.meteorclient.utils.misc.Localization.text("With rotations enabled, you can place at most 1 block per tick."));
 
         if (Modules.get().get(InstantRebreak.class).isActive())
-            warning("It's recommended to disable the Instant Rebreak module and instead use the 'instantly-rebreak-echests' setting to avoid errors.");
+            warning(meteordevelopment.meteorclient.utils.misc.Localization.text("It's recommended to disable the Instant Rebreak module and instead use the 'instantly-rebreak-echests' setting to avoid errors."));
         if (Modules.get().get(Speed.class).isActive() && dir.diagonal)
-            warning("It's recommended to disable the Speed module to avoid misalignment on diagonals.");
+            warning(meteordevelopment.meteorclient.utils.misc.Localization.text("It's recommended to disable the Speed module to avoid misalignment on diagonals."));
         if (!Modules.get().get(Velocity.class).isActive())
-            warning("It's recommended to enable the Velocity module to avoid misalignment (entity pushing, liquid movement).");
+            warning(meteordevelopment.meteorclient.utils.misc.Localization.text("It's recommended to enable the Velocity module to avoid misalignment (entity pushing, liquid movement)."));
         if (!warned && Modules.get().get(NoGhostBlocks.class).isActive()) {
-            info("The No Ghost Blocks module is useful to prevent desyncs on laggy servers. However, it will also slow Highway Builder down, and comes with the risks of incorrect statistics and packet kicks.");
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("The No Ghost Blocks module is useful to prevent desyncs on laggy servers. However, it will also slow Highway Builder down, and comes with the risks of incorrect statistics and packet kicks."));
             warned = true;
         }
     }
@@ -524,9 +524,9 @@ public class HighwayBuilder extends Module {
         mc.options.keyUse.setDown(false);
 
         if (displayInfo) {
-            info("Distance: (highlight)%.0f", PlayerUtils.distanceTo(start));
-            info("Blocks broken: (highlight)%d", blocksBroken);
-            info("Blocks placed: (highlight)%d", blocksPlaced);
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Distance: (highlight)%.0f"), PlayerUtils.distanceTo(start));
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Blocks broken: (highlight)%d"), blocksBroken);
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Blocks placed: (highlight)%d"), blocksPlaced);
         }
     }
 
@@ -739,7 +739,7 @@ public class HighwayBuilder extends Module {
     }
 
     public MutableComponent getStatsText() {
-        MutableComponent text = Component.literal(String.format("%sDistance: %s%.0f\n", ChatFormatting.GRAY, ChatFormatting.WHITE, mc.player == null ? 0.0f : PlayerUtils.distanceTo(start)));
+        MutableComponent text = Component.literal(String.format(meteordevelopment.meteorclient.utils.misc.Localization.text("%sDistance: %s%.0f\n"), ChatFormatting.GRAY, ChatFormatting.WHITE, mc.player == null ? 0.0f : PlayerUtils.distanceTo(start)));
         text.append(String.format("%sBlocks broken: %s%d\n", ChatFormatting.GRAY, ChatFormatting.WHITE, blocksBroken));
         text.append(String.format("%sBlocks placed: %s%d", ChatFormatting.GRAY, ChatFormatting.WHITE, blocksPlaced));
 
@@ -762,7 +762,7 @@ public class HighwayBuilder extends Module {
                 normalMining.stopDestroying();
             }
 
-            mc.player.swing(InteractionHand.MAIN_HAND);
+            mc.player.swing(InteractionHand.MAIN_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, false);
         }
 
         if (packetMining != null) {

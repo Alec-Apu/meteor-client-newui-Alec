@@ -28,7 +28,7 @@ public class ItemSettingScreen extends WindowScreen {
     private String filterText = "";
 
     public ItemSettingScreen(GuiTheme theme, ItemSetting setting) {
-        super(theme, "Select item");
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Select item"));
 
         this.setting = setting;
     }
@@ -57,7 +57,7 @@ public class ItemSettingScreen extends WindowScreen {
             if (!filterText.isEmpty() && !Strings.CI.contains(itemLabel.getLabelText(), filterText)) continue;
             table.add(itemLabel);
 
-            WButton select = table.add(theme.button("Select")).expandCellX().right().widget();
+            WButton select = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Select"))).expandCellX().right().widget();
             select.action = () -> {
                 setting.set(item);
                 onClose();

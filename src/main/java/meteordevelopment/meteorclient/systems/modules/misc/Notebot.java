@@ -66,7 +66,7 @@ public class Notebot extends Module {
 
     public final Setting<Integer> tickDelay = sgGeneral.add(new IntSetting.Builder()
         .name("tick-delay")
-        .description("The delay when loading a song.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The delay when loading a song."))
         .defaultValue(1)
         .sliderRange(1, 20)
         .min(1)
@@ -75,7 +75,7 @@ public class Notebot extends Module {
 
     public final Setting<Integer> concurrentTuneBlocks = sgGeneral.add(new IntSetting.Builder()
         .name("concurrent-tune-blocks")
-        .description("How many noteblocks can be tuned at the same time. On Paper it is recommended to set it to 1 to avoid bugs.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How many noteblocks can be tuned at the same time. On Paper it is recommended to set it to 1 to avoid bugs."))
         .defaultValue(1)
         .min(1)
         .sliderRange(1, 20)
@@ -84,56 +84,56 @@ public class Notebot extends Module {
 
     public final Setting<NotebotUtils.NotebotMode> mode = sgGeneral.add(new EnumSetting.Builder<NotebotUtils.NotebotMode>()
         .name("mode")
-        .description("Select mode of notebot")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Select mode of notebot"))
         .defaultValue(NotebotUtils.NotebotMode.ExactInstruments)
         .build()
     );
 
     public final Setting<InstrumentDetectMode> instrumentDetectMode = sgGeneral.add(new EnumSetting.Builder<InstrumentDetectMode>()
         .name("instrument-detect-mode")
-        .description("Select an instrument detect mode. Can be useful when server has a plugin that modifies noteblock state (e.g ItemsAdder) but noteblock can still play the right note")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Select an instrument detect mode. Can be useful when server has a plugin that modifies noteblock state (e.g ItemsAdder) but noteblock can still play the right note"))
         .defaultValue(InstrumentDetectMode.BlockState)
         .build()
     );
 
     public final Setting<Boolean> polyphonic = sgGeneral.add(new BoolSetting.Builder()
         .name("polyphonic")
-        .description("Whether or not to allow multiple notes to be played at the same time")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to allow multiple notes to be played at the same time"))
         .defaultValue(true)
         .build()
     );
 
     public final Setting<Boolean> autoRotate = sgGeneral.add(new BoolSetting.Builder()
         .name("auto-rotate")
-        .description("Should client look at note block when it wants to hit it")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Should client look at note block when it wants to hit it"))
         .defaultValue(true)
         .build()
     );
 
     public final Setting<Boolean> autoPlay = sgGeneral.add(new BoolSetting.Builder()
         .name("auto-play")
-        .description("Auto plays random songs")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Auto plays random songs"))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> roundOutOfRange = sgGeneral.add(new BoolSetting.Builder()
         .name("round-out-of-range")
-        .description("Rounds out of range notes")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Rounds out of range notes"))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> swingArm = sgGeneral.add(new BoolSetting.Builder()
         .name("swing-arm")
-        .description("Should swing arm on hit")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Should swing arm on hit"))
         .defaultValue(true)
         .build()
     );
 
     public final Setting<Integer> checkNoteblocksAgainDelay = sgGeneral.add(new IntSetting.Builder()
         .name("check-noteblocks-again-delay")
-        .description("How much delay should be between end of tuning and checking again")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How much delay should be between end of tuning and checking again"))
         .defaultValue(10)
         .min(1)
         .sliderRange(1, 20)
@@ -142,84 +142,84 @@ public class Notebot extends Module {
 
     public final Setting<Boolean> renderText = sgRender.add(new BoolSetting.Builder()
         .name("render-text")
-        .description("Whether or not to render the text above noteblocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to render the text above noteblocks."))
         .defaultValue(true)
         .build()
     );
 
     public final Setting<Boolean> renderBoxes = sgRender.add(new BoolSetting.Builder()
         .name("render-boxes")
-        .description("Whether or not to render the outline around the noteblocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to render the outline around the noteblocks."))
         .defaultValue(true)
         .build()
     );
 
     public final Setting<ShapeMode> shapeMode = sgRender.add(new EnumSetting.Builder<ShapeMode>()
         .name("shape-mode")
-        .description("How the shapes are rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How the shapes are rendered."))
         .defaultValue(ShapeMode.Both)
         .build()
     );
 
     public final Setting<SettingColor> untunedSideColor = sgRender.add(new ColorSetting.Builder()
         .name("untuned-side-color")
-        .description("The color of the sides of the untuned blocks being rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of the sides of the untuned blocks being rendered."))
         .defaultValue(new SettingColor(204, 0, 0, 10))
         .build()
     );
 
     public final Setting<SettingColor> untunedLineColor = sgRender.add(new ColorSetting.Builder()
         .name("untuned-line-color")
-        .description("The color of the lines of the untuned blocks being rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of the lines of the untuned blocks being rendered."))
         .defaultValue(new SettingColor(204, 0, 0, 255))
         .build()
     );
 
     public final Setting<SettingColor> tunedSideColor = sgRender.add(new ColorSetting.Builder()
         .name("tuned-side-color")
-        .description("The color of the sides of the tuned blocks being rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of the sides of the tuned blocks being rendered."))
         .defaultValue(new SettingColor(0, 204, 0, 10))
         .build()
     );
 
     public final Setting<SettingColor> tunedLineColor = sgRender.add(new ColorSetting.Builder()
         .name("tuned-line-color")
-        .description("The color of the lines of the tuned blocks being rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of the lines of the tuned blocks being rendered."))
         .defaultValue(new SettingColor(0, 204, 0, 255))
         .build()
     );
 
     public final Setting<SettingColor> tuneHitSideColor = sgRender.add(new ColorSetting.Builder()
         .name("hit-side-color")
-        .description("The color of the sides being rendered on noteblock tune hit.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of the sides being rendered on noteblock tune hit."))
         .defaultValue(new SettingColor(255, 153, 0, 10))
         .build()
     );
 
     private final Setting<SettingColor> tuneHitLineColor = sgRender.add(new ColorSetting.Builder()
         .name("hit-line-color")
-        .description("The color of the lines being rendered on noteblock tune hit.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of the lines being rendered on noteblock tune hit."))
         .defaultValue(new SettingColor(255, 153, 0, 255))
         .build()
     );
 
     public final Setting<SettingColor> scannedNoteblockSideColor = sgRender.add(new ColorSetting.Builder()
         .name("scanned-noteblock-side-color")
-        .description("The color of the sides of the scanned noteblocks being rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of the sides of the scanned noteblocks being rendered."))
         .defaultValue(new SettingColor(255, 255, 0, 30))
         .build()
     );
 
     private final Setting<SettingColor> scannedNoteblockLineColor = sgRender.add(new ColorSetting.Builder()
         .name("scanned-noteblock-line-color")
-        .description("The color of the lines of the scanned noteblocks being rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of the lines of the scanned noteblocks being rendered."))
         .defaultValue(new SettingColor(255, 255, 0, 255))
         .build()
     );
 
     public final Setting<Double> noteTextScale = sgRender.add(new DoubleSetting.Builder()
         .name("note-text-scale")
-        .description("The scale.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The scale."))
         .defaultValue(1.5)
         .min(0)
         .build()
@@ -227,7 +227,7 @@ public class Notebot extends Module {
 
     public final Setting<Boolean> showScannedNoteblocks = sgRender.add(new BoolSetting.Builder()
         .name("show-scanned-noteblocks")
-        .description("Show scanned Noteblocks")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Show scanned Noteblocks"))
         .defaultValue(false)
         .build()
     );
@@ -415,7 +415,7 @@ public class Notebot extends Module {
             waitTicks--;
             if (waitTicks == 0) {
                 waitTicks = -1;
-                info("Checking noteblocks again...");
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Checking noteblocks again..."));
 
                 setupTuneHitsMap();
                 stage = Stage.Tune;
@@ -423,14 +423,14 @@ public class Notebot extends Module {
         } else if (stage == Stage.SetUp) {
             scanForNoteblocks();
             if (scannedNoteblocks.isEmpty()) {
-                error("Can't find any nearby noteblock!");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("Can't find any nearby noteblock!"));
                 stop();
                 return;
             }
 
             setupNoteblocksMap();
             if (noteBlockPositions.isEmpty()) {
-                error("Can't find any valid noteblock to play song.");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("Can't find any valid noteblock to play song."));
                 stop();
                 return;
             }
@@ -450,7 +450,7 @@ public class Notebot extends Module {
             if (song.getNotesMap().containsKey(currentTick)) {
                 if (playingMode == PlayingMode.Preview) onTickPreview();
                 else if (mc.player.getAbilities().instabuild) {
-                    error("You need to be in survival mode.");
+                    error(meteordevelopment.meteorclient.utils.misc.Localization.text("You need to be in survival mode."));
                     stop();
                     return;
                 } else onTickPlay();
@@ -528,9 +528,9 @@ public class Notebot extends Module {
 
         if (!uniqueNotesToUse.isEmpty()) {
             for (Note note : uniqueNotesToUse) {
-                warning("Missing note: " + note.getInstrument() + ", " + note.getNoteLevel());
+                warning(meteordevelopment.meteorclient.utils.misc.Localization.text("Missing note: ") + note.getInstrument() + ", " + note.getNoteLevel());
             }
-            warning(uniqueNotesToUse.size() + " missing notes!");
+            warning(uniqueNotesToUse.size() + meteordevelopment.meteorclient.utils.misc.Localization.text(" missing notes!"));
         }
     }
 
@@ -561,13 +561,13 @@ public class Notebot extends Module {
         WTable table = theme.table();
 
         // Open Song GUI
-        WButton openSongGUI = table.add(theme.button("Open Song GUI")).expandX().minWidth(100).widget();
+        WButton openSongGUI = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Open Song GUI"))).expandX().minWidth(100).widget();
         openSongGUI.action = () -> mc.gui.setScreen(theme.notebotSongs());
 
         table.row();
 
         // Align Center
-        WButton alignCenter = table.add(theme.button("Align Center")).expandX().minWidth(100).widget();
+        WButton alignCenter = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Align Center"))).expandX().minWidth(100).widget();
         alignCenter.action = () -> {
             if (mc.player == null) return;
             Vec3 pos = Vec3.atBottomCenterOf(mc.player.blockPosition());
@@ -588,7 +588,7 @@ public class Notebot extends Module {
         };
 
         // Stop
-        WButton stop = table.add(theme.button("Stop")).right().widget();
+        WButton stop = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Stop"))).right().widget();
         stop.action = this::stop;
 
         return table;
@@ -615,28 +615,28 @@ public class Notebot extends Module {
     public void play() {
         if (mc.player == null) return;
         if (mc.player.getAbilities().instabuild && playingMode != PlayingMode.Preview) {
-            error("You need to be in survival mode.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("You need to be in survival mode."));
         } else if (stage == Stage.Playing) {
             isPlaying = true;
-            info("Playing.");
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Playing."));
         } else {
-            error("No song loaded.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("No song loaded."));
         }
     }
 
     public void pause() {
         enable();
         if (isPlaying) {
-            info("Pausing.");
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Pausing."));
             isPlaying = false;
         } else {
-            info("Resuming.");
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Resuming."));
             isPlaying = true;
         }
     }
 
     public void stop() {
-        info("Stopping.");
+        info(meteordevelopment.meteorclient.utils.misc.Localization.text("Stopping."));
         disableNotebot();
         updateStatus();
     }
@@ -709,16 +709,16 @@ public class Notebot extends Module {
      */
     public boolean loadFileToMap(File file, Runnable callback) {
         if (!file.exists() || !file.isFile()) {
-            error("File not found");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("File not found"));
             return false;
         }
 
         if (!SongDecoders.hasDecoder(file)) {
-            error("File is in wrong format. Decoder not found.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("File is in wrong format. Decoder not found."));
             return false;
         }
 
-        info("Loading song \"%s\".", FilenameUtils.getBaseName(file.getName()));
+        info(meteordevelopment.meteorclient.utils.misc.Localization.text("Loading song \"%s\"."), FilenameUtils.getBaseName(file.getName()));
 
         // Start loading song
         loadingSongFuture = CompletableFuture.supplyAsync(() -> {
@@ -736,7 +736,7 @@ public class Notebot extends Module {
             if (ex == null) {
                 // Song is null only when it times out
                 if (song == null) {
-                    error("Loading song '" + FilenameUtils.getBaseName(file.getName()) + "' timed out.");
+                    error(meteordevelopment.meteorclient.utils.misc.Localization.text("Loading song '") + FilenameUtils.getBaseName(file.getName()) + meteordevelopment.meteorclient.utils.misc.Localization.text("' timed out."));
                     onSongEnd();
                     return;
                 }
@@ -745,13 +745,13 @@ public class Notebot extends Module {
                 long time2 = System.currentTimeMillis();
                 long diff = time2 - time1;
 
-                info("Song '" + FilenameUtils.getBaseName(file.getName()) + "' has been loaded to the memory! Took " + diff + "ms");
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Song '") + FilenameUtils.getBaseName(file.getName()) + meteordevelopment.meteorclient.utils.misc.Localization.text("' has been loaded to the memory! Took ") + diff + "ms");
                 callback.run();
             } else {
                 if (ex instanceof CancellationException) {
-                    error("Loading song '" + FilenameUtils.getBaseName(file.getName()) + "' was cancelled.");
+                    error(meteordevelopment.meteorclient.utils.misc.Localization.text("Loading song '") + FilenameUtils.getBaseName(file.getName()) + meteordevelopment.meteorclient.utils.misc.Localization.text("' was cancelled."));
                 } else {
-                    error("An error occurred while loading song '" + FilenameUtils.getBaseName(file.getName()) + "'. See the logs for more details");
+                    error(meteordevelopment.meteorclient.utils.misc.Localization.text("An error occurred while loading song '") + FilenameUtils.getBaseName(file.getName()) + meteordevelopment.meteorclient.utils.misc.Localization.text("'. See the logs for more details"));
                     MeteorClient.LOG.error("An error occurred while loading song '{}'", FilenameUtils.getBaseName(file.getName()), ex);
                     onSongEnd();
                 }
@@ -811,10 +811,10 @@ public class Notebot extends Module {
                 waitTicks = checkNoteblocksAgainDelay.get();
                 stage = Stage.WaitingToCheckNoteblocks;
 
-                info("Delaying check for noteblocks");
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Delaying check for noteblocks"));
             } else {
                 stage = Stage.Playing;
-                info("Loading done.");
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Loading done."));
                 play();
             }
             return;
@@ -834,7 +834,7 @@ public class Notebot extends Module {
         }
 
         if (swingArm.get()) {
-            mc.player.swing(InteractionHand.MAIN_HAND);
+            mc.player.swing(InteractionHand.MAIN_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, false);
         }
 
         int iterations = 0;
@@ -904,7 +904,7 @@ public class Notebot extends Module {
 
             // Swing arm
             if (swingArm.get()) {
-                mc.player.swing(InteractionHand.MAIN_HAND);
+                mc.player.swing(InteractionHand.MAIN_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, false);
             }
 
             // Play notes

@@ -5,15 +5,15 @@
 
 package meteordevelopment.meteorclient.mixin;
 
-import com.mojang.blaze3d.systems.GpuDevice;
-import com.mojang.blaze3d.systems.GpuDeviceBackend;
-import com.mojang.blaze3d.systems.RenderPassBackend;
+import com.mojang.renderpearl.frontend.FrontendGpuDevice;
+import com.mojang.renderpearl.backend.api.GpuDeviceBackend;
+import com.mojang.renderpearl.api.commands.RenderPass;
 import meteordevelopment.meteorclient.mixininterface.IGpuDevice;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(GpuDevice.class)
+@Mixin(FrontendGpuDevice.class)
 public abstract class GpuDeviceMixin implements IGpuDevice {
     @Shadow
     @Final
@@ -29,9 +29,12 @@ public abstract class GpuDeviceMixin implements IGpuDevice {
         ((IGpuDevice) backend).meteor$popScissor();
     }
 
+    @Override
+    public boolean meteor$isScissorEmpty() { return ((IGpuDevice) backend).meteor$isScissorEmpty(); }
+
     @SuppressWarnings("deprecation")
     @Override
-    public void meteor$onCreateRenderPass(RenderPassBackend backend) {
+    public void meteor$onCreateRenderPass(RenderPass backend) {
         ((IGpuDevice) this.backend).meteor$onCreateRenderPass(backend);
     }
 }

@@ -1,10 +1,10 @@
-#version 330 core
+#version 450 core
 
 precision lowp float;
 
 layout (location = 0) in vec2 Position;
 
-out vec2 uv;
+layout (location = 0) out vec2 uv;
 
 void main() {
     gl_Position = vec4(Position, 0.0, 1.0);

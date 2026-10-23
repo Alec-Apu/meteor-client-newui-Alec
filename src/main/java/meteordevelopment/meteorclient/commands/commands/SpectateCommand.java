@@ -33,7 +33,7 @@ public class SpectateCommand extends Command {
 
         builder.then(argument("player", PlayerArgumentType.create()).executes(context -> {
             mc.setCameraEntity(PlayerArgumentType.get(context));
-            mc.player.sendSystemMessage(Component.literal("Sneak to un-spectate."));
+            mc.player.sendSystemMessage(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Sneak to un-spectate.")));
             MeteorClient.EVENT_BUS.subscribe(shiftListener);
             return SINGLE_SUCCESS;
         }));

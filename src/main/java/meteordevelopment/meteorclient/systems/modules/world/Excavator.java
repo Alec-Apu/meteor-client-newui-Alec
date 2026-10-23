@@ -20,7 +20,7 @@ import meteordevelopment.meteorclient.utils.misc.input.KeyAction;
 import meteordevelopment.meteorclient.utils.render.color.SettingColor;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.world.phys.BlockHitResult;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 
 public class Excavator extends Module {
     private final IBaritone baritone = BaritoneAPI.getProvider().getPrimaryBaritone();
@@ -30,22 +30,22 @@ public class Excavator extends Module {
     // Keybindings
     private final Setting<Keybind> selectionBind = sgGeneral.add(new KeybindSetting.Builder()
         .name("selection-bind")
-        .description("Bind to draw selection.")
-        .defaultValue(Keybind.fromButton(GLFW.GLFW_MOUSE_BUTTON_RIGHT))
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Bind to draw selection."))
+        .defaultValue(Keybind.fromButton(InputConstants.MOUSE_BUTTON_RIGHT))
         .build()
     );
 
     // Logging
     private final Setting<Boolean> logSelection = sgGeneral.add(new BoolSetting.Builder()
         .name("log-selection")
-        .description("Logs the selection coordinates to the chat.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Logs the selection coordinates to the chat."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> keepActive = sgGeneral.add(new BoolSetting.Builder()
         .name("keep-active")
-        .description("Keep the module active after finishing the excavation.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Keep the module active after finishing the excavation."))
         .defaultValue(false)
         .build()
     );
@@ -53,21 +53,21 @@ public class Excavator extends Module {
     // Rendering
     private final Setting<ShapeMode> shapeMode = sgRendering.add(new EnumSetting.Builder<ShapeMode>()
         .name("shape-mode")
-        .description("How the shapes are rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How the shapes are rendered."))
         .defaultValue(ShapeMode.Both)
         .build()
     );
 
     private final Setting<SettingColor> sideColor = sgRendering.add(new ColorSetting.Builder()
         .name("side-color")
-        .description("The side color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The side color."))
         .defaultValue(new SettingColor(255, 255, 255, 50))
         .build()
     );
 
     private final Setting<SettingColor> lineColor = sgRendering.add(new ColorSetting.Builder()
         .name("line-color")
-        .description("The line color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The line color."))
         .defaultValue(new SettingColor(255, 255, 255, 255))
         .build()
     );
@@ -115,13 +115,13 @@ public class Excavator extends Module {
             start = BetterBlockPos.from(result.getBlockPos());
             status = Status.SEL_END;
             if (logSelection.get()) {
-                info("Start corner set: (%d, %d, %d)".formatted(start.x, start.y, start.z));
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Start corner set: (%d, %d, %d)").formatted(start.x, start.y, start.z));
             }
         } else if (status == Status.SEL_END) {
             end = BetterBlockPos.from(result.getBlockPos());
             status = Status.WORKING;
             if (logSelection.get()) {
-                info("End corner set: (%d, %d, %d)".formatted(end.x, end.y, end.z));
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("End corner set: (%d, %d, %d)").formatted(end.x, end.y, end.z));
             }
             baritone.getSelectionManager().addSelection(start, end);
             baritone.getBuilderProcess().clearArea(start, end);

@@ -54,7 +54,7 @@ public class HudTab extends Tab {
 
             add(theme.horizontalSeparator()).expandX();
 
-            WButton openEditor = add(theme.button("Edit")).expandX().widget();
+            WButton openEditor = add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Edit"))).expandX().widget();
             openEditor.action = () -> mc.gui.setScreen(new HudEditorScreen(theme));
 
             WHorizontalList buttons = add(theme.horizontalList()).expandX().widget();
@@ -65,13 +65,13 @@ public class HudTab extends Tab {
 
             WHorizontalList bottom = add(theme.horizontalList()).expandX().widget();
 
-            bottom.add(theme.label("Active: "));
+            bottom.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Active: ")));
             WCheckbox active = bottom.add(theme.checkbox(hud.active)).expandCellX().widget();
             active.action = () -> hud.active = active.checked;
 
             WButton resetSettings = bottom.add(theme.button(GuiRenderer.RESET)).widget();
             resetSettings.action = hud.settings::reset;
-            resetSettings.tooltip = "Reset";
+            resetSettings.tooltip = meteordevelopment.meteorclient.utils.misc.Localization.text("Reset");
         }
 
         @Override

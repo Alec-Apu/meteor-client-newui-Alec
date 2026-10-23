@@ -22,7 +22,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ModuleArgumentType implements ArgumentType<Module> {
     private static final ModuleArgumentType INSTANCE = new ModuleArgumentType();
-    private static final DynamicCommandExceptionType NO_SUCH_MODULE = new DynamicCommandExceptionType(name -> Component.literal("Module with name " + name + " doesn't exist."));
+    private static final DynamicCommandExceptionType NO_SUCH_MODULE = new DynamicCommandExceptionType(name -> Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Module with name ") + name + meteordevelopment.meteorclient.utils.misc.Localization.text(" doesn't exist.")));
 
     private static final Collection<String> EXAMPLES = Modules.get().getAll()
         .stream()

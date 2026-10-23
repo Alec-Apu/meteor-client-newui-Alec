@@ -39,7 +39,7 @@ public class HudElementScreen extends WindowScreen {
         SettingGroup sg = settings.createGroup("Anchors");
         sg.add(new BoolSetting.Builder()
             .name("auto-anchors")
-            .description("Automatically assigns anchors based on the position.")
+            .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically assigns anchors based on the position."))
             .defaultValue(true)
             .onModuleActivated(booleanSetting -> booleanSetting.set(element.autoAnchors))
             .onChanged(aBoolean -> {
@@ -50,7 +50,7 @@ public class HudElementScreen extends WindowScreen {
         );
         sg.add(new EnumSetting.Builder<XAnchor>()
             .name("x-anchor")
-            .description("Horizontal anchor.")
+            .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Horizontal anchor."))
             .defaultValue(XAnchor.Left)
             .visible(() -> !element.autoAnchors)
             .onModuleActivated(xAnchorSetting -> xAnchorSetting.set(element.box.xAnchor))
@@ -59,7 +59,7 @@ public class HudElementScreen extends WindowScreen {
         );
         sg.add(new EnumSetting.Builder<YAnchor>()
             .name("y-anchor")
-            .description("Vertical anchor.")
+            .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Vertical anchor."))
             .defaultValue(YAnchor.Top)
             .visible(() -> !element.autoAnchors)
             .onModuleActivated(yAnchorSetting -> yAnchorSetting.set(element.box.yAnchor))
@@ -102,7 +102,7 @@ public class HudElementScreen extends WindowScreen {
         WHorizontalList bottomList = add(theme.horizontalList()).expandX().widget();
 
         //   Active
-        bottomList.add(theme.label("Active:"));
+        bottomList.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Active:")));
         WCheckbox active = bottomList.add(theme.checkbox(element.isActive())).widget();
         active.action = () -> {
             if (element.isActive() != active.checked) element.toggle();

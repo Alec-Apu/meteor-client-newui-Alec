@@ -16,7 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
 public class WaspCommand extends Command {
-    private static final SimpleCommandExceptionType CANT_WASP_SELF = new SimpleCommandExceptionType(Component.literal("You cannot target yourself!"));
+    private static final SimpleCommandExceptionType CANT_WASP_SELF = new SimpleCommandExceptionType(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("You cannot target yourself!")));
 
     public WaspCommand() {
         super("wasp", "Sets the auto wasp target.");
@@ -38,7 +38,7 @@ public class WaspCommand extends Command {
 
             wasp.target = player;
             wasp.enable();
-            info(player.getName().getString() + " set as target.");
+            info(player.getName().getString() + meteordevelopment.meteorclient.utils.misc.Localization.text(" set as target."));
             return SINGLE_SUCCESS;
         }));
     }

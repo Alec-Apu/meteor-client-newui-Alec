@@ -12,7 +12,7 @@ import meteordevelopment.meteorclient.systems.accounts.types.SessionAccount;
 
 public class AddSessionAccountScreen extends AddAccountScreen {
     public AddSessionAccountScreen(GuiTheme theme, AccountsScreen parent) {
-        super(theme, "Add Session Account", parent);
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Add Session Account"), parent);
     }
 
     @Override
@@ -20,13 +20,13 @@ public class AddSessionAccountScreen extends AddAccountScreen {
         WTable t = add(theme.table()).widget();
 
         // Access token
-        t.add(theme.label("Access Token: "));
+        t.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Access Token: ")));
         WTextBox token = t.add(theme.textBox("")).minWidth(400).expandX().widget();
         token.setFocused(true);
         t.row();
 
         // Add
-        add = t.add(theme.button("Add")).expandX().widget();
+        add = t.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Add"))).expandX().widget();
         add.action = () -> {
             if (!token.get().isEmpty()) {
                 SessionAccount account = new SessionAccount(token.get());

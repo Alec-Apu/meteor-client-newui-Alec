@@ -28,21 +28,21 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 
-import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_MIDDLE;
+import static com.mojang.blaze3d.platform.InputConstants.MOUSE_BUTTON_MIDDLE;
 
 public class MiddleClickExtra extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
 
     private final Setting<Mode> mode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("mode")
-        .description("Which item to use when you middle click.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which item to use when you middle click."))
         .defaultValue(Mode.Pearl)
         .build()
     );
 
     private final Setting<Boolean> message = sgGeneral.add(new BoolSetting.Builder()
         .name("send-message")
-        .description("Sends a message when you add a player as a friend.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Sends a message when you add a player as a friend."))
         .defaultValue(false)
         .visible(() -> mode.get() == Mode.AddFriend)
         .build()
@@ -50,7 +50,7 @@ public class MiddleClickExtra extends Module {
 
     private final Setting<String> friendMessage = sgGeneral.add(new StringSetting.Builder()
         .name("message-to-send")
-        .description("Message to send when you add a player as a friend (use %player for the player's name)")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Message to send when you add a player as a friend (use %player for the player's name)"))
         .defaultValue("/msg %player I just friended you on Meteor.")
         .visible(() -> mode.get() == Mode.AddFriend)
         .build()
@@ -58,7 +58,7 @@ public class MiddleClickExtra extends Module {
 
     private final Setting<Boolean> quickSwap = sgGeneral.add(new BoolSetting.Builder()
         .name("quick-swap")
-        .description("Allows you to use items in your inventory by simulating hotbar key presses. May get flagged by anticheats.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Allows you to use items in your inventory by simulating hotbar key presses. May get flagged by anticheats."))
         .defaultValue(false)
         .visible(() -> mode.get() != Mode.AddFriend)
         .build()
@@ -66,7 +66,7 @@ public class MiddleClickExtra extends Module {
 
     private final Setting<Boolean> swapBack = sgGeneral.add(new BoolSetting.Builder()
         .name("swap-back")
-        .description("Swap back to your original slot when you finish using an item.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swap back to your original slot when you finish using an item."))
         .defaultValue(false)
         .visible(() -> mode.get() != Mode.AddFriend && !quickSwap.get())
         .build()
@@ -74,14 +74,14 @@ public class MiddleClickExtra extends Module {
 
     private final Setting<Boolean> disableInCreative = sgGeneral.add(new BoolSetting.Builder()
         .name("disable-in-creative")
-        .description("Middle click action is disabled in Creative mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Middle click action is disabled in Creative mode."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> notify = sgGeneral.add(new BoolSetting.Builder()
         .name("notify")
-        .description("Notifies you when you do not have the specified item in your hotbar.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Notifies you when you do not have the specified item in your hotbar."))
         .defaultValue(true)
         .visible(() -> mode.get() != Mode.AddFriend)
         .build()
@@ -103,7 +103,7 @@ public class MiddleClickExtra extends Module {
 
     @EventHandler
     private void onMouseClick(MouseClickEvent event) {
-        if (event.action != KeyAction.Press || event.button() != GLFW_MOUSE_BUTTON_MIDDLE || mc.gui.screen() != null)
+        if (event.action != KeyAction.Press || event.button() != MOUSE_BUTTON_MIDDLE || mc.gui.screen() != null)
             return;
 
         if (disabledByCreative()) return;
@@ -114,7 +114,7 @@ public class MiddleClickExtra extends Module {
 
             if (!Friends.get().isFriend(player)) {
                 Friends.get().add(new Friend(player));
-                info("Added %s to friends", player.getName().getString());
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Added %s to friends"), player.getName().getString());
                 if (message.get()) {
                     String messageNotify = friendMessage.get().replace("%player", player.getName().getString());
                     ChatUtils.sendPlayerMsg(messageNotify);
@@ -122,7 +122,7 @@ public class MiddleClickExtra extends Module {
 
             } else {
                 Friends.get().remove(Friends.get().get(player));
-                info("Removed %s from friends", player.getName().getString());
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Removed %s from friends"), player.getName().getString());
             }
 
             return;
@@ -130,7 +130,7 @@ public class MiddleClickExtra extends Module {
 
         FindItemResult result = InvUtils.find(mode.get().item);
         if (!result.found() || !result.isHotbar() && !quickSwap.get()) {
-            if (notify.get()) warning("Unable to find specified item.");
+            if (notify.get()) warning(meteordevelopment.meteorclient.utils.misc.Localization.text("Unable to find specified item."));
             return;
         }
 

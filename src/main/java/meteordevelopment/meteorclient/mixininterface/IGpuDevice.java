@@ -5,7 +5,7 @@
 
 package meteordevelopment.meteorclient.mixininterface;
 
-import com.mojang.blaze3d.systems.RenderPassBackend;
+import com.mojang.renderpearl.api.commands.RenderPass;
 
 public interface IGpuDevice {
     /**
@@ -14,11 +14,12 @@ public interface IGpuDevice {
     void meteor$pushScissor(int x, int y, int width, int height);
 
     void meteor$popScissor();
+    boolean meteor$isScissorEmpty();
 
     /**
      * This is an *INTERNAL* method, it shouldn't be called.
      */
     @Deprecated
     @SuppressWarnings("DeprecatedIsStillUsed")
-    void meteor$onCreateRenderPass(RenderPassBackend backend);
+    void meteor$onCreateRenderPass(RenderPass backend);
 }

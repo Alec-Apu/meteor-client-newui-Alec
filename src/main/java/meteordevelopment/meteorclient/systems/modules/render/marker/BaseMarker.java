@@ -23,26 +23,26 @@ public abstract class BaseMarker implements ISerializable<BaseMarker> {
 
     public final Setting<String> name = sgBase.add(new StringSetting.Builder()
         .name("name")
-        .description("Custom name for this marker.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Custom name for this marker."))
         .build()
     );
 
     protected final Setting<String> description = sgBase.add(new StringSetting.Builder()
         .name("description")
-        .description("Custom description for this marker.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Custom description for this marker."))
         .build()
     );
 
     private final Setting<Dimension> dimension = sgBase.add(new EnumSetting.Builder<Dimension>()
         .name("dimension")
-        .description("In which dimension this marker should be visible.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("In which dimension this marker should be visible."))
         .defaultValue(Dimension.Overworld)
         .build()
     );
 
     private final Setting<Boolean> active = sgBase.add(new BoolSetting.Builder()
         .name("active")
-        .description("Is this marker visible.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Is this marker visible."))
         .defaultValue(false)
         .build()
     );

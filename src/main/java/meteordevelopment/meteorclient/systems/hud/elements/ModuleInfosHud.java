@@ -21,49 +21,49 @@ public class ModuleInfosHud extends HudElement {
 
     private final Setting<List<Module>> modules = sgGeneral.add(new ModuleListSetting.Builder()
         .name("modules")
-        .description("Which modules to display")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which modules to display"))
         .defaultValue(KillAura.class, CrystalAura.class, AnchorAura.class, BedAura.class, Surround.class)
         .build()
     );
 
     private final Setting<Boolean> additionalInfo = sgGeneral.add(new BoolSetting.Builder()
         .name("additional-info")
-        .description("Shows additional info from the module next to the name in the module info list.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows additional info from the module next to the name in the module info list."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> textShadow = sgGeneral.add(new BoolSetting.Builder()
         .name("text-shadow")
-        .description("Renders shadow behind text.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Renders shadow behind text."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<SettingColor> moduleColor = sgGeneral.add(new ColorSetting.Builder()
         .name("module-color")
-        .description("Module color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Module color."))
         .defaultValue(new SettingColor())
         .build()
     );
 
     private final Setting<SettingColor> onColor = sgGeneral.add(new ColorSetting.Builder()
         .name("on-color")
-        .description("Color when module is on.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color when module is on."))
         .defaultValue(new SettingColor(25, 225, 25))
         .build()
     );
 
     private final Setting<SettingColor> offColor = sgGeneral.add(new ColorSetting.Builder()
         .name("off-color")
-        .description("Color when module is off.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color when module is off."))
         .defaultValue(new SettingColor(225, 25, 25))
         .build()
     );
 
     private final Setting<Alignment> alignment = sgGeneral.add(new EnumSetting.Builder<Alignment>()
         .name("alignment")
-        .description("Horizontal alignment.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Horizontal alignment."))
         .defaultValue(Alignment.Auto)
         .build()
     );
@@ -75,8 +75,8 @@ public class ModuleInfosHud extends HudElement {
     @Override
     public void render(HudRenderer renderer) {
         if (Modules.get() == null || modules.get().isEmpty()) {
-            renderer.text("Module Info", x, y, moduleColor.get(), textShadow.get());
-            setSize(renderer.textWidth("Module Info"), renderer.textHeight());
+            renderer.text(meteordevelopment.meteorclient.utils.misc.Localization.text("Module Info"), x, y, moduleColor.get(), textShadow.get());
+            setSize(renderer.textWidth(meteordevelopment.meteorclient.utils.misc.Localization.text("Module Info")), renderer.textHeight());
             return;
         }
 
@@ -96,9 +96,9 @@ public class ModuleInfosHud extends HudElement {
                     if (info != null) text = info;
                 }
 
-                if (text == null) text = "ON";
+                if (text == null) text = meteordevelopment.meteorclient.utils.misc.Localization.text("ON");
             }
-            else text = "OFF";
+            else text = meteordevelopment.meteorclient.utils.misc.Localization.text("OFF");
             moduleWidth += renderer.textWidth(text);
 
             double x = this.x + alignX(moduleWidth, alignment.get());

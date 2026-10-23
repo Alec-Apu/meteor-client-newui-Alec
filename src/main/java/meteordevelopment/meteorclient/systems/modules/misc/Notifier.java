@@ -55,14 +55,14 @@ public class Notifier extends Module {
 
     private final Setting<Boolean> totemPops = sgTotemPops.add(new BoolSetting.Builder()
         .name("totem-pops")
-        .description("Notifies you when a player pops a totem.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Notifies you when a player pops a totem."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> totemsDistanceCheck = sgTotemPops.add(new BoolSetting.Builder()
         .name("distance-check")
-        .description("Limits the distance in which the pops are recognized.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Limits the distance in which the pops are recognized."))
         .defaultValue(false)
         .visible(totemPops::get)
         .build()
@@ -70,7 +70,7 @@ public class Notifier extends Module {
 
     private final Setting<Integer> totemsDistance = sgTotemPops.add(new IntSetting.Builder()
         .name("player-radius")
-        .description("The radius in which to log totem pops.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The radius in which to log totem pops."))
         .defaultValue(30)
         .sliderRange(1, 50)
         .range(1, 100)
@@ -80,21 +80,21 @@ public class Notifier extends Module {
 
     private final Setting<Boolean> totemsIgnoreOwn = sgTotemPops.add(new BoolSetting.Builder()
         .name("ignore-own")
-        .description("Ignores your own totem pops.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Ignores your own totem pops."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> totemsIgnoreFriends = sgTotemPops.add(new BoolSetting.Builder()
         .name("ignore-friends")
-        .description("Ignores friends totem pops.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Ignores friends totem pops."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> totemsIgnoreOthers = sgTotemPops.add(new BoolSetting.Builder()
         .name("ignore-others")
-        .description("Ignores other players totem pops.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Ignores other players totem pops."))
         .defaultValue(false)
         .build()
     );
@@ -103,42 +103,42 @@ public class Notifier extends Module {
 
     private final Setting<Boolean> visualRange = sgVisualRange.add(new BoolSetting.Builder()
         .name("visual-range")
-        .description("Notifies you when an entity enters your render distance.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Notifies you when an entity enters your render distance."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Event> event = sgVisualRange.add(new EnumSetting.Builder<Event>()
         .name("event")
-        .description("When to log the entities.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("When to log the entities."))
         .defaultValue(Event.Both)
         .build()
     );
 
     private final Setting<Set<EntityType<?>>> entities = sgVisualRange.add(new EntityTypeListSetting.Builder()
         .name("entities")
-        .description("Which entities to notify about.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which entities to notify about."))
         .defaultValue(EntityTypes.PLAYER)
         .build()
     );
 
     private final Setting<Boolean> visualRangeIgnoreFriends = sgVisualRange.add(new BoolSetting.Builder()
         .name("ignore-friends")
-        .description("Ignores friends.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Ignores friends."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> visualRangeIgnoreFakes = sgVisualRange.add(new BoolSetting.Builder()
         .name("ignore-fake-players")
-        .description("Ignores fake players.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Ignores fake players."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> visualMakeSound = sgVisualRange.add(new BoolSetting.Builder()
         .name("sound")
-        .description("Emits a sound effect on enter / leave")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Emits a sound effect on enter / leave"))
         .defaultValue(true)
         .build()
     );
@@ -147,21 +147,21 @@ public class Notifier extends Module {
 
     private final Setting<Boolean> pearl = sgPearl.add(new BoolSetting.Builder()
         .name("pearl")
-        .description("Notifies you when a player is teleported using an ender pearl.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Notifies you when a player is teleported using an ender pearl."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> pearlIgnoreOwn = sgPearl.add(new BoolSetting.Builder()
         .name("ignore-own")
-        .description("Ignores your own pearls.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Ignores your own pearls."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> pearlIgnoreFriends = sgPearl.add(new BoolSetting.Builder()
         .name("ignore-friends")
-        .description("Ignores friends pearls.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Ignores friends pearls."))
         .defaultValue(false)
         .build()
     );
@@ -170,14 +170,14 @@ public class Notifier extends Module {
 
     private final Setting<JoinLeaveModes> joinsLeavesMode = sgJoinsLeaves.add(new EnumSetting.Builder<JoinLeaveModes>()
         .name("player-joins-leaves")
-        .description("How to handle player join/leave notifications.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How to handle player join/leave notifications."))
         .defaultValue(JoinLeaveModes.None)
         .build()
     );
 
     private final Setting<Integer> notificationDelay = sgJoinsLeaves.add(new IntSetting.Builder()
         .name("notification-delay")
-        .description("How long to wait in ticks before posting the next join/leave notification in your chat.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How long to wait in ticks before posting the next join/leave notification in your chat."))
         .range(0, 1000)
         .sliderRange(0, 100)
         .defaultValue(0)
@@ -186,7 +186,7 @@ public class Notifier extends Module {
 
     private final Setting<Boolean> simpleNotifications = sgJoinsLeaves.add(new BoolSetting.Builder()
         .name("simple-notifications")
-        .description("Display join/leave notifications without a prefix, to reduce chat clutter.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Display join/leave notifications without a prefix, to reduce chat clutter."))
         .defaultValue(true)
         .build()
     );
@@ -211,14 +211,14 @@ public class Notifier extends Module {
         if (!event.entity.getUUID().equals(mc.player.getUUID()) && entities.get().contains(event.entity.getType()) && visualRange.get() && this.event.get() != Event.Despawn) {
             if (event.entity instanceof Player player) {
                 if ((!visualRangeIgnoreFriends.get() || !Friends.get().isFriend(player)) && (!visualRangeIgnoreFakes.get() || !(event.entity instanceof FakePlayerEntity))) {
-                    ChatUtils.sendMsg(event.entity.getId() + 100, ChatFormatting.GRAY, "(highlight)%s(default) has entered your visual range!", event.entity.getName().getString());
+                    ChatUtils.sendMsg(event.entity.getId() + 100, ChatFormatting.GRAY, meteordevelopment.meteorclient.utils.misc.Localization.text("(highlight)%s(default) has entered your visual range!"), event.entity.getName().getString());
 
                     if (visualMakeSound.get())
                         mc.level.playSound(mc.player, mc.player, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.AMBIENT, 3.0F, 1.0F);
                 }
             } else {
                 MutableComponent text = Component.literal(event.entity.getType().getDescription().getString()).withStyle(ChatFormatting.WHITE);
-                text.append(Component.literal(" has spawned at ").withStyle(ChatFormatting.GRAY));
+                text.append(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text(" has spawned at ")).withStyle(ChatFormatting.GRAY));
                 text.append(formatCoords(event.entity.position()));
                 text.append(Component.literal(".").withStyle(ChatFormatting.GRAY));
                 info(text);
@@ -235,14 +235,14 @@ public class Notifier extends Module {
         if (!event.entity.getUUID().equals(mc.player.getUUID()) && entities.get().contains(event.entity.getType()) && visualRange.get() && this.event.get() != Event.Spawn) {
             if (event.entity instanceof Player player) {
                 if ((!visualRangeIgnoreFriends.get() || !Friends.get().isFriend(player)) && (!visualRangeIgnoreFakes.get() || !(event.entity instanceof FakePlayerEntity))) {
-                    ChatUtils.sendMsg(event.entity.getId() + 100, ChatFormatting.GRAY, "(highlight)%s(default) has left your visual range!", event.entity.getName().getString());
+                    ChatUtils.sendMsg(event.entity.getId() + 100, ChatFormatting.GRAY, meteordevelopment.meteorclient.utils.misc.Localization.text("(highlight)%s(default) has left your visual range!"), event.entity.getName().getString());
 
                     if (visualMakeSound.get())
                         mc.level.playSound(mc.player, mc.player, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.AMBIENT, 3.0F, 1.0F);
                 }
             } else {
                 MutableComponent text = Component.literal(event.entity.getType().getDescription().getString()).withStyle(ChatFormatting.WHITE);
-                text.append(Component.literal(" has despawned at ").withStyle(ChatFormatting.GRAY));
+                text.append(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text(" has despawned at ")).withStyle(ChatFormatting.GRAY));
                 text.append(formatCoords(event.entity.position()));
                 text.append(Component.literal(".").withStyle(ChatFormatting.GRAY));
                 info(text);
@@ -258,7 +258,7 @@ public class Notifier extends Module {
                 if (pearl.getOwner() != null && pearl.getOwner() instanceof Player p) {
                     double d = thrownPos.distanceTo(e.position());
                     if ((!Friends.get().isFriend(p) || !pearlIgnoreFriends.get()) && (!p.equals(mc.player) || !pearlIgnoreOwn.get())) {
-                        info("(highlight)%s's(default) pearl landed at %d, %d, %d (highlight)(%.1fm away, travelled %.1fm)(default).", pearl.getOwner().getName().getString(), pearl.blockPosition().getX(), pearl.blockPosition().getY(), pearl.blockPosition().getZ(), pearl.distanceTo(mc.player), d);
+                        info(meteordevelopment.meteorclient.utils.misc.Localization.text("(highlight)%s's(default) pearl landed at %d, %d, %d (highlight)(%.1fm away, travelled %.1fm)(default)."), pearl.getOwner().getName().getString(), pearl.blockPosition().getX(), pearl.blockPosition().getY(), pearl.blockPosition().getZ(), pearl.distanceTo(mc.player), d);
                     }
                 }
             }
@@ -326,7 +326,7 @@ public class Notifier extends Module {
                     double distance = PlayerUtils.distanceTo(entity);
                     if (totemsDistanceCheck.get() && distance > totemsDistance.get()) return;
 
-                    ChatUtils.sendMsg(getChatId(entity), ChatFormatting.GRAY, "(highlight)%s (default)popped (highlight)%d (default)%s.", entity.getName().getString(), pops, pops == 1 ? "totem" : "totems");
+                    ChatUtils.sendMsg(getChatId(entity), ChatFormatting.GRAY, meteordevelopment.meteorclient.utils.misc.Localization.text("(highlight)%s (default)popped (highlight)%d (default)%s."), entity.getName().getString(), pops, pops == 1 ? "totem" : "totems");
                 }
             }
             default -> {
@@ -356,7 +356,7 @@ public class Notifier extends Module {
                 if (player.deathTime > 0 || player.getHealth() <= 0) {
                     int pops = totemPopMap.removeInt(player.getUUID());
 
-                    ChatUtils.sendMsg(getChatId(player), ChatFormatting.GRAY, "(highlight)%s (default)died after popping (highlight)%d (default)%s.", player.getName().getString(), pops, pops == 1 ? "totem" : "totems");
+                    ChatUtils.sendMsg(getChatId(player), ChatFormatting.GRAY, meteordevelopment.meteorclient.utils.misc.Localization.text("(highlight)%s (default)died after popping (highlight)%d (default)%s."), player.getName().getString(), pops, pops == 1 ? "totem" : "totems");
                     chatIdMap.removeInt(player.getUUID());
                 }
             }
@@ -382,7 +382,7 @@ public class Notifier extends Module {
                 messageQueue.addLast(Component.literal(
                     ChatFormatting.WHITE
                         + entry.profile().name()
-                        + ChatFormatting.GRAY + " joined."
+                        + ChatFormatting.GRAY + meteordevelopment.meteorclient.utils.misc.Localization.text(" joined.")
                 ));
             }
         }
@@ -406,7 +406,7 @@ public class Notifier extends Module {
                 messageQueue.addLast(Component.literal(
                     ChatFormatting.WHITE
                         + toRemove.getProfile().name()
-                        + ChatFormatting.GRAY + " left."
+                        + ChatFormatting.GRAY + meteordevelopment.meteorclient.utils.misc.Localization.text(" left.")
                 ));
             }
         }

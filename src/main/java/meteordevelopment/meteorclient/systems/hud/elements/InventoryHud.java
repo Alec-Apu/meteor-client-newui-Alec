@@ -33,7 +33,7 @@ public class InventoryHud extends HudElement {
 
     private final Setting<Boolean> containers = sgGeneral.add(new BoolSetting.Builder()
         .name("containers")
-        .description("Shows the contents of a container when holding them.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows the contents of a container when holding them."))
         .defaultValue(false)
         .build()
     );
@@ -42,7 +42,7 @@ public class InventoryHud extends HudElement {
 
     public final Setting<Boolean> customScale = sgScale.add(new BoolSetting.Builder()
         .name("custom-scale")
-        .description("Applies a custom scale to this hud element.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Applies a custom scale to this hud element."))
         .defaultValue(false)
         .onChanged(_ -> calculateSize())
         .build()
@@ -50,7 +50,7 @@ public class InventoryHud extends HudElement {
 
     public final Setting<Double> scale = sgScale.add(new DoubleSetting.Builder()
         .name("scale")
-        .description("Custom scale.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Custom scale."))
         .visible(customScale::get)
         .defaultValue(2)
         .onChanged(_ -> calculateSize())
@@ -63,7 +63,7 @@ public class InventoryHud extends HudElement {
 
     private final Setting<Background> background = sgBackground.add(new EnumSetting.Builder<Background>()
         .name("background")
-        .description("Background of inventory viewer.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Background of inventory viewer."))
         .defaultValue(Background.Texture)
         .onChanged(_ -> calculateSize())
         .build()
@@ -71,7 +71,7 @@ public class InventoryHud extends HudElement {
 
     public final Setting<SettingColor> backgroundColor = sgBackground.add(new ColorSetting.Builder()
         .name("background-color")
-        .description("Color used for the background.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color used for the background."))
         .visible(() -> background.get() != Background.None)
         .defaultValue(new SettingColor(255, 255, 255))
         .build()

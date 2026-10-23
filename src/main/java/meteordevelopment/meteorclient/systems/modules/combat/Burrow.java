@@ -22,7 +22,6 @@ import meteordevelopment.orbit.EventHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;
-import net.minecraft.network.protocol.game.ServerboundSwingPacket;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Items;
@@ -38,28 +37,28 @@ public class Burrow extends Module {
 
     private final Setting<Block> block = sgGeneral.add(new EnumSetting.Builder<Block>()
         .name("block-to-use")
-        .description("The block to use for Burrow.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The block to use for Burrow."))
         .defaultValue(Block.EChest)
         .build()
     );
 
     private final Setting<Boolean> instant = sgGeneral.add(new BoolSetting.Builder()
         .name("instant")
-        .description("Jumps with packets rather than vanilla jump.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Jumps with packets rather than vanilla jump."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> automatic = sgGeneral.add(new BoolSetting.Builder()
         .name("automatic")
-        .description("Automatically burrows on activate rather than waiting for jump.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically burrows on activate rather than waiting for jump."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Double> triggerHeight = sgGeneral.add(new DoubleSetting.Builder()
         .name("trigger-height")
-        .description("How high you have to jump before a rubberband is triggered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How high you have to jump before a rubberband is triggered."))
         .defaultValue(1.12)
         .range(0.01, 1.4)
         .sliderRange(0.01, 1.4)
@@ -68,7 +67,7 @@ public class Burrow extends Module {
 
     private final Setting<Double> rubberbandHeight = sgGeneral.add(new DoubleSetting.Builder()
         .name("rubberband-height")
-        .description("How far to attempt to cause rubberband.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How far to attempt to cause rubberband."))
         .defaultValue(12)
         .sliderMin(-30)
         .sliderMax(30)
@@ -77,7 +76,7 @@ public class Burrow extends Module {
 
     private final Setting<Double> timer = sgGeneral.add(new DoubleSetting.Builder()
         .name("timer")
-        .description("Timer override.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Timer override."))
         .defaultValue(1)
         .min(0.01)
         .sliderRange(0.01, 10)
@@ -86,21 +85,21 @@ public class Burrow extends Module {
 
     private final Setting<Boolean> onlyInHole = sgGeneral.add(new BoolSetting.Builder()
         .name("only-in-holes")
-        .description("Stops you from burrowing when not in a hole.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Stops you from burrowing when not in a hole."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> center = sgGeneral.add(new BoolSetting.Builder()
         .name("center")
-        .description("Centers you to the middle of the block before burrowing.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Centers you to the middle of the block before burrowing."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> rotate = sgGeneral.add(new BoolSetting.Builder()
         .name("rotate")
-        .description("Faces the block you place server-side.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Faces the block you place server-side."))
         .defaultValue(true)
         .build()
     );
@@ -115,19 +114,19 @@ public class Burrow extends Module {
     @Override
     public void onActivate() {
         if (!mc.level.getBlockState(mc.player.blockPosition()).canBeReplaced()) {
-            error("Already burrowed, disabling.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Already burrowed, disabling."));
             toggle();
             return;
         }
 
         if (!PlayerUtils.isInHole(false) && onlyInHole.get()) {
-            error("Not in a hole, disabling.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Not in a hole, disabling."));
             toggle();
             return;
         }
 
         if (!checkHead()) {
-            error("Not enough headroom to burrow, disabling.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Not enough headroom to burrow, disabling."));
             toggle();
             return;
         }
@@ -135,7 +134,7 @@ public class Burrow extends Module {
         FindItemResult result = getItem();
 
         if (!result.isHotbar() && !result.isOffhand()) {
-            error("No burrow block found, disabling.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("No burrow block found, disabling."));
             toggle();
             return;
         }
@@ -150,7 +149,7 @@ public class Burrow extends Module {
             if (instant.get()) shouldBurrow = true;
             else mc.player.jumpFromGround();
         } else {
-            info("Waiting for manual jump.");
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Waiting for manual jump."));
         }
     }
 
@@ -200,7 +199,6 @@ public class Burrow extends Module {
         InvUtils.swap(block.slot(), true);
 
         mc.gameMode.useItemOn(mc.player, InteractionHand.MAIN_HAND, new BlockHitResult(Utils.vec3(blockPos), Direction.UP, blockPos, false));
-        mc.player.connection.send(new ServerboundSwingPacket(InteractionHand.MAIN_HAND));
 
         InvUtils.swapBack();
 

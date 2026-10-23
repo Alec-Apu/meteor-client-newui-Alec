@@ -43,7 +43,7 @@ public class Trajectories extends Module {
 
     private final Setting<List<Item>> items = sgGeneral.add(new ItemListSetting.Builder()
         .name("items")
-        .description("Items to display trajectories for.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Items to display trajectories for."))
         .defaultValue(getDefaultItems())
         .filter(this::itemFilter)
         .build()
@@ -51,21 +51,21 @@ public class Trajectories extends Module {
 
     private final Setting<Boolean> otherPlayers = sgGeneral.add(new BoolSetting.Builder()
         .name("other-players")
-        .description("Calculates trajectories for other players.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Calculates trajectories for other players."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> firedProjectiles = sgGeneral.add(new BoolSetting.Builder()
         .name("fired-projectiles")
-        .description("Calculates trajectories for already fired projectiles.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Calculates trajectories for already fired projectiles."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> ignoreWitherSkulls = sgGeneral.add(new BoolSetting.Builder()
         .name("ignore-wither-skulls")
-        .description("Whether to ignore fired wither skulls.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to ignore fired wither skulls."))
         .defaultValue(false)
         .visible(firedProjectiles::get)
         .build()
@@ -73,14 +73,14 @@ public class Trajectories extends Module {
 
     private final Setting<Boolean> accurate = sgGeneral.add(new BoolSetting.Builder()
         .name("accurate")
-        .description("Whether or not to calculate more accurate.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to calculate more accurate."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Integer> simulationSteps = sgGeneral.add(new IntSetting.Builder()
         .name("simulation-steps")
-        .description("How many steps to simulate projectiles. Zero for no limit")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How many steps to simulate projectiles. Zero for no limit"))
         .defaultValue(500)
         .sliderMax(5000)
         .build()
@@ -90,7 +90,7 @@ public class Trajectories extends Module {
 
     private final Setting<Integer> ignoreFirstTicks = sgRender.add(new IntSetting.Builder()
         .name("ignore-rendering-first-ticks")
-        .description("Ignores rendering the first given ticks, to make the rest of the path more visible.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Ignores rendering the first given ticks, to make the rest of the path more visible."))
         .defaultValue(3)
         .min(0)
         .build()
@@ -98,35 +98,35 @@ public class Trajectories extends Module {
 
     private final Setting<ShapeMode> shapeMode = sgRender.add(new EnumSetting.Builder<ShapeMode>()
         .name("shape-mode")
-        .description("How the shapes are rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How the shapes are rendered."))
         .defaultValue(ShapeMode.Both)
         .build()
     );
 
     private final Setting<SettingColor> sideColor = sgRender.add(new ColorSetting.Builder()
         .name("side-color")
-        .description("The side color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The side color."))
         .defaultValue(new SettingColor(255, 150, 0, 35))
         .build()
     );
 
     private final Setting<SettingColor> lineColor = sgRender.add(new ColorSetting.Builder()
         .name("line-color")
-        .description("The line color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The line color."))
         .defaultValue(new SettingColor(255, 150, 0))
         .build()
     );
 
     private final Setting<Boolean> renderPositionBox = sgRender.add(new BoolSetting.Builder()
         .name("render-position-boxes")
-        .description("Renders the actual position the projectile will be at each tick along it's trajectory.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Renders the actual position the projectile will be at each tick along it's trajectory."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Double> positionBoxSize = sgRender.add(new DoubleSetting.Builder()
         .name("position-box-size")
-        .description("The size of the box drawn at the simulated positions.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The size of the box drawn at the simulated positions."))
         .defaultValue(0.02)
         .sliderRange(0.01, 0.1)
         .visible(renderPositionBox::get)
@@ -135,7 +135,7 @@ public class Trajectories extends Module {
 
     private final Setting<SettingColor> positionSideColor = sgRender.add(new ColorSetting.Builder()
         .name("position-side-color")
-        .description("The side color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The side color."))
         .defaultValue(new SettingColor(255, 150, 0, 35))
         .visible(renderPositionBox::get)
         .build()
@@ -143,7 +143,7 @@ public class Trajectories extends Module {
 
     private final Setting<SettingColor> positionLineColor = sgRender.add(new ColorSetting.Builder()
         .name("position-line-color")
-        .description("The line color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The line color."))
         .defaultValue(new SettingColor(255, 150, 0))
         .visible(renderPositionBox::get)
         .build()

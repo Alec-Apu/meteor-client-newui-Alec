@@ -26,7 +26,7 @@ public class BetterTab extends Module {
 
     public final Setting<Integer> tabSize = sgGeneral.add(new IntSetting.Builder()
         .name("tablist-size")
-        .description("How many players in total to display in the tablist.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How many players in total to display in the tablist."))
         .defaultValue(100)
         .min(1)
         .sliderRange(1, 1000)
@@ -35,7 +35,7 @@ public class BetterTab extends Module {
 
     public final Setting<Integer> tabHeight = sgGeneral.add(new IntSetting.Builder()
         .name("column-height")
-        .description("How many players to display in each column.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How many players to display in each column."))
         .defaultValue(20)
         .min(1)
         .sliderRange(1, 1000)
@@ -44,14 +44,14 @@ public class BetterTab extends Module {
 
     private final Setting<Boolean> self = sgGeneral.add(new BoolSetting.Builder()
         .name("highlight-self")
-        .description("Highlights yourself in the tablist.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Highlights yourself in the tablist."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<SettingColor> selfColor = sgGeneral.add(new ColorSetting.Builder()
         .name("self-color")
-        .description("The color to highlight your name with.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color to highlight your name with."))
         .defaultValue(new SettingColor(250, 130, 30))
         .visible(self::get)
         .build()
@@ -59,21 +59,21 @@ public class BetterTab extends Module {
 
     private final Setting<Boolean> friends = sgGeneral.add(new BoolSetting.Builder()
         .name("highlight-friends")
-        .description("Highlights friends in the tablist.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Highlights friends in the tablist."))
         .defaultValue(true)
         .build()
     );
 
     public final Setting<Boolean> accurateLatency = sgGeneral.add(new BoolSetting.Builder()
         .name("accurate-latency")
-        .description("Shows latency as a number in the tablist.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows latency as a number in the tablist."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> gamemode = sgGeneral.add(new BoolSetting.Builder()
         .name("gamemode")
-        .description("Display gamemode next to the nick.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Display gamemode next to the nick."))
         .defaultValue(false)
         .build()
     );

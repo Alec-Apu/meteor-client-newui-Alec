@@ -24,7 +24,6 @@ import meteordevelopment.orbit.EventHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
-import net.minecraft.network.protocol.game.ServerboundSwingPacket;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
@@ -36,7 +35,7 @@ public class AutoCity extends Module {
 
     private final Setting<Double> targetRange = sgGeneral.add(new DoubleSetting.Builder()
         .name("target-range")
-        .description("The radius in which players get targeted.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The radius in which players get targeted."))
         .defaultValue(5.5)
         .min(0)
         .sliderMax(7)
@@ -45,7 +44,7 @@ public class AutoCity extends Module {
 
     private final Setting<Double> breakRange = sgGeneral.add(new DoubleSetting.Builder()
         .name("break-range")
-        .description("How close a block must be to you to be considered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How close a block must be to you to be considered."))
         .defaultValue(4.5)
         .min(0)
         .sliderMax(6)
@@ -54,21 +53,21 @@ public class AutoCity extends Module {
 
     private final Setting<SwitchMode> switchMode = sgGeneral.add(new EnumSetting.Builder<SwitchMode>()
         .name("switch-mode")
-        .description("How to switch to a pickaxe.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How to switch to a pickaxe."))
         .defaultValue(SwitchMode.Normal)
         .build()
     );
 
     private final Setting<Boolean> support = sgGeneral.add(new BoolSetting.Builder()
         .name("support")
-        .description("If there is no block below a city block it will place one before mining.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("If there is no block below a city block it will place one before mining."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Double> placeRange = sgGeneral.add(new DoubleSetting.Builder()
         .name("place-range")
-        .description("How far away to try and place a block.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How far away to try and place a block."))
         .defaultValue(4.5)
         .min(0)
         .sliderMax(6)
@@ -78,14 +77,14 @@ public class AutoCity extends Module {
 
     private final Setting<Boolean> rotate = sgGeneral.add(new BoolSetting.Builder()
         .name("rotate")
-        .description("Automatically rotates you towards the city block.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically rotates you towards the city block."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> chatInfo = sgGeneral.add(new BoolSetting.Builder()
         .name("chat-info")
-        .description("Whether the module should send messages in chat.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether the module should send messages in chat."))
         .defaultValue(true)
         .build()
     );
@@ -94,21 +93,21 @@ public class AutoCity extends Module {
 
     private final Setting<Boolean> swingHand = sgRender.add(new BoolSetting.Builder()
         .name("swing-hand")
-        .description("Whether to render your hand swinging.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to render your hand swinging."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> renderBlock = sgRender.add(new BoolSetting.Builder()
         .name("render-block")
-        .description("Whether to render the block being broken.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to render the block being broken."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<ShapeMode> shapeMode = sgRender.add(new EnumSetting.Builder<ShapeMode>()
         .name("shape-mode")
-        .description("How the shapes are rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How the shapes are rendered."))
         .defaultValue(ShapeMode.Both)
         .visible(renderBlock::get)
         .build()
@@ -116,7 +115,7 @@ public class AutoCity extends Module {
 
     private final Setting<SettingColor> sideColor = sgRender.add(new ColorSetting.Builder()
         .name("side-color")
-        .description("The side color of the rendering.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The side color of the rendering."))
         .defaultValue(new SettingColor(225, 0, 0, 75))
         .visible(() -> renderBlock.get() && shapeMode.get().sides())
         .build()
@@ -124,7 +123,7 @@ public class AutoCity extends Module {
 
     private final Setting<SettingColor> lineColor = sgRender.add(new ColorSetting.Builder()
         .name("line-color")
-        .description("The line color of the rendering.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The line color of the rendering."))
         .defaultValue(new SettingColor(225, 0, 0, 255))
         .visible(() -> renderBlock.get() && shapeMode.get().lines())
         .build()
@@ -143,14 +142,14 @@ public class AutoCity extends Module {
     public void onActivate() {
         target = TargetUtils.getPlayerTarget(targetRange.get(), SortPriority.ClosestAngle);
         if (TargetUtils.isBadTarget(target, targetRange.get())) {
-            if (chatInfo.get()) error("Couldn't find a target, disabling.");
+            if (chatInfo.get()) error(meteordevelopment.meteorclient.utils.misc.Localization.text("Couldn't find a target, disabling."));
             toggle();
             return;
         }
 
         targetPos = EntityUtils.getCityBlock(target);
         if (targetPos == null || PlayerUtils.squaredDistanceTo(targetPos) > Math.pow(breakRange.get(), 2)) {
-            if (chatInfo.get()) error("Couldn't find a good block, disabling.");
+            if (chatInfo.get()) error(meteordevelopment.meteorclient.utils.misc.Localization.text("Couldn't find a good block, disabling."));
             toggle();
             return;
         }
@@ -164,7 +163,7 @@ public class AutoCity extends Module {
 
         pick = InvUtils.find(itemStack -> itemStack.getItem() == Items.DIAMOND_PICKAXE || itemStack.getItem() == Items.NETHERITE_PICKAXE);
         if (!pick.isHotbar()) {
-            error("No pickaxe found... disabling.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("No pickaxe found... disabling."));
             toggle();
             return;
         }
@@ -187,7 +186,7 @@ public class AutoCity extends Module {
         }
 
         if (PlayerUtils.squaredDistanceTo(targetPos) > Math.pow(breakRange.get(), 2)) {
-            if (chatInfo.get()) error("Couldn't find a target, disabling.");
+            if (chatInfo.get()) error(meteordevelopment.meteorclient.utils.misc.Localization.text("Couldn't find a target, disabling."));
             toggle();
             return;
         }
@@ -195,7 +194,7 @@ public class AutoCity extends Module {
         if (progress < 1.0f) {
             pick = InvUtils.find(itemStack -> itemStack.getItem() == Items.DIAMOND_PICKAXE || itemStack.getItem() == Items.NETHERITE_PICKAXE);
             if (!pick.isHotbar()) {
-                error("No pickaxe found... disabling.");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("No pickaxe found... disabling."));
                 toggle();
                 return;
             }
@@ -216,8 +215,7 @@ public class AutoCity extends Module {
             mc.gameMode.startPrediction(mc.level, sequence -> new ServerboundPlayerActionPacket(ServerboundPlayerActionPacket.Action.START_DESTROY_BLOCK, targetPos, direction, sequence));
         mc.gameMode.startPrediction(mc.level, sequence -> new ServerboundPlayerActionPacket(ServerboundPlayerActionPacket.Action.STOP_DESTROY_BLOCK, targetPos, direction, sequence));
 
-        if (swingHand.get()) mc.player.swing(InteractionHand.MAIN_HAND);
-        else mc.getConnection().send(new ServerboundSwingPacket(InteractionHand.MAIN_HAND));
+        if (swingHand.get()) mc.player.swing(InteractionHand.MAIN_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, false);
 
         if (switchMode.get() == SwitchMode.Silent) InvUtils.swapBack();
     }

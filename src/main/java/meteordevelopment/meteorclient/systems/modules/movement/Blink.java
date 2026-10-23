@@ -28,14 +28,14 @@ public class Blink extends Module {
 
     private final Setting<Boolean> renderOriginal = sgGeneral.add(new BoolSetting.Builder()
         .name("render-original")
-        .description("Renders your player model at the original position.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Renders your player model at the original position."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Integer> delay = sgGeneral.add(new IntSetting.Builder()
         .name("pulse-delay")
-        .description("After the duration in ticks has elapsed, send all packets and start blinking again. 0 to disable.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("After the duration in ticks has elapsed, send all packets and start blinking again. 0 to disable."))
         .defaultValue(0)
         .min(0)
         .sliderMax(60)
@@ -45,7 +45,7 @@ public class Blink extends Module {
     @SuppressWarnings("unused")
     private final Setting<Keybind> cancelBlink = sgGeneral.add(new KeybindSetting.Builder()
         .name("cancel-blink")
-        .description("Cancels sending packets and sends you back to your original position.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Cancels sending packets and sends you back to your original position."))
         .defaultValue(Keybind.none())
         .action(() -> {
             cancelled = true;
@@ -134,7 +134,7 @@ public class Blink extends Module {
 
     @EventHandler
     private void onJoinGame(GameJoinedEvent event) {
-        warning("Blink is currently enabled; you won't be able to interact with anything properly until you disable it!");
+        warning(meteordevelopment.meteorclient.utils.misc.Localization.text("Blink is currently enabled; you won't be able to interact with anything properly until you disable it!"));
     }
 
     @EventHandler

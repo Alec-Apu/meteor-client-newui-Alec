@@ -35,12 +35,12 @@ public class MacroCommand extends Command {
             .then(literal("clear")
                 .executes(_ -> {
                     if (scheduleQueue.isEmpty() && scheduledMacros.isEmpty()) {
-                        error("No macros are currently scheduled.");
+                        error(meteordevelopment.meteorclient.utils.misc.Localization.text("No macros are currently scheduled."));
                         return SINGLE_SUCCESS;
                     }
 
                     clearAll();
-                    info("Cleared all scheduled macros.");
+                    info(meteordevelopment.meteorclient.utils.misc.Localization.text("Cleared all scheduled macros."));
 
                     return SINGLE_SUCCESS;
                 })
@@ -49,12 +49,12 @@ public class MacroCommand extends Command {
                         Macro macro = MacroArgumentType.get(context);
 
                         if (!isScheduled(macro)) {
-                            error("This macro is not currently scheduled.");
+                            error(meteordevelopment.meteorclient.utils.misc.Localization.text("This macro is not currently scheduled."));
                             return SINGLE_SUCCESS;
                         }
 
                         clear(macro);
-                        info("Cleared scheduled macro.");
+                        info(meteordevelopment.meteorclient.utils.misc.Localization.text("Cleared scheduled macro."));
                         return SINGLE_SUCCESS;
                     })
                 )

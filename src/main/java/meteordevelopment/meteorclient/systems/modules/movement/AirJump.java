@@ -22,7 +22,7 @@ public class AirJump extends Module {
 
     private final Setting<Boolean> maintainLevel = sgGeneral.add(new BoolSetting.Builder()
         .name("maintain-level")
-        .description("Maintains your current Y level when holding the jump key.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Maintains your current Y level when holding the jump key."))
         .defaultValue(false)
         .build()
     );

@@ -19,14 +19,14 @@ public class Reach extends Module {
 
     private final Setting<Double> blockReach = sgGeneral.add(new DoubleSetting.Builder()
         .name("extra-block-reach")
-        .description("The distance to add to your block reach.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The distance to add to your block reach."))
         .sliderMax(1)
         .build()
     );
 
     private final Setting<Double> entityReach = sgGeneral.add(new DoubleSetting.Builder()
         .name("extra-entity-reach")
-        .description("The distance to add to your entity reach.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The distance to add to your entity reach."))
         .sliderMax(1)
         .build()
     );
@@ -37,8 +37,8 @@ public class Reach extends Module {
 
     @Override
     public WWidget getWidget(GuiTheme theme) {
-        return theme.label("Note: on vanilla servers you may give yourself up to 4 blocks of additional reach for specific actions - " +
-            "interacting with block entities (chests, furnaces, etc.) or with vehicles. This does not work on paper servers.", Utils.getWindowWidth() / 3.0);
+        return theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Note: on vanilla servers you may give yourself up to 4 blocks of additional reach for specific actions - ") +
+            meteordevelopment.meteorclient.utils.misc.Localization.text("interacting with block entities (chests, furnaces, etc.) or with vehicles. This does not work on paper servers."), Utils.getWindowWidth() / 3.0);
     }
 
     public double blockReach() {

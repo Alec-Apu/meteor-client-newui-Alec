@@ -43,7 +43,7 @@ public class ColorSettingScreen extends WindowScreen {
     private WCheckbox rainbow;
 
     public ColorSettingScreen(GuiTheme theme, Setting<SettingColor> setting) {
-        super(theme, "Select Color");
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Select Color"));
 
         this.setting = setting;
     }
@@ -60,28 +60,28 @@ public class ColorSettingScreen extends WindowScreen {
         // RGBA
         WTable rgbaTable = add(theme.table()).expandX().widget();
 
-        rgbaTable.add(theme.label("R:"));
+        rgbaTable.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("R:")));
         rItb = rgbaTable.add(theme.intEdit(setting.get().r, 0, 255, 0, 255, false)).expandX().widget();
         rItb.action = this::rgbaChanged;
         rgbaTable.row();
 
-        rgbaTable.add(theme.label("G:"));
+        rgbaTable.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("G:")));
         gItb = rgbaTable.add(theme.intEdit(setting.get().g, 0, 255, 0, 255, false)).expandX().widget();
         gItb.action = this::rgbaChanged;
         rgbaTable.row();
 
-        rgbaTable.add(theme.label("B:"));
+        rgbaTable.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("B:")));
         bItb = rgbaTable.add(theme.intEdit(setting.get().b, 0, 255, 0, 255, false)).expandX().widget();
         bItb.action = this::rgbaChanged;
         rgbaTable.row();
 
-        rgbaTable.add(theme.label("A:"));
+        rgbaTable.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("A:")));
         aItb = rgbaTable.add(theme.intEdit(setting.get().a, 0, 255, 0, 255, false)).expandX().widget();
         aItb.action = this::rgbaChanged;
 
         // Rainbow
         WHorizontalList rainbowList = add(theme.horizontalList()).expandX().widget();
-        rainbowList.add(theme.label("Rainbow: "));
+        rainbowList.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Rainbow: ")));
         rainbow = theme.checkbox(setting.get().rainbow);
         rainbow.action = () -> {
             setting.get().rainbow = rainbow.checked;
@@ -92,16 +92,16 @@ public class ColorSettingScreen extends WindowScreen {
         // Bottom
         WHorizontalList bottomList = add(theme.horizontalList()).expandX().widget();
 
-        WButton backButton = bottomList.add(theme.button("Back")).expandX().widget();
+        WButton backButton = bottomList.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Back"))).expandX().widget();
         backButton.action = this::onClose;
 
         WButton copyButton = bottomList.add(theme.button(GuiRenderer.COPY)).widget();
         copyButton.action = this::toClipboard;
-        copyButton.tooltip = "Copy config";
+        copyButton.tooltip = meteordevelopment.meteorclient.utils.misc.Localization.text("Copy config");
 
         WButton pasteButton = bottomList.add(theme.button(GuiRenderer.PASTE)).widget();
         pasteButton.action = this::fromClipboard;
-        pasteButton.tooltip = "Paste config";
+        pasteButton.tooltip = meteordevelopment.meteorclient.utils.misc.Localization.text("Paste config");
 
         WButton resetButton = bottomList.add(theme.button(GuiRenderer.RESET)).widget();
         resetButton.action = () -> {
@@ -109,7 +109,7 @@ public class ColorSettingScreen extends WindowScreen {
             setFromSetting();
             callAction();
         };
-        resetButton.tooltip = "Reset";
+        resetButton.tooltip = meteordevelopment.meteorclient.utils.misc.Localization.text("Reset");
 
         hueQuad.calculateFromSetting(false);
         brightnessQuad.calculateFromColor(setting.get(), false);

@@ -374,7 +374,7 @@ public class ProjectileEntitySimulator {
                 entity -> !entity.isSpectator() && entity.isAlive() && entity.isPickable(),
                 getToleranceMargin(),
                 ClipContext.Block.COLLIDER,
-                false
+                false, false
             );
 
             // prevent simulating projectiles as colliding with ourselves on the first tick of movement

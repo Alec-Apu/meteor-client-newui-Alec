@@ -23,7 +23,7 @@ public class PotionSaver extends Module {
 
     private final Setting<List<MobEffect>> effects = sgGeneral.add(new StatusEffectListSetting.Builder()
         .name("effects")
-        .description("The effects to preserve.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The effects to preserve."))
         .defaultValue(
             STRENGTH.value(),
             ABSORPTION.value(),
@@ -45,7 +45,7 @@ public class PotionSaver extends Module {
 
     public final Setting<Boolean> onlyWhenStationary = sgGeneral.add(new BoolSetting.Builder()
         .name("only-when-stationary")
-        .description("Only freezes effects when you aren't moving.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Only freezes effects when you aren't moving."))
         .defaultValue(false)
         .build()
     );

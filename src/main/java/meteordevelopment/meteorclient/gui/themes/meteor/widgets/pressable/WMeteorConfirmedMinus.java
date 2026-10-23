@@ -11,7 +11,19 @@ import meteordevelopment.meteorclient.gui.themes.meteor.MeteorWidget;
 import meteordevelopment.meteorclient.gui.widgets.pressable.WConfirmedMinus;
 import meteordevelopment.meteorclient.utils.render.color.Color;
 
+import static meteordevelopment.meteorclient.gui.themes.meteor.ModernWidgetStyle.isModuleDetails;
+
 public class WMeteorConfirmedMinus extends WConfirmedMinus implements MeteorWidget {
+    @Override
+    protected void onCalculateSize() {
+        if (!isModuleDetails()) {
+            super.onCalculateSize();
+            return;
+        }
+
+        width = height = theme.scale(34);
+    }
+
     @Override
     protected void onRender(GuiRenderer renderer, double mouseX, double mouseY, double delta) {
         MeteorGuiTheme theme = theme();

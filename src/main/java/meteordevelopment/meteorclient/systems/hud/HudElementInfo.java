@@ -25,8 +25,8 @@ public class HudElementInfo<T extends HudElement> {
     public HudElementInfo(HudGroup group, String name, String title, String description, Supplier<T> factory) {
         this.group = group;
         this.name = name;
-        this.title = title;
-        this.description = description;
+        this.title = meteordevelopment.meteorclient.utils.misc.Localization.text(title);
+        this.description = meteordevelopment.meteorclient.utils.misc.Localization.text(description);
 
         this.factory = factory;
         this.presets = new ArrayList<>();
@@ -60,7 +60,7 @@ public class HudElementInfo<T extends HudElement> {
 
         public Preset(HudElementInfo<?> info, String title, Consumer<T> callback) {
             this.info = info;
-            this.title = title;
+            this.title = meteordevelopment.meteorclient.utils.misc.Localization.text(title);
             this.callback = callback;
         }
     }

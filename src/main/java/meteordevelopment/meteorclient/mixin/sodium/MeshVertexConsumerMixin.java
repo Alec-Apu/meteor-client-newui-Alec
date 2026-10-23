@@ -7,8 +7,8 @@ package meteordevelopment.meteorclient.mixin.sodium;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.vertex.VertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormatElement;
+import com.mojang.renderpearl.api.vertex.VertexFormat;
+import com.mojang.renderpearl.api.vertex.VertexFormatElement;
 import meteordevelopment.meteorclient.utils.render.MeshBuilderVertexConsumerProvider;
 import net.caffeinemc.mods.sodium.api.vertex.buffer.VertexBufferWriter;
 import org.lwjgl.system.MemoryStack;

@@ -24,14 +24,14 @@ public class Trail extends Module {
 
     private final Setting<List<ParticleType<?>>> particles = sgGeneral.add(new ParticleTypeListSetting.Builder()
         .name("particles")
-        .description("Particles to draw.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Particles to draw."))
         .defaultValue(ParticleTypes.DRIPPING_OBSIDIAN_TEAR, ParticleTypes.CAMPFIRE_COSY_SMOKE)
         .build()
     );
 
     private final Setting<Boolean> pause = sgGeneral.add(new BoolSetting.Builder()
         .name("pause-when-stationary")
-        .description("Whether or not to add particles when you are not moving.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to add particles when you are not moving."))
         .defaultValue(true)
         .build()
     );

@@ -23,7 +23,7 @@ public class WallHack extends Module {
 
     public final Setting<Integer> opacity = sgGeneral.add(new IntSetting.Builder()
         .name("opacity")
-        .description("The opacity for rendered blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The opacity for rendered blocks."))
         .defaultValue(0)
         .range(0, 255)
         .sliderMax(255)
@@ -37,7 +37,7 @@ public class WallHack extends Module {
 
     public final Setting<List<Block>> blocks = sgGeneral.add(new BlockListSetting.Builder()
         .name("blocks")
-        .description("What blocks should be targeted for Wall Hack.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("What blocks should be targeted for Wall Hack."))
         .defaultValue()
         .onChanged(_ -> {
             if (isActive()) {
@@ -49,7 +49,7 @@ public class WallHack extends Module {
 
     public final Setting<Boolean> occludeChunks = sgGeneral.add(new BoolSetting.Builder()
         .name("occlude-chunks")
-        .description("Whether caves should occlude underground (may look wonky when on).")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether caves should occlude underground (may look wonky when on)."))
         .defaultValue(false)
         .build()
     );
@@ -71,7 +71,7 @@ public class WallHack extends Module {
     @Override
     public WWidget getWidget(GuiTheme theme) {
         if (MixinPlugin.isIrisPresent && IrisApi.getInstance().isShaderPackInUse())
-            return theme.label("Warning: Due to shaders in use, opacity is overridden to 0.");
+            return theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Warning: Due to shaders in use, opacity is overridden to 0."));
 
         return null;
     }

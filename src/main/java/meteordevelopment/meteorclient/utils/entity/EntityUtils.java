@@ -113,7 +113,7 @@ public class EntityUtils {
         while (blockPos.getY() > bottom) {
             BlockState state = mc.level.getBlockState(blockPos);
 
-            if (state.blocksMotion()) break;
+            if (state.isSolid()) break;
 
             Fluid fluid = state.getFluidState().getType();
             if (fluid == Fluids.WATER || fluid == Fluids.FLOWING_WATER) {

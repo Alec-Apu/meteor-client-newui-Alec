@@ -16,7 +16,7 @@ public class Multitask extends Module {
 
     private final Setting<Boolean> attackingEntities = sgGeneral.add(new BoolSetting.Builder()
         .name("attacking-entities")
-        .description("Lets you attack entities while using an item.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Lets you attack entities while using an item."))
         .defaultValue(true)
         .build()
     );

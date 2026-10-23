@@ -40,21 +40,21 @@ public class ESP extends Module {
 
     public final Setting<Mode> mode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("mode")
-        .description("Rendering mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Rendering mode."))
         .defaultValue(Mode.Shader)
         .build()
     );
 
     public final Setting<Boolean> highlightTarget = sgGeneral.add(new BoolSetting.Builder()
         .name("highlight-target")
-        .description("highlights the currently targeted entity differently")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("highlights the currently targeted entity differently"))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> targetHitbox = sgGeneral.add(new BoolSetting.Builder()
         .name("target-hitbox")
-        .description("draw the hitbox of the target entity")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("draw the hitbox of the target entity"))
         .defaultValue(true)
         .visible(highlightTarget::get)
         .build()
@@ -62,7 +62,7 @@ public class ESP extends Module {
 
     public final Setting<Integer> outlineWidth = sgGeneral.add(new IntSetting.Builder()
         .name("outline-width")
-        .description("The width of the shader outline.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The width of the shader outline."))
         .visible(() -> mode.get() == Mode.Shader)
         .defaultValue(2)
         .range(1, 10)
@@ -72,7 +72,7 @@ public class ESP extends Module {
 
     public final Setting<Double> glowMultiplier = sgGeneral.add(new DoubleSetting.Builder()
         .name("glow-multiplier")
-        .description("Multiplier for glow effect")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Multiplier for glow effect"))
         .visible(() -> mode.get() == Mode.Shader)
         .decimalPlaces(3)
         .defaultValue(3.5)
@@ -83,14 +83,14 @@ public class ESP extends Module {
 
     public final Setting<Boolean> ignoreSelf = sgGeneral.add(new BoolSetting.Builder()
         .name("ignore-self")
-        .description("Ignores yourself drawing the shader.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Ignores yourself drawing the shader."))
         .defaultValue(true)
         .build()
     );
 
     public final Setting<ShapeMode> shapeMode = sgGeneral.add(new EnumSetting.Builder<ShapeMode>()
         .name("shape-mode")
-        .description("How the shapes are rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How the shapes are rendered."))
         .visible(() -> mode.get() != Mode.Glow)
         .defaultValue(ShapeMode.Both)
         .build()
@@ -98,7 +98,7 @@ public class ESP extends Module {
 
     public final Setting<Double> fillOpacity = sgGeneral.add(new DoubleSetting.Builder()
         .name("fill-opacity")
-        .description("The opacity of the shape fill.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The opacity of the shape fill."))
         .visible(() -> shapeMode.get() != ShapeMode.Lines && mode.get() != Mode.Glow)
         .defaultValue(0.3)
         .range(0, 1)
@@ -108,7 +108,7 @@ public class ESP extends Module {
 
     private final Setting<Double> fadeDistance = sgGeneral.add(new DoubleSetting.Builder()
         .name("fade-distance")
-        .description("The distance from an entity where the color begins to fade.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The distance from an entity where the color begins to fade."))
         .defaultValue(3)
         .min(0)
         .sliderMax(12)
@@ -117,7 +117,7 @@ public class ESP extends Module {
 
     private final Setting<Set<EntityType<?>>> entities = sgGeneral.add(new EntityTypeListSetting.Builder()
         .name("entities")
-        .description("Select specific entities.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Select specific entities."))
         .defaultValue(EntityTypes.PLAYER)
         .build()
     );
@@ -126,14 +126,14 @@ public class ESP extends Module {
 
     public final Setting<ESPColorMode> colorMode = sgColors.add(new EnumSetting.Builder<ESPColorMode>()
         .name("color-mode")
-        .description("Determines the colors used for entities.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Determines the colors used for entities."))
         .defaultValue(ESPColorMode.EntityType)
         .build()
     );
 
     public final Setting<Boolean> friendOverride = sgColors.add(new BoolSetting.Builder()
         .name("show-friend-colors")
-        .description("Whether or not to override the distance/health color of friends with the friend color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to override the distance/health color of friends with the friend color."))
         .defaultValue(true)
         .visible(() -> colorMode.get() == ESPColorMode.Distance || colorMode.get() == ESPColorMode.Health)
         .build()
@@ -141,7 +141,7 @@ public class ESP extends Module {
 
     private final Setting<SettingColor> nonLivingEntityColor = sgColors.add(new ColorSetting.Builder()
         .name("non-living-entity-color")
-        .description("The color used for non living entities such as dropped items.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color used for non living entities such as dropped items."))
         .defaultValue(new SettingColor(25, 25, 25))
         .visible(() -> colorMode.get() == ESPColorMode.Health)
         .build()
@@ -149,7 +149,7 @@ public class ESP extends Module {
 
     private final Setting<SettingColor> playersColor = sgColors.add(new ColorSetting.Builder()
         .name("players-color")
-        .description("The other player's color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The other player's color."))
         .defaultValue(new SettingColor(255, 255, 255))
         .visible(() -> colorMode.get() == ESPColorMode.EntityType)
         .build()
@@ -157,7 +157,7 @@ public class ESP extends Module {
 
     private final Setting<SettingColor> animalsColor = sgColors.add(new ColorSetting.Builder()
         .name("animals-color")
-        .description("The animal's color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The animal's color."))
         .defaultValue(new SettingColor(25, 255, 25, 255))
         .visible(() -> colorMode.get() == ESPColorMode.EntityType)
         .build()
@@ -165,7 +165,7 @@ public class ESP extends Module {
 
     private final Setting<SettingColor> waterAnimalsColor = sgColors.add(new ColorSetting.Builder()
         .name("water-animals-color")
-        .description("The water animal's color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The water animal's color."))
         .defaultValue(new SettingColor(25, 25, 255, 255))
         .visible(() -> colorMode.get() == ESPColorMode.EntityType)
         .build()
@@ -173,7 +173,7 @@ public class ESP extends Module {
 
     private final Setting<SettingColor> monstersColor = sgColors.add(new ColorSetting.Builder()
         .name("monsters-color")
-        .description("The monster's color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The monster's color."))
         .defaultValue(new SettingColor(255, 25, 25, 255))
         .visible(() -> colorMode.get() == ESPColorMode.EntityType)
         .build()
@@ -181,7 +181,7 @@ public class ESP extends Module {
 
     private final Setting<SettingColor> ambientColor = sgColors.add(new ColorSetting.Builder()
         .name("ambient-color")
-        .description("The ambient's color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The ambient's color."))
         .defaultValue(new SettingColor(25, 25, 25, 255))
         .visible(() -> colorMode.get() == ESPColorMode.EntityType)
         .build()
@@ -189,7 +189,7 @@ public class ESP extends Module {
 
     private final Setting<SettingColor> miscColor = sgColors.add(new ColorSetting.Builder()
         .name("misc-color")
-        .description("The misc color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The misc color."))
         .defaultValue(new SettingColor(175, 175, 175, 255))
         .visible(() -> colorMode.get() == ESPColorMode.EntityType)
         .build()
@@ -197,7 +197,7 @@ public class ESP extends Module {
 
     private final Setting<SettingColor> targetColor = sgColors.add(new ColorSetting.Builder()
         .name("target-color")
-        .description("The target color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The target color."))
         .defaultValue(new SettingColor(200, 200, 200, 255))
         .visible(highlightTarget::get)
         .build()
@@ -205,7 +205,7 @@ public class ESP extends Module {
 
     private final Setting<SettingColor> targetHitboxColor = sgColors.add(new ColorSetting.Builder()
         .name("target-hitbox-color")
-        .description("The target hitbox color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The target hitbox color."))
         .defaultValue(new SettingColor(100, 200, 200, 255))
         .visible(() -> highlightTarget.get() && targetHitbox.get())
         .build()

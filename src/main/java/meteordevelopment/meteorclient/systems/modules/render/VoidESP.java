@@ -36,14 +36,14 @@ public class VoidESP extends Module {
 
     private final Setting<Boolean> airOnly = sgGeneral.add(new BoolSetting.Builder()
         .name("air-only")
-        .description("Checks bedrock only for air blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Checks bedrock only for air blocks."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Integer> horizontalRadius = sgGeneral.add(new IntSetting.Builder()
         .name("horizontal-radius")
-        .description("Horizontal radius in which to search for holes.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Horizontal radius in which to search for holes."))
         .defaultValue(64)
         .min(0)
         .sliderMax(256)
@@ -52,7 +52,7 @@ public class VoidESP extends Module {
 
     private final Setting<Integer> holeHeight = sgGeneral.add(new IntSetting.Builder()
         .name("hole-height")
-        .description("The minimum hole height to be rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The minimum hole height to be rendered."))
         .defaultValue(1)
         .min(1)
         .sliderRange(1, 5)
@@ -61,7 +61,7 @@ public class VoidESP extends Module {
 
     private final Setting<Boolean> netherRoof = sgGeneral.add(new BoolSetting.Builder()
         .name("nether-roof")
-        .description("Check for holes in nether roof.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Check for holes in nether roof."))
         .defaultValue(true)
         .build()
     );
@@ -70,21 +70,21 @@ public class VoidESP extends Module {
 
     private final Setting<ShapeMode> shapeMode = sgRender.add(new EnumSetting.Builder<ShapeMode>()
         .name("shape-mode")
-        .description("How the shapes are rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How the shapes are rendered."))
         .defaultValue(ShapeMode.Both)
         .build()
     );
 
     private final Setting<SettingColor> sideColor = sgRender.add(new ColorSetting.Builder()
         .name("fill-color")
-        .description("The color that fills holes in the void.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color that fills holes in the void."))
         .defaultValue(new SettingColor(225, 25, 25, 50))
         .build()
     );
 
     private final Setting<SettingColor> lineColor = sgRender.add(new ColorSetting.Builder()
         .name("line-color")
-        .description("The color to draw lines of holes to the void.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color to draw lines of holes to the void."))
         .defaultValue(new SettingColor(225, 25, 255))
         .build()
     );

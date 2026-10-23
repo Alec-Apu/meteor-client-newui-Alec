@@ -89,8 +89,10 @@ public abstract class GameRendererMixin {
         return result;
     }
 
-    @Inject(method = "renderLevel", at = @At(value = "INVOKE_STRING", target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V", args = "ldc=hand"))
-    private void onRenderLevel(DeltaTracker deltaTracker, CallbackInfo ci, @Local(name = "projectionMatrix") Matrix4f projectionMatrix, @Local(name = "modelViewMatrix") Matrix4fc modelViewMatrix, @Local(name = "worldPartialTicks") float worldPartialTicks, @Local(name = "bobStack") PoseStack bobStack) {
+    @Inject(method = "renderLevel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/GameRenderer;render3dHud(Lnet/minecraft/client/renderer/state/level/CameraRenderState;Lnet/minecraft/client/renderer/state/level/PlayerRenderState;Lnet/minecraft/client/renderer/state/OptionsRenderState;Z)V"))
+    private void onRenderLevel(CallbackInfo ci, @Local(name = "projectionMatrix") Matrix4f projectionMatrix, @Local(name = "worldPartialTicks") float worldPartialTicks, @Local(name = "cameraState") CameraRenderState cameraState) {
+        Matrix4fc modelViewMatrix = cameraState.viewRotationMatrix;
+        PoseStack bobStack = new PoseStack();
         if (!Utils.canUpdate()) return;
 
         Profiler.get().push(MeteorClient.MOD_ID + "_render");
@@ -107,20 +109,7 @@ public abstract class GameRendererMixin {
 
         RenderSystem.getModelViewStack().pushMatrix().mul(modelViewMatrix);
 
-        matrices.pushPose();
-        bobHurt(this.gameRenderState.levelRenderState.cameraRenderState, matrices);
-        if (minecraft.options.bobView().get()) {
-            bobView(this.gameRenderState.levelRenderState.cameraRenderState, matrices);
-        }
-
-        Matrix4f inverseBob = new Matrix4f(matrices.last().pose()).invert();
-        RenderSystem.getModelViewStack().mul(inverseBob);
-        matrices.popPose();
-
-        // Call utility classes (apply bob correction when Iris shaders are active)
-
-        Matrix4fc correctedPosition = MixinPlugin.isIrisPresent && RenderUtils.isShaderPackInUse() ? new Matrix4f(modelViewMatrix).mul(inverseBob) : modelViewMatrix;
-        RenderUtils.updateScreenCenter(projectionMatrix, correctedPosition);
+        RenderUtils.updateScreenCenter(projectionMatrix, modelViewMatrix);
         NametagUtils.onRender(modelViewMatrix);
 
         // Render
@@ -143,20 +132,13 @@ public abstract class GameRendererMixin {
         MeteorClient.EVENT_BUS.post(RenderAfterWorldEvent.get());
     }
 
-    @Inject(method = "displayItemActivation", at = @At("HEAD"), cancellable = true)
-    private void onDisplayItemActivation(ItemStack itemStack, CallbackInfo ci) {
-        if (itemStack.getItem() == Items.TOTEM_OF_UNDYING && Modules.get().get(NoRender.class).noTotemAnimation()) {
-            ci.cancel();
-        }
-    }
-
     @ModifyExpressionValue(method = "renderLevel", at = @At(value = "INVOKE", target = "Ljava/lang/Math;max(FF)F", ordinal = 0))
     private float applyCameraTransformationsMathHelperLerpProxy(float original) {
         return Modules.get().get(NoRender.class).noNausea() ? 0 : original;
     }
 
     @Inject(method = "renderItemInHand", at = @At("HEAD"), cancellable = true)
-    private void renderItemInHand(CameraRenderState cameraState, float deltaPartialTick, Matrix4fc modelViewMatrix, CallbackInfo ci) {
+    private void renderItemInHand(CallbackInfo ci) {
         if (!Modules.get().get(Freecam.class).renderHands() || !Modules.get().get(Zoom.class).renderHands()) {
             ci.cancel();
         }

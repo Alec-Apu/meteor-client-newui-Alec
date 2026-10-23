@@ -66,14 +66,14 @@ public class StashFinder extends Module {
 
     private final Setting<List<BlockEntityType<?>>> storageBlocks = sgGeneral.add(new StorageBlockListSetting.Builder()
         .name("storage-blocks")
-        .description("Select the storage blocks to search for.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Select the storage blocks to search for."))
         .defaultValue(StorageBlockListSetting.STORAGE_BLOCKS)
         .build()
     );
 
     private final Setting<Integer> minimumStorageCount = sgGeneral.add(new IntSetting.Builder()
         .name("minimum-storage-count")
-        .description("The minimum amount of storage blocks in a chunk to record the chunk.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The minimum amount of storage blocks in a chunk to record the chunk."))
         .defaultValue(4)
         .min(1)
         .sliderMin(1)
@@ -82,14 +82,14 @@ public class StashFinder extends Module {
 
     private final Setting<List<Block>> blacklistedBlocks = sgGeneral.add(new BlockListSetting.Builder()
         .name("blacklisted-support-blocks")
-        .description("Blocks that prevent counting a storage block entity when it sits on them.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Blocks that prevent counting a storage block entity when it sits on them."))
         .defaultValue(DEFAULT_SUPPORT_BLOCK_BLACKLIST)
         .build()
     );
 
     private final Setting<Integer> minimumDistance = sgGeneral.add(new IntSetting.Builder()
         .name("minimum-distance")
-        .description("The minimum distance you must be from spawn to record a certain chunk.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The minimum distance you must be from spawn to record a certain chunk."))
         .defaultValue(0)
         .min(0)
         .sliderMax(10000)
@@ -98,14 +98,14 @@ public class StashFinder extends Module {
 
     private final Setting<Boolean> sendNotifications = sgGeneral.add(new BoolSetting.Builder()
         .name("notifications")
-        .description("Sends Minecraft notifications when new stashes are found.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Sends Minecraft notifications when new stashes are found."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Mode> notificationMode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("notification-mode")
-        .description("The mode to use for notifications.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The mode to use for notifications."))
         .defaultValue(Mode.Both)
         .visible(sendNotifications::get)
         .build()
@@ -113,14 +113,14 @@ public class StashFinder extends Module {
 
     private final Setting<Boolean> renderTracer = sgRender.add(new BoolSetting.Builder()
         .name("render-tracer")
-        .description("Renders a tracer to the last found stash.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Renders a tracer to the last found stash."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<SettingColor> traceColor = sgRender.add(new ColorSetting.Builder()
         .name("tracer-color")
-        .description("Color of the stash tracer.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color of the stash tracer."))
         .defaultValue(new SettingColor(255, 215, 0, 255))
         .visible(renderTracer::get)
         .build()
@@ -128,7 +128,7 @@ public class StashFinder extends Module {
 
     private final Setting<Integer> traceArrivalDistance = sgRender.add(new IntSetting.Builder()
         .name("tracer-hide-at-distance")
-        .description("Hide the trace when you are this close to the stash.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Hide the trace when you are this close to the stash."))
         .defaultValue(16)
         .min(1)
         .sliderMin(1)
@@ -139,7 +139,7 @@ public class StashFinder extends Module {
 
     private final Setting<Integer> traceMaxDistance = sgRender.add(new IntSetting.Builder()
         .name("tracer-max-distance")
-        .description("Hide the trace when you are farther than this distance from the stash.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Hide the trace when you are farther than this distance from the stash."))
         .defaultValue(2000)
         .min(10)
         .sliderMin(50)
@@ -150,14 +150,14 @@ public class StashFinder extends Module {
 
     private final Setting<Boolean> renderChunkColumn = sgRender.add(new BoolSetting.Builder()
         .name("render-chunk-column")
-        .description("Renders a vertical column at the center of traced chunks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Renders a vertical column at the center of traced chunks."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<SettingColor> traceColumnColor = sgRender.add(new ColorSetting.Builder()
         .name("chunk-column-color")
-        .description("Color of the stash tracer column.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color of the stash tracer column."))
         .defaultValue(new SettingColor(255, 215, 0, 100))
         .visible(renderChunkColumn::get)
         .build()
@@ -165,7 +165,7 @@ public class StashFinder extends Module {
 
     private final Setting<Keybind> clearTracesBind = sgRender.add(new KeybindSetting.Builder()
         .name("clear-traces-bind")
-        .description("Keybind to clear all stash traces.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Keybind to clear all stash traces."))
         .defaultValue(Keybind.none())
         .build()
     );
@@ -262,8 +262,8 @@ public class StashFinder extends Module {
 
         // Clear buttons
         WHorizontalList hl = theme.horizontalList();
-        WButton clear = hl.add(theme.button("Clear Chunks")).widget();
-        WButton resetTracers = hl.add(theme.button("Reset Tracers")).widget();
+        WButton clear = hl.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Clear Chunks"))).widget();
+        WButton resetTracers = hl.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Reset Tracers"))).widget();
 
         list.add(hl);
 
@@ -290,8 +290,8 @@ public class StashFinder extends Module {
 
     private void fillTable(GuiTheme theme, WTable table) {
         for (Chunk chunk : chunks) {
-            table.add(theme.label("Pos: " + chunk.x + ", " + chunk.z)).padRight(10);
-            table.add(theme.label("Total: " + chunk.getTotal())).padRight(10);
+            table.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Pos: ") + chunk.x + ", " + chunk.z)).padRight(10);
+            table.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Total: ") + chunk.getTotal())).padRight(10);
 
             WCheckbox visible = table.add(theme.checkbox(tracerPositions.containsKey(chunk.chunkPos))).widget();
             visible.action = () -> {
@@ -301,10 +301,10 @@ public class StashFinder extends Module {
                 } else tracerPositions.remove(chunk.chunkPos);
             };
 
-            WButton open = table.add(theme.button("Open")).widget();
+            WButton open = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Open"))).widget();
             open.action = () -> mc.gui.setScreen(new ChunkScreen(theme, chunk));
 
-            WButton gotoBtn = table.add(theme.button("Goto")).widget();
+            WButton gotoBtn = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Goto"))).widget();
             gotoBtn.action = () -> PathManagers.get().moveTo(new BlockPos(chunk.x, 0, chunk.z), true);
 
             WMinus delete = table.add(theme.minus()).widget();
@@ -417,10 +417,10 @@ public class StashFinder extends Module {
             .setStyle(Style.EMPTY
                 .withColor(ChatFormatting.WHITE)
                 .applyFormat(ChatFormatting.UNDERLINE)
-                .withHoverEvent(new HoverEvent.ShowText(Component.literal("Path to stash")))
+                .withHoverEvent(new HoverEvent.ShowText(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Path to stash"))))
                 .withClickEvent(new RunnableClickEvent(() -> PathManagers.get().moveTo(new BlockPos(chunk.x, 0, chunk.z), true))));
 
-        MutableComponent message = Component.literal("Found stash at ")
+        MutableComponent message = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Found stash at "))
             .withStyle(ChatFormatting.GRAY)
             .append(Component.literal("[").withStyle(ChatFormatting.GRAY))
             .append(coords)
@@ -540,7 +540,7 @@ public class StashFinder extends Module {
             WTable t = add(theme.table()).expandX().widget();
 
             // Total
-            t.add(theme.label("Total:"));
+            t.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Total:")));
             t.add(theme.label(chunk.getTotal() + ""));
             t.row();
 
@@ -548,31 +548,31 @@ public class StashFinder extends Module {
             t.row();
 
             // Separate
-            t.add(theme.label("Chests:"));
+            t.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Chests:")));
             t.add(theme.label(chunk.chests + ""));
             t.row();
 
-            t.add(theme.label("Barrels:"));
+            t.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Barrels:")));
             t.add(theme.label(chunk.barrels + ""));
             t.row();
 
-            t.add(theme.label("Shulkers:"));
+            t.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Shulkers:")));
             t.add(theme.label(chunk.shulkers + ""));
             t.row();
 
-            t.add(theme.label("Ender Chests:"));
+            t.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Ender Chests:")));
             t.add(theme.label(chunk.enderChests + ""));
             t.row();
 
-            t.add(theme.label("Furnaces:"));
+            t.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Furnaces:")));
             t.add(theme.label(chunk.furnaces + ""));
             t.row();
 
-            t.add(theme.label("Dispensers and droppers:"));
+            t.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Dispensers and droppers:")));
             t.add(theme.label(chunk.dispensersDroppers + ""));
             t.row();
 
-            t.add(theme.label("Hoppers:"));
+            t.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Hoppers:")));
             t.add(theme.label(chunk.hoppers + ""));
         }
     }

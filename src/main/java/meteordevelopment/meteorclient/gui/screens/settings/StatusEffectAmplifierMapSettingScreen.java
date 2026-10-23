@@ -34,7 +34,7 @@ public class StatusEffectAmplifierMapSettingScreen extends WindowScreen {
     private String filterText = "";
 
     public StatusEffectAmplifierMapSettingScreen(GuiTheme theme, Setting<Reference2IntMap<MobEffect>> setting) {
-        super(theme, "Modify Amplifiers");
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Modify Amplifiers"));
 
         this.setting = setting;
     }

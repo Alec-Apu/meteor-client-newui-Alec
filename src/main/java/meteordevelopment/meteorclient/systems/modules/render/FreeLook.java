@@ -13,7 +13,7 @@ import meteordevelopment.meteorclient.utils.misc.input.Input;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.CameraType;
 import net.minecraft.util.Mth;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 
 public class FreeLook extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
@@ -23,21 +23,21 @@ public class FreeLook extends Module {
 
     public final Setting<Mode> mode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("mode")
-        .description("Which entity to rotate.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which entity to rotate."))
         .defaultValue(Mode.Player)
         .build()
     );
 
     public final Setting<Boolean> togglePerspective = sgGeneral.add(new BoolSetting.Builder()
         .name("toggle-perspective")
-        .description("Changes your perspective on toggle.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Changes your perspective on toggle."))
         .defaultValue(true)
         .build()
     );
 
     public final Setting<Double> sensitivity = sgGeneral.add(new DoubleSetting.Builder()
         .name("camera-sensitivity")
-        .description("How fast the camera moves in camera mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How fast the camera moves in camera mode."))
         .defaultValue(8)
         .min(0)
         .sliderMax(10)
@@ -48,14 +48,14 @@ public class FreeLook extends Module {
 
     public final Setting<Boolean> arrows = sgArrows.add(new BoolSetting.Builder()
         .name("arrows-control-opposite")
-        .description("Allows you to control the other entities rotation with the arrow keys.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Allows you to control the other entities rotation with the arrow keys."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Double> arrowSpeed = sgArrows.add(new DoubleSetting.Builder()
         .name("arrow-speed")
-        .description("Rotation speed with arrow keys.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Rotation speed with arrow keys."))
         .defaultValue(4)
         .min(0)
         .build()
@@ -99,19 +99,19 @@ public class FreeLook extends Module {
             for (int i = 0; i < (arrowSpeed.get() * 2); i++) {
                 switch (mode.get()) {
                     case Player -> {
-                        if (Input.isKeyPressed(GLFW.GLFW_KEY_LEFT)) cameraYaw -= 0.5;
-                        if (Input.isKeyPressed(GLFW.GLFW_KEY_RIGHT)) cameraYaw += 0.5;
-                        if (Input.isKeyPressed(GLFW.GLFW_KEY_UP)) cameraPitch -= 0.5;
-                        if (Input.isKeyPressed(GLFW.GLFW_KEY_DOWN)) cameraPitch += 0.5;
+                        if (Input.isKeyPressed(InputConstants.KEY_LEFT)) cameraYaw -= 0.5;
+                        if (Input.isKeyPressed(InputConstants.KEY_RIGHT)) cameraYaw += 0.5;
+                        if (Input.isKeyPressed(InputConstants.KEY_UP)) cameraPitch -= 0.5;
+                        if (Input.isKeyPressed(InputConstants.KEY_DOWN)) cameraPitch += 0.5;
                     }
                     case Camera -> {
                         float yaw = mc.player.getYRot();
                         float pitch = mc.player.getXRot();
 
-                        if (Input.isKeyPressed(GLFW.GLFW_KEY_LEFT)) yaw -= 0.5;
-                        if (Input.isKeyPressed(GLFW.GLFW_KEY_RIGHT)) yaw += 0.5;
-                        if (Input.isKeyPressed(GLFW.GLFW_KEY_UP)) pitch -= 0.5;
-                        if (Input.isKeyPressed(GLFW.GLFW_KEY_DOWN)) pitch += 0.5;
+                        if (Input.isKeyPressed(InputConstants.KEY_LEFT)) yaw -= 0.5;
+                        if (Input.isKeyPressed(InputConstants.KEY_RIGHT)) yaw += 0.5;
+                        if (Input.isKeyPressed(InputConstants.KEY_UP)) pitch -= 0.5;
+                        if (Input.isKeyPressed(InputConstants.KEY_DOWN)) pitch += 0.5;
 
                         mc.player.setYRot(yaw);
                         mc.player.setXRot(pitch);

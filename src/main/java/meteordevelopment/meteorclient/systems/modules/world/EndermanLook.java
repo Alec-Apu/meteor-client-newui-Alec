@@ -18,7 +18,7 @@ import meteordevelopment.orbit.EventHandler;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.monster.Enderman;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
@@ -27,14 +27,14 @@ public class EndermanLook extends Module {
 
     private final Setting<Mode> lookMode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("look-mode")
-        .description("How this module behaves.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How this module behaves."))
         .defaultValue(Mode.Away)
         .build()
     );
 
     private final Setting<Boolean> stun = sgGeneral.add(new BoolSetting.Builder()
         .name("stun-hostiles")
-        .description("Automatically stares at hostile endermen to stun them in place.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically stares at hostile endermen to stun them in place."))
         .defaultValue(true)
         .visible(() -> lookMode.get() == Mode.Away)
         .build()
@@ -51,7 +51,7 @@ public class EndermanLook extends Module {
             return;
 
         for (Entity entity : mc.level.entitiesForRendering()) {
-            if (!(entity instanceof EnderMan enderman) || !enderman.isAlive() || !mc.player.hasLineOfSight(enderman))
+            if (!(entity instanceof Enderman enderman) || !enderman.isAlive() || !mc.player.hasLineOfSight(enderman))
                 continue;
 
             switch (lookMode.get()) {
@@ -69,9 +69,9 @@ public class EndermanLook extends Module {
     }
 
     /**
-     * @see EnderMan#isBeingStaredBy(Player)
+     * @see Enderman#isBeingStaredBy(Player)
      */
-    private boolean angleCheck(EnderMan entity) {
+    private boolean angleCheck(Enderman entity) {
         Vec3 vec3d = mc.player.getViewVector(1.0F).normalize();
         Vec3 vec3d2 = new Vec3(entity.getX() - mc.player.getX(), entity.getEyeY() - mc.player.getEyeY(), entity.getZ() - mc.player.getZ());
 

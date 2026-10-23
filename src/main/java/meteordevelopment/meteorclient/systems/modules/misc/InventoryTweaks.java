@@ -36,7 +36,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DecoratedPotBlock;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -53,14 +53,14 @@ public class InventoryTweaks extends Module {
 
     private final Setting<Boolean> mouseDragItemMove = sgGeneral.add(new BoolSetting.Builder()
         .name("mouse-drag-item-move")
-        .description("Moving mouse over items while holding shift will transfer it to the other container.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Moving mouse over items while holding shift will transfer it to the other container."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> xCarry = sgGeneral.add(new BoolSetting.Builder()
         .name("xcarry")
-        .description("Allows you to store four extra item stacks in your crafting grid.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Allows you to store four extra item stacks in your crafting grid."))
         .defaultValue(true)
         .onChanged(v -> {
             if (v || !Utils.canUpdate()) return;
@@ -72,15 +72,15 @@ public class InventoryTweaks extends Module {
 
     private final Setting<Boolean> uncapBundleScrolling = sgGeneral.add(new BoolSetting.Builder()
         .name("uncap-bundle-scrolling")
-        .description("Whether to uncap the bundle scrolling feature to let you select any item.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to uncap the bundle scrolling feature to let you select any item."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> frameInput = sgGeneral.add(new BoolSetting.Builder()
         .name("frame-input-handling")
-        .description("Changes input handling to work every frame instead of every tick. A very minor effect but may\n" +
-            "make inputs feel smoother, especially in laggy environments. Will flag anticheats that check packet order (Grim).")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Changes input handling to work every frame instead of every tick. A very minor effect but may\n") +
+            meteordevelopment.meteorclient.utils.misc.Localization.text("make inputs feel smoother, especially in laggy environments. Will flag anticheats that check packet order (Grim)."))
         .defaultValue(false)
         .build()
     );
@@ -89,22 +89,22 @@ public class InventoryTweaks extends Module {
 
     private final Setting<Boolean> sortingEnabled = sgSorting.add(new BoolSetting.Builder()
         .name("sorting-enabled")
-        .description("Automatically sorts stacks in inventory.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically sorts stacks in inventory."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Keybind> sortingKey = sgSorting.add(new KeybindSetting.Builder()
         .name("sorting-key")
-        .description("Key to trigger the sort.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Key to trigger the sort."))
         .visible(sortingEnabled::get)
-        .defaultValue(Keybind.fromButton(GLFW.GLFW_MOUSE_BUTTON_MIDDLE))
+        .defaultValue(Keybind.fromButton(InputConstants.MOUSE_BUTTON_MIDDLE))
         .build()
     );
 
     private final Setting<Integer> sortingDelay = sgSorting.add(new IntSetting.Builder()
         .name("sorting-delay")
-        .description("Delay in ticks between moving items when sorting.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Delay in ticks between moving items when sorting."))
         .visible(sortingEnabled::get)
         .defaultValue(1)
         .min(0)
@@ -113,7 +113,7 @@ public class InventoryTweaks extends Module {
 
     private final Setting<Boolean> disableInCreative = sgSorting.add(new BoolSetting.Builder()
         .name("disable-in-creative")
-        .description("Disables the inventory sorter when in creative mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Disables the inventory sorter when in creative mode."))
         .defaultValue(true)
         .visible(sortingEnabled::get)
         .build()
@@ -123,20 +123,20 @@ public class InventoryTweaks extends Module {
 
     private final Setting<List<Item>> antiDropItems = sgAntiDrop.add(new ItemListSetting.Builder()
         .name("anti-drop-items")
-        .description("Items to prevent dropping. Doesn't work in creative inventory screen.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Items to prevent dropping. Doesn't work in creative inventory screen."))
         .build()
     );
 
     private final Setting<Boolean> antiItemFrame = sgAntiDrop.add(new BoolSetting.Builder()
         .name("item-frames")
-        .description("Prevent anti-drop items from being placed in item frames or pots")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Prevent anti-drop items from being placed in item frames or pots"))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Keybind> antiDropOverrideBind = sgAntiDrop.add(new KeybindSetting.Builder()
         .name("override-bind")
-        .description("Hold this bind to temporarily bypass anti-drop")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Hold this bind to temporarily bypass anti-drop"))
         .build()
     );
 
@@ -144,27 +144,27 @@ public class InventoryTweaks extends Module {
 
     private final Setting<List<Item>> autoDropItems = sgAutoDrop.add(new ItemListSetting.Builder()
         .name("auto-drop-items")
-        .description("Items to drop.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Items to drop."))
         .build()
     );
 
     private final Setting<Boolean> autoDropExcludeEquipped = sgAutoDrop.add(new BoolSetting.Builder()
         .name("exclude-equipped")
-        .description("Whether or not to drop items equipped in armor slots.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to drop items equipped in armor slots."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> autoDropExcludeHotbar = sgAutoDrop.add(new BoolSetting.Builder()
         .name("exclude-hotbar")
-        .description("Whether or not to drop items from your hotbar.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to drop items from your hotbar."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> autoDropOnlyFullStacks = sgAutoDrop.add(new BoolSetting.Builder()
         .name("only-full-stacks")
-        .description("Only drops the items if the stack is full.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Only drops the items if the stack is full."))
         .defaultValue(false)
         .build()
     );
@@ -173,28 +173,28 @@ public class InventoryTweaks extends Module {
 
     public final Setting<List<MenuType<?>>> stealScreens = sgStealDump.add(new ScreenHandlerListSetting.Builder()
         .name("steal-screens")
-        .description("Select the screens to display buttons and auto steal.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Select the screens to display buttons and auto steal."))
         .defaultValue(List.of(MenuType.GENERIC_9x3, MenuType.GENERIC_9x6))
         .build()
     );
 
     private final Setting<Boolean> buttons = sgStealDump.add(new BoolSetting.Builder()
         .name("inventory-buttons")
-        .description("Shows steal and dump buttons in container guis.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows steal and dump buttons in container guis."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> stealDrop = sgStealDump.add(new BoolSetting.Builder()
         .name("steal-drop")
-        .description("Drop items to the ground instead of stealing them.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Drop items to the ground instead of stealing them."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> dropBackwards = sgStealDump.add(new BoolSetting.Builder()
         .name("drop-backwards")
-        .description("Drop items behind you.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Drop items behind you."))
         .defaultValue(false)
         .visible(stealDrop::get)
         .build()
@@ -202,27 +202,27 @@ public class InventoryTweaks extends Module {
 
     private final Setting<ListMode> dumpFilter = sgStealDump.add(new EnumSetting.Builder<ListMode>()
         .name("dump-filter")
-        .description("Dump mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Dump mode."))
         .defaultValue(ListMode.None)
         .build()
     );
 
     private final Setting<List<Item>> dumpItems = sgStealDump.add(new ItemListSetting.Builder()
         .name("dump-items")
-        .description("Items to dump.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Items to dump."))
         .build()
     );
 
     private final Setting<ListMode> stealFilter = sgStealDump.add(new EnumSetting.Builder<ListMode>()
         .name("steal-filter")
-        .description("Steal mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Steal mode."))
         .defaultValue(ListMode.None)
         .build()
     );
 
     private final Setting<List<Item>> stealItems = sgStealDump.add(new ItemListSetting.Builder()
         .name("steal-items")
-        .description("Items to steal.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Items to steal."))
         .build()
     );
 
@@ -230,7 +230,7 @@ public class InventoryTweaks extends Module {
 
     private final Setting<Boolean> autoSteal = sgAutoSteal.add(new BoolSetting.Builder()
         .name("auto-steal")
-        .description("Automatically removes all possible items when you open a container.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically removes all possible items when you open a container."))
         .defaultValue(false)
         .onChanged(_ -> checkAutoStealSettings())
         .build()
@@ -238,7 +238,7 @@ public class InventoryTweaks extends Module {
 
     private final Setting<Boolean> autoDump = sgAutoSteal.add(new BoolSetting.Builder()
         .name("auto-dump")
-        .description("Automatically dumps all possible items when you open a container.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically dumps all possible items when you open a container."))
         .defaultValue(false)
         .onChanged(_ -> checkAutoStealSettings())
         .build()
@@ -246,7 +246,7 @@ public class InventoryTweaks extends Module {
 
     private final Setting<Integer> autoStealDelay = sgAutoSteal.add(new IntSetting.Builder()
         .name("delay")
-        .description("The minimum delay between stealing the next stack in milliseconds.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The minimum delay between stealing the next stack in milliseconds."))
         .defaultValue(20)
         .sliderMax(1000)
         .build()
@@ -254,7 +254,7 @@ public class InventoryTweaks extends Module {
 
     private final Setting<Integer> autoStealInitDelay = sgAutoSteal.add(new IntSetting.Builder()
         .name("initial-delay")
-        .description("The initial delay before stealing in milliseconds. 0 to use normal delay instead.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The initial delay before stealing in milliseconds. 0 to use normal delay instead."))
         .defaultValue(50)
         .sliderMax(1000)
         .build()
@@ -262,7 +262,7 @@ public class InventoryTweaks extends Module {
 
     private final Setting<Integer> autoStealRandomDelay = sgAutoSteal.add(new IntSetting.Builder()
         .name("random")
-        .description("Randomly adds a delay of up to the specified time in milliseconds.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Randomly adds a delay of up to the specified time in milliseconds."))
         .min(0)
         .sliderMax(1000)
         .defaultValue(50)
@@ -399,7 +399,7 @@ public class InventoryTweaks extends Module {
 
     private void checkAutoStealSettings() {
         if (autoSteal.get() && autoDump.get()) {
-            error("You can't enable Auto Steal and Auto Dump at the same time!");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("You can't enable Auto Steal and Auto Dump at the same time!"));
             autoDump.set(false);
         }
     }

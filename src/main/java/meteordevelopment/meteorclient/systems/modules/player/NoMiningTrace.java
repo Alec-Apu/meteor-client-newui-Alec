@@ -22,14 +22,14 @@ public class NoMiningTrace extends Module {
 
     private final Setting<Set<EntityType<?>>> entities = sgGeneral.add(new EntityTypeListSetting.Builder()
         .name("blacklisted-entities")
-        .description("Entities you will interact with as normal.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Entities you will interact with as normal."))
         .defaultValue()
         .build()
     );
 
     private final Setting<Boolean> onlyWhenHoldingPickaxe = sgGeneral.add(new BoolSetting.Builder()
         .name("only-when-holding-a-pickaxe")
-        .description("Whether or not to work only when holding a pickaxe.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to work only when holding a pickaxe."))
         .defaultValue(true)
         .build()
     );

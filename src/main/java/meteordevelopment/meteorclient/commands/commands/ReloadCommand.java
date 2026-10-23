@@ -23,7 +23,7 @@ public class ReloadCommand extends Command {
     @Override
     public void build(LiteralArgumentBuilder<ClientSuggestionProvider> builder) {
         builder.executes(_ -> {
-            warning("Reloading systems, this may take a while.");
+            warning(meteordevelopment.meteorclient.utils.misc.Localization.text("Reloading systems, this may take a while."));
 
             Systems.load();
             Capes.init();

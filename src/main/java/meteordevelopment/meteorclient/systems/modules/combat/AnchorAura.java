@@ -48,7 +48,7 @@ public class AnchorAura extends Module {
 
     private final Setting<Double> targetRange = sgGeneral.add(new DoubleSetting.Builder()
         .name("target-range")
-        .description("Range in which to target players.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Range in which to target players."))
         .defaultValue(10)
         .min(0)
         .sliderMax(16)
@@ -57,14 +57,14 @@ public class AnchorAura extends Module {
 
     private final Setting<SortPriority> targetPriority = sgGeneral.add(new EnumSetting.Builder<SortPriority>()
         .name("target-priority")
-        .description("How to select the player to target.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How to select the player to target."))
         .defaultValue(SortPriority.LowestHealth)
         .build()
     );
 
     private final Setting<Double> minDamage = sgGeneral.add(new DoubleSetting.Builder()
         .name("min-damage")
-        .description("The minimum damage to inflict on your target.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The minimum damage to inflict on your target."))
         .defaultValue(7)
         .min(0)
         .sliderMax(36)
@@ -73,7 +73,7 @@ public class AnchorAura extends Module {
 
     private final Setting<Double> maxSelfDamage = sgGeneral.add(new DoubleSetting.Builder()
         .name("max-self-damage")
-        .description("The maximum damage to inflict on yourself.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The maximum damage to inflict on yourself."))
         .defaultValue(7)
         .min(0)
         .sliderMax(36)
@@ -82,21 +82,21 @@ public class AnchorAura extends Module {
 
     private final Setting<Boolean> antiSuicide = sgGeneral.add(new BoolSetting.Builder()
         .name("anti-suicide")
-        .description("Will not place and break anchors if they will kill you.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Will not place and break anchors if they will kill you."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> swapBack = sgGeneral.add(new BoolSetting.Builder()
         .name("swap-back")
-        .description("Switches to your previous slot after using anchors.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Switches to your previous slot after using anchors."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> rotate = sgGeneral.add(new BoolSetting.Builder()
         .name("rotate")
-        .description("Rotates server-side towards the anchors being placed/broken.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Rotates server-side towards the anchors being placed/broken."))
         .defaultValue(true)
         .build()
     );
@@ -105,14 +105,14 @@ public class AnchorAura extends Module {
 
     private final Setting<Boolean> place = sgPlace.add(new BoolSetting.Builder()
         .name("place")
-        .description("Allows Anchor Aura to place anchors.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Allows Anchor Aura to place anchors."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Integer> placeDelay = sgPlace.add(new IntSetting.Builder()
         .name("place-delay")
-        .description("The tick delay between placing anchors.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The tick delay between placing anchors."))
         .defaultValue(5)
         .range(0, 10)
         .visible(place::get)
@@ -121,7 +121,7 @@ public class AnchorAura extends Module {
 
     private final Setting<Double> placeRange = sgPlace.add(new DoubleSetting.Builder()
         .name("place-range")
-        .description("The range at which anchors can be placed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The range at which anchors can be placed."))
         .defaultValue(4)
         .range(0, 6)
         .visible(place::get)
@@ -130,7 +130,7 @@ public class AnchorAura extends Module {
 
     private final Setting<Double> placeWallsRange = sgPlace.add(new DoubleSetting.Builder()
         .name("walls-range")
-        .description("Range in which to place anchors when behind blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Range in which to place anchors when behind blocks."))
         .defaultValue(4)
         .range(0, 6)
         .visible(place::get)
@@ -139,7 +139,7 @@ public class AnchorAura extends Module {
 
     private final Setting<Boolean> airPlace = sgPlace.add(new BoolSetting.Builder()
         .name("air-place")
-        .description("Allows Anchor Aura to place anchors in the air.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Allows Anchor Aura to place anchors in the air."))
         .defaultValue(true)
         .visible(place::get)
         .build()
@@ -149,7 +149,7 @@ public class AnchorAura extends Module {
 
     private final Setting<Integer> chargeDelay = sgBreak.add(new IntSetting.Builder()
         .name("charge-delay")
-        .description("The tick delay it takes to charge anchors.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The tick delay it takes to charge anchors."))
         .defaultValue(1)
         .range(0, 10)
         .build()
@@ -157,7 +157,7 @@ public class AnchorAura extends Module {
 
     private final Setting<Integer> breakDelay = sgBreak.add(new IntSetting.Builder()
         .name("break-delay")
-        .description("The tick delay it takes to break anchors.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The tick delay it takes to break anchors."))
         .defaultValue(1)
         .range(0, 10)
         .build()
@@ -165,7 +165,7 @@ public class AnchorAura extends Module {
 
     private final Setting<Double> breakRange = sgBreak.add(new DoubleSetting.Builder()
         .name("break-range")
-        .description("Range in which to break anchors.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Range in which to break anchors."))
         .defaultValue(4.5)
         .min(0)
         .sliderMax(6)
@@ -174,7 +174,7 @@ public class AnchorAura extends Module {
 
     private final Setting<Double> breakWallsRange = sgBreak.add(new DoubleSetting.Builder()
         .name("walls-range")
-        .description("Range in which to break anchors when behind blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Range in which to break anchors when behind blocks."))
         .defaultValue(4.5)
         .min(0)
         .sliderMax(6)
@@ -185,21 +185,21 @@ public class AnchorAura extends Module {
 
     private final Setting<Boolean> pauseOnUse = sgPause.add(new BoolSetting.Builder()
         .name("pause-on-use")
-        .description("Pauses while using an item.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Pauses while using an item."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> pauseOnMine = sgPause.add(new BoolSetting.Builder()
         .name("pause-on-mine")
-        .description("Pauses while mining blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Pauses while mining blocks."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> pauseOnCA = sgPause.add(new BoolSetting.Builder()
         .name("pause-on-CA")
-        .description("Pauses while Crystal Aura is placing.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Pauses while Crystal Aura is placing."))
         .defaultValue(true)
         .build()
     );
@@ -208,21 +208,21 @@ public class AnchorAura extends Module {
 
     private final Setting<Boolean> swing = sgRender.add(new BoolSetting.Builder()
         .name("swing")
-        .description("Whether to swing your hand client-side.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to swing your hand client-side."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> render = sgRender.add(new BoolSetting.Builder()
         .name("render")
-        .description("Renders the block where it is placing an anchor.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Renders the block where it is placing an anchor."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<ShapeMode> shapeMode = sgRender.add(new EnumSetting.Builder<ShapeMode>()
         .name("shape-mode")
-        .description("How the shapes are rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How the shapes are rendered."))
         .defaultValue(ShapeMode.Both)
         .visible(render::get)
         .build()
@@ -230,7 +230,7 @@ public class AnchorAura extends Module {
 
     private final Setting<SettingColor> sideColor = sgRender.add(new ColorSetting.Builder()
         .name("side-color")
-        .description("The side color for positions to be placed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The side color for positions to be placed."))
         .defaultValue(new SettingColor(15, 255, 211, 41))
         .visible(() -> render.get() && shapeMode.get().sides())
         .build()
@@ -238,7 +238,7 @@ public class AnchorAura extends Module {
 
     private final Setting<SettingColor> lineColor = sgRender.add(new ColorSetting.Builder()
         .name("line-color")
-        .description("The line color for positions to be placed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The line color for positions to be placed."))
         .defaultValue(new SettingColor(15, 255, 211))
         .visible(() -> render.get() && shapeMode.get().lines())
         .build()
@@ -275,7 +275,7 @@ public class AnchorAura extends Module {
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         if (mc.level.dimension() == Level.NETHER) {
-            error("You can't blow up respawn anchors in this dimension, disabling.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("You can't blow up respawn anchors in this dimension, disabling."));
             toggle();
             return;
         }

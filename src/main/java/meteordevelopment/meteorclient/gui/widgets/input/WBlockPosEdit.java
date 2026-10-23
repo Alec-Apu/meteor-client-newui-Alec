@@ -42,7 +42,7 @@ public class WBlockPosEdit extends WHorizontalList {
         addTextBox();
 
         if (Utils.canUpdate()) {
-            WButton click = add(theme.button("Click")).expandX().widget();
+            WButton click = add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Click"))).expandX().widget();
             click.action = () -> {
                 String sb = "Click!\nRight click to pick a new position.\nLeft click to cancel.";
                 Modules.get().get(Marker.class).info(sb);
@@ -56,7 +56,7 @@ public class WBlockPosEdit extends WHorizontalList {
             WButton here = add(theme.confirmedButton("Set Here", "Confirm")).expandX().widget();
             here.action = () -> {
                 lastValue = value;
-                set(new BlockPos(mc.player.blockPosition()));
+                set(mc.player.blockPosition().immutable());
                 newValueCheck();
 
                 clear();

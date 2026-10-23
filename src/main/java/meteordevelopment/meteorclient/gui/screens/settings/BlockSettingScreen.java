@@ -28,7 +28,7 @@ public class BlockSettingScreen extends WindowScreen {
     private String filterText = "";
 
     public BlockSettingScreen(GuiTheme theme, BlockSetting setting) {
-        super(theme, "Select Block");
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Select Block"));
 
         this.setting = setting;
     }
@@ -58,7 +58,7 @@ public class BlockSettingScreen extends WindowScreen {
             if (!filterText.isEmpty() && !Strings.CI.contains(item.getLabelText(), filterText)) continue;
             table.add(item);
 
-            WButton select = table.add(theme.button("Select")).expandCellX().right().widget();
+            WButton select = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Select"))).expandCellX().right().widget();
             select.action = () -> {
                 setting.set(block);
                 onClose();

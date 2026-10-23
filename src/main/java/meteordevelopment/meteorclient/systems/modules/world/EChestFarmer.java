@@ -37,14 +37,14 @@ public class EChestFarmer extends Module {
 
     private final Setting<Boolean> selfToggle = sgGeneral.add(new BoolSetting.Builder()
         .name("self-toggle")
-        .description("Disables when you reach the desired amount of obsidian.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Disables when you reach the desired amount of obsidian."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> ignoreExisting = sgGeneral.add(new BoolSetting.Builder()
         .name("ignore-existing")
-        .description("Ignores existing obsidian in your inventory and mines the total target amount.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Ignores existing obsidian in your inventory and mines the total target amount."))
         .defaultValue(true)
         .visible(selfToggle::get)
         .build()
@@ -52,7 +52,7 @@ public class EChestFarmer extends Module {
 
     private final Setting<Integer> amount = sgGeneral.add(new IntSetting.Builder()
         .name("amount")
-        .description("The amount of obsidian to farm.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The amount of obsidian to farm."))
         .defaultValue(64)
         .sliderMax(128)
         .range(8, 512)
@@ -65,35 +65,35 @@ public class EChestFarmer extends Module {
 
     private final Setting<Boolean> swingHand = sgRender.add(new BoolSetting.Builder()
         .name("swing-hand")
-        .description("Swing hand client-side.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swing hand client-side."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> render = sgRender.add(new BoolSetting.Builder()
         .name("render")
-        .description("Renders a block overlay where the obsidian will be placed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Renders a block overlay where the obsidian will be placed."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<ShapeMode> shapeMode = sgRender.add(new EnumSetting.Builder<ShapeMode>()
         .name("shape-mode")
-        .description("How the shapes are rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How the shapes are rendered."))
         .defaultValue(ShapeMode.Both)
         .build()
     );
 
     private final Setting<SettingColor> sideColor = sgRender.add(new ColorSetting.Builder()
         .name("side-color")
-        .description("The color of the sides of the blocks being rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of the sides of the blocks being rendered."))
         .defaultValue(new SettingColor(204, 0, 0, 50))
         .build()
     );
 
     private final Setting<SettingColor> lineColor = sgRender.add(new ColorSetting.Builder()
         .name("line-color")
-        .description("The color of the lines of the blocks being rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of the lines of the blocks being rendered."))
         .defaultValue(new SettingColor(204, 0, 0, 255))
         .build()
     );
@@ -134,7 +134,7 @@ public class EChestFarmer extends Module {
 
         // Disable if the block is too far away
         if (!PlayerUtils.isWithinReach(target)) {
-            error("Target block pos out of reach.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Target block pos out of reach."));
             target = null;
             return;
         }
@@ -174,7 +174,7 @@ public class EChestFarmer extends Module {
             FindItemResult echest = InvUtils.findInHotbar(Items.ENDER_CHEST);
 
             if (!echest.found()) {
-                error("No Echests in hotbar, disabling");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("No Echests in hotbar, disabling"));
                 toggle();
                 return;
             }

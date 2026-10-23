@@ -22,7 +22,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class MacroArgumentType implements ArgumentType<Macro> {
     private static final MacroArgumentType INSTANCE = new MacroArgumentType();
-    private static final DynamicCommandExceptionType NO_SUCH_MACRO = new DynamicCommandExceptionType(name -> Component.literal("Macro with name " + name + " doesn't exist."));
+    private static final DynamicCommandExceptionType NO_SUCH_MACRO = new DynamicCommandExceptionType(name -> Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Macro with name ") + name + meteordevelopment.meteorclient.utils.misc.Localization.text(" doesn't exist.")));
 
     public static MacroArgumentType create() {
         return INSTANCE;

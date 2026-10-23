@@ -156,4 +156,10 @@ public abstract class MultiPlayerGameModeMixin implements IMultiPlayerGameMode {
     public void meteor$syncSelected() {
         ensureHasSentCarriedItem();
     }
+    @Inject(method = "dropItem", at = @At("HEAD"), cancellable = true)
+    private void onDrop(net.minecraft.client.player.LocalPlayer player, boolean all, org.spongepowered.asm.mixin.injection.callback.CallbackInfo ci) {
+        if (MeteorClient.EVENT_BUS.post(meteordevelopment.meteorclient.events.entity.DropItemsEvent.get(player.getMainHandItem())).isCancelled())
+            ci.cancel();
+    }
+
 }

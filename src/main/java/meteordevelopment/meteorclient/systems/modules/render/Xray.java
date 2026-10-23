@@ -38,7 +38,7 @@ public class Xray extends Module {
 
     private final Setting<List<Block>> blocks = sgGeneral.add(new BlockListSetting.Builder()
         .name("whitelist")
-        .description("Which blocks to show x-rayed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which blocks to show x-rayed."))
         .defaultValue(ORES)
         .onChanged(_ -> {
             if (isActive()) {
@@ -50,7 +50,7 @@ public class Xray extends Module {
 
     public final Setting<Integer> opacity = sgGeneral.add(new IntSetting.Builder()
         .name("opacity")
-        .description("The opacity for all other blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The opacity for all other blocks."))
         .defaultValue(25)
         .range(0, 255)
         .sliderMax(255)
@@ -64,7 +64,7 @@ public class Xray extends Module {
 
     private final Setting<FluidOpacity> fluidOpacity = sgGeneral.add(new EnumSetting.Builder<FluidOpacity>()
         .name("fluid-opacity")
-        .description("Which fluids should use xray opacity.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which fluids should use xray opacity."))
         .defaultValue(FluidOpacity.Both)
         .onChanged(_ -> {
             if (isActive()) {
@@ -76,7 +76,7 @@ public class Xray extends Module {
 
     private final Setting<Boolean> exposedOnly = sgGeneral.add(new BoolSetting.Builder()
         .name("exposed-only")
-        .description("Show only exposed ores.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Show only exposed ores."))
         .defaultValue(false)
         .onChanged(_ -> {
             if (isActive()) {
@@ -102,7 +102,7 @@ public class Xray extends Module {
     @Override
     public WWidget getWidget(GuiTheme theme) {
         if (MixinPlugin.isIrisPresent && IrisApi.getInstance().isShaderPackInUse())
-            return theme.label("Warning: Due to shaders in use, opacity is overridden to 0.");
+            return theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Warning: Due to shaders in use, opacity is overridden to 0."));
 
         return null;
     }

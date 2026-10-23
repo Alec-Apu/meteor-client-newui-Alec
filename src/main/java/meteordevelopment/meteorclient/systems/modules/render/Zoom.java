@@ -19,14 +19,14 @@ import meteordevelopment.meteorclient.systems.modules.Categories;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.util.Mth;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 
 public class Zoom extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
 
     private final Setting<Double> zoom = sgGeneral.add(new DoubleSetting.Builder()
         .name("zoom")
-        .description("How much to zoom.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How much to zoom."))
         .defaultValue(6)
         .min(1)
         .build()
@@ -34,7 +34,7 @@ public class Zoom extends Module {
 
     private final Setting<Double> scrollSensitivity = sgGeneral.add(new DoubleSetting.Builder()
         .name("scroll-sensitivity")
-        .description("Allows you to change zoom value using scroll wheel. 0 to disable.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Allows you to change zoom value using scroll wheel. 0 to disable."))
         .defaultValue(1)
         .min(0)
         .build()
@@ -42,28 +42,28 @@ public class Zoom extends Module {
 
     private final Setting<Boolean> smooth = sgGeneral.add(new BoolSetting.Builder()
         .name("smooth")
-        .description("Smooth transition.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Smooth transition."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> cinematic = sgGeneral.add(new BoolSetting.Builder()
         .name("cinematic")
-        .description("Enables cinematic camera.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Enables cinematic camera."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> hideHud = sgGeneral.add(new BoolSetting.Builder()
         .name("hide-HUD")
-        .description("Whether or not to hide the Minecraft HUD.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to hide the Minecraft HUD."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> renderHands = sgGeneral.add(new BoolSetting.Builder()
         .name("show-hands")
-        .description("Whether or not to render your hands.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to render your hands."))
         .defaultValue(false)
         .visible(() -> !hideHud.get())
         .build()
@@ -109,7 +109,7 @@ public class Zoom extends Module {
 
     @EventHandler
     public void onKeyPressed(KeyInputEvent event) {
-        if (event.key() != GLFW.GLFW_KEY_F1) return;
+        if (event.key() != InputConstants.KEY_F1) return;
         hudManualToggled = true;
     }
 

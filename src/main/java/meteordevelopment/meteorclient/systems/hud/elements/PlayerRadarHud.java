@@ -31,7 +31,7 @@ public class PlayerRadarHud extends HudElement {
 
     private final Setting<Integer> limit = sgGeneral.add(new IntSetting.Builder()
         .name("limit")
-        .description("The max number of players to show.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The max number of players to show."))
         .defaultValue(10)
         .min(1)
         .sliderRange(1, 20)
@@ -40,49 +40,49 @@ public class PlayerRadarHud extends HudElement {
 
     private final Setting<Boolean> distance = sgGeneral.add(new BoolSetting.Builder()
         .name("distance")
-        .description("Shows the distance to the player next to their name.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows the distance to the player next to their name."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> friends = sgGeneral.add(new BoolSetting.Builder()
         .name("display-friends")
-        .description("Whether to show friends or not.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to show friends or not."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> shadow = sgGeneral.add(new BoolSetting.Builder()
         .name("shadow")
-        .description("Renders shadow behind text.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Renders shadow behind text."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<SettingColor> primaryColor = sgGeneral.add(new ColorSetting.Builder()
         .name("primary-color")
-        .description("Primary color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Primary color."))
         .defaultValue(new SettingColor())
         .build()
     );
 
     private final Setting<SettingColor> secondaryColor = sgGeneral.add(new ColorSetting.Builder()
         .name("secondary-color")
-        .description("Secondary color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Secondary color."))
         .defaultValue(new SettingColor(175, 175, 175))
         .build()
     );
 
     private final Setting<Alignment> alignment = sgGeneral.add(new EnumSetting.Builder<Alignment>()
         .name("alignment")
-        .description("Horizontal alignment.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Horizontal alignment."))
         .defaultValue(Alignment.Auto)
         .build()
     );
 
     private final Setting<Integer> border = sgGeneral.add(new IntSetting.Builder()
         .name("border")
-        .description("How much space to add around the element.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How much space to add around the element."))
         .defaultValue(0)
         .build()
     );
@@ -91,14 +91,14 @@ public class PlayerRadarHud extends HudElement {
 
     private final Setting<Boolean> customScale = sgScale.add(new BoolSetting.Builder()
         .name("custom-scale")
-        .description("Applies a custom scale to this hud element.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Applies a custom scale to this hud element."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Double> scale = sgScale.add(new DoubleSetting.Builder()
         .name("scale")
-        .description("Custom scale.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Custom scale."))
         .visible(customScale::get)
         .defaultValue(1)
         .min(0.5)
@@ -110,14 +110,14 @@ public class PlayerRadarHud extends HudElement {
 
     private final Setting<Boolean> background = sgBackground.add(new BoolSetting.Builder()
         .name("background")
-        .description("Displays background.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Displays background."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<SettingColor> backgroundColor = sgBackground.add(new ColorSetting.Builder()
         .name("background-color")
-        .description("Color used for the background.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color used for the background."))
         .visible(background::get)
         .defaultValue(new SettingColor(25, 25, 25, 50))
         .build()
@@ -141,7 +141,7 @@ public class PlayerRadarHud extends HudElement {
 
     @Override
     public void tick(HudRenderer renderer) {
-        double width = renderer.textWidth("Players:", shadow.get(), getScale());
+        double width = renderer.textWidth(meteordevelopment.meteorclient.utils.misc.Localization.text("Players:"), shadow.get(), getScale());
         double height = renderer.textHeight(shadow.get(), getScale());
 
         if (mc.level == null || mc.getCameraEntity() == null) {
@@ -171,7 +171,7 @@ public class PlayerRadarHud extends HudElement {
             renderer.quad(this.x, this.y, getWidth(), getHeight(), backgroundColor.get());
         }
 
-        renderer.text("Players:", x + border.get() + alignX(renderer.textWidth("Players:", shadow.get(), getScale()), alignment.get()), y, secondaryColor.get(), shadow.get(), getScale());
+        renderer.text(meteordevelopment.meteorclient.utils.misc.Localization.text("Players:"), x + border.get() + alignX(renderer.textWidth(meteordevelopment.meteorclient.utils.misc.Localization.text("Players:"), shadow.get(), getScale()), alignment.get()), y, secondaryColor.get(), shadow.get(), getScale());
 
         if (mc.level == null || mc.getCameraEntity() == null) return;
         double spaceWidth = renderer.textWidth(" ", shadow.get(), getScale());

@@ -17,7 +17,7 @@ import java.util.List;
 
 public class SoundEventListSettingScreen extends CollectionListSettingScreen<SoundEvent> {
     public SoundEventListSettingScreen(GuiTheme theme, Setting<List<SoundEvent>> setting) {
-        super(theme, "Select Sounds", setting, setting.get(), BuiltInRegistries.SOUND_EVENT);
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Select Sounds"), setting, setting.get(), BuiltInRegistries.SOUND_EVENT);
     }
 
     @Override

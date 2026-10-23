@@ -37,21 +37,21 @@ public class LiquidFiller extends Module {
 
     private final Setting<PlaceIn> placeInLiquids = sgGeneral.add(new EnumSetting.Builder<PlaceIn>()
         .name("place-in")
-        .description("What type of liquids to place in.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("What type of liquids to place in."))
         .defaultValue(PlaceIn.Both)
         .build()
     );
 
     private final Setting<Shape> shape = sgGeneral.add(new EnumSetting.Builder<Shape>()
         .name("shape")
-        .description("The shape of placing algorithm.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The shape of placing algorithm."))
         .defaultValue(Shape.Sphere)
         .build()
     );
 
     private final Setting<Double> placeRange = sgGeneral.add(new DoubleSetting.Builder()
         .name("place-range")
-        .description("The range at which blocks can be placed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The range at which blocks can be placed."))
         .defaultValue(4.5)
         .min(0)
         .sliderMax(6)
@@ -60,7 +60,7 @@ public class LiquidFiller extends Module {
 
     private final Setting<Double> placeWallsRange = sgGeneral.add(new DoubleSetting.Builder()
         .name("walls-range")
-        .description("Range in which to place when behind blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Range in which to place when behind blocks."))
         .defaultValue(4.5)
         .min(0)
         .sliderMax(6)
@@ -69,7 +69,7 @@ public class LiquidFiller extends Module {
 
     private final Setting<Integer> delay = sgGeneral.add(new IntSetting.Builder()
         .name("delay")
-        .description("Delay between actions in ticks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Delay between actions in ticks."))
         .defaultValue(0)
         .min(0)
         .build()
@@ -77,7 +77,7 @@ public class LiquidFiller extends Module {
 
     private final Setting<Integer> maxBlocksPerTick = sgGeneral.add(new IntSetting.Builder()
         .name("max-blocks-per-tick")
-        .description("Maximum blocks to try to place per tick.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Maximum blocks to try to place per tick."))
         .defaultValue(1)
         .min(1)
         .sliderRange(1, 10)
@@ -86,14 +86,14 @@ public class LiquidFiller extends Module {
 
     private final Setting<SortMode> sortMode = sgGeneral.add(new EnumSetting.Builder<SortMode>()
         .name("sort-mode")
-        .description("The blocks you want to place first.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The blocks you want to place first."))
         .defaultValue(SortMode.Furthest)
         .build()
     );
 
     private final Setting<Boolean> rotate = sgGeneral.add(new BoolSetting.Builder()
         .name("rotate")
-        .description("Automatically rotates towards the space targeted for filling.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically rotates towards the space targeted for filling."))
         .defaultValue(true)
         .build()
     );
@@ -102,14 +102,14 @@ public class LiquidFiller extends Module {
 
     private final Setting<ListMode> listMode = sgWhitelist.add(new EnumSetting.Builder<ListMode>()
         .name("list-mode")
-        .description("Selection mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Selection mode."))
         .defaultValue(ListMode.Whitelist)
         .build()
     );
 
     private final Setting<List<Block>> whitelist = sgWhitelist.add(new BlockListSetting.Builder()
         .name("whitelist")
-        .description("The allowed blocks that it will use to fill up the liquid.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The allowed blocks that it will use to fill up the liquid."))
         .defaultValue(
             Blocks.DIRT,
             Blocks.COBBLESTONE,
@@ -125,7 +125,7 @@ public class LiquidFiller extends Module {
 
     private final Setting<List<Block>> blacklist = sgWhitelist.add(new BlockListSetting.Builder()
         .name("blacklist")
-        .description("The denied blocks that it not will use to fill up the liquid.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The denied blocks that it not will use to fill up the liquid."))
         .visible(() -> listMode.get() == ListMode.Blacklist)
         .build()
     );

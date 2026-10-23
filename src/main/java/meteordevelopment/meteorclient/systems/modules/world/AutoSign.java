@@ -27,7 +27,7 @@ public class AutoSign extends Module {
 
     private final Setting<Integer> delay = sgGeneral.add(new IntSetting.Builder()
         .name("delay")
-        .description("The tick delay between sign update packets.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The tick delay between sign update packets."))
         .defaultValue(10)
         .range(0, 100)
         .sliderRange(0, 100)
@@ -74,7 +74,7 @@ public class AutoSign extends Module {
     private void onSendPacket(PacketEvent.Send event) {
         if (!(event.packet instanceof ServerboundSignUpdatePacket)) return;
 
-        text = ((ServerboundSignUpdatePacket) event.packet).getLines();
+        text = ((ServerboundSignUpdatePacket) event.packet).lines().toArray(String[]::new);
     }
 
     @EventHandler
@@ -83,7 +83,7 @@ public class AutoSign extends Module {
 
         SignBlockEntity sign = ((AbstractSignEditScreenAccessor) event.screen).meteor$getSign();
 
-        queue.add(new ServerboundSignUpdatePacket(sign.getBlockPos(), true, text[0], text[1], text[2], text[3]));
+        queue.add(new ServerboundSignUpdatePacket(sign.getBlockPos(), java.util.List.of(text), net.minecraft.world.level.block.entity.SignTextSlot.FRONT));
 
         event.cancel();
     }

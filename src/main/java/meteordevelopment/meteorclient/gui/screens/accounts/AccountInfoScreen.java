@@ -32,11 +32,11 @@ public class AccountInfoScreen extends WindowScreen {
         String tokenLabel = account.getType() + " token:";
         if (account.getType() == AccountType.Session) tokenLabel = "";
 
-        WButton copy = theme.button("Copy");
+        WButton copy = theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Copy"));
         copy.action = () -> mc.keyboardHandler.setClipboard(e.getToken());
 
         l.add(theme.label(tokenLabel));
-        l.add(theme.label(account.getType() == AccountType.Session ? "Click to copy Token" : e.getToken()).color(Color.GRAY)).pad(5);
+        l.add(theme.label(account.getType() == AccountType.Session ? meteordevelopment.meteorclient.utils.misc.Localization.text("Click to copy Token") : e.getToken()).color(Color.GRAY)).pad(5);
         l.add(copy);
     }
 }

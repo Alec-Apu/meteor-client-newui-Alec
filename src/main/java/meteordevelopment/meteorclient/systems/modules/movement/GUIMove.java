@@ -24,7 +24,7 @@ import net.minecraft.client.gui.screens.inventory.*;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.CreativeModeTabs;
 
-import static org.lwjgl.glfw.GLFW.*;
+import static com.mojang.blaze3d.platform.InputConstants.*;
 
 public class GUIMove extends Module {
     public enum Screens {
@@ -37,14 +37,14 @@ public class GUIMove extends Module {
 
     private final Setting<Screens> screens = sgGeneral.add(new EnumSetting.Builder<Screens>()
         .name("guis")
-        .description("Which GUIs to move in.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which GUIs to move in."))
         .defaultValue(Screens.Inventory)
         .build()
     );
 
     public final Setting<Boolean> jump = sgGeneral.add(new BoolSetting.Builder()
         .name("jump")
-        .description("Allows you to jump while in GUIs.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Allows you to jump while in GUIs."))
         .defaultValue(true)
         .onChanged(aBoolean -> {
             if (isActive() && !aBoolean) mc.options.keyJump.setDown(false);
@@ -54,7 +54,7 @@ public class GUIMove extends Module {
 
     public final Setting<Boolean> sneak = sgGeneral.add(new BoolSetting.Builder()
         .name("sneak")
-        .description("Allows you to sneak while in GUIs.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Allows you to sneak while in GUIs."))
         .defaultValue(true)
         .onChanged(aBoolean -> {
             if (isActive() && !aBoolean) mc.options.keyShift.setDown(false);
@@ -64,7 +64,7 @@ public class GUIMove extends Module {
 
     public final Setting<Boolean> sprint = sgGeneral.add(new BoolSetting.Builder()
         .name("sprint")
-        .description("Allows you to sprint while in GUIs.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Allows you to sprint while in GUIs."))
         .defaultValue(true)
         .onChanged(aBoolean -> {
             if (isActive() && !aBoolean) mc.options.keySprint.setDown(false);
@@ -74,14 +74,14 @@ public class GUIMove extends Module {
 
     private final Setting<Boolean> arrowsRotate = sgGeneral.add(new BoolSetting.Builder()
         .name("arrows-rotate")
-        .description("Allows you to use your arrow keys to rotate while in GUIs.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Allows you to use your arrow keys to rotate while in GUIs."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Double> rotateSpeed = sgGeneral.add(new DoubleSetting.Builder()
         .name("rotate-speed")
-        .description("Rotation speed while in GUIs.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Rotation speed while in GUIs."))
         .defaultValue(4)
         .min(0)
         .build()
@@ -147,10 +147,10 @@ public class GUIMove extends Module {
                 float yaw = mc.player.getYRot();
                 float pitch = mc.player.getXRot();
 
-                if (Input.isKeyPressed(GLFW_KEY_LEFT)) yaw -= rotationDelta;
-                if (Input.isKeyPressed(GLFW_KEY_RIGHT)) yaw += rotationDelta;
-                if (Input.isKeyPressed(GLFW_KEY_UP)) pitch -= rotationDelta;
-                if (Input.isKeyPressed(GLFW_KEY_DOWN)) pitch += rotationDelta;
+                if (Input.isKeyPressed(KEY_LEFT)) yaw -= rotationDelta;
+                if (Input.isKeyPressed(KEY_RIGHT)) yaw += rotationDelta;
+                if (Input.isKeyPressed(KEY_UP)) pitch -= rotationDelta;
+                if (Input.isKeyPressed(KEY_DOWN)) pitch += rotationDelta;
 
                 pitch = Mth.clamp(pitch, -90, 90);
 
@@ -159,10 +159,10 @@ public class GUIMove extends Module {
             } else {
                 double dy = 0, dx = 0;
 
-                if (Input.isKeyPressed(GLFW_KEY_LEFT)) dy = -rotationDelta;
-                if (Input.isKeyPressed(GLFW_KEY_RIGHT)) dy = rotationDelta;
-                if (Input.isKeyPressed(GLFW_KEY_UP)) dx = -rotationDelta;
-                if (Input.isKeyPressed(GLFW_KEY_DOWN)) dx = rotationDelta;
+                if (Input.isKeyPressed(KEY_LEFT)) dy = -rotationDelta;
+                if (Input.isKeyPressed(KEY_RIGHT)) dy = rotationDelta;
+                if (Input.isKeyPressed(KEY_UP)) dx = -rotationDelta;
+                if (Input.isKeyPressed(KEY_DOWN)) dx = rotationDelta;
 
                 freecam.changeLookDirection(dy, dx);
             }

@@ -46,28 +46,28 @@ public class AutoGap extends Module {
 
     private final Setting<Boolean> allowEgap = sgGeneral.add(new BoolSetting.Builder()
         .name("allow-egap")
-        .description("Allow eating E-Gaps over Gaps if found.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Allow eating E-Gaps over Gaps if found."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> always = sgGeneral.add(new BoolSetting.Builder()
         .name("always")
-        .description("If it should always eat.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("If it should always eat."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> pauseAuras = sgGeneral.add(new BoolSetting.Builder()
         .name("pause-auras")
-        .description("Pauses all auras when eating.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Pauses all auras when eating."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> pauseBaritone = sgGeneral.add(new BoolSetting.Builder()
         .name("pause-baritone")
-        .description("Pause baritone when eating.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Pause baritone when eating."))
         .defaultValue(true)
         .build()
     );
@@ -75,14 +75,14 @@ public class AutoGap extends Module {
     // Potions
     private final Setting<Boolean> beforeExpiry = sgPotions.add(new BoolSetting.Builder()
         .name("before-expiry")
-        .description("If it should eat before potion effects expire.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("If it should eat before potion effects expire."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Integer> expiryThreshold = sgPotions.add(new IntSetting.Builder()
         .name("expiry-threshold")
-        .description("Time in ticks before the potion effect expires to start eating.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Time in ticks before the potion effect expires to start eating."))
         .defaultValue(60)
         .min(0)
         .sliderMax(200)
@@ -92,14 +92,14 @@ public class AutoGap extends Module {
 
     private final Setting<Boolean> potionsRegeneration = sgPotions.add(new BoolSetting.Builder()
         .name("potions-regeneration")
-        .description("If it should eat when Regeneration runs out.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("If it should eat when Regeneration runs out."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> potionsFireResistance = sgPotions.add(new BoolSetting.Builder()
         .name("potions-fire-resistance")
-        .description("If it should eat when Fire Resistance runs out. Requires E-Gaps.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("If it should eat when Fire Resistance runs out. Requires E-Gaps."))
         .defaultValue(true)
         .visible(allowEgap::get)
         .build()
@@ -107,7 +107,7 @@ public class AutoGap extends Module {
 
     private final Setting<Boolean> potionsAbsorption = sgPotions.add(new BoolSetting.Builder()
         .name("potions-absorption")
-        .description("If it should eat when Absorption runs out. Requires E-Gaps.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("If it should eat when Absorption runs out. Requires E-Gaps."))
         .defaultValue(false)
         .visible(allowEgap::get)
         .build()
@@ -117,14 +117,14 @@ public class AutoGap extends Module {
 
     private final Setting<Boolean> healthEnabled = sgHealth.add(new BoolSetting.Builder()
         .name("health-enabled")
-        .description("If it should eat when health drops below threshold.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("If it should eat when health drops below threshold."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Integer> healthThreshold = sgHealth.add(new IntSetting.Builder()
         .name("health-threshold")
-        .description("Health threshold to eat at. Includes absorption.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Health threshold to eat at. Includes absorption."))
         .defaultValue(20)
         .min(0)
         .sliderMax(40)

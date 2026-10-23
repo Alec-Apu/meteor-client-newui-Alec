@@ -20,7 +20,7 @@ public class AntiVoid extends Module {
 
     private final Setting<Mode> mode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("mode")
-        .description("The method to prevent you from falling into the void.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The method to prevent you from falling into the void."))
         .defaultValue(Mode.Jump)
         .onChanged(_ -> onActivate())
         .build()

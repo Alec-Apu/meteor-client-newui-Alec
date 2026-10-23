@@ -26,7 +26,7 @@ public class CommandsCommand extends Command {
     @Override
     public void build(LiteralArgumentBuilder<ClientSuggestionProvider> builder) {
         builder.executes(_ -> {
-            ChatUtils.info("--- Commands ((highlight)%d(default)) ---", Commands.COMMANDS.size());
+            ChatUtils.info(meteordevelopment.meteorclient.utils.misc.Localization.text("--- Commands ((highlight)%d(default)) ---"), Commands.COMMANDS.size());
 
             MutableComponent commands = Component.literal("");
             Commands.COMMANDS.forEach(command -> commands.append(getCommandText(command)));

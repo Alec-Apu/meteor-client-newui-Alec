@@ -24,7 +24,7 @@ public class AutoReconnect extends Module {
 
     public final Setting<Double> time = sgGeneral.add(new DoubleSetting.Builder()
         .name("delay")
-        .description("The amount of seconds to wait before reconnecting to the server.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The amount of seconds to wait before reconnecting to the server."))
         .defaultValue(3.5)
         .min(0)
         .decimalPlaces(1)
@@ -33,7 +33,7 @@ public class AutoReconnect extends Module {
 
     public final Setting<Boolean> button = sgGeneral.add(new BoolSetting.Builder()
         .name("hide-buttons")
-        .description("Will hide the buttons related to Auto Reconnect.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Will hide the buttons related to Auto Reconnect."))
         .defaultValue(false)
         .build()
     );
