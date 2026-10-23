@@ -32,14 +32,14 @@ public class ArrowDodge extends Module {
 
     private final Setting<MoveType> moveType = sgMovement.add(new EnumSetting.Builder<MoveType>()
         .name("move-type")
-        .description("The way you are moved by this module.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The way you are moved by this module."))
         .defaultValue(MoveType.Velocity)
         .build()
     );
 
     private final Setting<Double> moveSpeed = sgMovement.add(new DoubleSetting.Builder()
         .name("move-speed")
-        .description("How fast should you be when dodging arrow.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How fast should you be when dodging arrow."))
         .defaultValue(1)
         .min(0.01)
         .sliderRange(0.01, 5)
@@ -48,7 +48,7 @@ public class ArrowDodge extends Module {
 
     private final Setting<Double> distanceCheck = sgMovement.add(new DoubleSetting.Builder()
         .name("distance-check")
-        .description("How far should an arrow be from the player to be considered not hitting.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How far should an arrow be from the player to be considered not hitting."))
         .defaultValue(1)
         .min(0.01)
         .sliderRange(0.01, 5)
@@ -57,28 +57,28 @@ public class ArrowDodge extends Module {
 
     private final Setting<Boolean> groundCheck = sgGeneral.add(new BoolSetting.Builder()
         .name("ground-check")
-        .description("Tries to prevent you from falling to your death.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Tries to prevent you from falling to your death."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> allProjectiles = sgGeneral.add(new BoolSetting.Builder()
         .name("all-projectiles")
-        .description("Dodge all projectiles, not only arrows.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Dodge all projectiles, not only arrows."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> ignoreOwn = sgGeneral.add(new BoolSetting.Builder()
         .name("ignore-own")
-        .description("Ignore your own projectiles.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Ignore your own projectiles."))
         .defaultValue(true)
         .build()
     );
 
     public final Setting<Integer> simulationSteps = sgGeneral.add(new IntSetting.Builder()
         .name("simulation-steps")
-        .description("How many steps to simulate projectiles. Zero for no limit.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How many steps to simulate projectiles. Zero for no limit."))
         .defaultValue(500)
         .sliderMax(5000)
         .build()

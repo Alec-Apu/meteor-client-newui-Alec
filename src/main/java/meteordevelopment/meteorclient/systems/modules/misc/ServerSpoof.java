@@ -37,14 +37,14 @@ public class ServerSpoof extends Module {
 
     private final Setting<Boolean> spoofBrand = sgGeneral.add(new BoolSetting.Builder()
         .name("spoof-brand")
-        .description("Whether or not to spoof the brand.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to spoof the brand."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<String> brand = sgGeneral.add(new StringSetting.Builder()
         .name("brand")
-        .description("Specify the brand that will be send to the server.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Specify the brand that will be send to the server."))
         .defaultValue("vanilla")
         .visible(spoofBrand::get)
         .build()
@@ -52,21 +52,21 @@ public class ServerSpoof extends Module {
 
     private final Setting<Boolean> resourcePack = sgGeneral.add(new BoolSetting.Builder()
         .name("resource-pack")
-        .description("Spoof accepting server resource pack.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Spoof accepting server resource pack."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> blockChannels = sgGeneral.add(new BoolSetting.Builder()
         .name("block-channels")
-        .description("Whether or not to block some channels.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to block some channels."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<List<String>> channels = sgGeneral.add(new StringListSetting.Builder()
         .name("channels")
-        .description("If the channel contains the keyword, this outgoing channel will be blocked.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("If the channel contains the keyword, this outgoing channel will be blocked."))
         .defaultValue("fabric", "minecraft:register")
         .visible(blockChannels::get)
         .build()
@@ -119,30 +119,30 @@ public class ServerSpoof extends Module {
         event.connection.send(new ServerboundResourcePackPacket(packet.id(), ServerboundResourcePackPacket.Action.DOWNLOADED));
         event.connection.send(new ServerboundResourcePackPacket(packet.id(), ServerboundResourcePackPacket.Action.SUCCESSFULLY_LOADED));
 
-        msg = Component.literal("This server has ");
+        msg = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("This server has "));
         msg.append(packet.required() ? "a required " : "an optional ").append("resource pack. ");
 
-        MutableComponent link = Component.literal("[Open URL]");
+        MutableComponent link = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("[Open URL]"));
         link.setStyle(link.getStyle()
             .withColor(ChatFormatting.BLUE)
             .withUnderlined(true)
             .withClickEvent(new ClickEvent.OpenUrl(URI.create(packet.url())))
-            .withHoverEvent(new HoverEvent.ShowText(Component.literal("Click to open the pack url")))
+            .withHoverEvent(new HoverEvent.ShowText(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Click to open the pack url"))))
         );
 
-        MutableComponent acceptance = Component.literal("[Accept Pack]");
+        MutableComponent acceptance = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("[Accept Pack]"));
         acceptance.setStyle(acceptance.getStyle()
             .withColor(ChatFormatting.DARK_GREEN)
             .withUnderlined(true)
             .withClickEvent(new RunnableClickEvent(() -> {
                 URL url = getParsedResourcePackUrl(packet.url());
-                if (url == null) error("Invalid resource pack URL: " + packet.url());
+                if (url == null) error(meteordevelopment.meteorclient.utils.misc.Localization.text("Invalid resource pack URL: ") + packet.url());
                 else {
                     silentAcceptResourcePack = true;
                     mc.getDownloadedPackSource().pushPack(packet.id(), url, packet.hash());
                 }
             }))
-            .withHoverEvent(new HoverEvent.ShowText(Component.literal("Click to accept and apply the pack.")))
+            .withHoverEvent(new HoverEvent.ShowText(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Click to accept and apply the pack."))))
         );
 
         msg.append(link).append(" ");

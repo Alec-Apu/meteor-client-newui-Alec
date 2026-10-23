@@ -16,8 +16,9 @@ import java.util.function.Supplier;
 public class HudElementInfo<T extends HudElement> {
     public final HudGroup group;
     public final String name;
-    public final String title;
-    public final String description;
+    public String title;
+    public String description;
+    private final String sourceTitle, sourceDescription;
 
     public final Supplier<T> factory;
     public final List<Preset> presets;
@@ -25,8 +26,12 @@ public class HudElementInfo<T extends HudElement> {
     public HudElementInfo(HudGroup group, String name, String title, String description, Supplier<T> factory) {
         this.group = group;
         this.name = name;
-        this.title = title;
-        this.description = description;
+        this.sourceTitle = meteordevelopment.meteorclient.utils.misc.Localization.source(title);
+        this.sourceDescription = meteordevelopment.meteorclient.utils.misc.Localization.source(description);
+        meteordevelopment.meteorclient.utils.misc.Localization.bind(this, info -> {
+            info.title = meteordevelopment.meteorclient.utils.misc.Localization.text(info.sourceTitle);
+            info.description = meteordevelopment.meteorclient.utils.misc.Localization.text(info.sourceDescription);
+        });
 
         this.factory = factory;
         this.presets = new ArrayList<>();
@@ -55,12 +60,15 @@ public class HudElementInfo<T extends HudElement> {
 
     public class Preset {
         public final HudElementInfo<?> info;
-        public final String title;
+        public String title;
+        private final String sourceTitle;
         public final Consumer<T> callback;
 
         public Preset(HudElementInfo<?> info, String title, Consumer<T> callback) {
             this.info = info;
-            this.title = title;
+            this.sourceTitle = meteordevelopment.meteorclient.utils.misc.Localization.source(title);
+            meteordevelopment.meteorclient.utils.misc.Localization.bind(this, preset ->
+                preset.title = meteordevelopment.meteorclient.utils.misc.Localization.text(preset.sourceTitle));
             this.callback = callback;
         }
     }

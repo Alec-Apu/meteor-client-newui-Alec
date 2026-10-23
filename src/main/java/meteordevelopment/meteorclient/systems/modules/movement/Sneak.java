@@ -16,7 +16,7 @@ public class Sneak extends Module {
 
     private final Setting<Mode> mode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("mode")
-        .description("Which method to sneak.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which method to sneak."))
         .defaultValue(Mode.Vanilla)
         .build()
     );

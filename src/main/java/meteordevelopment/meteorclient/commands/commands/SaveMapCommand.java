@@ -33,8 +33,8 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 
 public class SaveMapCommand extends Command {
-    private static final SimpleCommandExceptionType MAP_NOT_FOUND = new SimpleCommandExceptionType(Component.literal("You must be holding a filled map."));
-    private static final SimpleCommandExceptionType OOPS = new SimpleCommandExceptionType(Component.literal("Something went wrong."));
+    private static final SimpleCommandExceptionType MAP_NOT_FOUND = new SimpleCommandExceptionType(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("You must be holding a filled map.")));
+    private static final SimpleCommandExceptionType OOPS = new SimpleCommandExceptionType(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Something went wrong.")));
 
     private final PointerBuffer filters;
 
@@ -88,7 +88,7 @@ public class SaveMapCommand extends Command {
                 ImageIO.write(scaledImage, "png", path);
             }
         } catch (IOException e) {
-            error("Error writing map texture");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Error writing map texture"));
             MeteorClient.LOG.error(e.toString());
         }
     }

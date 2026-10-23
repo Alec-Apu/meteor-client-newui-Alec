@@ -29,17 +29,17 @@ public abstract class Prompt<T> {
     }
 
     public T title(String title) {
-        this.title = title;
+        this.title = meteordevelopment.meteorclient.utils.misc.Localization.text(title);
         return (T) this;
     }
 
     public T message(String message) {
-        this.messages.add(message);
+        this.messages.add(meteordevelopment.meteorclient.utils.misc.Localization.text(message));
         return (T) this;
     }
 
     public T message(String message, Object... args) {
-        this.messages.add(String.format(message, args));
+        this.messages.add(String.format(meteordevelopment.meteorclient.utils.misc.Localization.text(message), args));
         return (T) this;
     }
 
@@ -91,7 +91,7 @@ public abstract class Prompt<T> {
             if (dontShowAgainCheckboxVisible) {
                 WHorizontalList checkboxContainer = add(theme.horizontalList()).expandX().widget();
                 dontShowAgainCheckbox = checkboxContainer.add(theme.checkbox(false)).widget();
-                checkboxContainer.add(theme.label("Don't show this again.")).expandX();
+                checkboxContainer.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Don't show this again."))).expandX();
             } else dontShowAgainCheckbox = null;
 
             list = add(theme.horizontalList()).expandX().widget();

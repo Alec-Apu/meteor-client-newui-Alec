@@ -27,7 +27,7 @@ public class AutoSign extends Module {
 
     private final Setting<Integer> delay = sgGeneral.add(new IntSetting.Builder()
         .name("delay")
-        .description("The tick delay between sign update packets.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The tick delay between sign update packets."))
         .defaultValue(10)
         .range(0, 100)
         .sliderRange(0, 100)

@@ -46,14 +46,14 @@ public class NoFall extends Module {
 
     private final Setting<Mode> mode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("mode")
-        .description("The way you are saved from fall damage.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The way you are saved from fall damage."))
         .defaultValue(Mode.Packet)
         .build()
     );
 
     private final Setting<PlacedItem> placedItem = sgGeneral.add(new EnumSetting.Builder<PlacedItem>()
         .name("placed-item")
-        .description("Which block to place.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which block to place."))
         .defaultValue(PlacedItem.Bucket)
         .visible(() -> mode.get() == Mode.Place)
         .build()
@@ -61,7 +61,7 @@ public class NoFall extends Module {
 
     private final Setting<PlaceMode> airPlaceMode = sgGeneral.add(new EnumSetting.Builder<PlaceMode>()
         .name("air-place-mode")
-        .description("Whether place mode places before you die or before you take damage.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether place mode places before you die or before you take damage."))
         .defaultValue(PlaceMode.BeforeDeath)
         .visible(() -> mode.get() == Mode.AirPlace)
         .build()
@@ -69,7 +69,7 @@ public class NoFall extends Module {
 
     private final Setting<Boolean> anchor = sgGeneral.add(new BoolSetting.Builder()
         .name("anchor")
-        .description("Centers the player and reduces movement when using bucket or air place mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Centers the player and reduces movement when using bucket or air place mode."))
         .defaultValue(true)
         .visible(() -> mode.get() != Mode.Packet)
         .build()
@@ -77,14 +77,14 @@ public class NoFall extends Module {
 
     private final Setting<Boolean> antiBounce = sgGeneral.add(new BoolSetting.Builder()
         .name("anti-bounce")
-        .description("Disables bouncing on slime-block and bed upon landing.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Disables bouncing on slime-block and bed upon landing."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> pauseOnMace = sgGeneral.add(new BoolSetting.Builder()
         .name("pause-on-mace")
-        .description("Pauses NoFall when using a mace.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Pauses NoFall when using a mace."))
         .defaultValue(true)
         .build()
     );

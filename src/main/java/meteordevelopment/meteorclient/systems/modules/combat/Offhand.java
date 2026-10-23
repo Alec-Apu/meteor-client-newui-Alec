@@ -33,7 +33,7 @@ public class Offhand extends Module {
 
     private final Setting<Integer> delayTicks = sgCombat.add(new IntSetting.Builder()
         .name("item-switch-delay")
-        .description("The delay in ticks between slot movements.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The delay in ticks between slot movements."))
         .defaultValue(0)
         .min(0)
         .sliderMax(20)
@@ -41,21 +41,21 @@ public class Offhand extends Module {
     );
     private final Setting<Item> preferreditem = sgCombat.add(new EnumSetting.Builder<Item>()
         .name("item")
-        .description("Which item to hold in your offhand.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which item to hold in your offhand."))
         .defaultValue(Item.Crystal)
         .build()
     );
 
     private final Setting<Boolean> hotbar = sgCombat.add(new BoolSetting.Builder()
         .name("hotbar")
-        .description("Whether to use items from your hotbar.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to use items from your hotbar."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> rightgapple = sgCombat.add(new BoolSetting.Builder()
         .name("right-gapple")
-        .description("Will switch to a gapple when holding right click.(DO NOT USE WITH POTION ON)")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Will switch to a gapple when holding right click.(DO NOT USE WITH POTION ON)"))
         .defaultValue(false)
         .build()
     );
@@ -63,7 +63,7 @@ public class Offhand extends Module {
 
     private final Setting<Boolean> SwordGap = sgCombat.add(new BoolSetting.Builder()
         .name("sword-gapple")
-        .description("Will switch to a gapple when holding a sword and right click.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Will switch to a gapple when holding a sword and right click."))
         .defaultValue(false)
         .visible(rightgapple::get)
         .build()
@@ -71,7 +71,7 @@ public class Offhand extends Module {
 
     private final Setting<Boolean> alwaysSwordGap = sgCombat.add(new BoolSetting.Builder()
         .name("always-gap-on-sword")
-        .description("Holds an Enchanted Golden Apple when you are holding a sword.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Holds an Enchanted Golden Apple when you are holding a sword."))
         .defaultValue(false)
         .visible(() -> !rightgapple.get())
         .build()
@@ -80,14 +80,14 @@ public class Offhand extends Module {
 
     private final Setting<Boolean> alwaysPot = sgCombat.add(new BoolSetting.Builder()
         .name("always-pot-on-sword")
-        .description("Will switch to a potion when holding a sword")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Will switch to a potion when holding a sword"))
         .defaultValue(false)
         .visible(() -> !rightgapple.get() && !alwaysSwordGap.get())
         .build()
     );
     private final Setting<Boolean> potionClick = sgCombat.add(new BoolSetting.Builder()
         .name("sword-pot")
-        .description("Will switch to a potion when holding a sword and right click.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Will switch to a potion when holding a sword and right click."))
         .defaultValue(false)
         .visible(() -> !rightgapple.get() && !alwaysPot.get() && !alwaysSwordGap.get())
         .build()
@@ -97,7 +97,7 @@ public class Offhand extends Module {
 
     private final Setting<Double> minHealth = sgTotem.add(new DoubleSetting.Builder()
         .name("min-health")
-        .description("Will hold a totem when below this amount of health.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Will hold a totem when below this amount of health."))
         .defaultValue(10)
         .range(0, 36)
         .sliderRange(0, 36)
@@ -106,21 +106,21 @@ public class Offhand extends Module {
 
     private final Setting<Boolean> elytra = sgTotem.add(new BoolSetting.Builder()
         .name("elytra")
-        .description("Will always hold a totem while flying with an elytra.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Will always hold a totem while flying with an elytra."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> falling = sgTotem.add(new BoolSetting.Builder()
         .name("falling")
-        .description("Will hold a totem if fall damage could kill you.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Will hold a totem if fall damage could kill you."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> explosion = sgTotem.add(new BoolSetting.Builder()
         .name("explosion")
-        .description("Will hold a totem when explosion damage could kill you.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Will hold a totem when explosion damage could kill you."))
         .defaultValue(true)
         .build()
     );
@@ -221,7 +221,7 @@ public class Offhand extends Module {
                     // No offhand item
                     if (!item.found()) {
                         if (!sentMessage) {
-                            warning("Chosen item not found.");
+                            warning(meteordevelopment.meteorclient.utils.misc.Localization.text("Chosen item not found."));
                             sentMessage = true;
                         }
                     }

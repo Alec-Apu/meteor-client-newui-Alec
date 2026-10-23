@@ -46,7 +46,7 @@ public class ElytraFly extends Module {
 
     public final Setting<ElytraFlightModes> flightMode = sgGeneral.add(new EnumSetting.Builder<ElytraFlightModes>()
         .name("mode")
-        .description("The mode of flying.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The mode of flying."))
         .defaultValue(ElytraFlightModes.Vanilla)
         .onModuleActivated(flightModesSetting -> onModeChanged(flightModesSetting.get()))
         .onChanged(this::onModeChanged)
@@ -55,7 +55,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Boolean> autoTakeOff = sgGeneral.add(new BoolSetting.Builder()
         .name("auto-take-off")
-        .description("Automatically takes off when you hold jump without needing to double jump.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically takes off when you hold jump without needing to double jump."))
         .defaultValue(false)
         .visible(() -> flightMode.get() != ElytraFlightModes.Pitch40 && flightMode.get() != ElytraFlightModes.Bounce)
         .build()
@@ -63,7 +63,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Double> fallMultiplier = sgGeneral.add(new DoubleSetting.Builder()
         .name("fall-multiplier")
-        .description("Controls how fast will you go down naturally.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Controls how fast will you go down naturally."))
         .defaultValue(0.01)
         .min(0)
         .visible(() -> flightMode.get() != ElytraFlightModes.Pitch40 && flightMode.get() != ElytraFlightModes.Bounce)
@@ -72,7 +72,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Double> horizontalSpeed = sgGeneral.add(new DoubleSetting.Builder()
         .name("horizontal-speed")
-        .description("How fast you go forward and backward.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How fast you go forward and backward."))
         .defaultValue(1)
         .min(0)
         .visible(() -> flightMode.get() != ElytraFlightModes.Pitch40 && flightMode.get() != ElytraFlightModes.Bounce)
@@ -81,7 +81,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Double> verticalSpeed = sgGeneral.add(new DoubleSetting.Builder()
         .name("vertical-speed")
-        .description("How fast you go up and down.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How fast you go up and down."))
         .defaultValue(1)
         .min(0)
         .visible(() -> flightMode.get() != ElytraFlightModes.Pitch40 && flightMode.get() != ElytraFlightModes.Bounce)
@@ -114,7 +114,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Boolean> stopInWater = sgGeneral.add(new BoolSetting.Builder()
         .name("stop-in-water")
-        .description("Stops flying in water.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Stops flying in water."))
         .defaultValue(true)
         .visible(() -> flightMode.get() != ElytraFlightModes.Bounce)
         .build()
@@ -122,14 +122,14 @@ public class ElytraFly extends Module {
 
     public final Setting<Boolean> dontGoIntoUnloadedChunks = sgGeneral.add(new BoolSetting.Builder()
         .name("no-unloaded-chunks")
-        .description("Stops you from going into unloaded chunks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Stops you from going into unloaded chunks."))
         .defaultValue(true)
         .build()
     );
 
     public final Setting<Boolean> autoHover = sgGeneral.add(new BoolSetting.Builder()
         .name("auto-hover")
-        .description("Automatically hover .3 blocks off ground when holding shift.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically hover .3 blocks off ground when holding shift."))
         .defaultValue(false)
         .visible(() -> flightMode.get() != ElytraFlightModes.Bounce)
         .build()
@@ -137,7 +137,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Boolean> noCrash = sgGeneral.add(new BoolSetting.Builder()
         .name("no-crash")
-        .description("Stops you from going into walls.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Stops you from going into walls."))
         .defaultValue(false)
         .visible(() -> flightMode.get() != ElytraFlightModes.Bounce)
         .build()
@@ -145,7 +145,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Integer> crashLookAhead = sgGeneral.add(new IntSetting.Builder()
         .name("crash-look-ahead")
-        .description("Distance to look ahead when flying.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Distance to look ahead when flying."))
         .defaultValue(5)
         .range(1, 15)
         .sliderMin(1)
@@ -155,7 +155,7 @@ public class ElytraFly extends Module {
 
     private final Setting<Boolean> instaDrop = sgGeneral.add(new BoolSetting.Builder()
         .name("insta-drop")
-        .description("Makes you drop out of flight instantly.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Makes you drop out of flight instantly."))
         .defaultValue(false)
         .visible(() -> flightMode.get() != ElytraFlightModes.Bounce)
         .build()
@@ -164,8 +164,7 @@ public class ElytraFly extends Module {
     public final Setting<Double> pitch40lowerBounds = sgGeneral.add(new DoubleSetting.Builder()
         .name("pitch40-lower-bounds")
         .description(
-            "The bottom height boundary for pitch40. You must be at least 40 blocks above this boundary when starting the module.\n" +
-                "After descending below this boundary you will start pitching upwards."
+            meteordevelopment.meteorclient.utils.misc.Localization.text("The bottom height boundary for pitch40. You must be at least 40 blocks above this boundary when starting the module.\nAfter descending below this boundary you will start pitching upwards.")
         )
         .defaultValue(180)
         .min(-128)
@@ -177,8 +176,7 @@ public class ElytraFly extends Module {
     public final Setting<Double> pitch40upperBounds = sgGeneral.add(new DoubleSetting.Builder()
         .name("pitch40-upper-bounds")
         .description(
-            "The upper height boundary for pitch40. You must be above this boundary when starting the module.\n" +
-                "When ascending above this boundary, if you are not already, you will start pitching downwards."
+            meteordevelopment.meteorclient.utils.misc.Localization.text("The upper height boundary for pitch40. You must be above this boundary when starting the module.\nWhen ascending above this boundary, if you are not already, you will start pitching downwards.")
         )
         .defaultValue(220)
         .min(-128)
@@ -189,7 +187,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Double> pitch40rotationSpeedUp = sgGeneral.add(new DoubleSetting.Builder()
         .name("pitch40-rotate-speed-up")
-        .description("The speed for pitch rotation upwards (degrees per tick).")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The speed for pitch rotation upwards (degrees per tick)."))
         .defaultValue(5.45)
         .min(1)
         .sliderMax(20)
@@ -199,7 +197,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Double> pitch40rotationSpeedDown = sgGeneral.add(new DoubleSetting.Builder()
         .name("pitch40-rotate-speed-down")
-        .description("The speed for pitch rotation downwards (degrees per tick).")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The speed for pitch rotation downwards (degrees per tick)."))
         .defaultValue(0.90)
         .min(0.5)
         .sliderMax(2)
@@ -209,7 +207,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Boolean> autoJump = sgGeneral.add(new BoolSetting.Builder()
         .name("auto-jump")
-        .description("Automatically jumps for you.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically jumps for you."))
         .defaultValue(true)
         .visible(() -> flightMode.get() == ElytraFlightModes.Bounce)
         .build()
@@ -217,7 +215,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Rotation.LockMode> yawLockMode = sgGeneral.add(new EnumSetting.Builder<Rotation.LockMode>()
         .name("yaw-lock")
-        .description("Whether to enable yaw lock or not")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to enable yaw lock or not"))
         .defaultValue(Rotation.LockMode.Smart)
         .visible(() -> flightMode.get() == ElytraFlightModes.Bounce)
         .build()
@@ -225,7 +223,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Double> yaw = sgGeneral.add(new DoubleSetting.Builder()
         .name("yaw")
-        .description("The yaw angle to look at when using simple rotation lock in bounce mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The yaw angle to look at when using simple rotation lock in bounce mode."))
         .defaultValue(0)
         .range(0, 360)
         .sliderRange(0, 360)
@@ -235,7 +233,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Boolean> lockPitch = sgGeneral.add(new BoolSetting.Builder()
         .name("pitch-lock")
-        .description("Whether to lock your pitch angle.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to lock your pitch angle."))
         .defaultValue(true)
         .visible(() -> flightMode.get() == ElytraFlightModes.Bounce)
         .build()
@@ -243,7 +241,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Double> pitch = sgGeneral.add(new DoubleSetting.Builder()
         .name("pitch")
-        .description("The pitch angle to look at when using the bounce mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The pitch angle to look at when using the bounce mode."))
         .defaultValue(85)
         .range(0, 90)
         .sliderRange(0, 90)
@@ -253,7 +251,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Boolean> restart = sgGeneral.add(new BoolSetting.Builder()
         .name("restart")
-        .description("Restarts flying with the elytra when rubberbanding.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Restarts flying with the elytra when rubberbanding."))
         .defaultValue(true)
         .visible(() -> flightMode.get() == ElytraFlightModes.Bounce)
         .build()
@@ -261,7 +259,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Integer> restartDelay = sgGeneral.add(new IntSetting.Builder()
         .name("restart-delay")
-        .description("How many ticks to wait before restarting the elytra again after rubberbanding.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How many ticks to wait before restarting the elytra again after rubberbanding."))
         .defaultValue(7)
         .min(0)
         .sliderRange(0, 20)
@@ -271,7 +269,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Boolean> sprint = sgGeneral.add(new BoolSetting.Builder()
         .name("sprint-constantly")
-        .description("Sprints all the time. If turned off, it will only sprint when the player is touching the ground.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Sprints all the time. If turned off, it will only sprint when the player is touching the ground."))
         .defaultValue(true)
         .visible(() -> flightMode.get() == ElytraFlightModes.Bounce)
         .build()
@@ -279,7 +277,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Boolean> manualTakeoff = sgGeneral.add(new BoolSetting.Builder()
         .name("manual-takeoff")
-        .description("Does not automatically take off.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Does not automatically take off."))
         .defaultValue(false)
         .visible(() -> flightMode.get() == ElytraFlightModes.Bounce)
         .build()
@@ -289,14 +287,14 @@ public class ElytraFly extends Module {
 
     public final Setting<Boolean> replace = sgInventory.add(new BoolSetting.Builder()
         .name("elytra-replace")
-        .description("Replaces broken elytra with a new elytra.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Replaces broken elytra with a new elytra."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Integer> replaceDurability = sgInventory.add(new IntSetting.Builder()
         .name("replace-durability")
-        .description("The durability threshold your elytra will be replaced at.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The durability threshold your elytra will be replaced at."))
         .defaultValue(2)
         .sliderRange(1, 500)
         .visible(replace::get)
@@ -305,21 +303,21 @@ public class ElytraFly extends Module {
 
     public final Setting<ChestSwapMode> chestSwap = sgInventory.add(new EnumSetting.Builder<ChestSwapMode>()
         .name("chest-swap")
-        .description("Enables ChestSwap when toggling this module.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Enables ChestSwap when toggling this module."))
         .defaultValue(ChestSwapMode.Never)
         .build()
     );
 
     public final Setting<Boolean> autoReplenish = sgInventory.add(new BoolSetting.Builder()
         .name("replenish-fireworks")
-        .description("Moves fireworks into a selected hotbar slot.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Moves fireworks into a selected hotbar slot."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Integer> replenishSlot = sgInventory.add(new IntSetting.Builder()
         .name("replenish-slot")
-        .description("The slot auto move moves fireworks to.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The slot auto move moves fireworks to."))
         .defaultValue(9)
         .range(1, 9)
         .sliderRange(1, 9)
@@ -331,7 +329,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Boolean> autoPilot = sgAutopilot.add(new BoolSetting.Builder()
         .name("auto-pilot")
-        .description("Moves forward while elytra flying.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Moves forward while elytra flying."))
         .defaultValue(false)
         .visible(() -> flightMode.get() != ElytraFlightModes.Pitch40 && flightMode.get() != ElytraFlightModes.Bounce)
         .build()
@@ -339,7 +337,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Boolean> useFireworks = sgAutopilot.add(new BoolSetting.Builder()
         .name("use-fireworks")
-        .description("Uses firework rockets every second of your choice.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Uses firework rockets every second of your choice."))
         .defaultValue(false)
         .visible(() -> autoPilot.get() && flightMode.get() != ElytraFlightModes.Pitch40 && flightMode.get() != ElytraFlightModes.Bounce)
         .build()
@@ -347,7 +345,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Double> autoPilotFireworkDelay = sgAutopilot.add(new DoubleSetting.Builder()
         .name("firework-delay")
-        .description("The delay in seconds in between using fireworks if \"Use Fireworks\" is enabled.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The delay in seconds in between using fireworks if \"Use Fireworks\" is enabled."))
         .min(1)
         .defaultValue(8)
         .sliderMax(20)
@@ -357,7 +355,7 @@ public class ElytraFly extends Module {
 
     public final Setting<Double> autoPilotMinimumHeight = sgAutopilot.add(new DoubleSetting.Builder()
         .name("minimum-height")
-        .description("The minimum height for autopilot.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The minimum height for autopilot."))
         .defaultValue(120)
         .min(-128)
         .sliderMax(260)

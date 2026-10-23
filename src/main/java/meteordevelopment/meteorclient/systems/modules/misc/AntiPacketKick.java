@@ -16,14 +16,14 @@ public class AntiPacketKick extends Module {
 
     public final Setting<Boolean> catchExceptions = sgGeneral.add(new BoolSetting.Builder()
         .name("catch-exceptions")
-        .description("Drops corrupted packets.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Drops corrupted packets."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> logExceptions = sgGeneral.add(new BoolSetting.Builder()
         .name("log-exceptions")
-        .description("Logs caught exceptions.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Logs caught exceptions."))
         .defaultValue(true)
         .visible(catchExceptions::get)
         .build()

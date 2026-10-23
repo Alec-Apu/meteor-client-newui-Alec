@@ -28,7 +28,7 @@ public class AutoBreed extends Module {
 
     private final Setting<Set<EntityType<?>>> entities = sgGeneral.add(new EntityTypeListSetting.Builder()
         .name("entities")
-        .description("Entities to breed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Entities to breed."))
         .defaultValue(EntityTypes.HORSE, EntityTypes.DONKEY, EntityTypes.COW,
             EntityTypes.MOOSHROOM, EntityTypes.SHEEP, EntityTypes.PIG, EntityTypes.CHICKEN, EntityTypes.WOLF,
             EntityTypes.CAT, EntityTypes.OCELOT, EntityTypes.RABBIT, EntityTypes.LLAMA, EntityTypes.TURTLE,
@@ -39,7 +39,7 @@ public class AutoBreed extends Module {
 
     private final Setting<Double> range = sgGeneral.add(new DoubleSetting.Builder()
         .name("range")
-        .description("How far away the animals can be to be bred.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How far away the animals can be to be bred."))
         .min(0)
         .defaultValue(4.5)
         .build()
@@ -47,28 +47,28 @@ public class AutoBreed extends Module {
 
     private final Setting<InteractionHand> hand = sgGeneral.add(new EnumSetting.Builder<InteractionHand>()
         .name("hand-for-breeding")
-        .description("The hand to use for breeding.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The hand to use for breeding."))
         .defaultValue(InteractionHand.MAIN_HAND)
         .build()
     );
 
     private final Setting<EntityAgeTest> mobAgeFilter = sgGeneral.add(new EnumSetting.Builder<EntityAgeTest>()
         .name("mob-age-filter")
-        .description("Determines the age of the mobs to target (baby, adult, or both).")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Determines the age of the mobs to target (baby, adult, or both)."))
         .defaultValue(EntityAgeTest.Adult)
         .build()
     );
 
     private final Setting<Boolean> continuousBreeding = sgGeneral.add(new BoolSetting.Builder()
         .name("continuous-breeding")
-        .description("Whether to feed the same animal again after a certain time period.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to feed the same animal again after a certain time period."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Integer> breedingInterval = sgGeneral.add(new IntSetting.Builder()
         .name("breeding-interval")
-        .description("Determines how often the same animal is fed in ticks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Determines how often the same animal is fed in ticks."))
         .min(1)
         .sliderMax(24000)
         .defaultValue(6600) // 30s in love mode and the 5-minute breeding cooldown

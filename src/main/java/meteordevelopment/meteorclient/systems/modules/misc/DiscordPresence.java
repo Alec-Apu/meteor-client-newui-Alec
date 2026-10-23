@@ -53,7 +53,7 @@ public class DiscordPresence extends Module {
 
     private final Setting<List<String>> line1Strings = sgLine1.add(new StringListSetting.Builder()
         .name("line-1-messages")
-        .description("Messages used for the first line.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Messages used for the first line."))
         .defaultValue("{player}", "{server}")
         .onChanged(_ -> recompileLine1())
         .renderer(StarscriptTextBoxRenderer.class)
@@ -62,7 +62,7 @@ public class DiscordPresence extends Module {
 
     private final Setting<Integer> line1UpdateDelay = sgLine1.add(new IntSetting.Builder()
         .name("line-1-update-delay")
-        .description("How fast to update the first line in ticks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How fast to update the first line in ticks."))
         .defaultValue(200)
         .min(10)
         .sliderRange(10, 200)
@@ -71,7 +71,7 @@ public class DiscordPresence extends Module {
 
     private final Setting<SelectMode> line1SelectMode = sgLine1.add(new EnumSetting.Builder<SelectMode>()
         .name("line-1-select-mode")
-        .description("How to select messages for the first line.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How to select messages for the first line."))
         .defaultValue(SelectMode.Sequential)
         .build()
     );
@@ -80,7 +80,7 @@ public class DiscordPresence extends Module {
 
     private final Setting<List<String>> line2Strings = sgLine2.add(new StringListSetting.Builder()
         .name("line-2-messages")
-        .description("Messages used for the second line.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Messages used for the second line."))
         .defaultValue("Meteor on Crack!", "{round(server.tps, 1)} TPS", "Playing on {server.difficulty} difficulty.", "{server.player_count} Players online")
         .onChanged(_ -> recompileLine2())
         .renderer(StarscriptTextBoxRenderer.class)
@@ -89,7 +89,7 @@ public class DiscordPresence extends Module {
 
     private final Setting<Integer> line2UpdateDelay = sgLine2.add(new IntSetting.Builder()
         .name("line-2-update-delay")
-        .description("How fast to update the second line in ticks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How fast to update the second line in ticks."))
         .defaultValue(60)
         .min(10)
         .sliderRange(10, 200)
@@ -98,7 +98,7 @@ public class DiscordPresence extends Module {
 
     private final Setting<SelectMode> line2SelectMode = sgLine2.add(new EnumSetting.Builder<SelectMode>()
         .name("line-2-select-mode")
-        .description("How to select messages for the second line.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How to select messages for the second line."))
         .defaultValue(SelectMode.Sequential)
         .build()
     );
@@ -287,7 +287,7 @@ public class DiscordPresence extends Module {
 
     @Override
     public WWidget getWidget(GuiTheme theme) {
-        WButton help = theme.button("Open documentation.");
+        WButton help = theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Open documentation."));
         help.action = () -> Util.getPlatform().openUri("https://github.com/MeteorDevelopment/meteor-client/wiki/Starscript");
 
         return help;

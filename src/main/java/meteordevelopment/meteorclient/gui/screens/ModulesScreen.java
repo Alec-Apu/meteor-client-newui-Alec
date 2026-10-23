@@ -41,6 +41,8 @@ import static meteordevelopment.meteorclient.utils.Utils.getWindowWidth;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class ModulesScreen extends TabScreen {
+    private static String lastNavigationTitle = "Combat";
+
     private WModernPanel panel;
 
     public ModulesScreen(GuiTheme theme) {
@@ -106,6 +108,7 @@ public class ModulesScreen extends TabScreen {
         private final List<WCategoryButton> categoryButtons = new ArrayList<>();
 
         private NavigationItem selected;
+        private NavigationItem selectedBeforeSearch;
         private WTextBox search;
         private WModeToggle modeToggle;
         private WView moduleView;
@@ -120,6 +123,7 @@ public class ModulesScreen extends TabScreen {
         private double dragOffsetX;
         private double dragOffsetY;
         private boolean fallbackLightMode;
+        private boolean searchActive;
 
         @Override
         public void init() {
@@ -127,7 +131,7 @@ public class ModulesScreen extends TabScreen {
             buildNavigation();
 
             search = add(theme.textBox("", "Search modules...")).widget();
-            search.action = this::refreshModules;
+            search.action = this::onSearchChanged;
             modeToggle = add(new WModeToggle()).widget();
 
             for (NavigationItem item : navigation) {
@@ -161,7 +165,19 @@ public class ModulesScreen extends TabScreen {
             navigation.add(new NavigationItem("All Modules", null, false));
             navigation.add(new NavigationItem("Favorites", null, true));
 
-            selected = navigation.getFirst();
+            selected = findNavigation(lastNavigationTitle);
+            if (selected == null) {
+                selected = navigation.getFirst();
+                lastNavigationTitle = selected.title;
+            }
+        }
+
+        private NavigationItem findNavigation(String title) {
+            for (NavigationItem item : navigation) {
+                if (item.title.equalsIgnoreCase(title)) return item;
+            }
+
+            return null;
         }
 
         private boolean isVisible(Module module) {
@@ -193,9 +209,38 @@ public class ModulesScreen extends TabScreen {
         private Color selectedBackground() { return isLight() ? SELECTED_LIGHT : SELECTED_DARK; }
 
         private void select(NavigationItem item) {
+            if (searchActive && !isAllModules(item)) {
+                search.set("");
+                searchActive = false;
+                selectedBeforeSearch = null;
+            }
+
             if (selected == item) return;
             selected = item;
+            lastNavigationTitle = item.title;
             refreshModules();
+        }
+
+        private void onSearchChanged() {
+            boolean hasFilter = !search.get().trim().isEmpty();
+
+            if (hasFilter && !searchActive) {
+                searchActive = true;
+                selectedBeforeSearch = selected;
+
+                NavigationItem allModules = findNavigation("All Modules");
+                if (allModules != null) selected = allModules;
+            } else if (!hasFilter && searchActive) {
+                searchActive = false;
+                if (selectedBeforeSearch != null) selected = selectedBeforeSearch;
+                selectedBeforeSearch = null;
+            }
+
+            refreshModules();
+        }
+
+        private boolean isAllModules(NavigationItem item) {
+            return item.category == null && !item.favorite;
         }
 
         private void refreshModules() {
@@ -203,14 +248,18 @@ public class ModulesScreen extends TabScreen {
             moduleView.clear();
 
             String filter = search == null ? "" : search.get().trim().toLowerCase(Locale.ROOT);
+            boolean globalSearch = !filter.isEmpty();
             List<Module> modules = new ArrayList<>();
 
             for (Module module : Modules.get().getAll()) {
                 if (!isVisible(module)) continue;
-                if (selected.favorite && !module.favorite) continue;
-                if (selected.category != null && !selected.category.equals(module.category)) continue;
+                if (!globalSearch && selected.favorite && !module.favorite) continue;
+                if (!globalSearch && selected.category != null && !selected.category.equals(module.category)) continue;
                 if (!filter.isEmpty()
+                    && !module.name.toLowerCase(Locale.ROOT).contains(filter)
+                    && !meteordevelopment.meteorclient.utils.Utils.nameToTitle(module.name).toLowerCase(Locale.ROOT).contains(filter)
                     && !module.title.toLowerCase(Locale.ROOT).contains(filter)
+                    && !meteordevelopment.meteorclient.utils.misc.Localization.chineseText(meteordevelopment.meteorclient.utils.Utils.nameToTitle(module.name)).toLowerCase(Locale.ROOT).contains(filter)
                     && !module.description.toLowerCase(Locale.ROOT).contains(filter)) continue;
                 modules.add(module);
             }
@@ -246,8 +295,8 @@ public class ModulesScreen extends TabScreen {
             double baseHeight = baseWidth * 3.0 / 4.0;
             double baseSidebar = Math.max(theme.scale(135), baseWidth * 0.236);
             double baseContent = baseWidth - baseSidebar - theme.scale(32);
-            plannedWidth = Math.min(getWindowWidth() * 0.92, baseWidth + baseContent * 0.10);
-            plannedHeight = baseHeight;
+            plannedWidth = Math.min(getWindowWidth() * 0.92, Math.max(theme.scale(760), baseWidth + baseContent * 0.10));
+            plannedHeight = Math.min(getWindowHeight() - theme.scale(50), Math.max(theme.scale(420), baseHeight));
             plannedSidebarWidth = baseSidebar;
         }
 
@@ -274,7 +323,7 @@ public class ModulesScreen extends TabScreen {
             }
 
             savedX = Mth.clamp(savedX, 0, Math.max(0, getWindowWidth() - width));
-            savedY = Mth.clamp(savedY, 0, Math.max(0, getWindowHeight() - height));
+            savedY = Mth.clamp(savedY, Math.min(theme.scale(40), Math.max(0, getWindowHeight() - height)), Math.max(0, getWindowHeight() - height));
             x = savedX;
             y = savedY;
 
@@ -319,15 +368,15 @@ public class ModulesScreen extends TabScreen {
             renderRoundedLeft(renderer, x, y, sidebarWidth(), height, radius, sidebar());
             renderer.quad(x + sidebarWidth(), y + radius, theme.scale(1), height - radius * 2, line());
 
-            renderer.text("Alec", x + theme.scale(17), y + theme.scale(17), text(), true);
-            renderer.text("Minecraft", x + theme.scale(17), y + theme.scale(42), ACCENT, false);
+            renderer.text(meteordevelopment.meteorclient.utils.misc.Localization.text("Alec-apu"), x + theme.scale(17), y + theme.scale(17), text(), true);
+            renderer.text(meteordevelopment.meteorclient.utils.misc.Localization.text("Minecraft"), x + theme.scale(17), y + theme.scale(42), ACCENT, false);
             double titleX = x + sidebarWidth() + outerPad();
-            renderer.text(selected.title, titleX, y + theme.scale(17), text(), true);
+            renderer.text(meteordevelopment.meteorclient.utils.misc.Localization.text(selected.title), titleX, y + theme.scale(17), text(), true);
             renderer.text(moduleCountText(), titleX, y + theme.scale(42), muted(), false);
         }
 
         private void renderRoundedLeftBlur(GuiRenderer renderer, GpuTextureView texture, double radius) {
-            renderRoundedBands((sx, sy, sw, sh) -> {
+            renderBlurBands((sx, sy, sw, sh) -> {
                 double clipWidth = x + sidebarWidth() - sx;
                 renderer.scissorStart(sx, sy, clipWidth, sh);
                 renderer.texture(0, 0, getWindowWidth(), getWindowHeight(), 0, texture);
@@ -336,15 +385,15 @@ public class ModulesScreen extends TabScreen {
         }
 
         private void renderRounded(GuiRenderer renderer, double rx, double ry, double rw, double rh, double radius, Color color) {
-            renderRoundedBands((sx, sy, sw, sh) -> renderer.quad(sx, sy, sw, sh, color), rx, ry, rw, rh, radius);
+            renderer.roundedQuad(rx, ry, rw, rh, radius, color);
         }
 
         private void renderRoundedLeft(GuiRenderer renderer, double rx, double ry, double rw, double rh, double radius, Color color) {
-            renderRoundedBands((sx, sy, sw, sh) -> renderer.quad(sx, sy, Math.max(0, rx + rw - sx), sh, color), rx, ry, rw, rh, radius);
+            renderer.roundedLeftQuad(rx, ry, rw, rh, radius, color);
         }
 
-        private void renderRoundedBands(BandRenderer renderer, double rx, double ry, double rw, double rh, double radius) {
-            int bands = 5;
+        private void renderBlurBands(BandRenderer renderer, double rx, double ry, double rw, double rh, double radius) {
+            int bands = Math.max(8, (int) Math.ceil(radius));
             double bandHeight = radius / bands;
             for (int i = 0; i < bands; i++) {
                 double midpoint = (i + 0.5) * bandHeight;
@@ -359,16 +408,20 @@ public class ModulesScreen extends TabScreen {
         private String moduleCountText() {
             int count = 0;
             String filter = search == null ? "" : search.get().trim().toLowerCase(Locale.ROOT);
+            boolean globalSearch = !filter.isEmpty();
             for (Module module : Modules.get().getAll()) {
                 if (!isVisible(module)) continue;
-                if (selected.favorite && !module.favorite) continue;
-                if (selected.category != null && !selected.category.equals(module.category)) continue;
+                if (!globalSearch && selected.favorite && !module.favorite) continue;
+                if (!globalSearch && selected.category != null && !selected.category.equals(module.category)) continue;
                 if (!filter.isEmpty()
+                    && !module.name.toLowerCase(Locale.ROOT).contains(filter)
+                    && !meteordevelopment.meteorclient.utils.Utils.nameToTitle(module.name).toLowerCase(Locale.ROOT).contains(filter)
                     && !module.title.toLowerCase(Locale.ROOT).contains(filter)
+                    && !meteordevelopment.meteorclient.utils.misc.Localization.chineseText(meteordevelopment.meteorclient.utils.Utils.nameToTitle(module.name)).toLowerCase(Locale.ROOT).contains(filter)
                     && !module.description.toLowerCase(Locale.ROOT).contains(filter)) continue;
                 count++;
             }
-            return count + (count == 1 ? " module" : " modules");
+            return String.format(meteordevelopment.meteorclient.utils.misc.Localization.text("%d modules"), count);
         }
 
         @Override
@@ -407,7 +460,7 @@ public class ModulesScreen extends TabScreen {
             protected void onCalculateSize() {
                 width = theme.scale(55);
                 height = theme.scale(28);
-                tooltip = "Switch between light and dark Mica";
+                tooltip = meteordevelopment.meteorclient.utils.misc.Localization.text("Switch between light and dark Mica");
             }
 
             @Override
@@ -418,7 +471,7 @@ public class ModulesScreen extends TabScreen {
             @Override
             protected void onRender(GuiRenderer renderer, double mouseX, double mouseY, double delta) {
                 renderRounded(renderer, x, y, width, height, theme.scale(8), isLight() ? LIGHT_CARD : DARK_CARD);
-                String label = isLight() ? "Light" : "Dark";
+                String label = meteordevelopment.meteorclient.utils.misc.Localization.text(isLight() ? "Light" : "Dark");
                 renderer.text(label, x + width / 2 - theme.textWidth(label) / 2, y + height / 2 - theme.textHeight() / 2, text(), false);
             }
         }
@@ -446,7 +499,7 @@ public class ModulesScreen extends TabScreen {
                 }
                 if (active || mouseOver) renderRounded(renderer, x, y, width, height, theme.scale(6), active ? selectedBackground() : line());
                 if (active) renderer.quad(x, y + theme.scale(6), theme.scale(2), height - theme.scale(12), ACCENT);
-                renderer.text(item.title, x + theme.scale(10), y + height / 2 - theme.textHeight() / 2, active ? text() : muted(), false);
+                renderer.text(meteordevelopment.meteorclient.utils.misc.Localization.text(item.title), x + theme.scale(10), y + height / 2 - theme.textHeight() / 2, active ? text() : muted(), false);
             }
         }
 

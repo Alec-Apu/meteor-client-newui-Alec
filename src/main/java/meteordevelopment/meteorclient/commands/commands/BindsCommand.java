@@ -32,7 +32,7 @@ public class BindsCommand extends Command {
                 .filter(module -> module.keybind.isSet())
                 .toList();
 
-            ChatUtils.info("--- Bound Modules ((highlight)%d(default)) ---", modules.size());
+            ChatUtils.info(meteordevelopment.meteorclient.utils.misc.Localization.text("--- Bound Modules ((highlight)%d(default)) ---"), modules.size());
 
             for (Module module : modules) {
                 HoverEvent hoverEvent = new HoverEvent.ShowText(getTooltip(module));

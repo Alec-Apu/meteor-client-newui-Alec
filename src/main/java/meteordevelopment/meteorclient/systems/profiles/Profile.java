@@ -30,42 +30,42 @@ public class Profile implements ISerializable<Profile> {
 
     public Setting<String> name = sgGeneral.add(new StringSetting.Builder()
         .name("name")
-        .description("The name of the profile.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The name of the profile."))
         .filter(Utils::fileNameFilter)
         .build()
     );
 
     public Setting<List<String>> loadOnJoin = sgGeneral.add(new StringListSetting.Builder()
         .name("load-on-join")
-        .description("Which servers to set this profile as active when joining.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which servers to set this profile as active when joining."))
         .filter(Utils::ipFilter)
         .build()
     );
 
     public Setting<Boolean> hud = sgSave.add(new BoolSetting.Builder()
         .name("hud")
-        .description("Whether the profile should save hud.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether the profile should save hud."))
         .defaultValue(false)
         .build()
     );
 
     public Setting<Boolean> macros = sgSave.add(new BoolSetting.Builder()
         .name("macros")
-        .description("Whether the profile should save macros.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether the profile should save macros."))
         .defaultValue(false)
         .build()
     );
 
     public Setting<Boolean> modules = sgSave.add(new BoolSetting.Builder()
         .name("modules")
-        .description("Whether the profile should save modules.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether the profile should save modules."))
         .defaultValue(false)
         .build()
     );
 
     public Setting<Boolean> waypoints = sgSave.add(new BoolSetting.Builder()
         .name("waypoints")
-        .description("Whether the profile should save waypoints.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether the profile should save waypoints."))
         .defaultValue(false)
         .build()
     );

@@ -31,8 +31,9 @@ public abstract class Module implements ISerializable<Module>, Comparable<Module
 
     public final Category category;
     public final String name;
-    public final String title;
-    public final String description;
+    public String title;
+    public String description;
+    private final String sourceTitle, sourceDescription;
     public final String[] aliases;
     public final Color color;
 
@@ -57,8 +58,12 @@ public abstract class Module implements ISerializable<Module>, Comparable<Module
         this.mc = Minecraft.getInstance();
         this.category = category;
         this.name = name;
-        this.title = Utils.nameToTitle(name);
-        this.description = description;
+        this.sourceTitle = Utils.nameToTitle(name);
+        this.sourceDescription = meteordevelopment.meteorclient.utils.misc.Localization.source(description);
+        meteordevelopment.meteorclient.utils.misc.Localization.bind(this, module -> {
+            module.title = meteordevelopment.meteorclient.utils.misc.Localization.text(module.sourceTitle);
+            module.description = meteordevelopment.meteorclient.utils.misc.Localization.text(module.sourceDescription);
+        });
         this.aliases = aliases;
         this.color = Color.fromHsv(Utils.random(0.0, 360.0), 0.35, 1);
 
@@ -120,7 +125,7 @@ public abstract class Module implements ISerializable<Module>, Comparable<Module
     public void sendToggledMsg() {
         if (Config.get().chatFeedback.get() && chatFeedback) {
             ChatUtils.forceNextPrefixClass(getClass());
-            ChatUtils.sendMsg(this.hashCode(), ChatFormatting.GRAY, "Toggled (highlight)%s(default) %s(default).", title, isActive() ? ChatFormatting.GREEN + "on" : ChatFormatting.RED + "off");
+            ChatUtils.sendMsg(this.hashCode(), ChatFormatting.GRAY, meteordevelopment.meteorclient.utils.misc.Localization.text("Toggled (highlight)%s(default) %s(default)."), title, isActive() ? ChatFormatting.GREEN + meteordevelopment.meteorclient.utils.misc.Localization.text("on") : ChatFormatting.RED + meteordevelopment.meteorclient.utils.misc.Localization.text("off"));
         }
     }
 

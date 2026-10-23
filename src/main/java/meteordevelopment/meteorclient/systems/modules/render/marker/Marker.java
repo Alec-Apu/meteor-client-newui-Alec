@@ -133,7 +133,7 @@ public class Marker extends Module {
         WHorizontalList bottom = list.add(theme.horizontalList()).expandX().widget();
 
         WDropdown<String> newMarker = bottom.add(theme.dropdown(factory.getNames(), factory.getNames()[0])).widget();
-        WButton add = bottom.add(theme.button("Add")).expandX().widget();
+        WButton add = bottom.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Add"))).expandX().widget();
         add.action = () -> {
             String name = newMarker.get();
             markers.add(factory.createMarker(name));

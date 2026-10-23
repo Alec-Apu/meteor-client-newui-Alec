@@ -9,7 +9,19 @@ import meteordevelopment.meteorclient.gui.renderer.GuiRenderer;
 import meteordevelopment.meteorclient.gui.themes.meteor.MeteorWidget;
 import meteordevelopment.meteorclient.gui.widgets.pressable.WMinus;
 
+import static meteordevelopment.meteorclient.gui.themes.meteor.ModernWidgetStyle.isModuleDetails;
+
 public class WMeteorMinus extends WMinus implements MeteorWidget {
+    @Override
+    protected void onCalculateSize() {
+        if (!isModuleDetails()) {
+            super.onCalculateSize();
+            return;
+        }
+
+        width = height = theme.scale(34);
+    }
+
     @Override
     protected void onRender(GuiRenderer renderer, double mouseX, double mouseY, double delta) {
         double pad = pad();

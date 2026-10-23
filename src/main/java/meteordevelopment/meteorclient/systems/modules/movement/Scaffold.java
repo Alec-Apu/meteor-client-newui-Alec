@@ -37,27 +37,27 @@ public class Scaffold extends Module {
 
     private final Setting<List<Block>> blocks = sgGeneral.add(new BlockListSetting.Builder()
         .name("blocks")
-        .description("Selected blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Selected blocks."))
         .build()
     );
 
     private final Setting<ListMode> blocksFilter = sgGeneral.add(new EnumSetting.Builder<ListMode>()
         .name("blocks-filter")
-        .description("How to use the block list setting")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How to use the block list setting"))
         .defaultValue(ListMode.Blacklist)
         .build()
     );
 
     private final Setting<Boolean> fastTower = sgGeneral.add(new BoolSetting.Builder()
         .name("fast-tower")
-        .description("Whether or not to scaffold upwards faster.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to scaffold upwards faster."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Double> towerSpeed = sgGeneral.add(new DoubleSetting.Builder()
         .name("tower-speed")
-        .description("The speed at which to tower.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The speed at which to tower."))
         .defaultValue(0.5)
         .min(0)
         .sliderMax(1)
@@ -67,7 +67,7 @@ public class Scaffold extends Module {
 
     private final Setting<Boolean> whileMoving = sgGeneral.add(new BoolSetting.Builder()
         .name("while-moving")
-        .description("Allows you to tower while moving.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Allows you to tower while moving."))
         .defaultValue(false)
         .visible(fastTower::get)
         .build()
@@ -75,42 +75,42 @@ public class Scaffold extends Module {
 
     private final Setting<Boolean> onlyOnClick = sgGeneral.add(new BoolSetting.Builder()
         .name("only-on-click")
-        .description("Only places blocks when holding right click.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Only places blocks when holding right click."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> renderSwing = sgGeneral.add(new BoolSetting.Builder()
         .name("swing")
-        .description("Renders your client-side swing.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Renders your client-side swing."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> autoSwitch = sgGeneral.add(new BoolSetting.Builder()
         .name("auto-switch")
-        .description("Automatically swaps to a block before placing.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically swaps to a block before placing."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> rotate = sgGeneral.add(new BoolSetting.Builder()
         .name("rotate")
-        .description("Rotates towards the blocks being placed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Rotates towards the blocks being placed."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> airPlace = sgGeneral.add(new BoolSetting.Builder()
         .name("air-place")
-        .description("Allow air place. This also allows you to modify scaffold radius.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Allow air place. This also allows you to modify scaffold radius."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Double> aheadDistance = sgGeneral.add(new DoubleSetting.Builder()
         .name("ahead-distance")
-        .description("How far ahead to place blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How far ahead to place blocks."))
         .defaultValue(0)
         .min(0)
         .sliderMax(1)
@@ -120,7 +120,7 @@ public class Scaffold extends Module {
 
     private final Setting<Double> placeRange = sgGeneral.add(new DoubleSetting.Builder()
         .name("closest-block-range")
-        .description("How far can scaffold place blocks when you are in air.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How far can scaffold place blocks when you are in air."))
         .defaultValue(4)
         .min(0)
         .sliderMax(8)
@@ -130,7 +130,7 @@ public class Scaffold extends Module {
 
     private final Setting<Double> radius = sgGeneral.add(new DoubleSetting.Builder()
         .name("radius")
-        .description("Scaffold radius.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Scaffold radius."))
         .defaultValue(0)
         .min(0)
         .max(6)
@@ -140,7 +140,7 @@ public class Scaffold extends Module {
 
     private final Setting<Integer> blocksPerTick = sgGeneral.add(new IntSetting.Builder()
         .name("blocks-per-tick")
-        .description("How many blocks to place in one tick.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How many blocks to place in one tick."))
         .defaultValue(3)
         .min(1)
         .visible(airPlace::get)
@@ -151,14 +151,14 @@ public class Scaffold extends Module {
 
     private final Setting<Boolean> render = sgRender.add(new BoolSetting.Builder()
         .name("render")
-        .description("Whether to render blocks that have been placed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to render blocks that have been placed."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<ShapeMode> shapeMode = sgRender.add(new EnumSetting.Builder<ShapeMode>()
         .name("shape-mode")
-        .description("How the shapes are rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How the shapes are rendered."))
         .defaultValue(ShapeMode.Both)
         .visible(render::get)
         .build()
@@ -166,7 +166,7 @@ public class Scaffold extends Module {
 
     private final Setting<SettingColor> sideColor = sgRender.add(new ColorSetting.Builder()
         .name("side-color")
-        .description("The side color of the target block rendering.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The side color of the target block rendering."))
         .defaultValue(new SettingColor(197, 137, 232, 10))
         .visible(render::get)
         .build()
@@ -174,7 +174,7 @@ public class Scaffold extends Module {
 
     private final Setting<SettingColor> lineColor = sgRender.add(new ColorSetting.Builder()
         .name("line-color")
-        .description("The line color of the target block rendering.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The line color of the target block rendering."))
         .defaultValue(new SettingColor(197, 137, 232))
         .visible(render::get)
         .build()

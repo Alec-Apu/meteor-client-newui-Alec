@@ -22,7 +22,7 @@ public class Anchor extends Module {
 
     private final Setting<Integer> maxHeight = sgGeneral.add(new IntSetting.Builder()
         .name("max-height")
-        .description("The maximum height Anchor will work at.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The maximum height Anchor will work at."))
         .defaultValue(10)
         .range(0, 255)
         .sliderMax(20)
@@ -31,7 +31,7 @@ public class Anchor extends Module {
 
     private final Setting<Integer> minPitch = sgGeneral.add(new IntSetting.Builder()
         .name("min-pitch")
-        .description("The minimum pitch at which anchor will work.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The minimum pitch at which anchor will work."))
         .defaultValue(0)
         .range(-90, 90)
         .sliderRange(-90, 90)
@@ -40,21 +40,21 @@ public class Anchor extends Module {
 
     private final Setting<Boolean> cancelMove = sgGeneral.add(new BoolSetting.Builder()
         .name("cancel-jump-in-hole")
-        .description("Prevents you from jumping when Anchor is active and Min Pitch is met.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Prevents you from jumping when Anchor is active and Min Pitch is met."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> pull = sgGeneral.add(new BoolSetting.Builder()
         .name("pull")
-        .description("The pull strength of Anchor.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The pull strength of Anchor."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Double> pullSpeed = sgGeneral.add(new DoubleSetting.Builder()
         .name("pull-speed")
-        .description("How fast to pull towards the hole in blocks per second.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How fast to pull towards the hole in blocks per second."))
         .defaultValue(0.3)
         .min(0)
         .sliderMax(5)

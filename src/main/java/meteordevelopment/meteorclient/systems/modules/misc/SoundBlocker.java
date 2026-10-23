@@ -23,7 +23,7 @@ public class SoundBlocker extends Module {
 
     private final Setting<List<SoundEvent>> sounds = sgGeneral.add(new SoundEventListSetting.Builder()
         .name("sounds")
-        .description("Sounds to block.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Sounds to block."))
         .build()
     );
 

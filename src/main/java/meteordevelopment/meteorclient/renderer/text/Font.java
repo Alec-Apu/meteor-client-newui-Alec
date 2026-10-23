@@ -79,12 +79,15 @@ public class Font {
             int offset = packRange.get(i).first_unicode_codepoint_in_range();
 
             for (int j = 0; j < cbuf.capacity(); j++) {
+                int codePoint = j + offset;
+                if (STBTruetype.stbtt_FindGlyphIndex(fontInfo, codePoint) == 0) continue;
+
                 STBTTPackedchar packedChar = cbuf.get(j);
 
                 float ipw = 1f / size; // pixel width and height
                 float iph = 1f / size;
 
-                charMap.put(j + offset, new CharData(
+                charMap.put(codePoint, new CharData(
                     packedChar.xoff(),
                     packedChar.yoff(),
                     packedChar.xoff2(),
@@ -101,13 +104,17 @@ public class Font {
 
     public double getWidth(String string, int length) {
         double width = 0;
+        int limit = Math.min(length, string.length());
 
-        for (int i = 0; i < length; i++) {
-            int cp = string.charAt(i);
+        for (int offset = 0; offset < limit;) {
+            int cp = string.codePointAt(offset);
+            int count = Character.charCount(cp);
+            if (offset + count > limit) break;
             CharData c = charMap.get(cp);
             if (c == null) c = charMap.get(32);
 
             width += c.xAdvance;
+            offset += count;
         }
 
         return width;
@@ -120,11 +127,12 @@ public class Font {
     public double render(MeshBuilder mesh, String string, double x, double y, Color color, double scale) {
         y += ascent * this.scale * scale;
 
-        int length = string.length();
+        int length = string.codePointCount(0, string.length());
         mesh.ensureCapacity(length * 4, length * 6);
 
-        for (int i = 0; i < length; i++) {
-            int cp = string.charAt(i);
+        for (int offset = 0; offset < string.length();) {
+            int cp = string.codePointAt(offset);
+            offset += Character.charCount(cp);
             CharData c = charMap.get(cp);
             if (c == null) c = charMap.get(32);
 
@@ -139,6 +147,20 @@ public class Font {
         }
 
         return x;
+    }
+
+    public boolean supports(String string, int length) {
+        int limit = Math.min(length, string.length());
+
+        for (int offset = 0; offset < limit;) {
+            int cp = string.codePointAt(offset);
+            int count = Character.charCount(cp);
+            if (offset + count > limit) break;
+            if (!charMap.containsKey(cp)) return false;
+            offset += count;
+        }
+
+        return true;
     }
 
     private record CharData(float x0, float y0, float x1, float y1, float u0, float v0, float u1, float v1, float xAdvance) {}

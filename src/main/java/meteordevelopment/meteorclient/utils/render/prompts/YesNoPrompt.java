@@ -42,14 +42,14 @@ public class YesNoPrompt extends Prompt<YesNoPrompt> {
 
     @Override
     protected void initialiseWidgets(PromptScreen screen) {
-        WButton yesButton = screen.list.add(theme.button("Yes")).expandX().widget();
+        WButton yesButton = screen.list.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Yes"))).expandX().widget();
         yesButton.action = () -> {
             dontShowAgain(screen);
             onYes.run();
             screen.onClose();
         };
 
-        WButton noButton = screen.list.add(theme.button("No")).expandX().widget();
+        WButton noButton = screen.list.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("No"))).expandX().widget();
         noButton.action = () -> {
             dontShowAgain(screen);
             onNo.run();

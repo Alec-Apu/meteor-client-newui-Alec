@@ -27,7 +27,7 @@ public abstract class EditSystemScreen<T> extends WindowScreen {
 
         add(theme.horizontalSeparator()).expandX();
 
-        WButton done = add(theme.button(isNew ? "Create" : "Save")).expandX().widget();
+        WButton done = add(theme.button(isNew ? meteordevelopment.meteorclient.utils.misc.Localization.text("Create") : meteordevelopment.meteorclient.utils.misc.Localization.text("Save"))).expandX().widget();
         done.action = () -> {
             if (save()) onClose();
         };

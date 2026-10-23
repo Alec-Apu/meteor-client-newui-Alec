@@ -10,7 +10,7 @@ base {
     archivesName = archivesBaseName
     group = mavenGroup
 
-    val suffix = providers.gradleProperty("build_number").getOrElse("local")
+    val suffix = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.10")
     version = "${libs.versions.minecraft.get()}-$suffix"
 }
 
@@ -47,6 +47,8 @@ val jij = configurations.create("jij")
 val launcher = sourceSets.create("launcher") {
     java.srcDir("src/launcher/java")
 }
+
+
 
 configurations {
     // include mods
@@ -114,12 +116,14 @@ java {
 val jijExcluded = setOf("org.slf4j", "jsr305")
 listOf("api", "implementation", "include").forEach { configName ->
     configurations.named(configName).configure {
-        defaultDependencies {
+        // Include transitive JAR-in-JAR dependencies even when include has direct entries.
+        withDependencies {
             configurations.getByName("jij").incoming.resolutionResult.allComponents
                 .mapNotNull { it.id as? ModuleComponentIdentifier }
                 .forEach { id ->
                     val notation = "${id.group}:${id.module}:${id.version}"
-                    if (jijExcluded.none { notation.contains(it) }) {
+                    val providedLwjgl = id.group == "org.lwjgl" && id.module == "lwjgl"
+                    if (!providedLwjgl && jijExcluded.none { notation.contains(it) }) {
                         add(project.dependencies.create(notation) {
                             isTransitive = false
                         })
@@ -160,7 +164,7 @@ fun toMinecraftCompat(version: String): String {
 
 tasks {
     processResources {
-        val buildNumber = providers.gradleProperty("build_number").getOrElse("")
+        val buildNumber = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.10")
         val commit = providers.gradleProperty("commit").getOrElse("")
 
         val propertyMap = mapOf(
@@ -249,3 +253,52 @@ publishing {
         }
     }
 }
+
+// Executable regression tests use a dedicated source set, not JUnit discovery.
+val autoMaceTests = sourceSets.create("autoMaceTests") {
+    java.srcDir("src/test-auto-mace/java")
+    compileClasspath += sourceSets.main.get().output
+    runtimeClasspath += sourceSets.main.get().output
+}
+val autoMacePolicyTest = tasks.register<JavaExec>("autoMacePolicyTest") {
+    group = "verification"
+    description = "Runs the Auto Mace decision and slot ownership regression tests."
+    dependsOn(tasks.named(autoMaceTests.classesTaskName))
+    classpath = autoMaceTests.runtimeClasspath
+    mainClass.set("meteordevelopment.meteorclient.systems.modules.combat.automace.MaceAttackPolicyTest")
+    javaLauncher.set(javaToolchains.launcherFor {
+        languageVersion.set(JavaLanguageVersion.of(libs.versions.jdk.get().toInt()))
+    })
+}
+tasks.named("check") { dependsOn(autoMacePolicyTest) }
+
+val commandBookTests = sourceSets.create("commandBookTests") {
+    java.srcDir("src/test-command-book/java")
+    compileClasspath += sourceSets.main.get().output
+    runtimeClasspath += sourceSets.main.get().output
+}
+val commandBookTest = tasks.register<JavaExec>("commandBookTest") {
+    group = "verification"
+    description = "Runs command notebook privacy, scope, history and dispatch regression tests."
+    dependsOn(tasks.named(commandBookTests.classesTaskName))
+    classpath = commandBookTests.runtimeClasspath
+    mainClass.set("meteordevelopment.meteorclient.systems.commandbook.CommandNotebookTest")
+    javaLauncher.set(javaToolchains.launcherFor {
+        languageVersion.set(JavaLanguageVersion.of(libs.versions.jdk.get().toInt()))
+    })
+}
+tasks.named("check") { dependsOn(commandBookTest) }
+
+val carpetTests = sourceSets.create("carpetTests") {
+    java.srcDir("src/test-carpet/java")
+    compileClasspath += sourceSets.main.get().output
+    runtimeClasspath += sourceSets.main.get().output
+}
+val carpetTest = tasks.register<JavaExec>("carpetTest") {
+    group = "verification"
+    dependsOn(tasks.named(carpetTests.classesTaskName))
+    classpath = carpetTests.runtimeClasspath
+    mainClass.set("meteordevelopment.meteorclient.systems.modules.misc.carpet.CarpetStateTest")
+    javaLauncher.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(25)) })
+}
+tasks.named("check") { dependsOn(carpetTest) }

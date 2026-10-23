@@ -28,28 +28,28 @@ public class Collisions extends Module {
 
     public final Setting<List<Block>> blocks = sgGeneral.add(new BlockListSetting.Builder()
         .name("blocks")
-        .description("What blocks should be added collision box.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("What blocks should be added collision box."))
         .filter(this::blockFilter)
         .build()
     );
 
     private final Setting<Boolean> magma = sgGeneral.add(new BoolSetting.Builder()
         .name("magma")
-        .description("Prevents you from walking over magma blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Prevents you from walking over magma blocks."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> unloadedChunks = sgGeneral.add(new BoolSetting.Builder()
         .name("unloaded-chunks")
-        .description("Stops you from going into unloaded chunks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Stops you from going into unloaded chunks."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> ignoreBorder = sgGeneral.add(new BoolSetting.Builder()
         .name("ignore-border")
-        .description("Removes world border collision.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Removes world border collision."))
         .defaultValue(false)
         .build()
     );

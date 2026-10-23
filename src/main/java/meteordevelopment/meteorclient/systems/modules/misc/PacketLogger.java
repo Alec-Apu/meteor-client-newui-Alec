@@ -38,49 +38,49 @@ public class PacketLogger extends Module {
 
     private final Setting<Set<PacketType<? extends Packet<?>>>> s2cPackets = sgGeneral.add(new PacketListSetting.Builder()
         .name("S2C-packets")
-        .description("Server-to-client packets to log.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Server-to-client packets to log."))
         .clientbound()
         .build()
     );
 
     private final Setting<Set<PacketType<? extends Packet<?>>>> c2sPackets = sgGeneral.add(new PacketListSetting.Builder()
         .name("C2S-packets")
-        .description("Client-to-server packets to log.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Client-to-server packets to log."))
         .serverbound()
         .build()
     );
 
     private final Setting<Boolean> showTimestamp = sgOutput.add(new BoolSetting.Builder()
         .name("show-timestamp")
-        .description("Show timestamp for each logged packet.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Show timestamp for each logged packet."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> showPacketData = sgOutput.add(new BoolSetting.Builder()
         .name("show-packet-data")
-        .description("Show the packet's toString() data for debugging.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Show the packet's toString() data for debugging."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> showCount = sgOutput.add(new BoolSetting.Builder()
         .name("show-count")
-        .description("Show how many times each packet type has been logged.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Show how many times each packet type has been logged."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> showSummary = sgOutput.add(new BoolSetting.Builder()
         .name("show-summary")
-        .description("Show final packet count summary when module is deactivated.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Show final packet count summary when module is deactivated."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> logToChat = sgOutput.add(new BoolSetting.Builder()
         .name("log-to-chat")
-        .description("Log packets to chat.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Log packets to chat."))
         .defaultValue(true)
         .build()
     );
@@ -89,14 +89,14 @@ public class PacketLogger extends Module {
 
     private final Setting<Boolean> logToFile = sgOutput.add(new BoolSetting.Builder()
         .name("log-to-file")
-        .description("Save packet logs to a file in the meteor-client folder.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Save packet logs to a file in the meteor-client folder."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Integer> flushInterval = sgOutput.add(new IntSetting.Builder()
         .name("flush-interval")
-        .description("How often to flush logs to disk (in seconds).")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How often to flush logs to disk (in seconds)."))
         .defaultValue(1)
         .min(1)
         .sliderMax(10)
@@ -106,7 +106,7 @@ public class PacketLogger extends Module {
 
     private final Setting<Integer> maxFileSizeMB = sgOutput.add(new IntSetting.Builder()
         .name("max-file-size-mb")
-        .description("Maximum size per log file in MB. Creates new file when exceeded.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Maximum size per log file in MB. Creates new file when exceeded."))
         .defaultValue(10)
         .min(1)
         .sliderMax(100)
@@ -116,7 +116,7 @@ public class PacketLogger extends Module {
 
     private final Setting<Integer> maxTotalLogsMB = sgOutput.add(new IntSetting.Builder()
         .name("max-total-logs-mb")
-        .description("Maximum total disk space for all packet logs in MB. Deletes oldest when exceeded.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Maximum total disk space for all packet logs in MB. Deletes oldest when exceeded."))
         .defaultValue(50)
         .min(1)
         .sliderMax(500)
@@ -156,7 +156,7 @@ public class PacketLogger extends Module {
                 cleanupOldLogs();
                 openNewLogFile();
             } catch (IOException e) {
-                error("Failed to initialize packet logging: %s", e.getMessage());
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("Failed to initialize packet logging: %s"), e.getMessage());
                 fileWriter = null;
             }
         }
@@ -223,7 +223,7 @@ public class PacketLogger extends Module {
                 lastFlushMs = now;
             }
         } catch (IOException e) {
-            error("Failed to write to packet log file: %s. File logging disabled.", e.getMessage());
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Failed to write to packet log file: %s. File logging disabled."), e.getMessage());
             closeFileWriter();
         }
     }

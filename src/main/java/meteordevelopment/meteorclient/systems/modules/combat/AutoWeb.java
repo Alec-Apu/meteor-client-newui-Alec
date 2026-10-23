@@ -35,7 +35,7 @@ public class AutoWeb extends Module {
 
     private final Setting<Double> placeRange = sgGeneral.add(new DoubleSetting.Builder()
         .name("place-range")
-        .description("The range at which webs can be placed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The range at which webs can be placed."))
         .defaultValue(4)
         .min(0)
         .sliderMax(6)
@@ -44,7 +44,7 @@ public class AutoWeb extends Module {
 
     private final Setting<Double> placeWallsRange = sgGeneral.add(new DoubleSetting.Builder()
         .name("walls-range")
-        .description("Range in which to place webs when behind blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Range in which to place webs when behind blocks."))
         .defaultValue(4)
         .min(0)
         .sliderMax(6)
@@ -53,14 +53,14 @@ public class AutoWeb extends Module {
 
     private final Setting<SortPriority> priority = sgGeneral.add(new EnumSetting.Builder<SortPriority>()
         .name("target-priority")
-        .description("How to filter targets within range.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How to filter targets within range."))
         .defaultValue(SortPriority.LowestDistance)
         .build()
     );
 
     private final Setting<Double> targetRange = sgGeneral.add(new DoubleSetting.Builder()
         .name("target-range")
-        .description("The maximum distance to target players.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The maximum distance to target players."))
         .defaultValue(10)
         .min(0)
         .sliderMax(30)
@@ -69,14 +69,14 @@ public class AutoWeb extends Module {
 
     private final Setting<Boolean> predictMovement = sgGeneral.add(new BoolSetting.Builder()
         .name("predict-movement")
-        .description("Predict target movement to account for ping.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Predict target movement to account for ping."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Double> ticksToPredict = sgGeneral.add(new DoubleSetting.Builder()
         .name("ticks-to-predict")
-        .description("How many ticks ahead we should predict for.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How many ticks ahead we should predict for."))
         .defaultValue(10)
         .min(1)
         .sliderMax(30)
@@ -86,14 +86,14 @@ public class AutoWeb extends Module {
 
     private final Setting<Boolean> doubles = sgGeneral.add(new BoolSetting.Builder()
         .name("doubles")
-        .description("Places webs in the target's upper hitbox as well as the lower hitbox.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Places webs in the target's upper hitbox as well as the lower hitbox."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> rotate = sgGeneral.add(new BoolSetting.Builder()
         .name("rotate")
-        .description("Rotates towards the webs when placing.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Rotates towards the webs when placing."))
         .defaultValue(true)
         .build()
     );
@@ -102,14 +102,14 @@ public class AutoWeb extends Module {
 
     private final Setting<Boolean> render = sgRender.add(new BoolSetting.Builder()
         .name("render")
-        .description("Renders an overlay where webs are placed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Renders an overlay where webs are placed."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<ShapeMode> shapeMode = sgRender.add(new EnumSetting.Builder<ShapeMode>()
         .name("shape-mode")
-        .description("How the shapes are rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How the shapes are rendered."))
         .defaultValue(ShapeMode.Both)
         .visible(render::get)
         .build()
@@ -117,7 +117,7 @@ public class AutoWeb extends Module {
 
     private final Setting<SettingColor> sideColor = sgRender.add(new ColorSetting.Builder()
         .name("side-color")
-        .description("The side color of the placed web rendering.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The side color of the placed web rendering."))
         .defaultValue(new SettingColor(239, 231, 244, 31))
         .visible(() -> render.get() && shapeMode.get().sides())
         .build()
@@ -125,7 +125,7 @@ public class AutoWeb extends Module {
 
     private final Setting<SettingColor> lineColor = sgRender.add(new ColorSetting.Builder()
         .name("line-color")
-        .description("The line color of the placed web rendering.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The line color of the placed web rendering."))
         .defaultValue(new SettingColor(255, 255, 255))
         .visible(() -> render.get() && shapeMode.get().lines())
         .build()

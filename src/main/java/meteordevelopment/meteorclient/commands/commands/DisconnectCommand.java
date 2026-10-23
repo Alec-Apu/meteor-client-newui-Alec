@@ -21,7 +21,7 @@ public class DisconnectCommand extends Command {
     @Override
     public void build(LiteralArgumentBuilder<ClientSuggestionProvider> builder) {
         builder.executes(_ -> {
-            mc.player.connection.handleDisconnect(new ClientboundDisconnectPacket(Component.literal("%s[%sDisconnectCommand%s] Disconnected by user.".formatted(ChatFormatting.GRAY, ChatFormatting.BLUE, ChatFormatting.GRAY))));
+            mc.player.connection.handleDisconnect(new ClientboundDisconnectPacket(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("%s[%sDisconnectCommand%s] Disconnected by user.").formatted(ChatFormatting.GRAY, ChatFormatting.BLUE, ChatFormatting.GRAY))));
             return SINGLE_SUCCESS;
         });
 

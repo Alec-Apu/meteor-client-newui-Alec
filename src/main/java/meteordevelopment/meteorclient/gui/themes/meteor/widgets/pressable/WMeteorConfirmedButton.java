@@ -12,9 +12,35 @@ import meteordevelopment.meteorclient.gui.themes.meteor.MeteorWidget;
 import meteordevelopment.meteorclient.gui.widgets.pressable.WConfirmedButton;
 import meteordevelopment.meteorclient.utils.render.color.Color;
 
+import static meteordevelopment.meteorclient.gui.themes.meteor.ModernWidgetStyle.isModuleDetails;
+
 public class WMeteorConfirmedButton extends WConfirmedButton implements MeteorWidget {
     public WMeteorConfirmedButton(String text, String confirmText, GuiTexture texture) {
         super(text, confirmText, texture);
+    }
+
+    @Override
+    public double pad() {
+        return isModuleDetails() ? theme.scale(8) : super.pad();
+    }
+
+    @Override
+    protected void onCalculateSize() {
+        if (!isModuleDetails()) {
+            super.onCalculateSize();
+            return;
+        }
+
+        double textHeight = theme.textHeight(true);
+        height = Math.max(theme.scale(34), textHeight + theme.scale(14));
+        if (text != null) {
+            double regularWidth = theme.textWidth(text, text.length(), true);
+            double confirmWidth = theme.textWidth(confirmText, confirmText.length(), true);
+            textWidth = Math.max(regularWidth, confirmWidth);
+            width = textWidth + theme.scale(28);
+        } else {
+            width = height;
+        }
     }
 
     @Override
@@ -31,10 +57,13 @@ public class WMeteorConfirmedButton extends WConfirmedButton implements MeteorWi
         String text = getText();
 
         if (text != null) {
-            renderer.text(text, x + width / 2 - textWidth / 2, y + pad, fg, false);
+            boolean material = isModuleDetails();
+            double width = theme.textWidth(text, text.length(), material);
+            renderer.text(text, x + this.width / 2 - width / 2,
+                y + height / 2 - theme.textHeight(material) / 2, fg, material);
         } else {
-            double ts = theme.textHeight();
-            renderer.quad(x + width / 2 - ts / 2, y + pad, ts, ts, texture, fg);
+            double ts = theme.textHeight(isModuleDetails());
+            renderer.quad(x + width / 2 - ts / 2, y + height / 2 - ts / 2, ts, ts, texture, fg);
         }
     }
 }

@@ -42,7 +42,7 @@ public class InfinityMiner extends Module {
 
     public final Setting<List<Block>> targetBlocks = sgGeneral.add(new BlockListSetting.Builder()
         .name("target-blocks")
-        .description("The target blocks to mine.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The target blocks to mine."))
         .defaultValue(Blocks.DIAMOND_ORE, Blocks.DEEPSLATE_DIAMOND_ORE)
         .filter(this::filterBlocks)
         .build()
@@ -50,14 +50,14 @@ public class InfinityMiner extends Module {
 
     public final Setting<List<Item>> targetItems = sgGeneral.add(new ItemListSetting.Builder()
         .name("target-items")
-        .description("The target items to collect.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The target items to collect."))
         .defaultValue(Items.DIAMOND)
         .build()
     );
 
     public final Setting<List<Block>> repairBlocks = sgGeneral.add(new BlockListSetting.Builder()
         .name("repair-blocks")
-        .description("The repair blocks to mine.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The repair blocks to mine."))
         .defaultValue(Blocks.COAL_ORE, Blocks.REDSTONE_ORE, Blocks.NETHER_QUARTZ_ORE)
         .filter(this::filterBlocks)
         .build()
@@ -65,7 +65,7 @@ public class InfinityMiner extends Module {
 
     public final Setting<Double> startRepairing = sgGeneral.add(new DoubleSetting.Builder()
         .name("repair-threshold")
-        .description("The durability percentage at which to start repairing.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The durability percentage at which to start repairing."))
         .defaultValue(20)
         .range(1, 99)
         .sliderRange(1, 99)
@@ -74,7 +74,7 @@ public class InfinityMiner extends Module {
 
     public final Setting<Double> startMining = sgGeneral.add(new DoubleSetting.Builder()
         .name("mine-threshold")
-        .description("The durability percentage at which to start mining.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The durability percentage at which to start mining."))
         .defaultValue(70)
         .range(1, 99)
         .sliderRange(1, 99)
@@ -85,14 +85,14 @@ public class InfinityMiner extends Module {
 
     public final Setting<Boolean> walkHome = sgWhenFull.add(new BoolSetting.Builder()
         .name("walk-home")
-        .description("Will walk 'home' when your inventory is full.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Will walk 'home' when your inventory is full."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> logOut = sgWhenFull.add(new BoolSetting.Builder()
         .name("log-out")
-        .description("Logs out when your inventory is full. Will walk home FIRST if walk home is enabled.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Logs out when your inventory is full. Will walk home FIRST if walk home is enabled."))
         .defaultValue(false)
         .build()
     );
@@ -128,12 +128,12 @@ public class InfinityMiner extends Module {
         if (isFull()) {
             if (walkHome.get()) {
                 if (isBaritoneNotWalking()) {
-                    info("Walking home.");
+                    info(meteordevelopment.meteorclient.utils.misc.Localization.text("Walking home."));
                     baritone.getCustomGoalProcess().setGoalAndPath(new GoalBlock(homePos));
                 } else if (mc.player.blockPosition().equals(homePos) && logOut.get()) logOut();
             } else if (logOut.get()) logOut();
             else {
-                info("Inventory full, stopping process.");
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Inventory full, stopping process."));
                 toggle();
             }
 
@@ -141,20 +141,20 @@ public class InfinityMiner extends Module {
         }
 
         if (!findPickaxe()) {
-            error("Could not find a usable mending pickaxe.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Could not find a usable mending pickaxe."));
             toggle();
             return;
         }
 
         if (!checkThresholds()) {
-            error("Start mining value can't be lower than start repairing value.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Start mining value can't be lower than start repairing value."));
             toggle();
             return;
         }
 
         if (repairing) {
             if (!needsRepair()) {
-                warning("Finished repairing, going back to mining.");
+                warning(meteordevelopment.meteorclient.utils.misc.Localization.text("Finished repairing, going back to mining."));
                 repairing = false;
                 baritoneSettings.mineScanDroppedItems.value = true;
                 mineTargetBlocks();
@@ -164,7 +164,7 @@ public class InfinityMiner extends Module {
             if (isBaritoneNotMining()) mineRepairBlocks();
         } else {
             if (needsRepair()) {
-                warning("Pickaxe needs repair, beginning repair process");
+                warning(meteordevelopment.meteorclient.utils.misc.Localization.text("Pickaxe needs repair, beginning repair process"));
                 repairing = true;
                 baritoneSettings.mineScanDroppedItems.value = false;
                 mineRepairBlocks();
@@ -214,7 +214,7 @@ public class InfinityMiner extends Module {
 
     private void logOut() {
         toggle();
-        mc.player.connection.send(new ClientboundDisconnectPacket(Component.literal("[Infinity Miner] Inventory is full.")));
+        mc.player.connection.send(new ClientboundDisconnectPacket(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("[Infinity Miner] Inventory is full."))));
     }
 
     private boolean isBaritoneNotMining() {

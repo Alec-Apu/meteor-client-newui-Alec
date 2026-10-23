@@ -158,7 +158,8 @@ public class Modules extends System<Modules> {
 
         for (Module module : this.moduleInstances.values()) {
             String title = module.title;
-            int score = Utils.searchLevenshteinDefault(title, text, false);
+            int score = Math.min(Utils.searchLevenshteinDefault(title, text, false), Utils.searchLevenshteinDefault(Utils.nameToTitle(module.name), text, false));
+            score = Math.min(score, Utils.searchLevenshteinDefault(meteordevelopment.meteorclient.utils.misc.Localization.chineseText(Utils.nameToTitle(module.name)), text, false));
 
             if (Config.get().moduleAliases.get()) {
                 for (String alias : module.aliases) {
@@ -186,7 +187,8 @@ public class Modules extends System<Modules> {
             int lowest = Integer.MAX_VALUE;
             for (SettingGroup sg : module.settings) {
                 for (Setting<?> setting : sg) {
-                    int score = Utils.searchLevenshteinDefault(setting.title, text, false);
+                    int score = Math.min(Utils.searchLevenshteinDefault(setting.title, text, false), Utils.searchLevenshteinDefault(Utils.nameToTitle(setting.name), text, false));
+                    score = Math.min(score, Utils.searchLevenshteinDefault(meteordevelopment.meteorclient.utils.misc.Localization.chineseText(Utils.nameToTitle(setting.name)), text, false));
                     if (score < lowest) lowest = score;
                 }
             }
@@ -406,6 +408,7 @@ public class Modules extends System<Modules> {
         add(new AutoTotem());
         add(new AutoTrap());
         add(new AutoWeapon());
+        add(new AutoMace());
         add(new AutoWeb());
         add(new BedAura());
         add(new BowAimbot());
@@ -569,6 +572,9 @@ public class Modules extends System<Modules> {
         add(new BetterBeacons());
         add(new BetterChat());
         add(new BookBot());
+        add(new CommandBookModule());
+        add(new Carpet());
+        if (BaritoneUtils.IS_AVAILABLE) add(new BaritoneControl());
         add(new DiscordPresence());
         add(new InventoryTweaks());
         add(new MessageAura());

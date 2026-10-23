@@ -28,7 +28,7 @@ public class EditBookTitleAndAuthorScreen extends WindowScreen {
     private final InteractionHand hand;
 
     public EditBookTitleAndAuthorScreen(GuiTheme theme, ItemStack itemStack, InteractionHand hand) {
-        super(theme, "Edit title & author");
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Edit title & author"));
         this.itemStack = itemStack;
         this.hand = hand;
     }
@@ -37,15 +37,15 @@ public class EditBookTitleAndAuthorScreen extends WindowScreen {
     public void initWidgets() {
         WTable t = add(theme.table()).expandX().widget();
 
-        t.add(theme.label("Title"));
+        t.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Title")));
         WTextBox title = t.add(theme.textBox(itemStack.get(DataComponents.WRITTEN_BOOK_CONTENT).title().get(mc.isTextFilteringEnabled()))).minWidth(220).expandX().widget();
         t.row();
 
-        t.add(theme.label("Author"));
+        t.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Author")));
         WTextBox author = t.add(theme.textBox(itemStack.get(DataComponents.WRITTEN_BOOK_CONTENT).author())).minWidth(220).expandX().widget();
         t.row();
 
-        t.add(theme.button("Done")).expandX().widget().action = () -> {
+        t.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Done"))).expandX().widget().action = () -> {
             WrittenBookContent component = itemStack.get(DataComponents.WRITTEN_BOOK_CONTENT);
             WrittenBookContent newComponent = new WrittenBookContent(Filterable.passThrough(title.get()), author.get(), component.generation(), component.pages(), component.resolved());
             itemStack.set(DataComponents.WRITTEN_BOOK_CONTENT, newComponent);

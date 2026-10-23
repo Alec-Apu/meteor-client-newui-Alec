@@ -24,7 +24,7 @@ import static meteordevelopment.meteorclient.MeteorClient.mc;
 
 public class PlayerArgumentType implements ArgumentType<Player> {
     private static final PlayerArgumentType INSTANCE = new PlayerArgumentType();
-    private static final DynamicCommandExceptionType NO_SUCH_PLAYER = new DynamicCommandExceptionType(name -> Component.literal("Player with name " + name + " doesn't exist."));
+    private static final DynamicCommandExceptionType NO_SUCH_PLAYER = new DynamicCommandExceptionType(name -> Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Player with name ") + name + meteordevelopment.meteorclient.utils.misc.Localization.text(" doesn't exist.")));
 
     private static final Collection<String> EXAMPLES = List.of("seasnail8169", "MineGame159");
 

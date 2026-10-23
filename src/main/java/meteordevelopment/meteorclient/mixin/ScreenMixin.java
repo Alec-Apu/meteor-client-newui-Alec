@@ -53,6 +53,7 @@ public abstract class ScreenMixin {
                 Commands.dispatch(meteorClickEvent.value.substring(Config.get().prefix.get().length()));
             } catch (CommandSyntaxException e) {
                 MeteorClient.LOG.error("Failed to run command", e);
+                meteordevelopment.meteorclient.utils.player.ChatUtils.error(meteordevelopment.meteorclient.utils.misc.CommandErrors.message(e));
             } finally {
                 ci.cancel();
             }

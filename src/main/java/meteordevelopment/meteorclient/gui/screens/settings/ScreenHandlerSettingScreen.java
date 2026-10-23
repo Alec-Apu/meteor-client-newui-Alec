@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ScreenHandlerSettingScreen extends CollectionListSettingScreen<MenuType<?>> {
     public ScreenHandlerSettingScreen(GuiTheme theme, Setting<List<MenuType<?>>> setting) {
-        super(theme, "Select Screen Handlers", setting, setting.get(), BuiltInRegistries.MENU);
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Select Screen Handlers"), setting, setting.get(), BuiltInRegistries.MENU);
     }
 
     @Override

@@ -49,7 +49,7 @@ public class MacrosTab extends Tab {
 
             add(theme.horizontalSeparator()).expandX();
 
-            WButton create = add(theme.button("Create")).expandX().widget();
+            WButton create = add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Create"))).expandX().widget();
             create.action = () -> mc.gui.setScreen(new EditMacroScreen(theme, null, this::reload));
         }
 

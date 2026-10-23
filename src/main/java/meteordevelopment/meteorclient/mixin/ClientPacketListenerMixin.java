@@ -176,7 +176,7 @@ public abstract class ClientPacketListenerMixin extends ClientCommonPacketListen
             try {
                 Commands.dispatch(message.substring(Config.get().prefix.get().length()));
             } catch (CommandSyntaxException e) {
-                ChatUtils.error(e.getMessage());
+                ChatUtils.error(meteordevelopment.meteorclient.utils.misc.CommandErrors.message(e));
             }
 
             minecraft.gui.hud.getChat().addRecentChat(message);

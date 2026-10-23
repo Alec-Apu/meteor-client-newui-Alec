@@ -10,6 +10,8 @@ import meteordevelopment.meteorclient.gui.themes.meteor.MeteorGuiTheme;
 import meteordevelopment.meteorclient.gui.themes.meteor.MeteorWidget;
 import meteordevelopment.meteorclient.gui.widgets.input.WSlider;
 
+import static meteordevelopment.meteorclient.gui.themes.meteor.ModernWidgetStyle.renderPill;
+
 public class WMeteorSlider extends WSlider implements MeteorWidget {
     public WMeteorSlider(double value, double min, double max) {
         super(value, min, max);
@@ -17,7 +19,13 @@ public class WMeteorSlider extends WSlider implements MeteorWidget {
 
     @Override
     protected double handleSize() {
-        return super.handleSize() * 1.10;
+        return 0;
+    }
+
+    @Override
+    protected void onCalculateSize() {
+        width = theme.scale(20);
+        height = theme.scale(20);
     }
 
     @Override
@@ -25,26 +33,20 @@ public class WMeteorSlider extends WSlider implements MeteorWidget {
         double valueWidth = valueWidth();
 
         renderBar(renderer, valueWidth);
-        renderHandle(renderer, valueWidth);
     }
 
     private void renderBar(GuiRenderer renderer, double valueWidth) {
         MeteorGuiTheme theme = theme();
 
-        double s = theme.scale(3);
-        double handleSize = handleSize();
-
-        double x = this.x + handleSize / 2;
+        double s = theme.scale(dragging || mouseOver ? 7 : 6);
+        double x = this.x;
         double y = this.y + height / 2 - s / 2;
 
-        renderer.quad(x, y, valueWidth, s, theme.sliderLeft.get());
-        renderer.quad(x + valueWidth, y, width - valueWidth - handleSize, s, theme.sliderRight.get());
-    }
+        renderPill(renderer, x, y, width, s, theme.sliderRight.get());
+        if (valueWidth <= 0) return;
 
-    private void renderHandle(GuiRenderer renderer, double valueWidth) {
-        MeteorGuiTheme theme = theme();
-        double s = handleSize();
-
-        renderer.quad(x + valueWidth, y, s, s, GuiRenderer.CIRCLE, theme.sliderHandle.get(dragging, handleMouseOver));
+        renderer.scissorStart(x, y, Math.min(valueWidth, width), s);
+        renderPill(renderer, x, y, width, s, theme.sliderLeft.get());
+        renderer.scissorEnd();
     }
 }

@@ -38,11 +38,11 @@ public class HelpCommand extends Command {
 
     private void showHelp(Command cmd) {
         MutableComponent msg = Component.literal("");
-        msg.append(Component.literal("Help for ").withStyle(ChatFormatting.GRAY).append(Component.literal(cmd.getName()).withStyle(ChatFormatting.YELLOW)));
-        msg.append(Component.literal("\n ")).append(Component.literal("Description: ").withStyle(ChatFormatting.GRAY).append(Component.literal(cmd.getDescription()).withStyle(ChatFormatting.WHITE)));
+        msg.append(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Help for ")).withStyle(ChatFormatting.GRAY).append(Component.literal(cmd.getName()).withStyle(ChatFormatting.YELLOW)));
+        msg.append(Component.literal("\n ")).append(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Description: ")).withStyle(ChatFormatting.GRAY).append(Component.literal(cmd.getDescription()).withStyle(ChatFormatting.WHITE)));
 
         if (!cmd.getAliases().isEmpty()) {
-            msg.append(Component.literal("\n ")).append(Component.literal("Aliases: ").withStyle(ChatFormatting.GRAY));
+            msg.append(Component.literal("\n ")).append(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Aliases: ")).withStyle(ChatFormatting.GRAY));
             msg.append(Component.literal(String.join(", ", cmd.getAliases())).withStyle(ChatFormatting.AQUA));
         }
 
@@ -69,6 +69,6 @@ public class HelpCommand extends Command {
             usagesText.append(Component.literal("\n " + cmd).withStyle(ChatFormatting.GREEN));
         }
 
-        return Component.literal("\n Usage:").withStyle(ChatFormatting.GRAY).append(usagesText);
+        return Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("\n Usage:")).withStyle(ChatFormatting.GRAY).append(usagesText);
     }
 }

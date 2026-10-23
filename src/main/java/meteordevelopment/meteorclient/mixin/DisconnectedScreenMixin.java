@@ -47,7 +47,7 @@ public abstract class DisconnectedScreenMixin extends Screen {
             layout.addChild(reconnectBtn);
 
             layout.addChild(
-                new Button.Builder(Component.literal("Toggle Auto Reconnect"), _ -> {
+                new Button.Builder(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Toggle Auto Reconnect")), _ -> {
                     autoReconnect.toggle();
                     reconnectBtn.setMessage(Component.literal(getText()));
                     time = autoReconnect.time.get() * 20;

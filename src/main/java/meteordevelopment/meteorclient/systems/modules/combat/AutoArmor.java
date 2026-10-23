@@ -37,14 +37,14 @@ public class AutoArmor extends Module {
 
     private final Setting<Protection> preferredProtection = sgGeneral.add(new EnumSetting.Builder<Protection>()
         .name("preferred-protection")
-        .description("Which type of protection to prefer.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which type of protection to prefer."))
         .defaultValue(Protection.Protection)
         .build()
     );
 
     private final Setting<Integer> delay = sgGeneral.add(new IntSetting.Builder()
         .name("swap-delay")
-        .description("The delay between equipping armor pieces.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The delay between equipping armor pieces."))
         .defaultValue(1)
         .min(0)
         .sliderMax(5)
@@ -53,28 +53,28 @@ public class AutoArmor extends Module {
 
     private final Setting<Set<ResourceKey<Enchantment>>> avoidedEnchantments = sgGeneral.add(new EnchantmentListSetting.Builder()
         .name("avoided-enchantments")
-        .description("Enchantments that should be avoided.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Enchantments that should be avoided."))
         .defaultValue(Enchantments.BINDING_CURSE, Enchantments.FROST_WALKER)
         .build()
     );
 
     private final Setting<Boolean> blastLeggings = sgGeneral.add(new BoolSetting.Builder()
         .name("blast-prot-leggings")
-        .description("Uses blast protection for leggings regardless of preferred protection.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Uses blast protection for leggings regardless of preferred protection."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> antiBreak = sgGeneral.add(new BoolSetting.Builder()
         .name("anti-break")
-        .description("Takes off armor if it is about to break.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Takes off armor if it is about to break."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> ignoreElytra = sgGeneral.add(new BoolSetting.Builder()
         .name("ignore-elytra")
-        .description("Will not replace your elytra if you have it equipped.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Will not replace your elytra if you have it equipped."))
         .defaultValue(true)
         .build()
     );

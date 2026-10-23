@@ -48,28 +48,28 @@ public class Tracers extends Module {
 
     private final Setting<Set<EntityType<?>>> entities = sgGeneral.add(new EntityTypeListSetting.Builder()
         .name("entities")
-        .description("Select specific entities.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Select specific entities."))
         .defaultValue(EntityTypes.PLAYER)
         .build()
     );
 
     private final Setting<Boolean> ignoreSelf = sgGeneral.add(new BoolSetting.Builder()
         .name("ignore-self")
-        .description("Doesn't draw tracers to yourself when in third person or freecam.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Doesn't draw tracers to yourself when in third person or freecam."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> ignoreFriends = sgGeneral.add(new BoolSetting.Builder()
         .name("ignore-friends")
-        .description("Doesn't draw tracers to friends.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Doesn't draw tracers to friends."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> showInvis = sgGeneral.add(new BoolSetting.Builder()
         .name("show-invisible")
-        .description("Shows invisible entities.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows invisible entities."))
         .defaultValue(true)
         .build()
     );
@@ -78,14 +78,14 @@ public class Tracers extends Module {
 
     private final Setting<TracerStyle> style = sgAppearance.add(new EnumSetting.Builder<TracerStyle>()
         .name("style")
-        .description("What display mode should be used")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("What display mode should be used"))
         .defaultValue(TracerStyle.Lines)
         .build()
     );
 
     private final Setting<Target> target = sgAppearance.add(new EnumSetting.Builder<Target>()
         .name("target")
-        .description("What part of the entity to target.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("What part of the entity to target."))
         .defaultValue(Target.Body)
         .visible(() -> style.get() == TracerStyle.Lines)
         .build()
@@ -93,7 +93,7 @@ public class Tracers extends Module {
 
     private final Setting<Boolean> stem = sgAppearance.add(new BoolSetting.Builder()
         .name("stem")
-        .description("Draw a line through the center of the tracer target.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Draw a line through the center of the tracer target."))
         .defaultValue(true)
         .visible(() -> style.get() == TracerStyle.Lines)
         .build()
@@ -101,7 +101,7 @@ public class Tracers extends Module {
 
     private final Setting<Integer> maxDist = sgAppearance.add(new IntSetting.Builder()
         .name("max-distance")
-        .description("Maximum distance for tracers to show.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Maximum distance for tracers to show."))
         .defaultValue(256)
         .min(0)
         .sliderMax(256)
@@ -110,7 +110,7 @@ public class Tracers extends Module {
 
     private final Setting<Integer> distanceOffscreen = sgAppearance.add(new IntSetting.Builder()
         .name("distance-offscreen")
-        .description("Offscreen's distance from center.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Offscreen's distance from center."))
         .defaultValue(200)
         .min(0)
         .sliderMax(500)
@@ -120,7 +120,7 @@ public class Tracers extends Module {
 
     private final Setting<Integer> sizeOffscreen = sgAppearance.add(new IntSetting.Builder()
         .name("size-offscreen")
-        .description("Offscreen's size.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Offscreen's size."))
         .defaultValue(10)
         .min(2)
         .sliderMax(50)
@@ -130,7 +130,7 @@ public class Tracers extends Module {
 
     private final Setting<Boolean> blinkOffscreen = sgAppearance.add(new BoolSetting.Builder()
         .name("blink-offscreen")
-        .description("Make offscreen Blink.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Make offscreen Blink."))
         .defaultValue(true)
         .visible(() -> style.get() == TracerStyle.Offscreen)
         .build()
@@ -138,7 +138,7 @@ public class Tracers extends Module {
 
     private final Setting<Double> blinkOffscreenSpeed = sgAppearance.add(new DoubleSetting.Builder()
         .name("blink-offscreen-speed")
-        .description("Offscreen's blink speed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Offscreen's blink speed."))
         .defaultValue(4)
         .min(1)
         .sliderMax(15)
@@ -150,14 +150,14 @@ public class Tracers extends Module {
 
     public final Setting<Boolean> distance = sgColors.add(new BoolSetting.Builder()
         .name("distance-colors")
-        .description("Changes the color of tracers depending on distance.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Changes the color of tracers depending on distance."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> friendOverride = sgColors.add(new BoolSetting.Builder()
         .name("show-friend-colors")
-        .description("Whether or not to override the distance color of friends with the friend color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to override the distance color of friends with the friend color."))
         .defaultValue(true)
         .visible(() -> distance.get() && !ignoreFriends.get())
         .build()
@@ -165,7 +165,7 @@ public class Tracers extends Module {
 
     private final Setting<SettingColor> playersColor = sgColors.add(new ColorSetting.Builder()
         .name("players-colors")
-        .description("The player's color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The player's color."))
         .defaultValue(new SettingColor(205, 205, 205, 127))
         .visible(() -> !distance.get())
         .build()
@@ -173,7 +173,7 @@ public class Tracers extends Module {
 
     private final Setting<SettingColor> animalsColor = sgColors.add(new ColorSetting.Builder()
         .name("animals-color")
-        .description("The animal's color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The animal's color."))
         .defaultValue(new SettingColor(145, 255, 145, 127))
         .visible(() -> !distance.get())
         .build()
@@ -181,7 +181,7 @@ public class Tracers extends Module {
 
     private final Setting<SettingColor> waterAnimalsColor = sgColors.add(new ColorSetting.Builder()
         .name("water-animals-color")
-        .description("The water animal's color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The water animal's color."))
         .defaultValue(new SettingColor(145, 145, 255, 127))
         .visible(() -> !distance.get())
         .build()
@@ -189,7 +189,7 @@ public class Tracers extends Module {
 
     private final Setting<SettingColor> monstersColor = sgColors.add(new ColorSetting.Builder()
         .name("monsters-color")
-        .description("The monster's color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The monster's color."))
         .defaultValue(new SettingColor(255, 145, 145, 127))
         .visible(() -> !distance.get())
         .build()
@@ -197,7 +197,7 @@ public class Tracers extends Module {
 
     private final Setting<SettingColor> ambientColor = sgColors.add(new ColorSetting.Builder()
         .name("ambient-color")
-        .description("The ambient color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The ambient color."))
         .defaultValue(new SettingColor(75, 75, 75, 127))
         .visible(() -> !distance.get())
         .build()
@@ -205,7 +205,7 @@ public class Tracers extends Module {
 
     private final Setting<SettingColor> miscColor = sgColors.add(new ColorSetting.Builder()
         .name("misc-color")
-        .description("The misc color.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The misc color."))
         .defaultValue(new SettingColor(145, 145, 145, 127))
         .visible(() -> !distance.get())
         .build()

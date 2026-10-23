@@ -41,7 +41,7 @@ public class EntityOwner extends Module {
 
     private final Setting<Double> scale = sgGeneral.add(new DoubleSetting.Builder()
         .name("scale")
-        .description("The scale of the text.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The scale of the text."))
         .defaultValue(1)
         .min(0)
         .build()

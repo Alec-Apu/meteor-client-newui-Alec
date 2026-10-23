@@ -31,7 +31,7 @@ public class ArmorHud extends HudElement {
 
     private final Setting<Orientation> orientation = sgGeneral.add(new EnumSetting.Builder<Orientation>()
         .name("orientation")
-        .description("How to display armor.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How to display armor."))
         .defaultValue(Orientation.Horizontal)
         .onChanged(_ -> calculateSize())
         .build()
@@ -39,14 +39,14 @@ public class ArmorHud extends HudElement {
 
     private final Setting<Boolean> flipOrder = sgGeneral.add(new BoolSetting.Builder()
         .name("flip-order")
-        .description("Flips the order of armor items.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Flips the order of armor items."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> showEmpty = sgGeneral.add(new BoolSetting.Builder()
         .name("show-empty")
-        .description("Renders barrier icons for empty slots.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Renders barrier icons for empty slots."))
         .defaultValue(false)
         .build()
     );
@@ -55,7 +55,7 @@ public class ArmorHud extends HudElement {
 
     private final Setting<Durability> durability = sgDurability.add(new EnumSetting.Builder<Durability>()
         .name("durability")
-        .description("How to display armor durability.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How to display armor durability."))
         .defaultValue(Durability.Bar)
         .onChanged(_ -> calculateSize())
         .build()
@@ -63,7 +63,7 @@ public class ArmorHud extends HudElement {
 
     private final Setting<SettingColor> durabilityColor = sgDurability.add(new ColorSetting.Builder()
         .name("durability-color")
-        .description("Color of the text.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color of the text."))
         .visible(() -> durability.get() == Durability.Total || durability.get() == Durability.Percentage)
         .defaultValue(new SettingColor())
         .build()
@@ -71,7 +71,7 @@ public class ArmorHud extends HudElement {
 
     private final Setting<Boolean> durabilityShadow = sgDurability.add(new BoolSetting.Builder()
         .name("durability-shadow")
-        .description("Text shadow.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Text shadow."))
         .visible(() -> durability.get() == Durability.Total || durability.get() == Durability.Percentage)
         .defaultValue(true)
         .build()
@@ -81,7 +81,7 @@ public class ArmorHud extends HudElement {
 
     private final Setting<Boolean> customScale = sgScale.add(new BoolSetting.Builder()
         .name("custom-scale")
-        .description("Applies a custom scale to this hud element.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Applies a custom scale to this hud element."))
         .defaultValue(false)
         .onChanged(_ -> calculateSize())
         .build()
@@ -89,7 +89,7 @@ public class ArmorHud extends HudElement {
 
     private final Setting<Double> scale = sgScale.add(new DoubleSetting.Builder()
         .name("scale")
-        .description("Custom scale.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Custom scale."))
         .visible(customScale::get)
         .defaultValue(2)
         .onChanged(_ -> calculateSize())
@@ -102,14 +102,14 @@ public class ArmorHud extends HudElement {
 
     private final Setting<Boolean> background = sgBackground.add(new BoolSetting.Builder()
         .name("background")
-        .description("Displays background.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Displays background."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<SettingColor> backgroundColor = sgBackground.add(new ColorSetting.Builder()
         .name("background-color")
-        .description("Color used for the background.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color used for the background."))
         .visible(background::get)
         .defaultValue(new SettingColor(25, 25, 25, 50))
         .build()

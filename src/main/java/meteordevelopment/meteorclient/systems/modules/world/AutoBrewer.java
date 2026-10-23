@@ -25,7 +25,7 @@ public class AutoBrewer extends Module {
 
     private final Setting<MyPotion> potion = sgGeneral.add(new PotionSetting.Builder()
         .name("potion")
-        .description("The type of potion to brew.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The type of potion to brew."))
         .defaultValue(MyPotion.Strength)
         .build()
     );
@@ -95,7 +95,7 @@ public class AutoBrewer extends Module {
         }
 
         if (slot == -1) {
-            error("You do not have any %s left in your inventory... disabling.", I18n.get(ingredient.getDescriptionId()));
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("You do not have any %s left in your inventory... disabling."), I18n.get(ingredient.getDescriptionId()));
             toggle();
             return true;
         }
@@ -117,7 +117,7 @@ public class AutoBrewer extends Module {
             }
 
             if (slot == -1) {
-                error("You do not have a sufficient amount of blaze powder to use as fuel for the brew... disabling.");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("You do not have a sufficient amount of blaze powder to use as fuel for the brew... disabling."));
                 toggle();
                 return true;
             }
@@ -147,7 +147,7 @@ public class AutoBrewer extends Module {
             }
 
             if (slot == -1) {
-                error("You do not have a sufficient amount of water bottles to complete this brew... disabling.");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("You do not have a sufficient amount of water bottles to complete this brew... disabling."));
                 toggle();
                 return true;
             }
@@ -163,7 +163,7 @@ public class AutoBrewer extends Module {
             InvUtils.shiftClick().slotId(i);
 
             if (!c.slots.get(i).getItem().isEmpty()) {
-                error("You do not have a sufficient amount of inventory space... disabling.");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("You do not have a sufficient amount of inventory space... disabling."));
                 toggle();
                 return true;
             }

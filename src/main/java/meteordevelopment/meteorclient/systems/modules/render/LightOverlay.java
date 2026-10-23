@@ -30,7 +30,7 @@ public class LightOverlay extends Module {
 
     private final Setting<Integer> horizontalRange = sgGeneral.add(new IntSetting.Builder()
         .name("horizontal-range")
-        .description("Horizontal range in blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Horizontal range in blocks."))
         .defaultValue(8)
         .min(0)
         .build()
@@ -38,7 +38,7 @@ public class LightOverlay extends Module {
 
     private final Setting<Integer> verticalRange = sgGeneral.add(new IntSetting.Builder()
         .name("vertical-range")
-        .description("Vertical range in blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Vertical range in blocks."))
         .defaultValue(4)
         .min(0)
         .build()
@@ -46,14 +46,14 @@ public class LightOverlay extends Module {
 
     private final Setting<Boolean> seeThroughBlocks = sgGeneral.add(new BoolSetting.Builder()
         .name("see-through-blocks")
-        .description("Allows you to see the lines through blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Allows you to see the lines through blocks."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Integer> lightLevel = sgGeneral.add(new IntSetting.Builder()
         .name("light-level")
-        .description("Which light levels to render. Old spawning light: 7.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which light levels to render. Old spawning light: 7."))
         .defaultValue(0)
         .min(0)
         .sliderMax(15)
@@ -64,14 +64,14 @@ public class LightOverlay extends Module {
 
     private final Setting<SettingColor> color = sgColors.add(new ColorSetting.Builder()
         .name("color")
-        .description("Color of places where mobs can currently spawn.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color of places where mobs can currently spawn."))
         .defaultValue(new SettingColor(225, 25, 25))
         .build()
     );
 
     private final Setting<SettingColor> potentialColor = sgColors.add(new ColorSetting.Builder()
         .name("potential-color")
-        .description("Color of places where mobs can potentially spawn (eg at night).")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color of places where mobs can potentially spawn (eg at night)."))
         .defaultValue(new SettingColor(225, 225, 25))
         .build()
     );

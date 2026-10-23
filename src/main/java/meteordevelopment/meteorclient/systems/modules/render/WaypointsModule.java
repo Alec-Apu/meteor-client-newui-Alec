@@ -54,7 +54,7 @@ public class WaypointsModule extends Module {
 
     public final Setting<Integer> textRenderDistance = sgGeneral.add(new IntSetting.Builder()
         .name("text-render-distance")
-        .description("Maximum distance from the center of the screen at which text will be rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Maximum distance from the center of the screen at which text will be rendered."))
         .defaultValue(100)
         .min(0)
         .sliderMax(200)
@@ -63,7 +63,7 @@ public class WaypointsModule extends Module {
 
     private final Setting<Integer> waypointFadeDistance = sgGeneral.add(new IntSetting.Builder()
         .name("waypoint-fade-distance")
-        .description("The distance to a waypoint at which it begins to start fading.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The distance to a waypoint at which it begins to start fading."))
         .defaultValue(20)
         .sliderRange(0, 100)
         .min(0)
@@ -72,7 +72,7 @@ public class WaypointsModule extends Module {
 
     private final Setting<Integer> maxDeathPositions = sgDeathPosition.add(new IntSetting.Builder()
         .name("max-death-positions")
-        .description("The amount of death positions to save, 0 to disable")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The amount of death positions to save, 0 to disable"))
         .defaultValue(0)
         .min(0)
         .sliderMax(20)
@@ -82,7 +82,7 @@ public class WaypointsModule extends Module {
 
     private final Setting<Boolean> dpChat = sgDeathPosition.add(new BoolSetting.Builder()
         .name("chat")
-        .description("Send a chat message with your position once you die")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Send a chat message with your position once you die"))
         .defaultValue(false)
         .build()
     );
@@ -177,7 +177,7 @@ public class WaypointsModule extends Module {
     public void addDeath(Vec3 deathPos) {
         String time = dateFormat.format(new Date());
         if (dpChat.get()) {
-            MutableComponent text = Component.literal("Died at ");
+            MutableComponent text = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Died at "));
             text.append(formatCoords(deathPos));
             text.append(String.format(" on %s.", time));
             info(text);
@@ -219,7 +219,7 @@ public class WaypointsModule extends Module {
 
     @Override
     public WWidget getWidget(GuiTheme theme) {
-        if (!Utils.canUpdate()) return theme.label("You need to be in a world.");
+        if (!Utils.canUpdate()) return theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("You need to be in a world."));
 
         WTable table = theme.table();
         initTable(theme, table);
@@ -248,7 +248,7 @@ public class WaypointsModule extends Module {
 
             // Goto
             if (validDim) {
-                WButton gotoB = table.add(theme.button("Goto")).widget();
+                WButton gotoB = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Goto"))).widget();
                 gotoB.action = () -> {
                     if (PathManagers.get().isPathing())
                         PathManagers.get().stop();
@@ -259,7 +259,7 @@ public class WaypointsModule extends Module {
 
             boolean isOperator = mc.player.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER);
             if (isOperator) {
-                WButton teleportB = table.add(theme.button("TP")).widget();
+                WButton teleportB = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("TP"))).widget();
                 teleportB.action = () -> {
                     BlockPos pos = waypoint.pos.get();
 
@@ -287,7 +287,7 @@ public class WaypointsModule extends Module {
         table.add(theme.horizontalSeparator()).expandX();
         table.row();
 
-        WButton create = table.add(theme.button("Create")).expandX().widget();
+        WButton create = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Create"))).expandX().widget();
         create.action = () -> mc.gui.setScreen(new EditWaypointScreen(theme, null, () -> initTable(theme, table)));
     }
 

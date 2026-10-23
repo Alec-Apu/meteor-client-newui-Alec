@@ -16,7 +16,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class PeekCommand extends Command {
     private static final ItemStack[] ITEMS = new ItemStack[27];
-    private static final SimpleCommandExceptionType CANT_PEEK = new SimpleCommandExceptionType(Component.literal("You must be holding a storage block or looking at an item frame."));
+    private static final SimpleCommandExceptionType CANT_PEEK = new SimpleCommandExceptionType(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("You must be holding a storage block or looking at an item frame.")));
 
     public PeekCommand() {
         super("peek", "Lets you see what's inside storage block items.");

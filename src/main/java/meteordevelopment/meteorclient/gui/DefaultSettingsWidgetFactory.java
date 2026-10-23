@@ -8,6 +8,7 @@ package meteordevelopment.meteorclient.gui;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import meteordevelopment.meteorclient.gui.renderer.GuiRenderer;
+import meteordevelopment.meteorclient.gui.screens.ModuleScreen;
 import meteordevelopment.meteorclient.gui.screens.settings.*;
 import meteordevelopment.meteorclient.gui.themes.meteor.widgets.WMeteorLabel;
 import meteordevelopment.meteorclient.gui.utils.Cell;
@@ -105,15 +106,20 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
     }
 
     private void group(WVerticalList list, SettingGroup group, String filter, List<RemoveInfo> removeInfoList) {
-        WSection section = list.add(theme.section(group.name, group.sectionExpanded)).expandX().widget();
-        section.action = () -> group.sectionExpanded = section.isExpanded();
+        boolean material = mc.gui.screen() instanceof ModuleScreen;
+        WSection section = list.add(theme.section(meteordevelopment.meteorclient.utils.misc.Localization.text(group.name), material || group.sectionExpanded)).expandX().widget();
+        if (!material) section.action = () -> group.sectionExpanded = section.isExpanded();
 
         WTable table = section.add(theme.table()).expandX().widget();
+        if (material) {
+            table.horizontalSpacing = 10;
+            table.verticalSpacing = 6;
+        }
 
         RemoveInfo removeInfo = null;
 
         for (Setting<?> setting : group) {
-            if (!Strings.CI.contains(setting.title, filter)) continue;
+            if (!Strings.CI.contains(setting.title, filter) && !Strings.CI.contains(Utils.nameToTitle(setting.name), filter)) continue;
 
             boolean visible = setting.isVisible();
             setting.lastWasVisible = visible;
@@ -122,7 +128,14 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
                 removeInfo.markRowForRemoval();
             }
 
-            table.add(theme.label(setting.title)).top().marginTop(settingTitleTopMargin()).widget().tooltip = setting.description;
+            Cell<WLabel> labelCell = table.add(theme.label(setting.title, material));
+            if (material) {
+                double labelWidth = mc.gui.screen() instanceof ModuleScreen moduleScreen
+                    ? moduleScreen.materialSettingLabelWidth() : 150;
+                labelCell.minWidth(labelWidth).centerY().padVertical(6);
+            }
+            else labelCell.top().marginTop(settingTitleTopMargin());
+            labelCell.widget().tooltip = setting.description;
 
             Factory factory = getFactory(setting.getClass());
             if (factory != null) factory.create(table, setting);
@@ -159,7 +172,9 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
     // Settings
 
     private void boolW(WTable table, BoolSetting setting) {
-        WCheckbox checkbox = table.add(theme.checkbox(setting.get())).expandCellX().widget();
+        Cell<WCheckbox> cell = table.add(theme.checkbox(setting.get())).expandCellX();
+        if (mc.gui.screen() instanceof ModuleScreen) cell.right();
+        WCheckbox checkbox = cell.widget();
         checkbox.action = () -> setting.set(checkbox.checked);
 
         reset(table, setting, () -> checkbox.checked = setting.get());
@@ -206,14 +221,18 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
     }
 
     private <T extends Enum<?>> void enumW(WTable table, EnumSetting<T> setting) {
-        WDropdown<T> dropdown = table.add(theme.dropdown(setting.get())).expandCellX().widget();
+        Cell<WDropdown<T>> cell = table.add(theme.dropdown(setting.get())).expandCellX();
+        if (mc.gui.screen() instanceof ModuleScreen) cell.minWidth(150);
+        WDropdown<T> dropdown = cell.widget();
         dropdown.action = () -> setting.set(dropdown.get());
 
         reset(table, setting, () -> dropdown.set(setting.get()));
     }
 
     private void providedStringW(WTable table, ProvidedStringSetting setting) {
-        WDropdown<String> dropdown = table.add(theme.dropdown(setting.supplier.get(), setting.get())).expandCellX().widget();
+        Cell<WDropdown<String>> cell = table.add(theme.dropdown(setting.supplier.get(), setting.get())).expandCellX();
+        if (mc.gui.screen() instanceof ModuleScreen) cell.minWidth(150);
+        WDropdown<String> dropdown = cell.widget();
         dropdown.action = () -> setting.set(dropdown.get());
 
         reset(table, setting, () -> dropdown.set(setting.get()));
@@ -246,7 +265,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
 
         WButton reset = list.add(theme.button(GuiRenderer.RESET)).expandCellX().right().widget();
         reset.action = keybind::resetBind;
-        reset.tooltip = "Reset";
+        reset.tooltip = meteordevelopment.meteorclient.utils.misc.Localization.text("Reset");
     }
 
     private void blockW(WTable table, BlockSetting setting) {
@@ -254,7 +273,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
 
         WItem item = list.add(theme.item(DisplayItemUtils.toStack(setting.get().asItem()))).widget();
 
-        WButton select = list.add(theme.button("Select")).widget();
+        WButton select = list.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Select"))).widget();
         select.action = () -> {
             BlockSettingScreen screen = new BlockSettingScreen(theme, setting);
             screen.onClosed(() -> item.set(DisplayItemUtils.toStack(setting.get().asItem())));
@@ -284,7 +303,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
 
         WItem item = list.add(theme.item(DisplayItemUtils.toStack(setting.get()))).widget();
 
-        WButton select = list.add(theme.button("Select")).widget();
+        WButton select = list.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Select"))).widget();
         select.action = () -> {
             ItemSettingScreen screen = new ItemSettingScreen(theme, setting);
             screen.onClosed(() -> item.set(DisplayItemUtils.toStack(setting.get())));
@@ -352,7 +371,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
         WHorizontalList list = table.add(theme.horizontalList()).expandX().widget();
         WItemWithLabel item = list.add(theme.itemWithLabel(potion, I18n.get(potion.getItem().getDescriptionId()))).widget();
 
-        WButton button = list.add(theme.button("Select")).expandCellX().widget();
+        WButton button = list.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Select"))).expandCellX().widget();
         button.action = () -> {
             WidgetScreen screen = new PotionSettingScreen(theme, setting);
             screen.onClosed(() -> item.set(potion));
@@ -367,7 +386,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
         WHorizontalList list = table.add(theme.horizontalList()).expandX().widget();
         WLabel label = list.add(theme.label(setting.get().info.family())).widget();
 
-        WButton button = list.add(theme.button("Select")).expandCellX().widget();
+        WButton button = list.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Select"))).expandCellX().widget();
         button.action = () -> {
             WidgetScreen screen = new FontFaceSettingScreen(theme, setting);
             screen.onClosed(() -> label.set(setting.get().info.family()));
@@ -487,7 +506,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
             ((WHorizontalList) c2).spacing *= 2;
         }
 
-        WButton button = c2.add(theme.button("Select")).expandCellX().widget();
+        WButton button = c2.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Select"))).expandCellX().widget();
         button.action = action;
 
         if (addCount) c2.add(new WSelectedCountLabel(setting).color(theme.textSecondaryColor()));
@@ -501,7 +520,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
             setting.reset();
             if (action != null) action.run();
         };
-        reset.tooltip = "Reset";
+        reset.tooltip = meteordevelopment.meteorclient.utils.misc.Localization.text("Reset");
     }
 
     private static class WSelectedCountLabel extends WMeteorLabel {
@@ -519,7 +538,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
             int size = getSize(setting);
 
             if (size != lastSize) {
-                set("(" + size + " selected)");
+                set("(" + String.format(meteordevelopment.meteorclient.utils.misc.Localization.text("%d selected"), size) + ")");
                 lastSize = size;
             }
 

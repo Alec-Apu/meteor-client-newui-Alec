@@ -29,7 +29,7 @@ public class AutoSmelter extends Module {
 
     private final Setting<List<Item>> fuelItems = sgGeneral.add(new ItemListSetting.Builder()
         .name("fuel-items")
-        .description("Items to use as fuel")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Items to use as fuel"))
         .defaultValue(Items.COAL, Items.CHARCOAL)
         .filter(this::fuelItemFilter)
         .bypassFilterWhenSavingAndLoading()
@@ -38,7 +38,7 @@ public class AutoSmelter extends Module {
 
     private final Setting<Integer> fuelItemsPerRefill = sgGeneral.add(new IntSetting.Builder()
         .name("fuel-items-per-refill")
-        .description("How many fuel items to put into the furnace each time it refills")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How many fuel items to put into the furnace each time it refills"))
         .defaultValue(64)
         .range(1, 64)
         .sliderRange(1, 16)
@@ -47,7 +47,7 @@ public class AutoSmelter extends Module {
 
     private final Setting<List<Item>> smeltableItems = sgGeneral.add(new ItemListSetting.Builder()
         .name("smeltable-items")
-        .description("Items to smelt")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Items to smelt"))
         .defaultValue(Items.IRON_ORE, Items.GOLD_ORE, Items.COPPER_ORE, Items.RAW_IRON, Items.RAW_COPPER, Items.RAW_GOLD)
         .filter(this::smeltableItemFilter)
         .bypassFilterWhenSavingAndLoading()
@@ -56,7 +56,7 @@ public class AutoSmelter extends Module {
 
     private final Setting<Boolean> disableWhenOutOfItems = sgGeneral.add(new BoolSetting.Builder()
         .name("disable-when-out-of-items")
-        .description("Disable the module when you run out of items")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Disable the module when you run out of items"))
         .defaultValue(true)
         .build()
     );
@@ -114,7 +114,7 @@ public class AutoSmelter extends Module {
         }
 
         if (disableWhenOutOfItems.get() && slot == -1) {
-            error("You do not have any items in your inventory that can be smelted. Disabling.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("You do not have any items in your inventory that can be smelted. Disabling."));
             toggle();
             return;
         }
@@ -142,7 +142,7 @@ public class AutoSmelter extends Module {
         }
 
         if (disableWhenOutOfItems.get() && slot == -1) {
-            error("You do not have any fuel in your inventory. Disabling.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("You do not have any fuel in your inventory. Disabling."));
             toggle();
             return;
         }
@@ -182,7 +182,7 @@ public class AutoSmelter extends Module {
         InvUtils.shiftClick().slotId(2);
 
         if (!resultStack.isEmpty()) {
-            error("Your inventory is full. Disabling.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Your inventory is full. Disabling."));
             toggle();
         }
     }

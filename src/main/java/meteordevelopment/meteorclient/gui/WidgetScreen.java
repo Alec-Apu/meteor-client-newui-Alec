@@ -64,9 +64,12 @@ public abstract class WidgetScreen extends Screen {
     private List<Runnable> onClosed;
 
     protected boolean firstInit = true;
+    private int languageRevision = meteordevelopment.meteorclient.utils.misc.Localization.revision();
+    private final String sourceTitle;
 
     public WidgetScreen(GuiTheme theme, String title) {
         super(Component.literal(title));
+        sourceTitle = meteordevelopment.meteorclient.utils.misc.Localization.source(title);
 
         this.parent = mc.gui.screen();
         this.root = new WFullScreenRoot();
@@ -110,8 +113,14 @@ public abstract class WidgetScreen extends Screen {
     public abstract void initWidgets();
 
     public void reload() {
+        languageRevision = meteordevelopment.meteorclient.utils.misc.Localization.revision();
         clear();
         initWidgets();
+    }
+
+    @Override
+    public Component getTitle() {
+        return Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text(sourceTitle));
     }
 
     public void onClosed(Runnable action) {
@@ -263,6 +272,7 @@ public abstract class WidgetScreen extends Screen {
     }
 
     public void renderCustom(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
+        if (languageRevision != meteordevelopment.meteorclient.utils.misc.Localization.revision()) reload();
         int s = mc.getWindow().getGuiScale();
         mouseX *= s;
         mouseY *= s;

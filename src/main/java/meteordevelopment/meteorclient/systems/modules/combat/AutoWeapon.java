@@ -22,21 +22,21 @@ public class AutoWeapon extends Module {
 
     private final Setting<Weapon> weapon = sgGeneral.add(new EnumSetting.Builder<Weapon>()
         .name("weapon")
-        .description("What type of weapon to use.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("What type of weapon to use."))
         .defaultValue(Weapon.Sword)
         .build()
     );
 
     private final Setting<Integer> threshold = sgGeneral.add(new IntSetting.Builder()
         .name("threshold")
-        .description("If the non-preferred weapon produces this much damage this will favor it over your preferred weapon.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("If the non-preferred weapon produces this much damage this will favor it over your preferred weapon."))
         .defaultValue(4)
         .build()
     );
 
     private final Setting<Boolean> antiBreak = sgGeneral.add(new BoolSetting.Builder()
         .name("anti-break")
-        .description("Prevents you from breaking your weapon.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Prevents you from breaking your weapon."))
         .defaultValue(false)
         .build()
     );

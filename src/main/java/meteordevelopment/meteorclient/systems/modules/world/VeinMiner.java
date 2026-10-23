@@ -56,21 +56,21 @@ public class VeinMiner extends Module {
 
     private final Setting<List<Block>> selectedBlocks = sgGeneral.add(new BlockListSetting.Builder()
         .name("blocks")
-        .description("Which blocks to select.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which blocks to select."))
         .defaultValue(Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK)
         .build()
     );
 
     private final Setting<ListMode> mode = sgGeneral.add(new EnumSetting.Builder<ListMode>()
         .name("mode")
-        .description("Selection mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Selection mode."))
         .defaultValue(ListMode.Blacklist)
         .build()
     );
 
     private final Setting<Integer> depth = sgGeneral.add(new IntSetting.Builder()
         .name("depth")
-        .description("Amount of iterations used to scan for similar blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Amount of iterations used to scan for similar blocks."))
         .defaultValue(3)
         .min(1)
         .sliderRange(1, 15)
@@ -79,7 +79,7 @@ public class VeinMiner extends Module {
 
     private final Setting<Integer> delay = sgGeneral.add(new IntSetting.Builder()
         .name("delay")
-        .description("Delay between mining blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Delay between mining blocks."))
         .defaultValue(0)
         .min(0)
         .sliderRange(0, 20)
@@ -88,7 +88,7 @@ public class VeinMiner extends Module {
 
     private final Setting<Boolean> rotate = sgGeneral.add(new BoolSetting.Builder()
         .name("rotate")
-        .description("Sends rotation packets to the server when mining.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Sends rotation packets to the server when mining."))
         .defaultValue(true)
         .build()
     );
@@ -97,35 +97,35 @@ public class VeinMiner extends Module {
 
     private final Setting<Boolean> swingHand = sgRender.add(new BoolSetting.Builder()
         .name("swing-hand")
-        .description("Swing hand client-side.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swing hand client-side."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> render = sgRender.add(new BoolSetting.Builder()
         .name("render")
-        .description("Whether or not to render the block being mined.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to render the block being mined."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<ShapeMode> shapeMode = sgRender.add(new EnumSetting.Builder<ShapeMode>()
         .name("shape-mode")
-        .description("How the shapes are rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How the shapes are rendered."))
         .defaultValue(ShapeMode.Both)
         .build()
     );
 
     private final Setting<SettingColor> sideColor = sgRender.add(new ColorSetting.Builder()
         .name("side-color")
-        .description("The color of the sides of the blocks being rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of the sides of the blocks being rendered."))
         .defaultValue(new SettingColor(204, 0, 0, 10))
         .build()
     );
 
     private final Setting<SettingColor> lineColor = sgRender.add(new ColorSetting.Builder()
         .name("line-color")
-        .description("The color of the lines of the blocks being rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of the lines of the blocks being rendered."))
         .defaultValue(new SettingColor(204, 0, 0, 255))
         .build()
     );
