@@ -1,0 +1,5 @@
+AutoMaceswap CC0 hotbar selector adapted from MaceSwapMixin.java.
+Repository: https://github.com/rajputbabita399-sketch/AutoMaceswap
+Commit: 297fbfa07a615e1c032cc941d4a01d04bbb90f55
+Only the 0..8 hotbar scan is adapted. The 26.2 combat adapter is independently implemented.
+See AUTO_MACE_SOURCES.md in the source distribution.

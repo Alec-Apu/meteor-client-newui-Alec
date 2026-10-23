@@ -10,7 +10,7 @@ base {
     archivesName = archivesBaseName
     group = mavenGroup
 
-    val suffix = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.4")
+    val suffix = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.5")
     version = "${libs.versions.minecraft.get()}-$suffix"
 }
 
@@ -164,7 +164,7 @@ fun toMinecraftCompat(version: String): String {
 
 tasks {
     processResources {
-        val buildNumber = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.4")
+        val buildNumber = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.5")
         val commit = providers.gradleProperty("commit").getOrElse("")
 
         val propertyMap = mapOf(
@@ -253,3 +253,21 @@ publishing {
         }
     }
 }
+
+// Executable regression tests use a dedicated source set, not JUnit discovery.
+val autoMaceTests = sourceSets.create("autoMaceTests") {
+    java.srcDir("src/test-auto-mace/java")
+    compileClasspath += sourceSets.main.get().output
+    runtimeClasspath += sourceSets.main.get().output
+}
+val autoMacePolicyTest = tasks.register<JavaExec>("autoMacePolicyTest") {
+    group = "verification"
+    description = "Runs the Auto Mace decision and slot ownership regression tests."
+    dependsOn(tasks.named(autoMaceTests.classesTaskName))
+    classpath = autoMaceTests.runtimeClasspath
+    mainClass.set("meteordevelopment.meteorclient.systems.modules.combat.automace.MaceAttackPolicyTest")
+    javaLauncher.set(javaToolchains.launcherFor {
+        languageVersion.set(JavaLanguageVersion.of(libs.versions.jdk.get().toInt()))
+    })
+}
+tasks.named("check") { dependsOn(autoMacePolicyTest) }
