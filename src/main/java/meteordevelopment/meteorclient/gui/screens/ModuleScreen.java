@@ -204,6 +204,13 @@ public class ModuleScreen extends WidgetScreen {
                 else rightWeight += groupWeight;
             }
 
+            // The notebook's controls occupy the settings area of its own native module panel.
+            if (module instanceof meteordevelopment.meteorclient.systems.modules.misc.CommandBookModule && custom != null) {
+                left.add(custom).expandX();
+                leftWeight += 9;
+                custom = null;
+            }
+
             boolean moduleOnLeft = !twoColumns || leftWeight <= rightWeight;
             WVerticalList moduleColumn = moduleOnLeft ? left : right;
             WSection moduleSection = moduleColumn.add(theme.section(meteordevelopment.meteorclient.utils.misc.Localization.text("Module"), true)).expandX().widget();

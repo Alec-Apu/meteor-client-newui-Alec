@@ -4404,5 +4404,8 @@
   "meteor.commandbook.v107.8": "This hotkey conflicts with another command, module, macro or menu key.",
   "meteor.commandbook.v107.9": "Multiple commands share this hotkey. Rebind them before use.",
   "meteor.commandbook.v107.10": "Command hotkey could not run. Check its scope and command text.",
-  "meteor.commandbook.v107.11": "This command hotkey conflicts with a module, macro or menu key."
+  "meteor.commandbook.v107.11": "This command hotkey conflicts with a module, macro or menu key.",
+  "meteor.commandbook.v108.0": "Command View",
+  "meteor.commandbook.v108.1": "Command Details",
+  "meteor.commandbook.v108.2": "No matching commands."
 }

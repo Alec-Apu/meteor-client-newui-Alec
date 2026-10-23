@@ -109,6 +109,15 @@ public final class CommandBook extends System<CommandBook> {
         changed(true);
     }
 
+    @EventHandler(priority = EventPriority.HIGHEST)
+    private void onBindingKey(KeyInputEvent event) {
+        if (Modules.get().get(CommandBookModule.class).capture(event)) event.cancel();
+    }
+    @EventHandler(priority = EventPriority.HIGHEST)
+    private void onBindingMouse(MouseClickEvent event) {
+        if (Modules.get().get(CommandBookModule.class).capture(event)) event.cancel();
+    }
+
     @EventHandler(priority = EventPriority.HIGH)
     private void onKey(KeyInputEvent event) {
         if (event.action == KeyAction.Release) hotkeys.release(true, event.key());

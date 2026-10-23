@@ -4404,5 +4404,8 @@
   "meteor.commandbook.v107.8": "此快捷键与其他指令、模块、宏或菜单按键冲突，请换一个按键。",
   "meteor.commandbook.v107.9": "多条指令共用了此快捷键，未执行。请重新绑定。",
   "meteor.commandbook.v107.10": "指令快捷键未能执行，请检查适用范围和指令内容。",
-  "meteor.commandbook.v107.11": "此指令快捷键与模块、宏或菜单按键冲突，未执行。"
+  "meteor.commandbook.v107.11": "此指令快捷键与模块、宏或菜单按键冲突，未执行。",
+  "meteor.commandbook.v108.0": "指令视图",
+  "meteor.commandbook.v108.1": "指令详情",
+  "meteor.commandbook.v108.2": "暂无符合条件的指令。"
 }
