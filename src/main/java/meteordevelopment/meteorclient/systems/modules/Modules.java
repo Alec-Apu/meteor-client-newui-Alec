@@ -574,6 +574,7 @@ public class Modules extends System<Modules> {
         add(new BookBot());
         add(new CommandBookModule());
         add(new Carpet());
+        if (BaritoneUtils.IS_AVAILABLE) add(new BaritoneControl());
         add(new DiscordPresence());
         add(new InventoryTweaks());
         add(new MessageAura());

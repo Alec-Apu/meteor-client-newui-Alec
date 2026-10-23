@@ -77,6 +77,7 @@ public class ModuleScreen extends WidgetScreen {
     public void tick() {
         super.tick();
         if (module instanceof meteordevelopment.meteorclient.systems.modules.misc.Carpet carpet) carpet.tickWidget();
+        if (module instanceof meteordevelopment.meteorclient.systems.modules.misc.BaritoneControl baritone) baritone.tickWidget();
         if (panel != null && panel.visibilityChanged()) panel.refreshContent();
     }
 
@@ -175,6 +176,7 @@ public class ModuleScreen extends WidgetScreen {
             WWidget custom = module.getWidget(theme);
             int contentWeight = moduleContentWeight(custom != null);
             twoColumns = contentWeight > singleColumnCapacity() && getWindowWidth() >= theme.scale(1200);
+            if (module instanceof meteordevelopment.meteorclient.systems.modules.misc.BaritoneControl) twoColumns = false;
 
             WHorizontalList columns = theme.horizontalList();
             columns.spacing = 18;
@@ -206,7 +208,7 @@ public class ModuleScreen extends WidgetScreen {
             }
 
             // The notebook's controls occupy the settings area of its own native module panel.
-            if ((module instanceof meteordevelopment.meteorclient.systems.modules.misc.CommandBookModule || module instanceof meteordevelopment.meteorclient.systems.modules.misc.Carpet) && custom != null) {
+            if ((module instanceof meteordevelopment.meteorclient.systems.modules.misc.CommandBookModule || module instanceof meteordevelopment.meteorclient.systems.modules.misc.Carpet || module instanceof meteordevelopment.meteorclient.systems.modules.misc.BaritoneControl) && custom != null) {
                 left.add(custom).expandX();
                 leftWeight += 9;
                 custom = null;
