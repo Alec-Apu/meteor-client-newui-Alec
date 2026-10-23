@@ -1,12 +1,9 @@
-# Minecraft 26.2 — 1.0.6
+# Minecraft 26.2 — 1.0.7
 
-新增指令本：右 Shift → 指令本，收藏、备注、分类、搜索、历史及最近使用；可直接执行或填入聊天框再修改。使用说明和测试结果见 COMMAND_BOOK.md。
+指令本入口：右 Shift → 杂项 → 右键「指令本」→「打开指令本」。启用该模块后，已收藏指令的独立快捷键才生效。收藏按钮与最近 50 条指令记录可在管理窗口使用。原有收藏、备注、历史兼容读取。
 
-需要 Minecraft 26.2、Java 25、Fabric Loader >=0.19.3。保留现有 1.0.5 的 Auto Mace 和汉化功能，不新增运行依赖。
+Minecraft 26.2、Java 25、Fabric Loader >=0.19.3；无新增运行依赖。保留 Auto Mace 和汉化功能。实例 E:/pcl/.minecraft/versions/Alec-26.2。
 
-安装包：meteor-client-26.2-zh-cn-1.0.6.jar
-源码：meteor-client-26.2-zh-cn-1.0.6-source.zip
-目录：D:/codex-project/outputs/meteor-client-26.2-zh-cn-1.0.6
-测试实例：E:/pcl/.minecraft/versions/Alec-26.2
+交付目录 D:/codex-project/outputs/meteor-client-26.2-zh-cn-1.0.7，包含 JAR 和 -source.zip。更新前后源码与 JAR 备份至 D:/codex-project/update-backups。未上传 GitHub，未修改 26.3。
 
-更新前后源码、JAR 均在 D:/codex-project/update-backups 保存独立备份，不上传 GitHub。
+功能说明、测试和限制见 COMMAND_BOOK.md。

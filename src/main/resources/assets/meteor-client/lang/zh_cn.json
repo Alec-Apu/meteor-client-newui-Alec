@@ -4392,5 +4392,17 @@
   "meteor.text.8043e8102f818c21": "保持原有适用范围",
   "meteor.text.252b7be3310d5ac7": "请填写名称和以 / 或当前彗星前缀开头的有效指令。",
   "meteor.text.038d32cca9e8d161": "请先进入世界，再选择当前适用范围。",
-  "meteor.text.039b5d0caecf1a3c": "名称／分类最多 128 字符，指令最多 256 字符，备注最多 2048 字符。"
+  "meteor.text.039b5d0caecf1a3c": "名称／分类最多 128 字符，指令最多 256 字符，备注最多 2048 字符。",
+  "meteor.commandbook.v107.0": "管理收藏指令，启用后允许使用每条指令的快捷键。",
+  "meteor.commandbook.v107.1": "启用此模块后可使用指令快捷键。关闭模块仍可记录历史。",
+  "meteor.commandbook.v107.2": "打开指令本",
+  "meteor.commandbook.v107.3": "最近使用保留 50 条，收藏长期保留；启用杂项中的指令本模块后可使用快捷键。",
+  "meteor.commandbook.v107.4": "取消收藏",
+  "meteor.commandbook.v107.5": "收藏指令",
+  "meteor.commandbook.v107.6": "指令快捷键",
+  "meteor.commandbook.v107.7": "点击按键按钮，再按下并松开键盘按键，或按鼠标侧键。Esc 清除绑定。",
+  "meteor.commandbook.v107.8": "此快捷键与其他指令、模块、宏或菜单按键冲突，请换一个按键。",
+  "meteor.commandbook.v107.9": "多条指令共用了此快捷键，未执行。请重新绑定。",
+  "meteor.commandbook.v107.10": "指令快捷键未能执行，请检查适用范围和指令内容。",
+  "meteor.commandbook.v107.11": "此指令快捷键与模块、宏或菜单按键冲突，未执行。"
 }

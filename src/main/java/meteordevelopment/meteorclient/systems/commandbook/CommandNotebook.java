@@ -9,7 +9,7 @@ import java.util.*;
 /** Immutable entries and Minecraft-independent notebook operations. No command bodies are logged. */
 public final class CommandNotebook {
     public static final String GLOBAL = "*";
-    public static final int HISTORY_LIMIT = 200;
+    public static final int HISTORY_LIMIT = 50;
     public static final int MAX_COMMAND_LENGTH = 256;
     public enum View { Favorites, Recent, History }
     public enum Kind { Server, Client, Invalid }
@@ -28,6 +28,7 @@ public final class CommandNotebook {
                 || category.length() > 128 || scope.isBlank() || scope.length() > 2048 || lastUsed < 0)
                 throw new IllegalArgumentException("Invalid command notebook entry");
         }
+        public Entry favorited(boolean value) { return new Entry(id, name, command, note, category, scope, lastUsed, value); }
         public Entry used(long now) { return new Entry(id, name, command, note, category, scope, Math.max(lastUsed, now), favorite); }
         public boolean appliesTo(String current) { return scope.equals(GLOBAL) || scope.equals(current); }
     }
@@ -90,7 +91,7 @@ public final class CommandNotebook {
 
     public List<Entry> query(View view, String text, String currentScope, boolean showOtherScopes) {
         String search = text.strip().toLowerCase(Locale.ROOT);
-        return entries.values().stream()
+        var result = entries.values().stream()
             .filter(e -> showOtherScopes || e.appliesTo(currentScope))
             .filter(e -> switch (view) {
                 case Favorites -> e.favorite;
@@ -98,8 +99,13 @@ public final class CommandNotebook {
                 case History -> !e.favorite && e.lastUsed > 0;
             })
             .filter(e -> (e.name + "\n" + e.command + "\n" + e.note + "\n" + e.category).toLowerCase(Locale.ROOT).contains(search))
-            .sorted(Comparator.comparingLong(Entry::lastUsed).reversed().thenComparing(Entry::name).thenComparing(Entry::id))
-            .limit(view == View.Recent ? 20 : Long.MAX_VALUE).toList();
+            .sorted(Comparator.comparingLong(Entry::lastUsed).reversed()
+                .thenComparing(Entry::favorite, Comparator.reverseOrder()).thenComparing(Entry::name).thenComparing(Entry::id)).toList();
+        if (view != View.Recent) return result;
+        // A global favorite and its contextual sent-history represent one use in this view.
+        Map<String, Entry> recent = new LinkedHashMap<>();
+        for (Entry entry : result) recent.putIfAbsent(entry.command + "\0" + (entry.scope.equals(GLOBAL) ? currentScope : entry.scope), entry);
+        return recent.values().stream().limit(HISTORY_LIMIT).toList();
     }
 
     public static Result execute(Entry entry, boolean connected, String currentScope, String prefix, Sender sender) {

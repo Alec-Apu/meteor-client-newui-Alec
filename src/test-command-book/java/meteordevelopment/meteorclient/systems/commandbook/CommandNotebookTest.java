@@ -53,6 +53,8 @@ public final class CommandNotebookTest {
         check(book.query(View.Favorites, "返回家", "server:b", false).size() == 1, "Name is searchable");
         book.record("/home", ".", "server:a", 300);
         check(book.get(saved.id()).lastUsed() == 300 && book.get(saved.id()).note().equals(saved.note()), "Global bookmark gains use time without losing notes");
+        check(book.query(View.Recent, "/home", "server:a", false).size() == 1, "Recent view merges global favorite with its sent history");
+        check(book.query(View.Recent, "/home", "server:a", true).size() == 2, "Recent view keeps different server contexts separate");
         Entry promoted = new Entry(historyId, "我的家", "/home", "备注", "常用", "server:a", 300, true);
         book.put(promoted);
         check(book.get(historyId).favorite() && book.query(View.History, "", "server:a", false).isEmpty(), "Saving history promotes same entry without duplication");
@@ -61,7 +63,7 @@ public final class CommandNotebookTest {
         for (int i = 1; i <= 230; i++) book.record("/test " + i, ".", "server:a", 1000 + i);
         check(book.entries().size() == HISTORY_LIMIT + 2, "History is capped without trimming favorites");
         check(book.query(View.History, "/test 1", "server:a", false).stream().noneMatch(e -> e.command().equals("/test 1")), "Oldest history is evicted");
-        check(book.query(View.Recent, "", "server:a", false).size() == 20, "Recently used view is capped at 20");
+        check(book.query(View.Recent, "", "server:a", false).size() == 50, "Recently used view is capped at 50");
         List<Entry> snapshot = book.entries();
         CommandNotebook loaded = new CommandNotebook();
         loaded.replace(snapshot);
@@ -86,6 +88,29 @@ public final class CommandNotebookTest {
         boolean immutable = false;
         try { snapshot.clear(); } catch (UnsupportedOperationException expected) { immutable = true; }
         check(immutable, "Views cannot mutate saved entries");
+        check(HISTORY_LIMIT == 50, "History retains at most 50 non-favorites");
+        check(saved.favorited(false).id().equals(saved.id()) && !saved.favorited(false).favorite()
+            && saved.favorited(false).note().equals(saved.note()), "Unfavorite preserves command identity and notes");
+        check(saved.favorited(false).favorited(true).equals(saved), "Favorite toggle is reversible");
+        CommandNotebook migration = new CommandNotebook();
+        List<Entry> legacy = new ArrayList<>();
+        for (int i = 1; i <= 200; i++) legacy.add(new Entry(UUID.randomUUID(), "legacy", "/test " + i, "", "", "server:a", i, false));
+        legacy.add(saved); migration.replace(legacy);
+        check(migration.entries().size() == 51 && migration.get(saved.id()) != null, "Old 200-entry data trims to 50 while keeping favorites");
+        check(migration.query(View.History, "", "server:a", false).getLast().command().equals("/test 151"), "Migration retains the latest fifty commands");
+        CommandHotkeyGate gate = new CommandHotkeyGate();
+        check(gate.press(true, 65, true), "Initial eligible key press runs once");
+        check(!gate.press(true, 65, true), "Held key cannot repeat an action");
+        gate.release(true, 65);
+        check(gate.press(true, 65, true), "Release permits a new deliberate press");
+        check(!gate.press(true, 66, false), "Disabled or GUI input does not execute");
+        check(!gate.press(true, 66, true), "Closing a GUI while holding a key does not execute");
+        gate.release(true, 66);
+        check(gate.press(true, 66, true), "New press after closing GUI executes");
+        check(gate.press(false, 65, true), "Mouse and keyboard input have independent identities");
+        check(!gate.press(false, 65, true), "Held mouse side button cannot repeat");
+        gate.release(false, 65);
+        check(gate.press(false, 65, true), "Mouse release permits the next press");
         System.out.println("Command notebook: " + passed + " tests passed.");
     }
 }

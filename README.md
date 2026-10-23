@@ -1,15 +1,15 @@
 ## Minecraft 26.2 简体中文汉化版
 
-当前版本：1.0.6。右 Shift 打开界面 → 配置 → 视觉 → **Meteor 语言**，选择「简体中文」或「English」，立即刷新并保存；与 Minecraft 语言独立。
+当前版本：1.0.7。右 Shift 打开界面 → 配置 → 视觉 → **Meteor 语言**，选择「简体中文」或「English」，立即刷新并保存；与 Minecraft 语言独立。
 
 维护者：Alec。此版由原始 26.2 源码适配汉化，保留上游版权与 GPL-3.0 许可证。
 
 - 环境：Minecraft 26.2、Java 25、Fabric Loader 0.19.3 或更新兼容版本。
-- 安装：将 `meteor-client-26.2-zh-cn-1.0.6.jar` 放入 **26.2 实例**的 `mods` 文件夹，替换该实例已有的 Meteor JAR；右 Shift 打开界面。
+- 安装：将 `meteor-client-26.2-zh-cn-1.0.7.jar` 放入 **26.2 实例**的 `mods` 文件夹，替换该实例已有的 Meteor JAR；右 Shift 打开界面。
 - 本包只适用于 26.2，请勿放入 26.3 实例。
-- 构建：使用 JDK 25 执行 `./gradlew build -Pbuild_number=zh-cn-1.0.6`；输出位于 `build/libs`。
+- 构建：使用 JDK 25 执行 `./gradlew build -Pbuild_number=zh-cn-1.0.7`；输出位于 `build/libs`。
 - 汉化覆盖模块、设置、描述、界面、HUD、命令帮助与反馈；命令语法、配置键和自定义文字保留原值。
-- 新增指令本：右 Shift → 指令本，保存指令名称、备注、分类和适用范围，可直接执行、填入聊天框或复制；详情见 `COMMAND_BOOK.md`。
+- 指令本：右 Shift → 杂项 → 右键「指令本」→ 打开指令本。收藏按钮、每条指令独立快捷键、最近 50 条记录；启用模块后快捷键生效，界面打开时不触发。保留原有收藏和备注；详情见 `COMMAND_BOOK.md`。
 - Auto Mace 核心版：战斗分类 → 自动重锤。先将重锤放入快捷栏，默认不自动起跳。详情见 `AUTO_MACE_REPORT.md` 和 `AUTO_MACE_SOURCES.md`。
 - 本地测试结果及逐文件变更见 `CHINESE_TRANSLATION_REVIEW.md`；尚未上传 GitHub。
 

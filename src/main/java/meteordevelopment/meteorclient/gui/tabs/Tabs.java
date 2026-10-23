@@ -28,7 +28,6 @@ public class Tabs {
         add(new HudTab());
         add(new FriendsTab());
         add(new MacrosTab());
-        add(new CommandBookTab());
         add(new ProfilesTab());
 
         if (PathManagers.get().getSettings().get().sizeGroups() > 0) {

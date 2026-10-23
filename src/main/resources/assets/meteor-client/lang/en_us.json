@@ -4392,5 +4392,17 @@
   "meteor.text.8043e8102f818c21": "Keep existing scope",
   "meteor.text.252b7be3310d5ac7": "Enter a name and a valid command with / or the current Meteor prefix.",
   "meteor.text.038d32cca9e8d161": "Join a world to select its command scope.",
-  "meteor.text.039b5d0caecf1a3c": "Name/category: 128 characters. Command: 256. Note: 2048."
+  "meteor.text.039b5d0caecf1a3c": "Name/category: 128 characters. Command: 256. Note: 2048.",
+  "meteor.commandbook.v107.0": "Manage saved commands and enable their individual hotkeys.",
+  "meteor.commandbook.v107.1": "Enable this module to use command hotkeys. Recording works while disabled.",
+  "meteor.commandbook.v107.2": "Open Command Book",
+  "meteor.commandbook.v107.3": "Recent commands: 50. Favorites are kept. Enable the Misc module for hotkeys.",
+  "meteor.commandbook.v107.4": "Unfavorite Command",
+  "meteor.commandbook.v107.5": "Favorite Command",
+  "meteor.commandbook.v107.6": "Command Hotkey",
+  "meteor.commandbook.v107.7": "Click the key, then release a keyboard key or press a mouse side button. Esc clears it.",
+  "meteor.commandbook.v107.8": "This hotkey conflicts with another command, module, macro or menu key.",
+  "meteor.commandbook.v107.9": "Multiple commands share this hotkey. Rebind them before use.",
+  "meteor.commandbook.v107.10": "Command hotkey could not run. Check its scope and command text.",
+  "meteor.commandbook.v107.11": "This command hotkey conflicts with a module, macro or menu key."
 }
