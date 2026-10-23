@@ -16,7 +16,7 @@ public class Timer extends Module {
 
     private final Setting<Double> multiplier = sgGeneral.add(new DoubleSetting.Builder()
         .name("multiplier")
-        .description("The timer multiplier amount.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The timer multiplier amount."))
         .defaultValue(1)
         .min(0.1)
         .sliderMin(0.1)

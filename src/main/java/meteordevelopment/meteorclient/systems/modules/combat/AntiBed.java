@@ -29,28 +29,28 @@ public class AntiBed extends Module {
 
     private final Setting<Boolean> placeStringTop = sgGeneral.add(new BoolSetting.Builder()
         .name("place-string-top")
-        .description("Places string above you.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Places string above you."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> placeStringMiddle = sgGeneral.add(new BoolSetting.Builder()
         .name("place-string-middle")
-        .description("Places string in your upper hitbox.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Places string in your upper hitbox."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> placeStringBottom = sgGeneral.add(new BoolSetting.Builder()
         .name("place-string-bottom")
-        .description("Places string at your feet.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Places string at your feet."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> onlyInHole = sgGeneral.add(new BoolSetting.Builder()
         .name("only-in-hole")
-        .description("Only functions when you are standing in a hole.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Only functions when you are standing in a hole."))
         .defaultValue(true)
         .build()
     );

@@ -58,7 +58,7 @@ public abstract class WTextBox extends WWidget {
 
     public WTextBox(String text, String placeholder, CharFilter filter, Class<? extends Renderer> renderer) {
         this.text = text;
-        this.placeholder = placeholder;
+        this.placeholder = meteordevelopment.meteorclient.utils.misc.Localization.text(placeholder);
         this.filter = filter;
 
         try {

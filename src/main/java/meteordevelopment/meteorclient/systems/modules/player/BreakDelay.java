@@ -21,7 +21,7 @@ public class BreakDelay extends Module {
 
     private final Setting<Integer> cooldown = sgGeneral.add(new IntSetting.Builder()
         .name("cooldown")
-        .description("Block break cooldown in ticks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Block break cooldown in ticks."))
         .defaultValue(0)
         .min(0)
         .sliderMax(5)
@@ -30,7 +30,7 @@ public class BreakDelay extends Module {
 
     private final Setting<Boolean> noInstaBreak = sgGeneral.add(new BoolSetting.Builder()
         .name("no-insta-break")
-        .description("Prevents you from misbreaking blocks if you can instantly break them.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Prevents you from misbreaking blocks if you can instantly break them."))
         .defaultValue(false)
         .build()
     );

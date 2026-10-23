@@ -62,7 +62,7 @@ public abstract class WDropdown<T> extends WPressable {
 
         maxValueWidth = 0;
         for (T value : values) {
-            double valueWidth = theme.textWidth(value.toString());
+            double valueWidth = theme.textWidth(meteordevelopment.meteorclient.utils.misc.Localization.value(value));
             maxValueWidth = Math.max(maxValueWidth, valueWidth);
         }
 

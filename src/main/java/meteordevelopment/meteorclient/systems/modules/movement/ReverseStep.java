@@ -23,7 +23,7 @@ public class ReverseStep extends Module {
 
     private final Setting<Double> fallSpeed = sgGeneral.add(new DoubleSetting.Builder()
         .name("fall-speed")
-        .description("How fast to fall in blocks per second.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How fast to fall in blocks per second."))
         .defaultValue(3)
         .min(0)
         .build()
@@ -31,7 +31,7 @@ public class ReverseStep extends Module {
 
     private final Setting<Double> fallDistance = sgGeneral.add(new DoubleSetting.Builder()
         .name("fall-distance")
-        .description("The maximum fall distance this setting will activate at.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The maximum fall distance this setting will activate at."))
         .defaultValue(3)
         .min(0)
         .build()
@@ -39,7 +39,7 @@ public class ReverseStep extends Module {
 
     private final Setting<Boolean> vehicles = sgGeneral.add(new BoolSetting.Builder()
         .name("vehicles")
-        .description("Whether or not reverse step should affect vehicles.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not reverse step should affect vehicles."))
         .defaultValue(false)
         .build()
     );

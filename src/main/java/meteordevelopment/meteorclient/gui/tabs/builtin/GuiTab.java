@@ -45,7 +45,7 @@ public class GuiTab extends Tab {
         public void initWidgets() {
             WHorizontalList opts = add(theme.horizontalList()).expandX().widget();
 
-            opts.add(theme.label("Theme:"));
+            opts.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Theme:")));
             WDropdown<String> themeW = opts.add(theme.dropdown(GuiThemes.getNames(), GuiThemes.get().name)).widget();
             themeW.action = () -> {
                 GuiThemes.select(themeW.get());
@@ -54,10 +54,10 @@ public class GuiTab extends Tab {
                 tab.openScreen(GuiThemes.get());
             };
 
-            WButton resetLayout = opts.add(theme.button("Reset Layout")).expandX().widget();
+            WButton resetLayout = opts.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Reset Layout"))).expandX().widget();
             resetLayout.action = theme::clearWindowConfigs;
 
-            WButton reset = opts.add(theme.button("Reset Colors")).right().widget();
+            WButton reset = opts.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Reset Colors"))).right().widget();
             reset.action = () -> {
                 theme.settings.reset();
                 mc.gui.setScreen(null);
@@ -66,11 +66,11 @@ public class GuiTab extends Tab {
 
             WButton copyButton = opts.add(theme.button(GuiRenderer.COPY)).widget();
             copyButton.action = this::toClipboard;
-            copyButton.tooltip = "Copy config";
+            copyButton.tooltip = meteordevelopment.meteorclient.utils.misc.Localization.text("Copy config");
 
             WButton pasteButton = opts.add(theme.button(GuiRenderer.PASTE)).right().widget();
             pasteButton.action = this::fromClipboard;
-            pasteButton.tooltip = "Paste config";
+            pasteButton.tooltip = meteordevelopment.meteorclient.utils.misc.Localization.text("Paste config");
 
             add(theme.settings(theme.settings)).expandX();
         }

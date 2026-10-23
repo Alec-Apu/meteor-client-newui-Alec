@@ -18,7 +18,7 @@ public class HighJump extends Module {
 
     private final Setting<Double> multiplier = sgGeneral.add(new DoubleSetting.Builder()
         .name("jump-multiplier")
-        .description("Jump height multiplier.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Jump height multiplier."))
         .defaultValue(1)
         .min(0)
         .build()

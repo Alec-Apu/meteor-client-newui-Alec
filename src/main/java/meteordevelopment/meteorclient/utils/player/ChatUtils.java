@@ -35,7 +35,7 @@ public class ChatUtils {
         PREFIX = Component.empty()
             .setStyle(Style.EMPTY.applyFormats(ChatFormatting.GRAY))
             .append("[")
-            .append(Component.literal("Alec").setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xFFE6F2))))
+            .append(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Alec-apu")).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xFFE6F2))))
             .append("] ");
     }
 
@@ -131,12 +131,12 @@ public class ChatUtils {
     }
 
     public static void sendMsg(int id, @Nullable String prefixTitle, @Nullable ChatFormatting prefixColor, ChatFormatting messageColor, String messageContent, Object... args) {
-        MutableComponent message = formatMsg(String.format(messageContent, args), messageColor);
+        MutableComponent message = formatMsg(String.format(meteordevelopment.meteorclient.utils.misc.Localization.text(messageContent), args), messageColor);
         sendMsg(id, prefixTitle, prefixColor, message);
     }
 
     public static void sendMsg(int id, @Nullable String prefixTitle, @Nullable ChatFormatting prefixColor, String messageContent, ChatFormatting messageColor) {
-        MutableComponent message = formatMsg(messageContent, messageColor);
+        MutableComponent message = formatMsg(meteordevelopment.meteorclient.utils.misc.Localization.text(messageContent), messageColor);
         sendMsg(id, prefixTitle, prefixColor, message);
     }
 
@@ -160,7 +160,7 @@ public class ChatUtils {
 
         prefix.append("[");
 
-        MutableComponent moduleTitle = Component.literal(prefixTitle);
+        MutableComponent moduleTitle = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text(prefixTitle));
         moduleTitle.setStyle(moduleTitle.getStyle().applyFormats(prefixColor));
         prefix.append(moduleTitle);
 
@@ -258,7 +258,7 @@ public class ChatUtils {
         if (BaritoneUtils.IS_AVAILABLE) {
             Style style = coordsText.getStyle().applyFormats(ChatFormatting.BOLD)
                 .withHoverEvent(new HoverEvent.ShowText(
-                    Component.literal("Set as Baritone goal")
+                    Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Set as Baritone goal"))
                 ))
                 .withClickEvent(new MeteorClickEvent(
                     String.format("%sgoto %d %d %d", BaritoneUtils.getPrefix(), (int) pos.x, (int) pos.y, (int) pos.z)

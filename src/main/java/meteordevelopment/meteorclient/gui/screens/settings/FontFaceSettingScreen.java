@@ -32,7 +32,7 @@ public class FontFaceSettingScreen extends WindowScreen {
     private String filterText = "";
 
     public FontFaceSettingScreen(GuiTheme theme, FontFaceSetting setting) {
-        super(theme, "Select Font");
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Select Font"));
 
         this.setting = setting;
     }
@@ -80,7 +80,7 @@ public class FontFaceSettingScreen extends WindowScreen {
 
             WDropdown<FontInfo.Type> dropdown = table.add(theme.dropdown(FontInfo.Type.Regular)).right().widget();
 
-            WButton select = table.add(theme.button("Select")).expandCellX().right().widget();
+            WButton select = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Select"))).expandCellX().right().widget();
             select.action = () -> {
                 setting.set(fontFamily.get(dropdown.get()));
                 onClose();

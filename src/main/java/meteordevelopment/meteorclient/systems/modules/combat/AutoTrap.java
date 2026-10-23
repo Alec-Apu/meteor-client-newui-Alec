@@ -41,14 +41,14 @@ public class AutoTrap extends Module {
 
     private final Setting<List<Block>> blocks = sgGeneral.add(new BlockListSetting.Builder()
         .name("whitelist")
-        .description("Which blocks to use.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which blocks to use."))
         .defaultValue(Blocks.OBSIDIAN, Blocks.CRYING_OBSIDIAN)
         .build()
     );
 
     private final Setting<Double> placeRange = sgGeneral.add(new DoubleSetting.Builder()
         .name("place-range")
-        .description("The range at which blocks can be placed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The range at which blocks can be placed."))
         .defaultValue(4)
         .min(0)
         .sliderMax(6)
@@ -57,7 +57,7 @@ public class AutoTrap extends Module {
 
     private final Setting<Double> placeWallsRange = sgGeneral.add(new DoubleSetting.Builder()
         .name("walls-range")
-        .description("Range in which to place when behind blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Range in which to place when behind blocks."))
         .defaultValue(4)
         .min(0)
         .sliderMax(6)
@@ -66,14 +66,14 @@ public class AutoTrap extends Module {
 
     private final Setting<SortPriority> priority = sgGeneral.add(new EnumSetting.Builder<SortPriority>()
         .name("target-priority")
-        .description("How to select the player to target.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How to select the player to target."))
         .defaultValue(SortPriority.LowestHealth)
         .build()
     );
 
     private final Setting<Double> targetRange = sgGeneral.add(new DoubleSetting.Builder()
         .name("target-range")
-        .description("The maximum distance to target players.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The maximum distance to target players."))
         .defaultValue(3)
         .min(0)
         .sliderMax(10)
@@ -82,14 +82,14 @@ public class AutoTrap extends Module {
 
     private final Setting<Integer> delay = sgGeneral.add(new IntSetting.Builder()
         .name("place-delay")
-        .description("How many ticks between block placements.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How many ticks between block placements."))
         .defaultValue(1)
         .build()
     );
 
     private final Setting<Integer> blocksPerTick = sgGeneral.add(new IntSetting.Builder()
         .name("blocks-per-tick")
-        .description("How many blocks to place in one tick.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How many blocks to place in one tick."))
         .defaultValue(1)
         .min(1)
         .build()
@@ -97,28 +97,28 @@ public class AutoTrap extends Module {
 
     private final Setting<TopMode> topPlacement = sgGeneral.add(new EnumSetting.Builder<TopMode>()
         .name("top-blocks")
-        .description("Which blocks to place on the top half of the target.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which blocks to place on the top half of the target."))
         .defaultValue(TopMode.Full)
         .build()
     );
 
     private final Setting<BottomMode> bottomPlacement = sgGeneral.add(new EnumSetting.Builder<BottomMode>()
         .name("bottom-blocks")
-        .description("Which blocks to place on the bottom half of the target.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which blocks to place on the bottom half of the target."))
         .defaultValue(BottomMode.Platform)
         .build()
     );
 
     private final Setting<Boolean> selfToggle = sgGeneral.add(new BoolSetting.Builder()
         .name("self-toggle")
-        .description("Turns off after placing all blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Turns off after placing all blocks."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> rotate = sgGeneral.add(new BoolSetting.Builder()
         .name("rotate")
-        .description("Rotates towards blocks when placing.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Rotates towards blocks when placing."))
         .defaultValue(true)
         .build()
     );
@@ -127,14 +127,14 @@ public class AutoTrap extends Module {
 
     private final Setting<Boolean> render = sgRender.add(new BoolSetting.Builder()
         .name("render")
-        .description("Renders an overlay where blocks will be placed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Renders an overlay where blocks will be placed."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<ShapeMode> shapeMode = sgRender.add(new EnumSetting.Builder<ShapeMode>()
         .name("shape-mode")
-        .description("How the shapes are rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How the shapes are rendered."))
         .defaultValue(ShapeMode.Both)
         .visible(render::get)
         .build()
@@ -142,7 +142,7 @@ public class AutoTrap extends Module {
 
     private final Setting<SettingColor> sideColor = sgRender.add(new ColorSetting.Builder()
         .name("side-color")
-        .description("The side color of the target block rendering.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The side color of the target block rendering."))
         .defaultValue(new SettingColor(197, 137, 232, 10))
         .visible(() -> render.get() && shapeMode.get().sides())
         .build()
@@ -150,7 +150,7 @@ public class AutoTrap extends Module {
 
     private final Setting<SettingColor> lineColor = sgRender.add(new ColorSetting.Builder()
         .name("line-color")
-        .description("The line color of the target block rendering.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The line color of the target block rendering."))
         .defaultValue(new SettingColor(197, 137, 232))
         .visible(() -> render.get() && shapeMode.get().lines())
         .build()
@@ -158,7 +158,7 @@ public class AutoTrap extends Module {
 
     private final Setting<SettingColor> nextSideColor = sgRender.add(new ColorSetting.Builder()
         .name("next-side-color")
-        .description("The side color of the next block to be placed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The side color of the next block to be placed."))
         .defaultValue(new SettingColor(227, 196, 245, 10))
         .visible(() -> render.get() && shapeMode.get().sides())
         .build()
@@ -166,7 +166,7 @@ public class AutoTrap extends Module {
 
     private final Setting<SettingColor> nextLineColor = sgRender.add(new ColorSetting.Builder()
         .name("next-line-color")
-        .description("The line color of the next block to be placed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The line color of the next block to be placed."))
         .defaultValue(new SettingColor(5, 139, 221))
         .visible(() -> render.get() && shapeMode.get().lines())
         .build()

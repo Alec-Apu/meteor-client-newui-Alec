@@ -25,14 +25,14 @@ public class LongJump extends Module {
 
     public final Setting<JumpMode> jumpMode = sgGeneral.add(new EnumSetting.Builder<JumpMode>()
         .name("mode")
-        .description("The method of jumping.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The method of jumping."))
         .defaultValue(JumpMode.Vanilla)
         .build()
     );
 
     private final Setting<Double> vanillaBoostFactor = sgGeneral.add(new DoubleSetting.Builder()
         .name("vanilla-boost-factor")
-        .description("The amount by which to boost the jump.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The amount by which to boost the jump."))
         .visible(() -> jumpMode.get() == JumpMode.Vanilla)
         .defaultValue(1.261)
         .min(0)
@@ -42,7 +42,7 @@ public class LongJump extends Module {
 
     private final Setting<Double> burstInitialSpeed = sgGeneral.add(new DoubleSetting.Builder()
         .name("burst-initial-speed")
-        .description("The initial speed of the runup.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The initial speed of the runup."))
         .visible(() -> jumpMode.get() == JumpMode.Burst)
         .defaultValue(6)
         .min(0)
@@ -52,7 +52,7 @@ public class LongJump extends Module {
 
     private final Setting<Double> burstBoostFactor = sgGeneral.add(new DoubleSetting.Builder()
         .name("burst-boost-factor")
-        .description("The amount by which to boost the jump.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The amount by which to boost the jump."))
         .visible(() -> jumpMode.get() == JumpMode.Burst)
         .defaultValue(2.149)
         .min(0)
@@ -62,7 +62,7 @@ public class LongJump extends Module {
 
     private final Setting<Boolean> onlyOnGround = sgGeneral.add(new BoolSetting.Builder()
         .name("only-on-ground")
-        .description("Only performs the jump if you are on the ground.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Only performs the jump if you are on the ground."))
         .visible(() -> jumpMode.get() == JumpMode.Burst)
         .defaultValue(true)
         .build()
@@ -70,7 +70,7 @@ public class LongJump extends Module {
 
     private final Setting<Boolean> onJump = sgGeneral.add(new BoolSetting.Builder()
         .name("on-jump")
-        .description("Whether the player needs to jump first or not.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether the player needs to jump first or not."))
         .visible(() -> jumpMode.get() == JumpMode.Burst)
         .defaultValue(false)
         .build()
@@ -78,7 +78,7 @@ public class LongJump extends Module {
 
     private final Setting<Double> glideMultiplier = sgGeneral.add(new DoubleSetting.Builder()
         .name("glide-multiplier")
-        .description("The amount by to multiply the glide velocity.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The amount by to multiply the glide velocity."))
         .visible(() -> jumpMode.get() == JumpMode.Glide)
         .defaultValue(1)
         .min(0)
@@ -88,7 +88,7 @@ public class LongJump extends Module {
 
     public final Setting<Double> timer = sgGeneral.add(new DoubleSetting.Builder()
         .name("timer")
-        .description("Timer override.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Timer override."))
         .defaultValue(1)
         .min(0.01)
         .sliderMin(0.01)
@@ -97,7 +97,7 @@ public class LongJump extends Module {
 
     private final Setting<Boolean> autoDisable = sgGeneral.add(new BoolSetting.Builder()
         .name("auto-disable")
-        .description("Automatically disabled the module after jumping.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically disabled the module after jumping."))
         .visible(() -> jumpMode.get() != JumpMode.Vanilla)
         .defaultValue(true)
         .build()
@@ -105,7 +105,7 @@ public class LongJump extends Module {
 
     private final Setting<Boolean> disableOnRubberband = sgGeneral.add(new BoolSetting.Builder()
         .name("disable-on-rubberband")
-        .description("Disables the module when you get lagged back.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Disables the module when you get lagged back."))
         .defaultValue(true)
         .build()
     );
@@ -137,7 +137,7 @@ public class LongJump extends Module {
     @EventHandler
     private void onPacketReceive(PacketEvent.Receive event) {
         if (event.packet instanceof ClientboundPlayerPositionPacket && disableOnRubberband.get()) {
-            info("Rubberband detected! Disabling...");
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Rubberband detected! Disabling..."));
             toggle();
         }
     }
@@ -168,7 +168,7 @@ public class LongJump extends Module {
                 if (jumping && (mc.player.getY() - (int) mc.player.getY() < 0.01)) {
                     jumping = false;
                     toggle();
-                    info("Disabling after jump.");
+                    info(meteordevelopment.meteorclient.utils.misc.Localization.text("Disabling after jump."));
                 }
 
                 if (onlyOnGround.get() && !mc.player.onGround() && stage == 0) return;
@@ -238,7 +238,7 @@ public class LongJump extends Module {
                 if (autoDisable.get() && jumped) {
                     jumped = false;
                     toggle();
-                    info("Disabling after jump.");
+                    info(meteordevelopment.meteorclient.utils.misc.Localization.text("Disabling after jump."));
                 }
                 airTicks = 0;
                 groundTicks += 1;

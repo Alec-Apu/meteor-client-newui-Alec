@@ -15,7 +15,7 @@ import static meteordevelopment.meteorclient.MeteorClient.mc;
 
 public class AddMicrosoftAccountScreen extends AddAccountScreen {
     public AddMicrosoftAccountScreen(GuiTheme theme, AccountsScreen parent) {
-        super(theme, "Add Microsoft Account", parent);
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Add Microsoft Account"), parent);
     }
 
     @Override
@@ -30,15 +30,15 @@ public class AddMicrosoftAccountScreen extends AddAccountScreen {
             onClose();
         });
 
-        add(theme.label("Please select the account to log into in your browser."));
-        add(theme.label("If the link does not automatically open in a few seconds, copy it into your browser."));
+        add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Please select the account to log into in your browser.")));
+        add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("If the link does not automatically open in a few seconds, copy it into your browser.")));
 
         WHorizontalList l = add(theme.horizontalList()).expandX().widget();
 
-        WButton copy = l.add(theme.button("Copy link")).expandX().widget();
+        WButton copy = l.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Copy link"))).expandX().widget();
         copy.action = () -> mc.keyboardHandler.setClipboard(url);
 
-        WButton cancel = l.add(theme.button("Cancel")).expandX().widget();
+        WButton cancel = l.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Cancel"))).expandX().widget();
         cancel.action = () -> {
             MicrosoftLogin.stopServer();
             onClose();

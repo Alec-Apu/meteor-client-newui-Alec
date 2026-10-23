@@ -47,7 +47,7 @@ public class SwarmWorker extends Thread {
                     try {
                         Commands.dispatch(read);
                     } catch (Exception e) {
-                        ChatUtils.error("Error fetching command.");
+                        ChatUtils.error(meteordevelopment.meteorclient.utils.misc.Localization.text("Error fetching command."));
                         e.printStackTrace();
                     }
                 }

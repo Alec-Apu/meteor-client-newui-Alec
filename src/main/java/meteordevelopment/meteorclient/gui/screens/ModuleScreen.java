@@ -16,6 +16,7 @@ import meteordevelopment.meteorclient.gui.widgets.WWidget;
 import meteordevelopment.meteorclient.gui.widgets.containers.WContainer;
 import meteordevelopment.meteorclient.gui.widgets.containers.WHorizontalList;
 import meteordevelopment.meteorclient.gui.widgets.containers.WSection;
+import meteordevelopment.meteorclient.gui.widgets.containers.WTable;
 import meteordevelopment.meteorclient.gui.widgets.containers.WVerticalList;
 import meteordevelopment.meteorclient.gui.widgets.containers.WView;
 import meteordevelopment.meteorclient.gui.widgets.pressable.WButton;
@@ -35,6 +36,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import static meteordevelopment.meteorclient.MeteorClient.mc;
 import static meteordevelopment.meteorclient.utils.Utils.getWindowHeight;
@@ -53,6 +55,8 @@ public class ModuleScreen extends WidgetScreen {
     private static final Color LIGHT_TEXT = new Color(28, 31, 42);
     private static final Color LIGHT_MUTED = new Color(92, 99, 119);
     private static final Color LIGHT_BUTTON = new Color(255, 255, 255, 255);
+    private static final Color DARK_ACCENT_SOFT = new Color(0, 245, 255, 42);
+    private static final Color LIGHT_ACCENT_SOFT = new Color(0, 155, 170, 30);
 
     private final Module module;
     private WModulePanel panel;
@@ -117,13 +121,19 @@ public class ModuleScreen extends WidgetScreen {
     private Color text() { return isLight() ? LIGHT_TEXT : DARK_TEXT; }
     private Color muted() { return isLight() ? LIGHT_MUTED : DARK_MUTED; }
     private Color buttonColor() { return isLight() ? LIGHT_BUTTON : DARK_BUTTON; }
+    private Color accentSoft() { return isLight() ? LIGHT_ACCENT_SOFT : DARK_ACCENT_SOFT; }
+
+    public double materialSettingLabelWidth() {
+        return panel != null && panel.twoColumns ? 128 : 170;
+    }
 
     private final class WModulePanel extends WContainer {
         private WView view;
         private WBackButton back;
-        private WSmallButton favorite;
-        private WSmallButton mode;
+        private WIconButton favorite;
+        private WIconButton mode;
         private WActiveButton active;
+        private boolean twoColumns;
 
         private double plannedWidth;
         private double plannedHeight;
@@ -137,8 +147,10 @@ public class ModuleScreen extends WidgetScreen {
         @Override
         public void init() {
             back = add(new WBackButton()).widget();
-            favorite = add(new WSmallButton("Fav", () -> module.favorite = !module.favorite)).widget();
-            mode = add(new WSmallButton("Mode", this::toggleMode)).widget();
+            favorite = add(new WIconButton(() -> module.favorite ? "★" : "☆", "Toggle favorite",
+                () -> module.favorite = !module.favorite, () -> module.favorite)).widget();
+            mode = add(new WIconButton(() -> isLight() ? "☀" : "☾", "Switch light and dark theme",
+                this::toggleMode, () -> false)).widget();
             active = add(new WActiveButton()).widget();
             view = add(theme.view()).widget();
             view.scrollOnlyWhenMouseOver = true;
@@ -159,53 +171,105 @@ public class ModuleScreen extends WidgetScreen {
             if (view == null) return;
             view.clear();
 
+            WWidget custom = module.getWidget(theme);
+            int contentWeight = moduleContentWeight(custom != null);
+            twoColumns = contentWeight > singleColumnCapacity() && getWindowWidth() >= theme.scale(1200);
+
             WHorizontalList columns = theme.horizontalList();
-            columns.spacing = 12;
+            columns.spacing = 18;
             WVerticalList left = theme.verticalList();
             WVerticalList right = theme.verticalList();
-            left.spacing = 10;
-            right.spacing = 10;
+            left.spacing = 14;
+            right.spacing = 14;
             columns.add(left).expandX();
-            columns.add(right).expandX();
+            if (twoColumns) columns.add(right).expandX();
 
-            int index = 0;
+            int leftWeight = 0;
+            int rightWeight = 0;
             for (SettingGroup group : module.settings.groups) {
+                int visibleSettings = 0;
+                for (Setting<?> setting : group) {
+                    if (setting.isVisible()) visibleSettings++;
+                }
+                if (visibleSettings == 0) continue;
+
                 Settings singleGroup = new Settings();
                 singleGroup.groups.add(group);
-                WVerticalList target = (index++ & 1) == 0 ? left : right;
+                int groupWeight = visibleSettings + 1;
+
+                boolean addLeft = !twoColumns || leftWeight <= rightWeight;
+                WVerticalList target = addLeft ? left : right;
                 target.add(theme.settings(singleGroup)).expandX();
+                if (addLeft) leftWeight += groupWeight;
+                else rightWeight += groupWeight;
             }
 
-            WSection moduleSection = theme.section("Module", true);
-            WHorizontalList bind = moduleSection.add(theme.horizontalList()).expandX().widget();
-            bind.add(theme.label("Bind"));
-            keybind = bind.add(theme.keybind(module.keybind)).expandX().widget();
+            boolean moduleOnLeft = !twoColumns || leftWeight <= rightWeight;
+            WVerticalList moduleColumn = moduleOnLeft ? left : right;
+            WSection moduleSection = moduleColumn.add(theme.section(meteordevelopment.meteorclient.utils.misc.Localization.text("Module"), true)).expandX().widget();
+            WTable moduleTable = moduleSection.add(theme.table()).expandX().widget();
+            moduleTable.horizontalSpacing = 10;
+            moduleTable.verticalSpacing = 6;
+
+            moduleTable.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Bind"), true)).minWidth(materialSettingLabelWidth()).centerY().padVertical(6);
+            keybind = moduleTable.add(theme.keybind(module.keybind)).expandX().widget();
             keybind.actionOnSet = () -> Modules.get().setModuleToBind(module);
-            WButton reset = bind.add(theme.button(GuiRenderer.RESET)).widget();
+            WButton reset = moduleTable.add(theme.button(GuiRenderer.RESET)).centerY().widget();
             reset.action = keybind::resetBind;
+            moduleTable.row();
 
-            WHorizontalList release = moduleSection.add(theme.horizontalList()).expandX().widget();
-            release.add(theme.label("Toggle on release")).expandCellX();
-            WCheckbox releaseToggle = release.add(theme.checkbox(module.toggleOnBindRelease)).widget();
+            moduleTable.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Toggle on release"), true)).minWidth(materialSettingLabelWidth()).centerY().padVertical(6);
+            WCheckbox releaseToggle = moduleTable.add(theme.checkbox(module.toggleOnBindRelease)).expandCellX().right().widget();
             releaseToggle.action = () -> module.toggleOnBindRelease = releaseToggle.checked;
+            moduleTable.add(theme.label("")).minWidth(30);
+            moduleTable.row();
 
-            WHorizontalList feedback = moduleSection.add(theme.horizontalList()).expandX().widget();
-            feedback.add(theme.label("Chat feedback")).expandCellX();
-            WCheckbox feedbackToggle = feedback.add(theme.checkbox(module.chatFeedback)).widget();
+            moduleTable.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Chat feedback"), true)).minWidth(materialSettingLabelWidth()).centerY().padVertical(6);
+            WCheckbox feedbackToggle = moduleTable.add(theme.checkbox(module.chatFeedback)).expandCellX().right().widget();
             feedbackToggle.action = () -> module.chatFeedback = feedbackToggle.checked;
+            moduleTable.add(theme.label("")).minWidth(30);
+            moduleTable.row();
 
-            WHorizontalList sharing = moduleSection.add(theme.horizontalList()).expandX().widget();
-            WButton copy = sharing.add(theme.button("Copy config")).expandX().widget();
+            moduleTable.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Configuration"), true)).minWidth(materialSettingLabelWidth()).centerY().padVertical(6);
+            WHorizontalList sharing = moduleTable.add(theme.horizontalList()).expandCellX().right().widget();
+            sharing.spacing = 8;
+            WButton copy = sharing.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Copy"))).widget();
             copy.action = ModuleScreen.this::toClipboard;
-            WButton paste = sharing.add(theme.button("Paste config")).expandX().widget();
+            WButton paste = sharing.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Paste"))).widget();
             paste.action = ModuleScreen.this::fromClipboard;
-            right.add(moduleSection).expandX();
+            moduleTable.add(theme.label("")).minWidth(30);
 
-            WWidget custom = module.getWidget(theme);
-            if (custom != null) left.add(custom).expandX();
+            if (moduleOnLeft) leftWeight += 5;
+            else rightWeight += 5;
+
+            if (custom != null) {
+                WVerticalList customColumn = !twoColumns || leftWeight <= rightWeight ? left : right;
+                customColumn.add(custom).expandX();
+            }
 
             view.add(columns).expandX();
             invalidate();
+        }
+
+        private int moduleContentWeight(boolean hasCustomWidget) {
+            int weight = 5; // Permanent Module card: header plus four rows.
+
+            for (SettingGroup group : module.settings.groups) {
+                int visibleSettings = 0;
+                for (Setting<?> setting : group) {
+                    if (setting.isVisible()) visibleSettings++;
+                }
+
+                if (visibleSettings > 0) weight += visibleSettings + 1;
+            }
+
+            if (hasCustomWidget) weight += 4;
+            return weight;
+        }
+
+        private int singleColumnCapacity() {
+            double availableHeight = getWindowHeight() * 0.52;
+            return Math.max(9, (int) Math.floor(availableHeight / theme.scale(42)));
         }
 
         private boolean visibilityChanged() {
@@ -219,12 +283,20 @@ public class ModuleScreen extends WidgetScreen {
 
         @Override
         public void calculateSize() {
-            double maxWidth = getWindowWidth() * 0.56;
-            double maxHeight = getWindowHeight() * 0.62;
-            plannedWidth = Math.min(maxWidth, maxHeight * 4.0 / 3.0);
-            plannedHeight = plannedWidth * 3.0 / 4.0;
-            if (view != null) view.maxHeight = plannedHeight - theme.scale(80);
+            double maxHeight = getWindowHeight() * 0.70;
+            double widthRatio = twoColumns ? 0.62 : 0.42;
+            double aspectLimit = maxHeight * (twoColumns ? 4.0 / 3.0 : 1.10);
+            plannedWidth = Math.min(getWindowWidth() * 0.90, Math.max(theme.scale(twoColumns ? 820 : 650), Math.min(getWindowWidth() * widthRatio, aspectLimit)));
+            plannedHeight = maxHeight;
+
+            if (view != null) view.maxHeight = maxHeight - theme.scale(102);
             super.calculateSize();
+
+            if (view != null) {
+                double desiredHeight = view.height + theme.scale(102);
+                plannedHeight = Mth.clamp(desiredHeight, theme.scale(210), maxHeight);
+                height = plannedHeight;
+            }
         }
 
         @Override
@@ -245,18 +317,18 @@ public class ModuleScreen extends WidgetScreen {
             x = savedX;
             y = savedY;
 
-            double pad = theme.scale(15);
-            double top = y + theme.scale(16);
+            double pad = theme.scale(18);
+            double top = y + theme.scale(20);
             back.x = x + pad;
             back.y = top;
-            favorite.x = x + width - pad - theme.scale(42);
+            favorite.x = x + width - pad - favorite.width;
             favorite.y = top;
-            mode.x = favorite.x - theme.scale(50);
+            mode.x = favorite.x - theme.scale(8) - mode.width;
             mode.y = top;
-            active.x = mode.x - theme.scale(89);
+            active.x = mode.x - theme.scale(8) - active.width;
             active.y = top;
             view.x = x + pad;
-            view.y = y + theme.scale(66);
+            view.y = y + theme.scale(82);
             view.width = width - pad * 2;
         }
 
@@ -271,11 +343,12 @@ public class ModuleScreen extends WidgetScreen {
                 if (texture != null) renderRoundedTopBlur(renderer, texture, radius);
             }
 
-            renderRoundedTop(renderer, x, y, width, theme.scale(62), radius, header());
+            renderRoundedTop(renderer, x, y, width, theme.scale(76), radius, header());
 
-            renderer.text(module.title, x + theme.scale(80), y + theme.scale(15), text(), true);
-            String description = fit(module.description, width * 0.42);
-            renderer.text(description, x + theme.scale(80), y + theme.scale(41), muted(), false);
+            renderer.text(module.title, x + theme.scale(104), y + theme.scale(17), text(), true);
+            double descriptionWidth = Math.max(theme.scale(90), active.x - theme.scale(14) - (x + theme.scale(104)));
+            String description = fit(module.description, descriptionWidth);
+            renderer.text(description, x + theme.scale(104), y + theme.scale(47), muted(), false);
         }
 
         private String fit(String value, double maxWidth) {
@@ -286,7 +359,7 @@ public class ModuleScreen extends WidgetScreen {
         }
 
         private void renderRoundedTopBlur(GuiRenderer renderer, GpuTextureView texture, double radius) {
-            int bands = 5;
+            int bands = Math.max(8, (int) Math.ceil(radius));
             double bandHeight = radius / bands;
             for (int i = 0; i < bands; i++) {
                 double midpoint = (i + 0.5) * bandHeight;
@@ -298,44 +371,23 @@ public class ModuleScreen extends WidgetScreen {
                 renderer.scissorEnd();
             }
 
-            renderer.scissorStart(x, y + radius, width, theme.scale(62) - radius);
+            renderer.scissorStart(x, y + radius, width, theme.scale(76) - radius);
             renderer.texture(0, 0, getWindowWidth(), getWindowHeight(), 0, texture);
             renderer.scissorEnd();
         }
 
         private void renderRounded(GuiRenderer renderer, double rx, double ry, double rw, double rh, double radius, Color color) {
-            renderBands((sx, sy, sw, sh) -> renderer.quad(sx, sy, sw, sh, color), rx, ry, rw, rh, radius);
+            renderer.roundedQuad(rx, ry, rw, rh, radius, color);
         }
 
         private void renderRoundedTop(GuiRenderer renderer, double rx, double ry, double rw, double rh, double radius, Color color) {
-            int bands = 5;
-            double bandHeight = radius / bands;
-            for (int i = 0; i < bands; i++) {
-                double midpoint = (i + 0.5) * bandHeight;
-                double circleY = radius - midpoint;
-                double inset = radius - Math.sqrt(Math.max(0, radius * radius - circleY * circleY));
-                renderer.quad(rx + inset, ry + i * bandHeight, rw - inset * 2, bandHeight, color);
-            }
-            renderer.quad(rx, ry + radius, rw, rh - radius, color);
-        }
-
-        private void renderBands(BandRenderer renderer, double rx, double ry, double rw, double rh, double radius) {
-            int bands = 5;
-            double bandHeight = radius / bands;
-            for (int i = 0; i < bands; i++) {
-                double midpoint = (i + 0.5) * bandHeight;
-                double circleY = radius - midpoint;
-                double inset = radius - Math.sqrt(Math.max(0, radius * radius - circleY * circleY));
-                renderer.render(rx + inset, ry + i * bandHeight, rw - inset * 2, bandHeight);
-                renderer.render(rx + inset, ry + rh - (i + 1) * bandHeight, rw - inset * 2, bandHeight);
-            }
-            renderer.render(rx, ry + radius, rw, Math.max(0, rh - radius * 2));
+            renderer.roundedTopQuad(rx, ry, rw, rh, radius, color);
         }
 
         @Override
         public boolean onMouseClicked(MouseButtonEvent click, boolean doubled) {
             if (click.button() == GLFW_MOUSE_BUTTON_LEFT && click.x() >= x && click.x() <= x + width
-                && click.y() >= y && click.y() <= y + theme.scale(62)) {
+                && click.y() >= y && click.y() <= y + theme.scale(76)) {
                 dragging = true;
                 dragOffsetX = click.x() - x;
                 dragOffsetY = click.y() - y;
@@ -363,17 +415,13 @@ public class ModuleScreen extends WidgetScreen {
             savedY = y;
         }
 
-        @FunctionalInterface
-        private interface BandRenderer {
-            void render(double x, double y, double width, double height);
-        }
     }
 
     private final class WBackButton extends WPressable {
         @Override
         protected void onCalculateSize() {
-            width = theme.scale(54);
-            height = theme.scale(28);
+            width = theme.scale(72);
+            height = theme.scale(36);
         }
 
         @Override
@@ -384,22 +432,30 @@ public class ModuleScreen extends WidgetScreen {
         @Override
         protected void onRender(GuiRenderer renderer, double mouseX, double mouseY, double delta) {
             renderControl(renderer, this, buttonColor());
-            renderer.text("< Back", x + theme.scale(8), y + height / 2 - theme.textHeight() / 2, text(), false);
+            String label = meteordevelopment.meteorclient.utils.misc.Localization.text("← Back");
+            renderer.text(label, x + width / 2 - theme.textWidth(label, label.length(), true) / 2,
+                y + height / 2 - theme.textHeight(true) / 2, text(), true);
         }
     }
 
-    private final class WSmallButton extends WPressable {
-        private final String label;
+    private final class WIconButton extends WPressable {
+        private final Supplier<String> label;
+        private final String hint;
         private final Runnable action;
-        private WSmallButton(String label, Runnable action) {
+        private final Supplier<Boolean> highlighted;
+
+        private WIconButton(Supplier<String> label, String hint, Runnable action, Supplier<Boolean> highlighted) {
             this.label = label;
+            this.hint = hint;
             this.action = action;
+            this.highlighted = highlighted;
+            tooltip = meteordevelopment.meteorclient.utils.misc.Localization.text(hint);
         }
 
         @Override
         protected void onCalculateSize() {
-            width = theme.scale(42);
-            height = theme.scale(28);
+            width = theme.scale(40);
+            height = theme.scale(36);
         }
 
         @Override
@@ -409,16 +465,18 @@ public class ModuleScreen extends WidgetScreen {
 
         @Override
         protected void onRender(GuiRenderer renderer, double mouseX, double mouseY, double delta) {
-            renderControl(renderer, this, buttonColor());
-            renderer.text(label, x + width / 2 - theme.textWidth(label) / 2, y + height / 2 - theme.textHeight() / 2, text(), false);
+            renderControl(renderer, this, highlighted.get() ? accentSoft() : buttonColor());
+            String text = meteordevelopment.meteorclient.utils.misc.Localization.text(label.get());
+            renderer.text(text, x + width / 2 - theme.textWidth(text, text.length(), true) / 2,
+                y + height / 2 - theme.textHeight(true) / 2, text(), true);
         }
     }
 
     private final class WActiveButton extends WPressable {
         @Override
         protected void onCalculateSize() {
-            width = theme.scale(81);
-            height = theme.scale(28);
+            width = theme.scale(104);
+            height = theme.scale(36);
         }
 
         @Override
@@ -429,23 +487,14 @@ public class ModuleScreen extends WidgetScreen {
         @Override
         protected void onRender(GuiRenderer renderer, double mouseX, double mouseY, double delta) {
             renderControl(renderer, this, module.isActive() ? ACCENT : buttonColor());
-            String label = module.isActive() ? "Enabled" : "Disabled";
-            renderer.text(label, x + width / 2 - theme.textWidth(label) / 2, y + height / 2 - theme.textHeight() / 2,
-                module.isActive() ? Color.WHITE : text(), false);
+            String label = meteordevelopment.meteorclient.utils.misc.Localization.text(module.isActive() ? "Enabled" : "Disabled");
+            renderer.text(label, x + width / 2 - theme.textWidth(label, label.length(), true) / 2,
+                y + height / 2 - theme.textHeight(true) / 2, module.isActive() ? Color.WHITE : text(), true);
         }
     }
 
     private void renderControl(GuiRenderer renderer, WWidget widget, Color color) {
-        double radius = theme.scale(7);
-        int bands = 5;
-        double bandHeight = radius / bands;
-        for (int i = 0; i < bands; i++) {
-            double midpoint = (i + 0.5) * bandHeight;
-            double circleY = radius - midpoint;
-            double inset = radius - Math.sqrt(Math.max(0, radius * radius - circleY * circleY));
-            renderer.quad(widget.x + inset, widget.y + i * bandHeight, widget.width - inset * 2, bandHeight, color);
-            renderer.quad(widget.x + inset, widget.y + widget.height - (i + 1) * bandHeight, widget.width - inset * 2, bandHeight, color);
-        }
-        renderer.quad(widget.x, widget.y + radius, widget.width, Math.max(0, widget.height - radius * 2), color);
+        double radius = theme.scale(12);
+        renderer.roundedQuad(widget.x, widget.y, widget.width, widget.height, radius, color);
     }
 }

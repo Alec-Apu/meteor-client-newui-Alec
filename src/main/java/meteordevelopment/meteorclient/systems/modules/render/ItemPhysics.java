@@ -35,7 +35,7 @@ public class ItemPhysics extends Module {
 
     private final Setting<Boolean> randomRotation = sgGeneral.add(new BoolSetting.Builder()
         .name("random-rotation")
-        .description("Adds a random rotation to every item.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Adds a random rotation to every item."))
         .defaultValue(true)
         .build()
     );

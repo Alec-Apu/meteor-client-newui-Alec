@@ -27,49 +27,49 @@ public class HandView extends Module {
 
     private final Setting<Boolean> followRotations = sgGeneral.add(new BoolSetting.Builder()
         .name("server-rotations")
-        .description("Makes your hands follow your serverside rotations.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Makes your hands follow your serverside rotations."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> oldAnimations = sgGeneral.add(new BoolSetting.Builder()
         .name("old-animations")
-        .description("Changes hit animations to those like 1.8")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Changes hit animations to those like 1.8"))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> skipSwapping = sgGeneral.add(new BoolSetting.Builder()
         .name("skip-swapping-animation")
-        .description("Whether or not to skip the item swapping animation")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to skip the item swapping animation"))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> disableFoodAnimation = sgGeneral.add(new BoolSetting.Builder()
         .name("disable-eating-animation")
-        .description("Disables the eating animation. Potentially desirable if it goes offscreen.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Disables the eating animation. Potentially desirable if it goes offscreen."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> swordSlash = sgGeneral.add(new BoolSetting.Builder()
         .name("sword-slash")
-        .description("Replaces the sword swing animation with the offhand idle animation.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Replaces the sword swing animation with the offhand idle animation."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<SwingMode> swingMode = sgGeneral.add(new EnumSetting.Builder<SwingMode>()
         .name("swing-mode")
-        .description("Modifies your client & server hand swinging.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Modifies your client & server hand swinging."))
         .defaultValue(SwingMode.None)
         .build()
     );
 
     public final Setting<Integer> swingSpeed = sgGeneral.add(new IntSetting.Builder()
         .name("swing-speed")
-        .description("The swing speed of your hands.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The swing speed of your hands."))
         .defaultValue(6)
         .range(0, 20)
         .sliderMax(20)
@@ -78,7 +78,7 @@ public class HandView extends Module {
 
     public final Setting<Double> mainSwing = sgGeneral.add(new DoubleSetting.Builder()
         .name("main-hand-progress")
-        .description("The swing progress of your main hand.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The swing progress of your main hand."))
         .defaultValue(0)
         .range(0, 1)
         .sliderMax(1)
@@ -87,7 +87,7 @@ public class HandView extends Module {
 
     public final Setting<Double> offSwing = sgGeneral.add(new DoubleSetting.Builder()
         .name("off-hand-progress")
-        .description("The swing progress of your off hand.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The swing progress of your off hand."))
         .defaultValue(0)
         .range(0, 1)
         .sliderMax(1)
@@ -98,7 +98,7 @@ public class HandView extends Module {
 
     private final Setting<Vector3d> scaleMain = sgMainHand.add(new Vector3dSetting.Builder()
         .name("scale")
-        .description("The scale of your main hand.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The scale of your main hand."))
         .defaultValue(1, 1, 1)
         .sliderMax(5)
         .decimalPlaces(1)
@@ -107,7 +107,7 @@ public class HandView extends Module {
 
     private final Setting<Vector3d> posMain = sgMainHand.add(new Vector3dSetting.Builder()
         .name("position")
-        .description("The position of your main hand.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The position of your main hand."))
         .defaultValue(0, 0, 0)
         .sliderRange(-3, 3)
         .decimalPlaces(1)
@@ -116,7 +116,7 @@ public class HandView extends Module {
 
     private final Setting<Vector3d> rotMain = sgMainHand.add(new Vector3dSetting.Builder()
         .name("rotation")
-        .description("The rotation of your main hand.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The rotation of your main hand."))
         .defaultValue(0, 0, 0)
         .sliderRange(-180, 180)
         .decimalPlaces(0)
@@ -127,7 +127,7 @@ public class HandView extends Module {
 
     private final Setting<Vector3d> scaleOff = sgOffHand.add(new Vector3dSetting.Builder()
         .name("scale")
-        .description("The scale of your off hand.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The scale of your off hand."))
         .defaultValue(1, 1, 1)
         .sliderMax(5)
         .decimalPlaces(1)
@@ -136,7 +136,7 @@ public class HandView extends Module {
 
     private final Setting<Vector3d> posOff = sgOffHand.add(new Vector3dSetting.Builder()
         .name("position")
-        .description("The position of your off hand.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The position of your off hand."))
         .defaultValue(0, 0, 0)
         .sliderRange(-3, 3)
         .decimalPlaces(1)
@@ -145,7 +145,7 @@ public class HandView extends Module {
 
     private final Setting<Vector3d> rotOff = sgOffHand.add(new Vector3dSetting.Builder()
         .name("rotation")
-        .description("The rotation of your off hand.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The rotation of your off hand."))
         .defaultValue(0, 0, 0)
         .sliderRange(-180, 180)
         .decimalPlaces(0)

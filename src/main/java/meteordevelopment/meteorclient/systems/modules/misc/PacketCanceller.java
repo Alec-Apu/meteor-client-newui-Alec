@@ -24,14 +24,14 @@ public class PacketCanceller extends Module {
 
     private final Setting<Set<PacketType<? extends @NonNull Packet<?>>>> s2cPackets = sgGeneral.add(new PacketListSetting.Builder()
         .name("S2C-packets")
-        .description("Server-to-client packets to cancel.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Server-to-client packets to cancel."))
         .clientbound()
         .build()
     );
 
     private final Setting<Set<PacketType<? extends @NonNull Packet<?>>>> c2sPackets = sgGeneral.add(new PacketListSetting.Builder()
         .name("C2S-packets")
-        .description("Client-to-server packets to cancel.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Client-to-server packets to cancel."))
         .serverbound()
         .build()
     );

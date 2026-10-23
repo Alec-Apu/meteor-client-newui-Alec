@@ -35,7 +35,7 @@ public class OkPrompt extends Prompt<OkPrompt> {
 
     @Override
     protected void initialiseWidgets(PromptScreen screen) {
-        WButton okButton = screen.list.add(theme.button("Ok")).expandX().widget();
+        WButton okButton = screen.list.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Ok"))).expandX().widget();
         okButton.action = () -> {
             dontShowAgain(screen);
             onOk.run();

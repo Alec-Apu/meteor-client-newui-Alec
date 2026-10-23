@@ -27,14 +27,14 @@ public class EndermanLook extends Module {
 
     private final Setting<Mode> lookMode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("look-mode")
-        .description("How this module behaves.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How this module behaves."))
         .defaultValue(Mode.Away)
         .build()
     );
 
     private final Setting<Boolean> stun = sgGeneral.add(new BoolSetting.Builder()
         .name("stun-hostiles")
-        .description("Automatically stares at hostile endermen to stun them in place.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically stares at hostile endermen to stun them in place."))
         .defaultValue(true)
         .visible(() -> lookMode.get() == Mode.Away)
         .build()

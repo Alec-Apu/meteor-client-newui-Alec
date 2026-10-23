@@ -47,35 +47,35 @@ public class StorageESP extends Module {
 
     private final Setting<Mode> mode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("mode")
-        .description("Rendering mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Rendering mode."))
         .defaultValue(Mode.Shader)
         .build()
     );
 
     private final Setting<List<BlockEntityType<?>>> storageBlocks = sgGeneral.add(new StorageBlockListSetting.Builder()
         .name("storage-blocks")
-        .description("Select the storage blocks to display.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Select the storage blocks to display."))
         .defaultValue(StorageBlockListSetting.STORAGE_BLOCKS)
         .build()
     );
 
     private final Setting<Boolean> tracers = sgGeneral.add(new BoolSetting.Builder()
         .name("tracers")
-        .description("Draws tracers to storage blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Draws tracers to storage blocks."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<ShapeMode> shapeMode = sgGeneral.add(new EnumSetting.Builder<ShapeMode>()
         .name("shape-mode")
-        .description("How the shapes are rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How the shapes are rendered."))
         .defaultValue(ShapeMode.Both)
         .build()
     );
 
     public final Setting<Integer> fillOpacity = sgGeneral.add(new IntSetting.Builder()
         .name("fill-opacity")
-        .description("The opacity of the shape fill.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The opacity of the shape fill."))
         .visible(() -> shapeMode.get() != ShapeMode.Lines)
         .defaultValue(50)
         .range(0, 255)
@@ -85,7 +85,7 @@ public class StorageESP extends Module {
 
     public final Setting<Integer> outlineWidth = sgGeneral.add(new IntSetting.Builder()
         .name("width")
-        .description("The width of the shader outline.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The width of the shader outline."))
         .visible(() -> mode.get() == Mode.Shader)
         .defaultValue(1)
         .range(1, 10)
@@ -95,7 +95,7 @@ public class StorageESP extends Module {
 
     public final Setting<Double> glowMultiplier = sgGeneral.add(new DoubleSetting.Builder()
         .name("glow-multiplier")
-        .description("Multiplier for glow effect")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Multiplier for glow effect"))
         .visible(() -> mode.get() == Mode.Shader)
         .decimalPlaces(3)
         .defaultValue(3.5)
@@ -106,49 +106,49 @@ public class StorageESP extends Module {
 
     private final Setting<SettingColor> chest = sgGeneral.add(new ColorSetting.Builder()
         .name("chest")
-        .description("The color of chests.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of chests."))
         .defaultValue(new SettingColor(255, 160, 0, 255))
         .build()
     );
 
     private final Setting<SettingColor> trappedChest = sgGeneral.add(new ColorSetting.Builder()
         .name("trapped-chest")
-        .description("The color of trapped chests.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of trapped chests."))
         .defaultValue(new SettingColor(255, 0, 0, 255))
         .build()
     );
 
     private final Setting<SettingColor> barrel = sgGeneral.add(new ColorSetting.Builder()
         .name("barrel")
-        .description("The color of barrels.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of barrels."))
         .defaultValue(new SettingColor(255, 160, 0, 255))
         .build()
     );
 
     private final Setting<SettingColor> shulker = sgGeneral.add(new ColorSetting.Builder()
         .name("shulker")
-        .description("The color of Shulker Boxes.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of Shulker Boxes."))
         .defaultValue(new SettingColor(255, 160, 0, 255))
         .build()
     );
 
     private final Setting<SettingColor> enderChest = sgGeneral.add(new ColorSetting.Builder()
         .name("ender-chest")
-        .description("The color of Ender Chests.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of Ender Chests."))
         .defaultValue(new SettingColor(120, 0, 255, 255))
         .build()
     );
 
     private final Setting<SettingColor> other = sgGeneral.add(new ColorSetting.Builder()
         .name("other")
-        .description("The color of furnaces, dispensers, droppers and hoppers.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of furnaces, dispensers, droppers and hoppers."))
         .defaultValue(new SettingColor(140, 140, 140, 255))
         .build()
     );
 
     private final Setting<Double> fadeDistance = sgGeneral.add(new DoubleSetting.Builder()
         .name("fade-distance")
-        .description("The distance at which the color will fade.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The distance at which the color will fade."))
         .defaultValue(6)
         .min(0)
         .sliderMax(12)
@@ -157,14 +157,14 @@ public class StorageESP extends Module {
 
     private final Setting<Boolean> hideOpened = sgOpened.add(new BoolSetting.Builder()
         .name("hide-opened")
-        .description("Hides opened containers.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Hides opened containers."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<SettingColor> openedColor = sgOpened.add(new ColorSetting.Builder()
         .name("opened-color")
-        .description("Optional setting to change colors of opened chests, as opposed to not rendering. Disabled at zero opacity.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Optional setting to change colors of opened chests, as opposed to not rendering. Disabled at zero opacity."))
         .defaultValue(new SettingColor(203, 90, 203, 0)) // TRANSPARENT BY DEFAULT.
         .build()
     );
@@ -213,7 +213,7 @@ public class StorageESP extends Module {
         WVerticalList list = theme.verticalList();
 
         // Button to Clear Interacted Blocks
-        WButton clear = list.add(theme.button("Clear Rendering Cache")).expandX().widget();
+        WButton clear = list.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Clear Rendering Cache"))).expandX().widget();
 
         clear.action = interactedBlocks::clear;
 

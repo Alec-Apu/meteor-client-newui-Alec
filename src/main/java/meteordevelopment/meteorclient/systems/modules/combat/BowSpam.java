@@ -27,7 +27,7 @@ public class BowSpam extends Module {
 
     private final Setting<Integer> charge = sgGeneral.add(new IntSetting.Builder()
         .name("charge")
-        .description("How long to charge the bow before releasing in ticks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How long to charge the bow before releasing in ticks."))
         .defaultValue(5)
         .range(4, 20)
         .sliderRange(4, 20)
@@ -36,21 +36,21 @@ public class BowSpam extends Module {
 
     private final Setting<Boolean> onlyWhenHoldingRightClick = sgGeneral.add(new BoolSetting.Builder()
         .name("when-holding-right-click")
-        .description("Works only when holding right click.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Works only when holding right click."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> spamCrossbows = sgCrossbows.add(new BoolSetting.Builder()
         .name("spam-crossbows")
-        .description("Whether to spam loaded crossbows; takes priority over charging bows.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to spam loaded crossbows; takes priority over charging bows."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Integer> crossbowDelay = sgCrossbows.add(new IntSetting.Builder()
         .name("crossbow-delay")
-        .description("Delay between shooting crossbows in ticks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Delay between shooting crossbows in ticks."))
         .defaultValue(10)
         .sliderRange(0, 20)
         .min(0)
@@ -59,7 +59,7 @@ public class BowSpam extends Module {
 
     private final Setting<Boolean> searchInventory = sgCrossbows.add(new BoolSetting.Builder()
         .name("search-inventory")
-        .description("Whether to search your inventory to find loaded crossbows.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to search your inventory to find loaded crossbows."))
         .defaultValue(true)
         .build()
     );

@@ -49,7 +49,7 @@ public class MeteorGuiTheme extends GuiTheme {
 
     public final Setting<Double> scale = sgGeneral.add(new DoubleSetting.Builder()
         .name("scale")
-        .description("Scale of the GUI.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Scale of the GUI."))
         .defaultValue(1)
         .min(0.75)
         .sliderRange(0.75, 4)
@@ -62,21 +62,21 @@ public class MeteorGuiTheme extends GuiTheme {
 
     public final Setting<AlignmentX> moduleAlignment = sgGeneral.add(new EnumSetting.Builder<AlignmentX>()
         .name("module-alignment")
-        .description("How module titles are aligned.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How module titles are aligned."))
         .defaultValue(AlignmentX.Center)
         .build()
     );
 
     public final Setting<Boolean> categoryIcons = sgGeneral.add(new BoolSetting.Builder()
         .name("category-icons")
-        .description("Adds item icons to module categories.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Adds item icons to module categories."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> hideHUD = sgGeneral.add(new BoolSetting.Builder()
         .name("hide-HUD")
-        .description("Hide HUD when in GUI.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Hide HUD when in GUI."))
         .defaultValue(false)
         .onChanged(v -> {
             if (mc.gui.screen() instanceof WidgetScreen) {
@@ -88,7 +88,7 @@ public class MeteorGuiTheme extends GuiTheme {
 
     public final Setting<Boolean> modernLightMode = sgGeneral.add(new BoolSetting.Builder()
         .name("modern-light-mode")
-        .description("Uses the light Win11 Mica palette in the modern module browser.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Uses the light Win11 Mica palette in the modern module browser."))
         .defaultValue(false)
         .onChanged(_ -> {
             if (mc.gui.screen() instanceof WidgetScreen widgetScreen) widgetScreen.invalidate();
@@ -185,6 +185,11 @@ public class MeteorGuiTheme extends GuiTheme {
 
     public void applyModernPalette() {
         boolean light = modernLightMode.get();
+
+        SettingColor modernAccent = new SettingColor(0, 245, 255);
+        accentColor.set(modernAccent);
+        checkboxColor.set(new SettingColor(0, 245, 255));
+        sliderLeft.set(new SettingColor(0, 245, 255));
 
         textColor.set(light ? new SettingColor(24, 27, 35) : new SettingColor(245, 247, 252));
         titleTextColor.set(light ? new SettingColor(18, 21, 29) : new SettingColor(255, 255, 255));

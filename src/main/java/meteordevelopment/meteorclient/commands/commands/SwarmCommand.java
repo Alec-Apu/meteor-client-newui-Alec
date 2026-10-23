@@ -39,7 +39,7 @@ import java.util.Random;
 
 public class SwarmCommand extends Command {
 
-    private final static SimpleCommandExceptionType SWARM_NOT_ACTIVE = new SimpleCommandExceptionType(Component.literal("The swarm module must be active to use this command."));
+    private final static SimpleCommandExceptionType SWARM_NOT_ACTIVE = new SimpleCommandExceptionType(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("The swarm module must be active to use this command.")));
     private @Nullable ObjectIntPair<String> pendingConnection;
 
     public SwarmCommand() {
@@ -68,8 +68,8 @@ public class SwarmCommand extends Command {
 
                         pendingConnection = new ObjectIntImmutablePair<>(ip, port);
 
-                        info("Are you sure you want to connect to '%s:%s'?", ip, port);
-                        info(Component.literal("Click here to confirm").setStyle(Style.EMPTY
+                        info(meteordevelopment.meteorclient.utils.misc.Localization.text("Are you sure you want to connect to '%s:%s'?"), ip, port);
+                        info(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Click here to confirm")).setStyle(Style.EMPTY
                             .applyFormats(ChatFormatting.UNDERLINE, ChatFormatting.GREEN)
                             .withClickEvent(new MeteorClickEvent(".swarm join confirm"))
                         ));
@@ -80,7 +80,7 @@ public class SwarmCommand extends Command {
             )
             .then(literal("confirm").executes(_ -> {
                 if (pendingConnection == null) {
-                    error("No pending swarm connections.");
+                    error(meteordevelopment.meteorclient.utils.misc.Localization.text("No pending swarm connections."));
                     return SINGLE_SUCCESS;
                 }
 
@@ -94,9 +94,9 @@ public class SwarmCommand extends Command {
                 pendingConnection = null;
 
                 try {
-                    info("Connected to (highlight)%s.", swarm.worker.getConnection());
+                    info(meteordevelopment.meteorclient.utils.misc.Localization.text("Connected to (highlight)%s."), swarm.worker.getConnection());
                 } catch (NullPointerException _) {
-                    error("Error connecting to swarm host.");
+                    error(meteordevelopment.meteorclient.utils.misc.Localization.text("Error connecting to swarm host."));
                     swarm.close();
                     swarm.toggle();
                 }
@@ -110,18 +110,18 @@ public class SwarmCommand extends Command {
             if (swarm.isActive()) {
                 if (swarm.isHost()) {
                     if (swarm.host.getConnectionCount() > 0) {
-                        ChatUtils.info("--- Swarm Connections (highlight)(%s/%s)(default) ---", swarm.host.getConnectionCount(), swarm.host.getConnections().length);
+                        ChatUtils.info(meteordevelopment.meteorclient.utils.misc.Localization.text("--- Swarm Connections (highlight)(%s/%s)(default) ---"), swarm.host.getConnectionCount(), swarm.host.getConnections().length);
 
                         for (int i = 0; i < swarm.host.getConnections().length; i++) {
                             SwarmConnection connection = swarm.host.getConnections()[i];
                             if (connection != null)
-                                ChatUtils.info("(highlight)Worker %s(default): %s.", i, connection.getConnection());
+                                ChatUtils.info(meteordevelopment.meteorclient.utils.misc.Localization.text("(highlight)Worker %s(default): %s."), i, connection.getConnection());
                         }
                     } else {
-                        warning("No active connections");
+                        warning(meteordevelopment.meteorclient.utils.misc.Localization.text("No active connections"));
                     }
                 } else if (swarm.isWorker()) {
-                    info("Connected to (highlight)%s", swarm.worker.getConnection());
+                    info(meteordevelopment.meteorclient.utils.misc.Localization.text("Connected to (highlight)%s"), swarm.worker.getConnection());
                 }
             } else {
                 throw SWARM_NOT_ACTIVE.create();
@@ -136,7 +136,7 @@ public class SwarmCommand extends Command {
                     if (swarm.isHost()) {
                         swarm.host.sendMessage(context.getInput() + " " + mc.player.getName().getString());
                     } else if (swarm.isWorker()) {
-                        error("The follow host command must be used by the host.");
+                        error(meteordevelopment.meteorclient.utils.misc.Localization.text("The follow host command must be used by the host."));
                     }
                 } else {
                     throw SWARM_NOT_ACTIVE.create();

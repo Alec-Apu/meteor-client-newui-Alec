@@ -20,7 +20,7 @@ import java.util.function.Predicate;
 
 public class BlockListSettingScreen extends CollectionListSettingScreen<Block> {
     public BlockListSettingScreen(GuiTheme theme, BlockListSetting setting) {
-        super(theme, "Select Blocks", setting, setting.get(), BuiltInRegistries.BLOCK);
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Select Blocks"), setting, setting.get(), BuiltInRegistries.BLOCK);
     }
 
     @Override

@@ -22,14 +22,14 @@ public class AntiHunger extends Module {
 
     private final Setting<Boolean> sprint = sgGeneral.add(new BoolSetting.Builder()
         .name("sprint")
-        .description("Spoofs sprinting packets.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Spoofs sprinting packets."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> onGround = sgGeneral.add(new BoolSetting.Builder()
         .name("on-ground")
-        .description("Spoofs the onGround flag.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Spoofs the onGround flag."))
         .defaultValue(true)
         .build()
     );

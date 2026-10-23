@@ -63,7 +63,7 @@ public class KeyboardHud extends HudElement {
 
     private final Setting<Preset> preset = sgGeneral.add(new EnumSetting.Builder<Preset>()
         .name("preset")
-        .description("Which keys to display.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which keys to display."))
         .defaultValue(Preset.Movement)
         .onChanged(this::onPresetChanged)
         .build()
@@ -73,7 +73,7 @@ public class KeyboardHud extends HudElement {
 
     private final Setting<Double> scale = sgGeneral.add(new DoubleSetting.Builder()
         .name("scale")
-        .description("Scale of the keyboard.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Scale of the keyboard."))
         .defaultValue(1.5)
         .min(0.5)
         .sliderRange(0.5, 5)
@@ -84,7 +84,7 @@ public class KeyboardHud extends HudElement {
 
     private final Setting<Double> spacing = sgGeneral.add(new DoubleSetting.Builder()
         .name("spacing")
-        .description("Spacing between keys.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Spacing between keys."))
         .defaultValue(1)
         .min(0)
         .sliderRange(0, 10)
@@ -96,7 +96,7 @@ public class KeyboardHud extends HudElement {
 
     private final Setting<KeyboardLayout> keyboardLayout = sgGeneral.add(new EnumSetting.Builder<KeyboardLayout>()
         .name("keyboard-layout")
-        .description("Physical keyboard layout (ANSI or ISO).")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Physical keyboard layout (ANSI or ISO)."))
         .defaultValue(KeyboardLayout.ANSI)
         .visible(() -> preset.get() == Preset.Keyboard)
         .onChanged(_ -> onPresetChanged(preset.get()))
@@ -105,7 +105,7 @@ public class KeyboardHud extends HudElement {
 
     private final Setting<Boolean> showCps = sgGeneral.add(new BoolSetting.Builder()
         .name("Show CPS")
-        .description("Shows clicks per second on keys.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows clicks per second on keys."))
         .defaultValue(false)
         .visible(() -> preset.get() != Preset.Custom)
         .onChanged(_ -> onPresetChanged(preset.get()))
@@ -114,35 +114,35 @@ public class KeyboardHud extends HudElement {
 
     private final Setting<Alignment> alignment = sgGeneral.add(new EnumSetting.Builder<Alignment>()
         .name("alignment")
-        .description("Horizontal alignment of the text.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Horizontal alignment of the text."))
         .defaultValue(Alignment.Center)
         .build()
     );
 
     private final Setting<SettingColor> pressedColor = sgColor.add(new ColorSetting.Builder()
         .name("pressed-color")
-        .description("Color of pressed keys.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color of pressed keys."))
         .defaultValue(new SettingColor(200, 200, 200, 100))
         .build()
     );
 
     private final Setting<SettingColor> unpressedColor = sgColor.add(new ColorSetting.Builder()
         .name("unpressed-color")
-        .description("Color of unpressed keys.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color of unpressed keys."))
         .defaultValue(new SettingColor(0, 0, 0, 100))
         .build()
     );
 
     private final Setting<Boolean> colorFade = sgColor.add(new BoolSetting.Builder()
         .name("color-fade")
-        .description("Whether to fade the key color when pressing/unpressing.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to fade the key color when pressing/unpressing."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Double> fadeTime = sgColor.add(new DoubleSetting.Builder()
         .name("fade-time")
-        .description("How long to fade the color for, in seconds.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How long to fade the color for, in seconds."))
         .visible(colorFade::get)
         .defaultValue(0.1)
         .min(0.01)
@@ -153,21 +153,21 @@ public class KeyboardHud extends HudElement {
 
     private final Setting<SettingColor> textColor = sgColor.add(new ColorSetting.Builder()
         .name("text-color")
-        .description("Color of the key name.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color of the key name."))
         .defaultValue(new SettingColor(255, 255, 255))
         .build()
     );
 
     private final Setting<Boolean> border = sgBorder.add(new BoolSetting.Builder()
         .name("border")
-        .description("Draw a border around keys.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Draw a border around keys."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<SettingColor> borderColor = sgBorder.add(new ColorSetting.Builder()
         .name("border-color")
-        .description("Color of the key border.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color of the key border."))
         .visible(border::get)
         .defaultValue(new SettingColor(255, 255, 255, 200))
         .build()
@@ -175,7 +175,7 @@ public class KeyboardHud extends HudElement {
 
     private final Setting<Double> borderWidth = sgBorder.add(new DoubleSetting.Builder()
         .name("border-width")
-        .description("Width of the key border.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Width of the key border."))
         .visible(border::get)
         .defaultValue(1.0)
         .min(0.5)
@@ -185,7 +185,7 @@ public class KeyboardHud extends HudElement {
 
     private final Setting<Double> opacity = sgColor.add(new DoubleSetting.Builder()
         .name("opacity")
-        .description("Opacity of the whole element.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Opacity of the whole element."))
         .defaultValue(1)
         .min(0)
         .max(1)
@@ -195,14 +195,14 @@ public class KeyboardHud extends HudElement {
 
     private final Setting<Boolean> background = sgBackground.add(new BoolSetting.Builder()
         .name("background")
-        .description("Displays background.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Displays background."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<SettingColor> backgroundColor = sgBackground.add(new ColorSetting.Builder()
         .name("background-color")
-        .description("Color used for the background.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color used for the background."))
         .visible(background::get)
         .defaultValue(new SettingColor(25, 25, 25, 50))
         .build()
@@ -914,7 +914,7 @@ public class KeyboardHud extends HudElement {
 
             sgGeneral.add(new KeybindSetting.Builder()
                 .name("custom-key")
-                .description("The key to display.")
+                .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The key to display."))
                 .defaultValue(Keybind.fromKey(GLFW.GLFW_KEY_SPACE))
                 .onChanged(k -> {
                     this.key.keybind = k;
@@ -926,7 +926,7 @@ public class KeyboardHud extends HudElement {
 
             sgGeneral.add(new StringSetting.Builder()
                 .name("custom-label")
-                .description("Replace the Key name with custom text.")
+                .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Replace the Key name with custom text."))
                 .defaultValue("")
                 .onChanged(s -> this.key.name = s)
                 .onModuleActivated(setting -> setting.set(this.key.name))
@@ -935,7 +935,7 @@ public class KeyboardHud extends HudElement {
 
             sgGeneral.add(new DoubleSetting.Builder()
                 .name("key-width")
-                .description("Width of the key.")
+                .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Width of the key."))
                 .defaultValue(60)
                 .min(20)
                 .sliderRange(20, 200)
@@ -950,7 +950,7 @@ public class KeyboardHud extends HudElement {
 
             sgGeneral.add(new DoubleSetting.Builder()
                 .name("key-height")
-                .description("Height of the key.")
+                .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Height of the key."))
                 .defaultValue(40)
                 .min(20)
                 .sliderRange(20, 200)
@@ -965,7 +965,7 @@ public class KeyboardHud extends HudElement {
 
             sgGeneral.add(new DoubleSetting.Builder()
                 .name("key-x")
-                .description("X position offset of the key.")
+                .description(meteordevelopment.meteorclient.utils.misc.Localization.text("X position offset of the key."))
                 .defaultValue(0)
                 .sliderRange(-200, 200)
                 .decimalPlaces(1)
@@ -979,7 +979,7 @@ public class KeyboardHud extends HudElement {
 
             sgGeneral.add(new DoubleSetting.Builder()
                 .name("key-y")
-                .description("Y position offset of the key.")
+                .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Y position offset of the key."))
                 .defaultValue(0)
                 .sliderRange(-200, 200)
                 .decimalPlaces(1)
@@ -993,7 +993,7 @@ public class KeyboardHud extends HudElement {
 
             sgGeneral.add(new BoolSetting.Builder()
                 .name("show-cps")
-                .description("Show CPS for this key.")
+                .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Show CPS for this key."))
                 .defaultValue(false)
                 .onChanged(b -> this.key.showCps = b)
                 .onModuleActivated(setting -> setting.set(this.key.showCps))
@@ -1012,7 +1012,7 @@ public class KeyboardHud extends HudElement {
         for (Iterator<Key> it = setting.get().iterator(); it.hasNext(); ) {
             Key key = it.next();
 
-            table.add(theme.label("Key")).expandWidgetX().widget().color(theme.textSecondaryColor());
+            table.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Key"))).expandWidgetX().widget().color(theme.textSecondaryColor());
             table.add(theme.label(String.format("(%s)", key.keybind))).expandWidgetX();
 
             WButton edit = table.add(theme.button(GuiRenderer.EDIT)).expandCellX().widget();
@@ -1037,7 +1037,7 @@ public class KeyboardHud extends HudElement {
             table.row();
         }
 
-        WButton add = table.add(theme.button("Add")).expandX().widget();
+        WButton add = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Add"))).expandX().widget();
         add.action = () -> {
             Key newKey = new Key();
             // Position new key to the right of existing keys to avoid overlap
@@ -1058,6 +1058,6 @@ public class KeyboardHud extends HudElement {
 
             fillTable(theme, table, setting);
         };
-        reset.tooltip = "Reset";
+        reset.tooltip = meteordevelopment.meteorclient.utils.misc.Localization.text("Reset");
     }
 }

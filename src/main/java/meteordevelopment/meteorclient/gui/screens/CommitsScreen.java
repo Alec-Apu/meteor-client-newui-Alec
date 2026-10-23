@@ -25,7 +25,7 @@ public class CommitsScreen extends WindowScreen {
     private int statusCode;
 
     public CommitsScreen(GuiTheme theme, MeteorAddon addon) {
-        super(theme, "Commits for " + addon.name);
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Commits for ") + addon.name);
 
         this.addon = addon;
 
@@ -66,9 +66,9 @@ public class CommitsScreen extends WindowScreen {
         l.add(theme.label(headerMessage)).expandX();
 
         String website = addon.getWebsite();
-        if (website != null) l.add(theme.button("Website")).widget().action = () -> Util.getPlatform().openUri(website);
+        if (website != null) l.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Website"))).widget().action = () -> Util.getPlatform().openUri(website);
 
-        l.add(theme.button("GitHub")).widget().action = () -> {
+        l.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("GitHub"))).widget().action = () -> {
             GithubRepo repo = addon.getRepo();
             Util.getPlatform().openUri(String.format("https://github.com/%s/tree/%s", repo.getOwnerName(), repo.branch()));
         };
@@ -89,8 +89,8 @@ public class CommitsScreen extends WindowScreen {
             add(theme.horizontalSeparator()).padVertical(theme.scale(8)).expandX();
             WHorizontalList l = add(theme.horizontalList()).expandX().widget();
 
-            l.add(theme.label("Consider using an authentication token: ")).expandX();
-            l.add(theme.button("Authorization Guide")).widget().action = () -> {
+            l.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Consider using an authentication token: "))).expandX();
+            l.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Authorization Guide"))).widget().action = () -> {
                 Util.getPlatform().openUri("https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens");
             };
         }

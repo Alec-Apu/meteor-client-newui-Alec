@@ -31,7 +31,7 @@ public class AutoWalk extends Module {
 
     private final Setting<Mode> mode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("mode")
-        .description("Walking mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Walking mode."))
         .defaultValue(Mode.Smart)
         .onChanged(mode1 -> {
             if (isActive() && Utils.canUpdate()) {
@@ -49,7 +49,7 @@ public class AutoWalk extends Module {
 
     private final Setting<Direction> direction = sgGeneral.add(new EnumSetting.Builder<Direction>()
         .name("simple-direction")
-        .description("The direction to walk in simple mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The direction to walk in simple mode."))
         .defaultValue(Direction.Forwards)
         .onChanged(_ -> {
             if (isActive()) unpress();
@@ -60,14 +60,14 @@ public class AutoWalk extends Module {
 
     private final Setting<Boolean> disableOnInput = sgGeneral.add(new BoolSetting.Builder()
         .name("disable-on-input")
-        .description("Disable module on manual movement input")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Disable module on manual movement input"))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> disableOnY = sgGeneral.add(new BoolSetting.Builder()
         .name("disable-on-y-change")
-        .description("Disable module if player moves vertically")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Disable module if player moves vertically"))
         .defaultValue(false)
         .visible(() -> mode.get() == Mode.Simple)
         .build()
@@ -75,7 +75,7 @@ public class AutoWalk extends Module {
 
     private final Setting<Boolean> waitForChunks = sgGeneral.add(new BoolSetting.Builder()
         .name("no-unloaded-chunks")
-        .description("Do not allow movement into unloaded chunks")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Do not allow movement into unloaded chunks"))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Simple)
         .build()
@@ -112,7 +112,7 @@ public class AutoWalk extends Module {
             }
         } else {
             if (PathManagers.get() instanceof NopPathManager) {
-                info("Smart mode requires Baritone");
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Smart mode requires Baritone"));
                 toggle();
             }
         }

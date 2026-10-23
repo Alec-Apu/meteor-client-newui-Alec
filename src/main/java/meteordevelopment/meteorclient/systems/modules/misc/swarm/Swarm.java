@@ -24,14 +24,14 @@ public class Swarm extends Module {
 
     public final Setting<Mode> mode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("mode")
-        .description("What type of client to run.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("What type of client to run."))
         .defaultValue(Mode.Host)
         .build()
     );
 
     private final Setting<String> ipAddress = sgGeneral.add(new StringSetting.Builder()
         .name("ip")
-        .description("The IP address of the host server.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The IP address of the host server."))
         .defaultValue("localhost")
         .visible(() -> mode.get() == Mode.Worker)
         .build()
@@ -39,7 +39,7 @@ public class Swarm extends Module {
 
     private final Setting<Integer> serverPort = sgGeneral.add(new IntSetting.Builder()
         .name("port")
-        .description("The port used for connections.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The port used for connections."))
         .defaultValue(6969)
         .range(1, 65535)
         .noSlider()
@@ -59,7 +59,7 @@ public class Swarm extends Module {
 
         WHorizontalList b = list.add(theme.horizontalList()).expandX().widget();
 
-        WButton start = b.add(theme.button("Start")).expandX().widget();
+        WButton start = b.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Start"))).expandX().widget();
         start.action = () -> {
             if (!isActive()) return;
 
@@ -68,10 +68,10 @@ public class Swarm extends Module {
             else worker = new SwarmWorker(ipAddress.get(), serverPort.get());
         };
 
-        WButton stop = b.add(theme.button("Stop")).expandX().widget();
+        WButton stop = b.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Stop"))).expandX().widget();
         stop.action = this::close;
 
-        WButton guide = list.add(theme.button("Guide")).expandX().widget();
+        WButton guide = list.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Guide"))).expandX().widget();
         guide.action = () -> Util.getPlatform().openUri("https://github.com/MeteorDevelopment/meteor-client/wiki/Swarm-Guide");
 
         return list;

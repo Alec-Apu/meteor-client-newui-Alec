@@ -10,7 +10,7 @@ base {
     archivesName = archivesBaseName
     group = mavenGroup
 
-    val suffix = providers.gradleProperty("build_number").getOrElse("local")
+    val suffix = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.1")
     version = "${libs.versions.minecraft.get()}-$suffix"
 }
 
@@ -114,12 +114,14 @@ java {
 val jijExcluded = setOf("org.slf4j", "jsr305")
 listOf("api", "implementation", "include").forEach { configName ->
     configurations.named(configName).configure {
-        defaultDependencies {
+        // Include transitive JAR-in-JAR dependencies even when include has direct entries.
+        withDependencies {
             configurations.getByName("jij").incoming.resolutionResult.allComponents
                 .mapNotNull { it.id as? ModuleComponentIdentifier }
                 .forEach { id ->
                     val notation = "${id.group}:${id.module}:${id.version}"
-                    if (jijExcluded.none { notation.contains(it) }) {
+                    val providedLwjgl = id.group == "org.lwjgl" && id.module == "lwjgl"
+                    if (!providedLwjgl && jijExcluded.none { notation.contains(it) }) {
                         add(project.dependencies.create(notation) {
                             isTransitive = false
                         })
@@ -160,7 +162,7 @@ fun toMinecraftCompat(version: String): String {
 
 tasks {
     processResources {
-        val buildNumber = providers.gradleProperty("build_number").getOrElse("")
+        val buildNumber = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.1")
         val commit = providers.gradleProperty("commit").getOrElse("")
 
         val propertyMap = mapOf(

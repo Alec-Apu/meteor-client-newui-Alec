@@ -43,12 +43,12 @@ public class FakePlayerCommand extends Command {
                 .executes(context -> {
                     FakePlayerEntity fp = FakePlayerArgumentType.get(context);
                     if (fp == null || !FakePlayerManager.contains(fp)) {
-                        error("Couldn't find a Fake Player with that name.");
+                        error(meteordevelopment.meteorclient.utils.misc.Localization.text("Couldn't find a Fake Player with that name."));
                         return SINGLE_SUCCESS;
                     }
 
                     FakePlayerManager.remove(fp);
-                    info("Removed Fake Player %s.".formatted(fp.getName().getString()));
+                    info(meteordevelopment.meteorclient.utils.misc.Localization.text("Removed Fake Player %s.").formatted(fp.getName().getString()));
 
                     return SINGLE_SUCCESS;
                 })
@@ -64,7 +64,7 @@ public class FakePlayerCommand extends Command {
 
         builder.then(literal("list")
             .executes(_ -> {
-                info("--- Fake Players ((highlight)%s(default)) ---", FakePlayerManager.count());
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("--- Fake Players ((highlight)%s(default)) ---"), FakePlayerManager.count());
                 FakePlayerManager.forEach(fp -> ChatUtils.info("(highlight)%s".formatted(fp.getName().getString())));
                 return SINGLE_SUCCESS;
             })

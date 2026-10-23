@@ -40,7 +40,7 @@ public class TextHud extends HudElement {
 
     public final Setting<String> text = sgGeneral.add(new StringSetting.Builder()
         .name("text")
-        .description("Text to display with Starscript.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Text to display with Starscript."))
         .defaultValue(MeteorClient.NAME)
         .onChanged(_ -> recompile())
         .wide()
@@ -50,7 +50,7 @@ public class TextHud extends HudElement {
 
     public final Setting<Integer> updateDelay = sgGeneral.add(new IntSetting.Builder()
         .name("update-delay")
-        .description("Update delay in ticks")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Update delay in ticks"))
         .defaultValue(4)
         .onChanged(integer -> {
             if (timer > integer) timer = integer;
@@ -61,7 +61,7 @@ public class TextHud extends HudElement {
 
     public final Setting<Boolean> shadow = sgGeneral.add(new BoolSetting.Builder()
         .name("shadow")
-        .description("Renders shadow behind text.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Renders shadow behind text."))
         .defaultValue(true)
         .onChanged(_ -> recalculateSize = true)
         .build()
@@ -69,7 +69,7 @@ public class TextHud extends HudElement {
 
     public final Setting<Integer> border = sgGeneral.add(new IntSetting.Builder()
         .name("border")
-        .description("How much space to add around the text.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How much space to add around the text."))
         .defaultValue(0)
         .onChanged(integer -> super.setSize(originalWidth + integer * 2, originalHeight + integer * 2))
         .build()
@@ -79,7 +79,7 @@ public class TextHud extends HudElement {
 
     public final Setting<Shown> shown = sgShown.add(new EnumSetting.Builder<Shown>()
         .name("shown")
-        .description("When this text element is shown.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("When this text element is shown."))
         .defaultValue(Shown.Always)
         .onChanged(_ -> recompile())
         .build()
@@ -87,7 +87,7 @@ public class TextHud extends HudElement {
 
     public final Setting<String> condition = sgShown.add(new StringSetting.Builder()
         .name("condition")
-        .description("Condition to check when shown is not Always.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Condition to check when shown is not Always."))
         .visible(() -> shown.get() != Shown.Always)
         .onChanged(_ -> recompile())
         .renderer(StarscriptTextBoxRenderer.class)
@@ -98,7 +98,7 @@ public class TextHud extends HudElement {
 
     public final Setting<Boolean> customScale = sgScale.add(new BoolSetting.Builder()
         .name("custom-scale")
-        .description("Applies a custom scale to this hud element.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Applies a custom scale to this hud element."))
         .defaultValue(false)
         .onChanged(_ -> recalculateSize = true)
         .build()
@@ -106,7 +106,7 @@ public class TextHud extends HudElement {
 
     public final Setting<Double> scale = sgScale.add(new DoubleSetting.Builder()
         .name("scale")
-        .description("Custom scale.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Custom scale."))
         .visible(customScale::get)
         .defaultValue(1)
         .onChanged(_ -> recalculateSize = true)
@@ -119,14 +119,14 @@ public class TextHud extends HudElement {
 
     public final Setting<Boolean> background = sgBackground.add(new BoolSetting.Builder()
         .name("background")
-        .description("Displays background.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Displays background."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<SettingColor> backgroundColor = sgBackground.add(new ColorSetting.Builder()
         .name("background-color")
-        .description("Color used for the background.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color used for the background."))
         .visible(background::get)
         .defaultValue(new SettingColor(25, 25, 25, 50))
         .build()

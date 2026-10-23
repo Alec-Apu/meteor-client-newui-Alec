@@ -85,7 +85,7 @@ public class TitleScreenCredits {
         Credit credit = new Credit(addon);
 
         credit.text.append(Component.literal(addon.name).withStyle(style -> style.withColor(addon.color.getPacked())));
-        credit.text.append(Component.literal(" by ").withStyle(ChatFormatting.GRAY));
+        credit.text.append(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text(" by ")).withStyle(ChatFormatting.GRAY));
 
         for (int i = 0; i < addon.authors.length; i++) {
             if (i > 0) {

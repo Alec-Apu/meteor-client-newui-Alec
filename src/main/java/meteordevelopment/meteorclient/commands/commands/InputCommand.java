@@ -80,9 +80,9 @@ public class InputCommand extends Command {
         }
 
         builder.then(literal("clear").executes(_ -> {
-            if (activeHandlers.isEmpty()) warning("No active keypress handlers.");
+            if (activeHandlers.isEmpty()) warning(meteordevelopment.meteorclient.utils.misc.Localization.text("No active keypress handlers."));
             else {
-                info("Cleared all keypress handlers.");
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Cleared all keypress handlers."));
                 activeHandlers.forEach(MeteorClient.EVENT_BUS::unsubscribe);
                 activeHandlers.clear();
             }
@@ -90,12 +90,12 @@ public class InputCommand extends Command {
         }));
 
         builder.then(literal("list").executes(_ -> {
-            if (activeHandlers.isEmpty()) warning("No active keypress handlers.");
+            if (activeHandlers.isEmpty()) warning(meteordevelopment.meteorclient.utils.misc.Localization.text("No active keypress handlers."));
             else {
-                info("Active keypress handlers: ");
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Active keypress handlers: "));
                 for (int i = 0; i < activeHandlers.size(); i++) {
                     KeypressHandler handler = activeHandlers.get(i);
-                    info("(highlight)%d(default) - (highlight)%s %d(default) ticks left out of (highlight)%d(default).", i, I18n.get(handler.key.getName()), handler.ticks, handler.totalTicks);
+                    info(meteordevelopment.meteorclient.utils.misc.Localization.text("(highlight)%d(default) - (highlight)%s %d(default) ticks left out of (highlight)%d(default)."), i, I18n.get(handler.key.getName()), handler.ticks, handler.totalTicks);
                 }
             }
             return SINGLE_SUCCESS;
@@ -103,9 +103,9 @@ public class InputCommand extends Command {
 
         builder.then(literal("remove").then(argument("index", IntegerArgumentType.integer(0)).executes(ctx -> {
             int index = IntegerArgumentType.getInteger(ctx, "index");
-            if (index >= activeHandlers.size()) warning("Index out of range.");
+            if (index >= activeHandlers.size()) warning(meteordevelopment.meteorclient.utils.misc.Localization.text("Index out of range."));
             else {
-                info("Removed keypress handler.");
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Removed keypress handler."));
                 MeteorClient.EVENT_BUS.unsubscribe(activeHandlers.get(index));
                 activeHandlers.remove(index);
             }

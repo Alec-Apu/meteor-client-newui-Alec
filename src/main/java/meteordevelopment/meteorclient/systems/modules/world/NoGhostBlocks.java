@@ -20,14 +20,14 @@ public class NoGhostBlocks extends Module {
 
     private final Setting<Boolean> breaking = sgGeneral.add(new BoolSetting.Builder()
         .name("breaking")
-        .description("Whether to apply for block breaking actions.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to apply for block breaking actions."))
         .defaultValue(true)
         .build()
     );
 
     public final Setting<Boolean> placing = sgGeneral.add(new BoolSetting.Builder()
         .name("placing")
-        .description("Whether to apply for block placement actions.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to apply for block placement actions."))
         .defaultValue(true)
         .build()
     );

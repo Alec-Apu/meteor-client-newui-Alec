@@ -35,8 +35,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NotebotCommand extends Command {
-    private static final SimpleCommandExceptionType INVALID_SONG = new SimpleCommandExceptionType(Component.literal("Invalid song."));
-    private static final DynamicCommandExceptionType INVALID_PATH = new DynamicCommandExceptionType(object -> Component.literal("'%s' is not a valid path.".formatted(object)));
+    private static final SimpleCommandExceptionType INVALID_SONG = new SimpleCommandExceptionType(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Invalid song.")));
+    private static final DynamicCommandExceptionType INVALID_PATH = new DynamicCommandExceptionType(object -> Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("'%s' is not a valid path.").formatted(object)));
 
     private int ticks = -1;
     private final Int2ObjectMap<List<Note>> song = new Int2ObjectOpenHashMap<>(); // tick -> notes
@@ -112,13 +112,13 @@ public class NotebotCommand extends Command {
             ticks = -1;
             song.clear();
             MeteorClient.EVENT_BUS.subscribe(this);
-            info("Recording started");
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Recording started"));
             return SINGLE_SUCCESS;
         })));
 
         builder.then(literal("record").then(literal("cancel").executes(_ -> {
             MeteorClient.EVENT_BUS.unsubscribe(this);
-            info("Recording cancelled");
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Recording cancelled"));
             return SINGLE_SUCCESS;
         })));
 
@@ -177,9 +177,9 @@ public class NotebotCommand extends Command {
             }
 
             file.close();
-            info("Song saved.");
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Song saved."));
         } catch (IOException _) {
-            info("Couldn't create the file.");
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Couldn't create the file."));
             MeteorClient.EVENT_BUS.unsubscribe(this);
         }
 
@@ -199,13 +199,13 @@ public class NotebotCommand extends Command {
         }
 
         if (noteLevel == -1) {
-            error("Error while bruteforcing a note level! Sound: " + soundPacket.getSound().value() + " Pitch: " + pitch);
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Error while bruteforcing a note level! Sound: ") + soundPacket.getSound().value() + meteordevelopment.meteorclient.utils.misc.Localization.text(" Pitch: ") + pitch);
             return null;
         }
 
         NoteBlockInstrument instrument = getInstrumentFromSound(soundPacket.getSound().value());
         if (instrument == null) {
-            error("Can't find the instrument from sound! Sound: " + soundPacket.getSound().value());
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Can't find the instrument from sound! Sound: ") + soundPacket.getSound().value());
             return null;
         }
 

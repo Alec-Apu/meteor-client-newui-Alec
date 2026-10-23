@@ -73,7 +73,7 @@ public class BetterTooltips extends Module {
 
     private final Setting<DisplayWhen> displayWhen = sgGeneral.add(new EnumSetting.Builder<DisplayWhen>()
         .name("display-when")
-        .description("When to display previews.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("When to display previews."))
         .defaultValue(DisplayWhen.Keybind)
         .onChanged(_ -> updateTooltips = true)
         .build()
@@ -81,7 +81,7 @@ public class BetterTooltips extends Module {
 
     private final Setting<Keybind> keybind = sgGeneral.add(new KeybindSetting.Builder()
         .name("keybind")
-        .description("The bind for keybind mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The bind for keybind mode."))
         .defaultValue(Keybind.fromKey(GLFW_KEY_LEFT_ALT))
         .visible(() -> displayWhen.get() == DisplayWhen.Keybind)
         .onChanged(_ -> updateTooltips = true)
@@ -90,14 +90,14 @@ public class BetterTooltips extends Module {
 
     private final Setting<Boolean> openContents = sgGeneral.add(new BoolSetting.Builder()
         .name("open-contents")
-        .description("Opens a GUI window with the inventory of the storage block or book when you click the item.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Opens a GUI window with the inventory of the storage block or book when you click the item."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Keybind> openContentsKey = sgGeneral.add(new KeybindSetting.Builder()
         .name("keybind")
-        .description("Key to open contents (containers, books, etc.) when pressed on items.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Key to open contents (containers, books, etc.) when pressed on items."))
         .defaultValue(Keybind.fromButton(GLFW_MOUSE_BUTTON_MIDDLE))
         .visible(openContents::get)
         .build()
@@ -105,7 +105,7 @@ public class BetterTooltips extends Module {
 
     private final Setting<Boolean> pauseInCreative = sgGeneral.add(new BoolSetting.Builder()
         .name("pause-in-creative")
-        .description("Pauses middle click open while the player is in creative mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Pauses middle click open while the player is in creative mode."))
         .defaultValue(true)
         .visible(openContents::get)
         .build()
@@ -115,7 +115,7 @@ public class BetterTooltips extends Module {
 
     private final Setting<Boolean> shulkers = sgPreviews.add(new BoolSetting.Builder()
         .name("containers")
-        .description("Shows a preview of a containers when hovering over it in an inventory.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows a preview of a containers when hovering over it in an inventory."))
         .defaultValue(true)
         .onChanged(_ -> updateTooltips = true)
         .build()
@@ -123,14 +123,14 @@ public class BetterTooltips extends Module {
 
     private final Setting<Boolean> shulkerCompactTooltip = sgPreviews.add(new BoolSetting.Builder()
         .name("compact-shulker-tooltip")
-        .description("Compacts the lines of the shulker tooltip.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Compacts the lines of the shulker tooltip."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> echest = sgPreviews.add(new BoolSetting.Builder()
         .name("echests")
-        .description("Shows a preview of your echest when hovering over it in an inventory.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows a preview of your echest when hovering over it in an inventory."))
         .defaultValue(true)
         .onChanged(_ -> updateTooltips = true)
         .build()
@@ -138,7 +138,7 @@ public class BetterTooltips extends Module {
 
     private final Setting<Boolean> maps = sgPreviews.add(new BoolSetting.Builder()
         .name("maps")
-        .description("Shows a preview of a map when hovering over it in an inventory.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows a preview of a map when hovering over it in an inventory."))
         .defaultValue(true)
         .onChanged(_ -> updateTooltips = true)
         .build()
@@ -146,7 +146,7 @@ public class BetterTooltips extends Module {
 
     public final Setting<Double> mapsScale = sgPreviews.add(new DoubleSetting.Builder()
         .name("map-scale")
-        .description("The scale of the map preview.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The scale of the map preview."))
         .defaultValue(1)
         .min(0.001)
         .sliderMax(1)
@@ -156,7 +156,7 @@ public class BetterTooltips extends Module {
 
     private final Setting<Boolean> books = sgPreviews.add(new BoolSetting.Builder()
         .name("books")
-        .description("Shows contents of a book when hovering over it in an inventory.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows contents of a book when hovering over it in an inventory."))
         .defaultValue(true)
         .onChanged(_ -> updateTooltips = true)
         .build()
@@ -164,7 +164,7 @@ public class BetterTooltips extends Module {
 
     private final Setting<Boolean> banners = sgPreviews.add(new BoolSetting.Builder()
         .name("banners")
-        .description("Shows banners' patterns when hovering over it in an inventory. Also works with shields.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows banners' patterns when hovering over it in an inventory. Also works with shields."))
         .defaultValue(true)
         .onChanged(_ -> updateTooltips = true)
         .build()
@@ -172,7 +172,7 @@ public class BetterTooltips extends Module {
 
     private final Setting<Boolean> entitiesInBuckets = sgPreviews.add(new BoolSetting.Builder()
         .name("entities-in-buckets")
-        .description("Shows entities in buckets when hovering over it in an inventory.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows entities in buckets when hovering over it in an inventory."))
         .defaultValue(true)
         .onChanged(_ -> updateTooltips = true)
         .build()
@@ -180,7 +180,7 @@ public class BetterTooltips extends Module {
 
     private final Setting<Boolean> bundles = sgPreviews.add(new BoolSetting.Builder()
         .name("bundles")
-        .description("Shows a preview of bundle contents when hovering over it in an inventory.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows a preview of bundle contents when hovering over it in an inventory."))
         .defaultValue(true)
         .onChanged(_ -> updateTooltips = true)
         .build()
@@ -188,7 +188,7 @@ public class BetterTooltips extends Module {
 
     private final Setting<Boolean> foodInfo = sgPreviews.add(new BoolSetting.Builder()
         .name("food-info")
-        .description("Shows hunger and saturation values for food items.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows hunger and saturation values for food items."))
         .defaultValue(true)
         .onChanged(_ -> updateTooltips = true)
         .build()
@@ -198,7 +198,7 @@ public class BetterTooltips extends Module {
 
     public final Setting<Boolean> byteSize = sgOther.add(new BoolSetting.Builder()
         .name("byte-size")
-        .description("Displays an item's size in bytes in the tooltip.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Displays an item's size in bytes in the tooltip."))
         .defaultValue(true)
         .onChanged(_ -> updateTooltips = true)
         .build()
@@ -206,7 +206,7 @@ public class BetterTooltips extends Module {
 
     private final Setting<SortSize> sizeType = sgOther.add(new EnumSetting.Builder<SortSize>()
         .name("byte-size-format")
-        .description("The format by which to display the item's byte size.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The format by which to display the item's byte size."))
         .defaultValue(SortSize.Dynamic)
         .visible(byteSize::get)
         .build()
@@ -214,7 +214,7 @@ public class BetterTooltips extends Module {
 
     private final Setting<Boolean> statusEffects = sgOther.add(new BoolSetting.Builder()
         .name("status-effects")
-        .description("Adds list of status effects to tooltips of food items.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Adds list of status effects to tooltips of food items."))
         .defaultValue(true)
         .onChanged(_ -> updateTooltips = true)
         .build()
@@ -224,14 +224,14 @@ public class BetterTooltips extends Module {
 
     public final Setting<Boolean> tooltip = sgHideFlags.add(new BoolSetting.Builder()
         .name("tooltip")
-        .description("Show the tooltip when it's hidden.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Show the tooltip when it's hidden."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> additional = sgHideFlags.add(new BoolSetting.Builder()
         .name("tooltip-components")
-        .description("Shows tooltip components when they're hidden - e.g. enchantments, attributes, lore, etc.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Shows tooltip components when they're hidden - e.g. enchantments, attributes, lore, etc."))
         .defaultValue(false)
         .build()
     );
@@ -305,11 +305,11 @@ public class BetterTooltips extends Module {
 
                         event.appendEnd(Component.literal(count).withStyle(ChatFormatting.DARK_GRAY));
                     } catch (Exception _) {
-                        event.appendEnd(Component.literal("Error getting bytes.").withStyle(ChatFormatting.RED));
+                        event.appendEnd(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Error getting bytes.")).withStyle(ChatFormatting.RED));
                     }
                 }
                 case DataResult.Error<Tag> _ ->
-                    event.appendEnd(Component.literal("Error getting bytes.").withStyle(ChatFormatting.RED));
+                    event.appendEnd(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Error getting bytes.")).withStyle(ChatFormatting.RED));
                 default -> throw new MatchException(null, null);
             }
         }
@@ -330,7 +330,7 @@ public class BetterTooltips extends Module {
         else if (event.itemStack.getItem() == Items.ENDER_CHEST && previewEChest()) {
             event.tooltipData = EChestMemory.isKnown()
                 ? new ContainerTooltipComponent(EChestMemory.ITEMS.toArray(ItemStack[]::new), ECHEST_COLOR)
-                : new TextTooltipComponent(Component.literal("Unknown inventory.").withStyle(ChatFormatting.DARK_RED));
+                : new TextTooltipComponent(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Unknown inventory.")).withStyle(ChatFormatting.DARK_RED));
         }
 
         // Map preview
@@ -344,7 +344,7 @@ public class BetterTooltips extends Module {
             Component page = getFirstPage(event.itemStack);
             if (page != null) {
                 int pageCount = getBookPageCount(event.itemStack);
-                MutableComponent pageWithCount = page.copy().append(Component.literal(String.format(" (%d pages)", pageCount)).withStyle(ChatFormatting.GRAY));
+                MutableComponent pageWithCount = page.copy().append(Component.literal(String.format(meteordevelopment.meteorclient.utils.misc.Localization.text(" (%d pages)"), pageCount)).withStyle(ChatFormatting.GRAY));
                 event.tooltipData = new BookTooltipComponent(pageWithCount);
             }
         }
@@ -411,7 +411,7 @@ public class BetterTooltips extends Module {
 
         counts.keySet().stream().sorted(Comparator.comparingInt(value -> -counts.getInt(value))).limit(5).forEach(item -> {
             MutableComponent mutableText = item.components().get(DataComponents.ITEM_NAME).plainCopy();
-            mutableText.append(Component.literal(" x").append(String.valueOf(counts.getInt(item))).withStyle(ChatFormatting.GRAY));
+            mutableText.append(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text(" x")).append(String.valueOf(counts.getInt(item))).withStyle(ChatFormatting.GRAY));
             textConsumer.accept(mutableText);
         });
 
@@ -437,7 +437,7 @@ public class BetterTooltips extends Module {
         if (showPreviewText) {
             // we don't want to add the spacer if the tooltip is hidden
             if (spacer) event.appendEnd(Component.literal(""));
-            event.appendEnd(Component.literal("Hold " + ChatFormatting.YELLOW + keybind + ChatFormatting.RESET + " to preview"));
+            event.appendEnd(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Hold ") + ChatFormatting.YELLOW + keybind + ChatFormatting.RESET + meteordevelopment.meteorclient.utils.misc.Localization.text(" to preview")));
         }
     }
 

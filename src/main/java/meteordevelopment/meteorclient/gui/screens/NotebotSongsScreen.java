@@ -31,13 +31,13 @@ public class NotebotSongsScreen extends WindowScreen {
     private WTable table;
 
     public NotebotSongsScreen(GuiTheme theme) {
-        super(theme, "Notebot Songs");
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Notebot Songs"));
     }
 
     @Override
     public void initWidgets() {
         // Random Song
-        WButton randomSong = add(theme.button("Random Song")).minWidth(400).expandX().widget();
+        WButton randomSong = add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Random Song"))).minWidth(400).expandX().widget();
         randomSong.action = notebot::playRandomSong;
 
         // Filter
@@ -69,12 +69,12 @@ public class NotebotSongsScreen extends WindowScreen {
                 }
             });
         } catch (IOException _) {
-            table.add(theme.label("Missing meteor-client/notebot folder.")).expandCellX();
+            table.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Missing meteor-client/notebot folder."))).expandCellX();
             table.row();
         }
 
         if (noSongsFound.get()) {
-            table.add(theme.label("No songs found.")).expandCellX().center();
+            table.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("No songs found."))).expandCellX().center();
         }
     }
 
@@ -83,9 +83,9 @@ public class NotebotSongsScreen extends WindowScreen {
         table.row();
 
         table.add(theme.label(FilenameUtils.getBaseName(path.getFileName().toString()))).expandCellX();
-        WButton load = table.add(theme.button("Load")).right().widget();
+        WButton load = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Load"))).right().widget();
         load.action = () -> notebot.loadSong(path.toFile());
-        WButton preview = table.add(theme.button("Preview")).right().widget();
+        WButton preview = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Preview"))).right().widget();
         preview.action = () -> notebot.previewSong(path.toFile());
 
         table.row();

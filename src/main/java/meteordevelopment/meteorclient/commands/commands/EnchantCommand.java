@@ -24,8 +24,8 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import java.util.function.ToIntFunction;
 
 public class EnchantCommand extends Command {
-    private static final SimpleCommandExceptionType NOT_IN_CREATIVE = new SimpleCommandExceptionType(Component.literal("You must be in creative mode to use this."));
-    private static final SimpleCommandExceptionType NOT_HOLDING_ITEM = new SimpleCommandExceptionType(Component.literal("You need to hold some item to enchant."));
+    private static final SimpleCommandExceptionType NOT_IN_CREATIVE = new SimpleCommandExceptionType(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("You must be in creative mode to use this.")));
+    private static final SimpleCommandExceptionType NOT_HOLDING_ITEM = new SimpleCommandExceptionType(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("You need to hold some item to enchant.")));
 
     public EnchantCommand() {
         super("enchant", "Enchants the item in your hand. REQUIRES Creative mode.");

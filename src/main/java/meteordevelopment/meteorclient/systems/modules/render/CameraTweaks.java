@@ -23,14 +23,14 @@ public class CameraTweaks extends Module {
 
     private final Setting<Boolean> clip = sgGeneral.add(new BoolSetting.Builder()
         .name("clip")
-        .description("Allows the camera to clip through blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Allows the camera to clip through blocks."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Double> cameraDistance = sgGeneral.add(new DoubleSetting.Builder()
         .name("camera-distance")
-        .description("The distance the third person camera is from the player.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The distance the third person camera is from the player."))
         .defaultValue(4)
         .min(0)
         .onChanged(value -> distance = value)
@@ -41,14 +41,14 @@ public class CameraTweaks extends Module {
 
     private final Setting<Boolean> scrollingEnabled = sgScrolling.add(new BoolSetting.Builder()
         .name("scrolling")
-        .description("Allows you to scroll to change camera distance.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Allows you to scroll to change camera distance."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Keybind> scrollKeybind = sgScrolling.add(new KeybindSetting.Builder()
         .name("bind")
-        .description("Binds camera distance scrolling to a key.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Binds camera distance scrolling to a key."))
         .visible(scrollingEnabled::get)
         .defaultValue(Keybind.fromKey(GLFW.GLFW_KEY_LEFT_ALT))
         .build()
@@ -56,7 +56,7 @@ public class CameraTweaks extends Module {
 
     private final Setting<Double> scrollSensitivity = sgScrolling.add(new DoubleSetting.Builder()
         .name("sensitivity")
-        .description("Sensitivity of the scroll wheel when changing the cameras distance.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Sensitivity of the scroll wheel when changing the cameras distance."))
         .visible(scrollingEnabled::get)
         .defaultValue(1)
         .min(0.01)

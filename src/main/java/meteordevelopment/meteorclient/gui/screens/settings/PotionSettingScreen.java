@@ -17,7 +17,7 @@ public class PotionSettingScreen extends WindowScreen {
     private final PotionSetting setting;
 
     public PotionSettingScreen(GuiTheme theme, PotionSetting setting) {
-        super(theme, "Select Potion");
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Select Potion"));
 
         this.setting = setting;
     }
@@ -30,7 +30,7 @@ public class PotionSettingScreen extends WindowScreen {
             var stack = potion.potion.get();
             table.add(theme.itemWithLabel(stack, I18n.get(stack.getItem().getDescriptionId())));
 
-            WButton select = table.add(theme.button("Select")).widget();
+            WButton select = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Select"))).widget();
             select.action = () -> {
                 setting.set(potion);
                 onClose();

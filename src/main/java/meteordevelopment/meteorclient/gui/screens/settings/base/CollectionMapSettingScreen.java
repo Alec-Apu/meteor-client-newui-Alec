@@ -66,7 +66,7 @@ public abstract class CollectionMapSettingScreen<K, V> extends WindowScreen {
 
             WButton reset = table.add(theme.button(GuiRenderer.RESET)).widget();
             reset.action = () -> removeValue(t);
-            reset.tooltip = "Reset";
+            reset.tooltip = meteordevelopment.meteorclient.utils.misc.Localization.text("Reset");
 
             table.row();
         });

@@ -30,7 +30,7 @@ public class BlockDataSettingScreen<T extends ICopyable<T> & ISerializable<T> & 
     private boolean invalidate;
 
     public BlockDataSettingScreen(GuiTheme theme, BlockDataSetting<T> setting) {
-        super(theme, "Configure Blocks", setting, setting.get(), BuiltInRegistries.BLOCK);
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Configure Blocks"), setting, setting.get(), BuiltInRegistries.BLOCK);
 
         this.setting = setting;
     }

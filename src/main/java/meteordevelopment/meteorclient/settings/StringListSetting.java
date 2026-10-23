@@ -101,7 +101,7 @@ public class StringListSetting extends Setting<List<String>> {
             table.row();
         }
 
-        WButton add = table.add(theme.button("Add")).expandX().widget();
+        WButton add = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Add"))).expandX().widget();
         add.action = () -> {
             strings.add("");
             setting.set(strings);
@@ -115,7 +115,7 @@ public class StringListSetting extends Setting<List<String>> {
 
             fillTable(theme, table, setting);
         };
-        reset.tooltip = "Reset";
+        reset.tooltip = meteordevelopment.meteorclient.utils.misc.Localization.text("Reset");
     }
 
     public static class Builder extends SettingBuilder<Builder, List<String>, StringListSetting> {

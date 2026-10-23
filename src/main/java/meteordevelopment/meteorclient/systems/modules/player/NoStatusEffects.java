@@ -21,7 +21,7 @@ public class NoStatusEffects extends Module {
 
     private final Setting<List<MobEffect>> blockedEffects = sgGeneral.add(new StatusEffectListSetting.Builder()
         .name("blocked-effects")
-        .description("Effects to block.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Effects to block."))
         .defaultValue(
             LEVITATION.value(),
             JUMP_BOOST.value(),

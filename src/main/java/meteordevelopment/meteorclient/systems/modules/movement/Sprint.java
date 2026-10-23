@@ -29,28 +29,28 @@ public class Sprint extends Module {
 
     public final Setting<Mode> mode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("sprint-mode")
-        .description("What mode of sprinting.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("What mode of sprinting."))
         .defaultValue(Mode.Strict)
         .build()
     );
 
     private final Setting<Boolean> keepSprint = sgGeneral.add(new BoolSetting.Builder()
         .name("keep-sprint")
-        .description("Whether to keep sprinting after attacking.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to keep sprinting after attacking."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> unsprintOnHit = sgGeneral.add(new BoolSetting.Builder()
         .name("unsprint-on-hit")
-        .description("Whether to stop sprinting before attacking, to ensure you get crits and sweep attacks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to stop sprinting before attacking, to ensure you get crits and sweep attacks."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> unsprintInWater = sgGeneral.add(new BoolSetting.Builder()
         .name("unsprint-in-water")
-        .description("Whether to stop sprinting when in water.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to stop sprinting when in water."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Rage)
         .build()
@@ -58,7 +58,7 @@ public class Sprint extends Module {
 
     private final Setting<Boolean> permaSprint = sgGeneral.add(new BoolSetting.Builder()
         .name("sprint-while-stationary")
-        .description("Sprint even when not moving.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Sprint even when not moving."))
         .defaultValue(false)
         .visible(() -> mode.get() == Mode.Rage)
         .build()

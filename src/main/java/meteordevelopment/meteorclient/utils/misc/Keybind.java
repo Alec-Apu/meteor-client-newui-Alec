@@ -133,7 +133,7 @@ public class Keybind implements ISerializable<Keybind>, ICopyable<Keybind> {
 
     @Override
     public String toString() {
-        if (!isSet()) return "None";
+        if (!isSet()) return meteordevelopment.meteorclient.utils.misc.Localization.text("None");
         if (!isKey) return Utils.getButtonName(value);
         if (modifiers == 0) return Utils.getKeyName(value);
 
@@ -142,8 +142,8 @@ public class Keybind implements ISerializable<Keybind>, ICopyable<Keybind> {
         if ((modifiers & GLFW_MOD_SUPER) != 0) label.append("Cmd + ");
         if ((modifiers & GLFW_MOD_ALT) != 0) label.append("Alt + ");
         if ((modifiers & GLFW_MOD_SHIFT) != 0) label.append("Shift + ");
-        if ((modifiers & GLFW_MOD_CAPS_LOCK) != 0) label.append("Caps Lock + ");
-        if ((modifiers & GLFW_MOD_NUM_LOCK) != 0) label.append("Num Lock + ");
+        if ((modifiers & GLFW_MOD_CAPS_LOCK) != 0) label.append(meteordevelopment.meteorclient.utils.misc.Localization.text("Caps Lock") + " + ");
+        if ((modifiers & GLFW_MOD_NUM_LOCK) != 0) label.append(meteordevelopment.meteorclient.utils.misc.Localization.text("Num Lock") + " + ");
         label.append(Utils.getKeyName(value));
 
         return label.toString();

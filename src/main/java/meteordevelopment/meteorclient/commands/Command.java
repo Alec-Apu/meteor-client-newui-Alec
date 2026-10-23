@@ -34,8 +34,8 @@ public abstract class Command {
 
     public Command(String name, String description, String... aliases) {
         this.name = name;
-        this.title = Utils.nameToTitle(name);
-        this.description = description;
+        this.title = meteordevelopment.meteorclient.utils.misc.Localization.text(Utils.nameToTitle(name));
+        this.description = meteordevelopment.meteorclient.utils.misc.Localization.text(description);
         this.aliases = List.of(aliases);
     }
 
@@ -66,7 +66,7 @@ public abstract class Command {
     }
 
     public String getDescription() {
-        return description;
+        return meteordevelopment.meteorclient.utils.misc.Localization.text(description);
     }
 
     public List<String> getAliases() {

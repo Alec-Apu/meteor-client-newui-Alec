@@ -73,9 +73,8 @@ public class HudRenderer {
         graphics.pose().pushMatrix();
         graphics.pose().scale(1.0f / mc.getWindow().getGuiScale());
 
-        if (!hud.hasCustomFont()) {
-            VanillaTextRenderer.INSTANCE.begin(graphics);
-        }
+        // Also prepare Minecraft's Unicode font for CJK text in custom-font HUDs.
+        VanillaTextRenderer.INSTANCE.begin(graphics);
     }
 
     public void end() {
@@ -100,10 +99,9 @@ public class HudRenderer {
 
                 fontHolder.visited = false;
             }
-        } else {
-            VanillaTextRenderer.INSTANCE.end();
-            VanillaTextRenderer.INSTANCE.scaleIndividually = false;
         }
+        VanillaTextRenderer.INSTANCE.end();
+        VanillaTextRenderer.INSTANCE.scaleIndividually = false;
 
         for (Runnable task : postTasks) task.run();
         postTasks.clear();
@@ -140,7 +138,8 @@ public class HudRenderer {
     public double text(String text, double x, double y, Color color, boolean shadow, double scale) {
         if (scale == -1) scale = hud.getTextScale();
 
-        if (!hud.hasCustomFont()) {
+        if (!hud.hasCustomFont() || needsUnicodeFont(text)) {
+            VanillaTextRenderer.INSTANCE.scale = scale * 2;
             return VanillaTextRenderer.INSTANCE.render(text, x, y, color, shadow);
         }
 
@@ -173,7 +172,7 @@ public class HudRenderer {
     public double textWidth(String text, boolean shadow, double scale) {
         if (text.isEmpty()) return 0;
 
-        if (hud.hasCustomFont()) {
+        if (hud.hasCustomFont() && !needsUnicodeFont(text)) {
             double width = getFont(scale).getWidth(text, text.length());
             return (width + (shadow ? 1 : 0)) * (scale == -1 ? hud.getTextScale() : scale) + (shadow ? 1 : 0);
         }
@@ -184,6 +183,10 @@ public class HudRenderer {
 
     public double textWidth(String text, boolean shadow) {
         return textWidth(text, shadow, -1);
+    }
+
+    private static boolean needsUnicodeFont(String text) {
+        return text.codePoints().anyMatch(codePoint -> codePoint > 255);
     }
 
     public double textWidth(String text, double scale) {

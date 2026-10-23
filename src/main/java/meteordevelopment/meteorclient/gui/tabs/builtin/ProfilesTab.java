@@ -87,13 +87,13 @@ public class ProfilesTab extends Tab {
             WHorizontalList l = add(theme.horizontalList()).expandX().widget();
 
             // Create
-            WButton create = l.add(theme.button("Create")).expandX().widget();
-            create.tooltip = "Create new profile";
+            WButton create = l.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Create"))).expandX().widget();
+            create.tooltip = meteordevelopment.meteorclient.utils.misc.Localization.text("Create new profile");
             create.action = () -> mc.gui.setScreen(new EditProfileScreen(theme, null, this::reload));
 
             // Import
-            WButton importBtn = l.add(theme.button("Import")).expandX().widget();
-            importBtn.tooltip = "Import profile";
+            WButton importBtn = l.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Import"))).expandX().widget();
+            importBtn.tooltip = meteordevelopment.meteorclient.utils.misc.Localization.text("Import profile");
             importBtn.action = () -> {
                 try {
                     Profile imported = importProfile();
@@ -123,10 +123,10 @@ public class ProfilesTab extends Tab {
                 save.action = profile::save;
                 table.add(save).right();
 
-                WButton load = table.add(theme.button("Load")).widget();
+                WButton load = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Load"))).widget();
                 load.action = profile::load;
 
-                WButton export = table.add(theme.button("Export")).widget();
+                WButton export = table.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Export"))).widget();
                 export.action = () -> mc.gui.setScreen(new ExportProfileScreen(theme, profile));
 
                 WButton edit = table.add(theme.button(GuiRenderer.EDIT)).widget();
@@ -230,7 +230,7 @@ public class ProfilesTab extends Tab {
 
             add(theme.horizontalSeparator()).expandX();
 
-            WButton save = add(theme.button(isNew ? "Create" : "Save")).expandX().widget();
+            WButton save = add(theme.button(isNew ? meteordevelopment.meteorclient.utils.misc.Localization.text("Create") : meteordevelopment.meteorclient.utils.misc.Localization.text("Save"))).expandX().widget();
             save.action = () -> {
                 if (profile.name.get().isEmpty()) return;
 
@@ -273,13 +273,13 @@ public class ProfilesTab extends Tab {
         private final Profile profile;
 
         public ExportProfileScreen(GuiTheme theme, Profile profile) {
-            super(theme, "Export Profile");
+            super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Export Profile"));
             this.profile = profile;
         }
 
         @Override
         public void initWidgets() {
-            add(theme.label("Select which profile settings to export."));
+            add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Select which profile settings to export.")));
 
             WContainer settingsContainer = add(theme.verticalList()).expandX().minWidth(400).widget();
 
@@ -292,7 +292,7 @@ public class ProfilesTab extends Tab {
 
             add(theme.horizontalSeparator()).expandX().widget();
 
-            WButton export = add(theme.button("Export profile")).expandX().widget();
+            WButton export = add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Export profile"))).expandX().widget();
             export.action = () -> {
                 exportProfile(profile, hud.checked, macros.checked, modules.checked, waypoints.checked);
                 onClose();

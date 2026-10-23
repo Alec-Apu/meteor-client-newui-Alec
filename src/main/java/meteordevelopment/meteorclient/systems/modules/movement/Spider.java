@@ -19,7 +19,7 @@ public class Spider extends Module {
 
     private final Setting<Double> speed = sgGeneral.add(new DoubleSetting.Builder()
         .name("climb-speed")
-        .description("The speed you go up blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The speed you go up blocks."))
         .defaultValue(0.2)
         .min(0.0)
         .build()

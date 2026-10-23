@@ -46,7 +46,7 @@ public class StorageBlockListSettingScreen extends CollectionListSettingScreen<B
     }
 
     public StorageBlockListSettingScreen(GuiTheme theme, Setting<List<BlockEntityType<?>>> setting) {
-        super(theme, "Select Storage Blocks", setting, setting.get(), StorageBlockListSetting.REGISTRY);
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Select Storage Blocks"), setting, setting.get(), StorageBlockListSetting.REGISTRY);
     }
 
     @Override

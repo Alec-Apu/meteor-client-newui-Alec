@@ -22,8 +22,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 public class DropCommand extends Command {
-    private static final SimpleCommandExceptionType NOT_SPECTATOR = new SimpleCommandExceptionType(Component.literal("Can't drop items while in spectator."));
-    private static final SimpleCommandExceptionType NO_SUCH_ITEM = new SimpleCommandExceptionType(Component.literal("Could not find an item with that name!"));
+    private static final SimpleCommandExceptionType NOT_SPECTATOR = new SimpleCommandExceptionType(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Can't drop items while in spectator.")));
+    private static final SimpleCommandExceptionType NO_SUCH_ITEM = new SimpleCommandExceptionType(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Could not find an item with that name!")));
 
     public DropCommand() {
         super("drop", "Automatically drops specified items.");

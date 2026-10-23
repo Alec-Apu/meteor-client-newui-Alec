@@ -46,7 +46,7 @@ public class EntityTypeListSettingScreen extends WindowScreen {
     int hasAnimal = 0, hasWaterAnimal = 0, hasMonster = 0, hasAmbient = 0, hasMisc = 0;
 
     public EntityTypeListSettingScreen(GuiTheme theme, EntityTypeListSetting setting) {
-        super(theme, "Select entities");
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Select entities"));
         this.setting = setting;
 
         // Filter
@@ -90,7 +90,7 @@ public class EntityTypeListSettingScreen extends WindowScreen {
         List<EntityType<?>> animalsE = new ArrayList<>();
         WCheckbox animalsC = theme.checkbox(hasAnimal > 0);
 
-        animals = theme.section("Animals", animals != null && animals.isExpanded(), animalsC);
+        animals = theme.section(meteordevelopment.meteorclient.utils.misc.Localization.text("Animals"), animals != null && animals.isExpanded(), animalsC);
         animalsC.action = () -> tableChecked(animalsE, animalsC.checked);
 
         Cell<WSection> animalsCell = add(animals).expandX();
@@ -100,7 +100,7 @@ public class EntityTypeListSettingScreen extends WindowScreen {
         List<EntityType<?>> waterAnimalsE = new ArrayList<>();
         WCheckbox waterAnimalsC = theme.checkbox(hasWaterAnimal > 0);
 
-        waterAnimals = theme.section("Water Animals", waterAnimals != null && waterAnimals.isExpanded(), waterAnimalsC);
+        waterAnimals = theme.section(meteordevelopment.meteorclient.utils.misc.Localization.text("Water Animals"), waterAnimals != null && waterAnimals.isExpanded(), waterAnimalsC);
         waterAnimalsC.action = () -> tableChecked(waterAnimalsE, waterAnimalsC.checked);
 
         Cell<WSection> waterAnimalsCell = add(waterAnimals).expandX();
@@ -110,7 +110,7 @@ public class EntityTypeListSettingScreen extends WindowScreen {
         List<EntityType<?>> monstersE = new ArrayList<>();
         WCheckbox monstersC = theme.checkbox(hasMonster > 0);
 
-        monsters = theme.section("Monsters", monsters != null && monsters.isExpanded(), monstersC);
+        monsters = theme.section(meteordevelopment.meteorclient.utils.misc.Localization.text("Monsters"), monsters != null && monsters.isExpanded(), monstersC);
         monstersC.action = () -> tableChecked(monstersE, monstersC.checked);
 
         Cell<WSection> monstersCell = add(monsters).expandX();
@@ -120,7 +120,7 @@ public class EntityTypeListSettingScreen extends WindowScreen {
         List<EntityType<?>> ambientE = new ArrayList<>();
         WCheckbox ambientC = theme.checkbox(hasAmbient > 0);
 
-        ambient = theme.section("Ambient", ambient != null && ambient.isExpanded(), ambientC);
+        ambient = theme.section(meteordevelopment.meteorclient.utils.misc.Localization.text("Ambient"), ambient != null && ambient.isExpanded(), ambientC);
         ambientC.action = () -> tableChecked(ambientE, ambientC.checked);
 
         Cell<WSection> ambientCell = add(ambient).expandX();
@@ -130,7 +130,7 @@ public class EntityTypeListSettingScreen extends WindowScreen {
         List<EntityType<?>> miscE = new ArrayList<>();
         WCheckbox miscC = theme.checkbox(hasMisc > 0);
 
-        misc = theme.section("Misc", misc != null && misc.isExpanded(), miscC);
+        misc = theme.section(meteordevelopment.meteorclient.utils.misc.Localization.text("Misc"), misc != null && misc.isExpanded(), miscC);
         miscC.action = () -> tableChecked(miscE, miscC.checked);
 
         Cell<WSection> miscCell = add(misc).expandX();

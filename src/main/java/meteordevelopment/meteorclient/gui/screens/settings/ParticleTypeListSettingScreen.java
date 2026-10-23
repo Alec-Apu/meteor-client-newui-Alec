@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ParticleTypeListSettingScreen extends CollectionListSettingScreen<ParticleType<?>> {
     public ParticleTypeListSettingScreen(GuiTheme theme, Setting<List<ParticleType<?>>> setting) {
-        super(theme, "Select Particles", setting, setting.get(), BuiltInRegistries.PARTICLE_TYPE);
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Select Particles"), setting, setting.get(), BuiltInRegistries.PARTICLE_TYPE);
     }
 
     @Override

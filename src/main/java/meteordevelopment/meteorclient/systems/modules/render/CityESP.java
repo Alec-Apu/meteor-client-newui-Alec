@@ -29,21 +29,21 @@ public class CityESP extends Module {
 
     private final Setting<ShapeMode> shapeMode = sgRender.add(new EnumSetting.Builder<ShapeMode>()
         .name("shape-mode")
-        .description("How the shapes are rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How the shapes are rendered."))
         .defaultValue(ShapeMode.Both)
         .build()
     );
 
     private final Setting<SettingColor> sideColor = sgRender.add(new ColorSetting.Builder()
         .name("side-color")
-        .description("The side color of the rendering.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The side color of the rendering."))
         .defaultValue(new SettingColor(225, 0, 0, 75))
         .build()
     );
 
     private final Setting<SettingColor> lineColor = sgRender.add(new ColorSetting.Builder()
         .name("line-color")
-        .description("The line color of the rendering.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The line color of the rendering."))
         .defaultValue(new SettingColor(225, 0, 0, 255))
         .build()
     );

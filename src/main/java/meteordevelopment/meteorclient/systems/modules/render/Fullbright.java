@@ -24,7 +24,7 @@ public class Fullbright extends Module {
 
     public final Setting<Mode> mode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("mode")
-        .description("The mode to use for Fullbright.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The mode to use for Fullbright."))
         .defaultValue(Mode.Gamma)
         .onChanged(mode -> {
             if (isActive()) {
@@ -39,7 +39,7 @@ public class Fullbright extends Module {
 
     public final Setting<LightLayer> lightType = sgGeneral.add(new EnumSetting.Builder<LightLayer>()
         .name("light-type")
-        .description("Which type of light to use for Luminance mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which type of light to use for Luminance mode."))
         .defaultValue(LightLayer.BLOCK)
         .visible(() -> mode.get() == Mode.Luminance)
         .onChanged(_ -> {
@@ -52,7 +52,7 @@ public class Fullbright extends Module {
 
     private final Setting<Integer> minimumLightLevel = sgGeneral.add(new IntSetting.Builder()
         .name("minimum-light-level")
-        .description("Minimum light level when using Luminance mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Minimum light level when using Luminance mode."))
         .visible(() -> mode.get() == Mode.Luminance)
         .defaultValue(8)
         .range(0, 15)

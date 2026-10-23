@@ -20,7 +20,7 @@ import java.util.function.Predicate;
 
 public class PacketBoolSettingScreen extends CollectionListSettingScreen<PacketType<? extends @NonNull Packet<?>>> {
     public PacketBoolSettingScreen(GuiTheme theme, Setting<Set<PacketType<? extends @NonNull Packet<?>>>> setting) {
-        super(theme, "Select Packets", setting, setting.get(), PacketUtils.getPackets());
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Select Packets"), setting, setting.get(), PacketUtils.getPackets());
     }
 
     @Override

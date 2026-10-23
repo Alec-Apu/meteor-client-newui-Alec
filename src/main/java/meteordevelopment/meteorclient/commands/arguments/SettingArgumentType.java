@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 
 public class SettingArgumentType implements ArgumentType<String> {
     private static final SettingArgumentType INSTANCE = new SettingArgumentType();
-    private static final DynamicCommandExceptionType NO_SUCH_SETTING = new DynamicCommandExceptionType(name -> Component.literal("No such setting '" + name + "'."));
+    private static final DynamicCommandExceptionType NO_SUCH_SETTING = new DynamicCommandExceptionType(name -> Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("No such setting '") + name + "'."));
 
     public static SettingArgumentType create() {
         return INSTANCE;

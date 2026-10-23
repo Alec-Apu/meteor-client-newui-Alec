@@ -450,7 +450,7 @@ public class Utils {
     }
 
     public static String getKeyName(int key) {
-        return switch (key) {
+        return meteordevelopment.meteorclient.utils.misc.Localization.text(switch (key) {
             case GLFW_KEY_UNKNOWN -> "Unknown";
             case GLFW_KEY_ESCAPE -> "Esc";
             case GLFW_KEY_GRAVE_ACCENT -> "Grave Accent";
@@ -515,17 +515,17 @@ public class Utils {
                 String keyName = glfwGetKeyName(key, 0);
                 yield keyName == null ? "Unknown" : StringUtils.capitalize(keyName);
             }
-        };
+        });
     }
 
     public static String getButtonName(int button) {
-        return switch (button) {
+        return meteordevelopment.meteorclient.utils.misc.Localization.text(switch (button) {
             case -1 -> "Unknown";
             case 0 -> "Mouse Left";
             case 1 -> "Mouse Right";
             case 2 -> "Mouse Middle";
-            default -> "Mouse " + button;
-        };
+            default -> meteordevelopment.meteorclient.utils.misc.Localization.text("Mouse ") + button;
+        });
     }
 
     public static byte[] readBytes(InputStream in) {

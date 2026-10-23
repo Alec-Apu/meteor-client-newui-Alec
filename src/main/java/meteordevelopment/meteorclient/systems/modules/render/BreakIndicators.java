@@ -31,21 +31,21 @@ public class BreakIndicators extends Module {
 
     private final Setting<ShapeMode> shapeMode = sgGeneral.add(new EnumSetting.Builder<ShapeMode>()
         .name("shape-mode")
-        .description("How the shapes are rendered.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How the shapes are rendered."))
         .defaultValue(ShapeMode.Both)
         .build()
     );
 
     public final Setting<Boolean> packetMine = sgGeneral.add(new BoolSetting.Builder()
         .name("packet-mine")
-        .description("Whether or not to render blocks being packet mined.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to render blocks being packet mined."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<SettingColor> startSideColor = sgGeneral.add(new ColorSetting.Builder()
         .name("start-side-color")
-        .description("The side color for the non-broken block.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The side color for the non-broken block."))
         .defaultValue(new SettingColor(25, 252, 25, 150))
         .visible(() -> shapeMode.get().sides())
         .build()
@@ -53,7 +53,7 @@ public class BreakIndicators extends Module {
 
     private final Setting<SettingColor> startLineColor = sgGeneral.add(new ColorSetting.Builder()
         .name("start-line-color")
-        .description("The line color for the non-broken block.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The line color for the non-broken block."))
         .defaultValue(new SettingColor(25, 252, 25, 150))
         .visible(() -> shapeMode.get().lines())
         .build()
@@ -61,7 +61,7 @@ public class BreakIndicators extends Module {
 
     private final Setting<SettingColor> endSideColor = sgGeneral.add(new ColorSetting.Builder()
         .name("end-side-color")
-        .description("The side color for the fully-broken block.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The side color for the fully-broken block."))
         .defaultValue(new SettingColor(255, 25, 25, 150))
         .visible(() -> shapeMode.get().sides())
         .build()
@@ -69,7 +69,7 @@ public class BreakIndicators extends Module {
 
     private final Setting<SettingColor> endLineColor = sgGeneral.add(new ColorSetting.Builder()
         .name("end-line-color")
-        .description("The line color for the fully-broken block.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The line color for the fully-broken block."))
         .defaultValue(new SettingColor(255, 25, 25, 150))
         .visible(() -> shapeMode.get().lines())
         .build()

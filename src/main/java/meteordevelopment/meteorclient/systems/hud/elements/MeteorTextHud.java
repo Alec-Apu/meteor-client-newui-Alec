@@ -64,7 +64,7 @@ public class MeteorTextHud {
 
     private static HudElementInfo<TextHud>.Preset addPreset(String title, String text, int updateDelay) {
         return INFO.addPreset(title, textHud -> {
-            if (text != null) textHud.text.set(text);
+            if (text != null) textHud.text.set(meteordevelopment.meteorclient.utils.misc.Localization.text(text));
             if (updateDelay != -1) textHud.updateDelay.set(updateDelay);
         });
     }

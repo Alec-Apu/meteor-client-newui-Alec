@@ -1,3 +1,14 @@
+## Minecraft 26.2 简体中文汉化版
+
+维护者：Alec。此版由原始 26.2 源码适配汉化，保留上游版权与 GPL-3.0 许可证。
+
+- 环境：Minecraft 26.2、Java 25、Fabric Loader 0.19.3 或更新兼容版本。
+- 安装：将 `meteor-client-26.2-zh-cn-1.0.1.jar` 放入 **26.2 实例**的 `mods` 文件夹，替换该实例已有的 Meteor JAR；右 Shift 打开界面。
+- 本包只适用于 26.2，请勿放入 26.3 实例。
+- 构建：使用 JDK 25 执行 `./gradlew build -Pbuild_number=zh-cn-1.0.1`；输出位于 `build/libs`。
+- 汉化覆盖模块、设置、描述、界面、HUD、命令帮助与反馈；命令语法、配置键和自定义文字保留原值。
+- 本地测试结果及逐文件变更见 `CHINESE_TRANSLATION_REVIEW.md`；尚未上传 GitHub。
+
 
 <p align="center">
 <img src="https://meteorclient.com/icon.png" alt="meteor-client-logo" width="15%"/>

@@ -30,14 +30,14 @@ public class Criticals extends Module {
 
     private final Setting<Mode> mode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("mode")
-        .description("The mode on how Criticals will function.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The mode on how Criticals will function."))
         .defaultValue(Mode.Packet)
         .build()
     );
 
     private final Setting<Boolean> ka = sgGeneral.add(new BoolSetting.Builder()
         .name("only-killaura")
-        .description("Only performs crits when using killaura.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Only performs crits when using killaura."))
         .defaultValue(false)
         .visible(() -> mode.get() != Mode.None)
         .build()
@@ -45,14 +45,14 @@ public class Criticals extends Module {
 
     private final Setting<Boolean> mace = sgMace.add(new BoolSetting.Builder()
         .name("smash-attack")
-        .description("Will always perform smash attacks when using a mace.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Will always perform smash attacks when using a mace."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Double> extraHeight = sgMace.add(new DoubleSetting.Builder()
         .name("additional-height")
-        .description("The amount of additional height to spoof. More height means more damage.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The amount of additional height to spoof. More height means more damage."))
         .defaultValue(0.0)
         .min(0)
         .sliderRange(0, 100)

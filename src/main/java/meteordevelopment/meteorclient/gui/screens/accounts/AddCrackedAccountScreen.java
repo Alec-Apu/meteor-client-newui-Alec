@@ -13,7 +13,7 @@ import meteordevelopment.meteorclient.systems.accounts.types.CrackedAccount;
 
 public class AddCrackedAccountScreen extends AddAccountScreen {
     public AddCrackedAccountScreen(GuiTheme theme, AccountsScreen parent) {
-        super(theme, "Add Cracked Account", parent);
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Add Cracked Account"), parent);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class AddCrackedAccountScreen extends AddAccountScreen {
         WTable t = add(theme.table()).widget();
 
         // Name
-        t.add(theme.label("Name: "));
+        t.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Name: ")));
         WTextBox name = t.add(theme.textBox("", "seasnail8169", (_, c) ->
             /// @see net.minecraft.util.StringUtil#isValidPlayerName
             c > 32 && c < 127
@@ -30,7 +30,7 @@ public class AddCrackedAccountScreen extends AddAccountScreen {
         t.row();
 
         // Add
-        add = t.add(theme.button("Add")).expandX().widget();
+        add = t.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Add"))).expandX().widget();
         add.action = () -> {
             String username = name.get().trim();
             if (username.length() > 16) return;

@@ -43,14 +43,14 @@ public class Quiver extends Module {
 
     private final Setting<List<MobEffect>> effects = sgGeneral.add(new StatusEffectListSetting.Builder()
         .name("effects")
-        .description("Which effects to shoot you with.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which effects to shoot you with."))
         .defaultValue(MobEffects.STRENGTH.value())
         .build()
     );
 
     private final Setting<Integer> cooldown = sgGeneral.add(new IntSetting.Builder()
         .name("cooldown")
-        .description("How many ticks between shooting effects (19 minimum for NCP).")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How many ticks between shooting effects (19 minimum for NCP)."))
         .defaultValue(10)
         .range(0, 40)
         .sliderRange(0, 40)
@@ -59,21 +59,21 @@ public class Quiver extends Module {
 
     private final Setting<Boolean> checkEffects = sgGeneral.add(new BoolSetting.Builder()
         .name("check-effects")
-        .description("Won't shoot you with effects you already have.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Won't shoot you with effects you already have."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> silentBow = sgGeneral.add(new BoolSetting.Builder()
         .name("silent-bow")
-        .description("Takes a bow from your inventory to quiver.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Takes a bow from your inventory to quiver."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> chatInfo = sgGeneral.add(new BoolSetting.Builder()
         .name("chat-info")
-        .description("Sends info about quiver checks in chat.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Sends info about quiver checks in chat."))
         .defaultValue(false)
         .build()
     );
@@ -82,21 +82,21 @@ public class Quiver extends Module {
 
     private final Setting<Boolean> onlyInHoles = sgSafety.add(new BoolSetting.Builder()
         .name("only-in-holes")
-        .description("Only quiver when you're in a hole.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Only quiver when you're in a hole."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> onlyOnGround = sgSafety.add(new BoolSetting.Builder()
         .name("only-on-ground")
-        .description("Only quiver when you're on the ground.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Only quiver when you're on the ground."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Double> minHealth = sgSafety.add(new DoubleSetting.Builder()
         .name("min-health")
-        .description("How much health you must have to quiver.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How much health you must have to quiver."))
         .defaultValue(10)
         .range(0, 36)
         .sliderRange(0, 36)
@@ -198,31 +198,31 @@ public class Quiver extends Module {
 
     private boolean shouldQuiver() {
         if (!bow.found() || !bow.isHotbar() && !silentBow.get()) {
-            if (chatInfo.get()) error("Couldn't find a usable bow, disabling.");
+            if (chatInfo.get()) error(meteordevelopment.meteorclient.utils.misc.Localization.text("Couldn't find a usable bow, disabling."));
             toggle();
             return false;
         }
 
         if (!headIsOpen()) {
-            if (chatInfo.get()) error("Not enough space to quiver, disabling.");
+            if (chatInfo.get()) error(meteordevelopment.meteorclient.utils.misc.Localization.text("Not enough space to quiver, disabling."));
             toggle();
             return false;
         }
 
         if (EntityUtils.getTotalHealth(mc.player) < minHealth.get()) {
-            if (chatInfo.get()) error("Not enough health to quiver, disabling.");
+            if (chatInfo.get()) error(meteordevelopment.meteorclient.utils.misc.Localization.text("Not enough health to quiver, disabling."));
             toggle();
             return false;
         }
 
         if (onlyOnGround.get() && !mc.player.onGround()) {
-            if (chatInfo.get()) error("You are not on the ground, disabling.");
+            if (chatInfo.get()) error(meteordevelopment.meteorclient.utils.misc.Localization.text("You are not on the ground, disabling."));
             toggle();
             return false;
         }
 
         if (onlyInHoles.get() && !isSurrounded(mc.player)) {
-            if (chatInfo.get()) error("You are not in a hole, disabling.");
+            if (chatInfo.get()) error(meteordevelopment.meteorclient.utils.misc.Localization.text("You are not in a hole, disabling."));
             toggle();
             return false;
         }
