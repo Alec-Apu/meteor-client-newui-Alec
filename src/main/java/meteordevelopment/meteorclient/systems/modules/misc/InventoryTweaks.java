@@ -79,8 +79,7 @@ public class InventoryTweaks extends Module {
 
     private final Setting<Boolean> frameInput = sgGeneral.add(new BoolSetting.Builder()
         .name("frame-input-handling")
-        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Changes input handling to work every frame instead of every tick. A very minor effect but may\n") +
-            meteordevelopment.meteorclient.utils.misc.Localization.text("make inputs feel smoother, especially in laggy environments. Will flag anticheats that check packet order (Grim)."))
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Changes input handling to work every frame instead of every tick. A very minor effect but may\nmake inputs feel smoother, especially in laggy environments. Will flag anticheats that check packet order (Grim)."))
         .defaultValue(false)
         .build()
     );

@@ -4318,5 +4318,10 @@
   "meteor.text.96faa147e7b54579": "（位置 %d）",
   "meteor.text.e3426562e198fc82": "自动潜行。",
   "meteor.text.41e267ce797fa971": "目标使用盾牌格挡时的处理方式：\n- 忽略：目标格挡时不攻击。\n- 破盾：切换斧头使盾牌失效（需启用自动切换）。\n- 无：照常攻击。\n",
-  "meteor.value.entity_age.both": "成年与幼年"
+  "meteor.value.entity_age.both": "成年与幼年",
+  "meteor.config.language.title": "Meteor 语言",
+  "meteor.config.language.description": "独立选择 Meteor 的显示语言，不跟随 Minecraft 语言设置。",
+  "meteor.metadata.multiline.0": "40 度俯仰模式的下限高度。启用模块时，必须至少高于此高度 40 格。\n低于此高度后开始向上抬头。",
+  "meteor.metadata.multiline.1": "40 度俯仰模式的上限高度。启用模块时，必须高于此高度。\n超过此高度后，如果尚未低头，则开始向下俯视。",
+  "meteor.metadata.multiline.2": "将输入处理从每个游戏刻改为每帧执行，效果较轻微，但可能\n让输入更流畅，尤其是在卡顿时。Grim 等检查数据包顺序的反作弊可能会判定异常。"
 }

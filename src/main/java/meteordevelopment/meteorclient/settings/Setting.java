@@ -21,7 +21,9 @@ import java.util.function.Consumer;
 public abstract class Setting<T> implements IGetter<T>, ISerializable<T> {
     private static final List<String> NO_SUGGESTIONS = List.of();
 
-    public final String name, title, description;
+    public final String name;
+    public String title, description;
+    private final String sourceTitle, sourceDescription;
     private final IVisible visible;
 
     protected final T defaultValue;
@@ -35,8 +37,12 @@ public abstract class Setting<T> implements IGetter<T>, ISerializable<T> {
 
     public Setting(String name, String description, T defaultValue, Consumer<T> onChanged, Consumer<Setting<T>> onModuleActivated, IVisible visible) {
         this.name = name;
-        this.title = meteordevelopment.meteorclient.utils.misc.Localization.text(Utils.nameToTitle(name));
-        this.description = meteordevelopment.meteorclient.utils.misc.Localization.text(description);
+        this.sourceTitle = Utils.nameToTitle(name);
+        this.sourceDescription = meteordevelopment.meteorclient.utils.misc.Localization.source(description);
+        meteordevelopment.meteorclient.utils.misc.Localization.bind(this, setting -> {
+            setting.title = meteordevelopment.meteorclient.utils.misc.Localization.text(setting.sourceTitle);
+            setting.description = meteordevelopment.meteorclient.utils.misc.Localization.text(setting.sourceDescription);
+        });
         this.defaultValue = defaultValue;
         this.onChanged = onChanged;
         this.onModuleActivated = onModuleActivated;

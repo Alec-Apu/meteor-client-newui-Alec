@@ -1,10 +1,10 @@
-# 26.2 简体中文版本交付
+# Minecraft 26.2 — 1.0.2
 
-当前发布版本：1.0.1（2026-10-10）。
-安装包：meteor-client-26.2-zh-cn-1.0.1.jar
-源码包：meteor-client-26.2-zh-cn-1.0.1-source.zip
-Fabric 元数据版本：26.2-zh-cn-1.0.1。
+安装包：meteor-client-26.2-zh-cn-1.0.2.jar
+源码包：meteor-client-26.2-zh-cn-1.0.2-source.zip
+交付目录：D:/codex-project/outputs/meteor-client-26.2-zh-cn-1.0.2
 
-以后发布版本依次递增到 1.0.2、1.0.3。每次更新前后保存对应源码和安装包，版本备份放在 D:/codex-project/update-backups 的独立时间目录，不覆盖历史版本。安装包和源码的 SHA-256 记录于每份备份的 manifest.json 和 SHA256.txt。
+新增：右 Shift → 配置 → 视觉 → Meteor 语言，可选择简体中文或 English。英文界面对应 Config → Visual → Meteor Language。切换立即生效并自动保存，不依赖 Minecraft 语言。
 
-本次两个 Minecraft 版本的 Gradle build 均通过。此交付只更新版本命名和备份规则；之前游戏运行验证记录见 CHINESE_TRANSLATION_REVIEW.md。未上传 GitHub。
+需要 Minecraft 26.2、Java 25、兼容的 Fabric Loader（已测试 0.19.3）。安装时替换该实例原 Meteor JAR，保留一份客户端 JAR 即可。
+本次不更新 26.3。历史版本与更新前后源码/JAR 备份保留于 D 盘。未上传 GitHub。

@@ -31,8 +31,9 @@ public abstract class Module implements ISerializable<Module>, Comparable<Module
 
     public final Category category;
     public final String name;
-    public final String title;
-    public final String description;
+    public String title;
+    public String description;
+    private final String sourceTitle, sourceDescription;
     public final String[] aliases;
     public final Color color;
 
@@ -57,8 +58,12 @@ public abstract class Module implements ISerializable<Module>, Comparable<Module
         this.mc = Minecraft.getInstance();
         this.category = category;
         this.name = name;
-        this.title = meteordevelopment.meteorclient.utils.misc.Localization.text(Utils.nameToTitle(name));
-        this.description = meteordevelopment.meteorclient.utils.misc.Localization.text(description);
+        this.sourceTitle = Utils.nameToTitle(name);
+        this.sourceDescription = meteordevelopment.meteorclient.utils.misc.Localization.source(description);
+        meteordevelopment.meteorclient.utils.misc.Localization.bind(this, module -> {
+            module.title = meteordevelopment.meteorclient.utils.misc.Localization.text(module.sourceTitle);
+            module.description = meteordevelopment.meteorclient.utils.misc.Localization.text(module.sourceDescription);
+        });
         this.aliases = aliases;
         this.color = Color.fromHsv(Utils.random(0.0, 360.0), 0.35, 1);
 

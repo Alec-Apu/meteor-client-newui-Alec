@@ -259,6 +259,7 @@ public class ModulesScreen extends TabScreen {
                     && !module.name.toLowerCase(Locale.ROOT).contains(filter)
                     && !meteordevelopment.meteorclient.utils.Utils.nameToTitle(module.name).toLowerCase(Locale.ROOT).contains(filter)
                     && !module.title.toLowerCase(Locale.ROOT).contains(filter)
+                    && !meteordevelopment.meteorclient.utils.misc.Localization.chineseText(meteordevelopment.meteorclient.utils.Utils.nameToTitle(module.name)).toLowerCase(Locale.ROOT).contains(filter)
                     && !module.description.toLowerCase(Locale.ROOT).contains(filter)) continue;
                 modules.add(module);
             }
@@ -416,6 +417,7 @@ public class ModulesScreen extends TabScreen {
                     && !module.name.toLowerCase(Locale.ROOT).contains(filter)
                     && !meteordevelopment.meteorclient.utils.Utils.nameToTitle(module.name).toLowerCase(Locale.ROOT).contains(filter)
                     && !module.title.toLowerCase(Locale.ROOT).contains(filter)
+                    && !meteordevelopment.meteorclient.utils.misc.Localization.chineseText(meteordevelopment.meteorclient.utils.Utils.nameToTitle(module.name)).toLowerCase(Locale.ROOT).contains(filter)
                     && !module.description.toLowerCase(Locale.ROOT).contains(filter)) continue;
                 count++;
             }

@@ -28,14 +28,19 @@ public abstract class Command {
     protected static final Minecraft mc = MeteorClient.mc;
 
     private final String name;
-    private final String title;
-    private final String description;
+    private String title;
+    private String description;
+    private final String sourceTitle, sourceDescription;
     private final List<String> aliases;
 
     public Command(String name, String description, String... aliases) {
         this.name = name;
-        this.title = meteordevelopment.meteorclient.utils.misc.Localization.text(Utils.nameToTitle(name));
-        this.description = meteordevelopment.meteorclient.utils.misc.Localization.text(description);
+        this.sourceTitle = Utils.nameToTitle(name);
+        this.sourceDescription = meteordevelopment.meteorclient.utils.misc.Localization.source(description);
+        meteordevelopment.meteorclient.utils.misc.Localization.bind(this, command -> {
+            command.title = meteordevelopment.meteorclient.utils.misc.Localization.text(command.sourceTitle);
+            command.description = meteordevelopment.meteorclient.utils.misc.Localization.text(command.sourceDescription);
+        });
         this.aliases = List.of(aliases);
     }
 

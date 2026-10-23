@@ -25,7 +25,9 @@ public abstract class WWindow extends WVerticalList {
     public String id;
 
     public final WWidget icon;
-    protected final String title;
+    protected String title;
+    private final String sourceTitle;
+    private meteordevelopment.meteorclient.gui.widgets.WLabel titleLabel;
 
     protected WHeader header;
     public WView view;
@@ -43,7 +45,11 @@ public abstract class WWindow extends WVerticalList {
 
     public WWindow(WWidget icon, String title) {
         this.icon = icon;
-        this.title = title;
+        this.sourceTitle = meteordevelopment.meteorclient.utils.misc.Localization.source(title);
+        meteordevelopment.meteorclient.utils.misc.Localization.bind(this, window -> {
+            window.title = meteordevelopment.meteorclient.utils.misc.Localization.text(window.sourceTitle);
+            if (window.titleLabel != null) window.titleLabel.set(window.title);
+        });
     }
 
     @Override
@@ -157,7 +163,7 @@ public abstract class WWindow extends WVerticalList {
                 beforeHeaderInit.accept(this);
             }
 
-            add(theme.label(title, true)).expandCellX().center().pad(4);
+            titleLabel = add(theme.label(title, true)).expandCellX().center().pad(4).widget();
 
             triangle = add(theme.triangle()).pad(4).right().centerY().widget();
             triangle.action = () -> setExpanded(!expanded);

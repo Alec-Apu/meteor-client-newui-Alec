@@ -1,346 +1,59 @@
-# Meteor Client 26.2 简体中文汉化检查报告
+# Meteor Client 26.2 — 1.0.2 检查报告
 
-日期：2026-10-10。维护者：Alec。基线：`c1a90ef`；本地分支：`minecraft-26.2-zh-cn`。未上传 GitHub。原 26.3 工作目录和产物保留。
+日期：2026-10-10。维护者：Alec；界面品牌 Alec-apu。本次只更新 26.2，未上传 GitHub。
 
-## 版本与范围
+## 新功能
 
-Minecraft 26.2；Java 25；Fabric Loader 0.19.3；Fabric API 0.154.2+26.2；Loom 1.17.21；Gradle 9.6.1。默认 GUI 键位为右 Shift。
+右 Shift → 配置 → 视觉 → Meteor 语言。可独立选择简体中文或 English，默认简体中文；立即刷新并保存。英文界面的路径为 Config → Visual → Meteor Language。
 
-汉化采用显示层转换，覆盖主要 GUI、分类、模块与描述、设置与描述、分组、枚举显示、HUD、提示、命令帮助及反馈。语言资源 en_us/zh_cn 各 4,320 项。另修正 82 项译文，实体年龄枚举使用专门的上下文译文。模块 ID、设置 ID、主题 ID、命令语法、NBT 键、枚举存储与玩家自定义文字保持兼容。
+切换刷新模块名称和说明、设置名称和说明、枚举显示、命令描述与 HUD 元数据。已打开的 Meteor WidgetScreen 在下一帧重建界面；窗口标题同步刷新。描述保存英文源文本，使用弱引用监听刷新，避免保留已关闭窗口或删除的 HUD 元素。
 
-打包配置包含传递依赖 javassist，排除由 Minecraft 提供的 LWJGL 核心。最终 JAR 不含临时测试入口。
-
-## 品牌更新
-
-2026-10-10：当前 26.2 汉化版界面品牌与聊天前缀已改为 Alec-apu；重新构建成功并核对发布 class 的品牌常量。下面的游戏运行测试完成于此前汉化版本。
+资源只用于显示；现有模块 ID、命令语法、枚举存储和玩家自定义文字不变。新增配置键 meteor-language 使用 zh_cn/en_us 保存。中英文模块搜索在两种显示语言下均可使用。已有自定义 HUD 文本及已发送聊天消息不会被重写。
 
 ## 验证
 
-- 最终 Gradle build 成功。静态检查通过：1,664 个设置 ID、147 个命令语法定义、31 个持久化键访问、34 个 Mixin 方法目标；语言资源键、占位符与格式标记一致。
-- 游戏内检查 167 个模块和 1,406 个模块设置，剩余英文元数据仅为 HUD 缩写。
-- 中英文 Kill Aura 搜索、模块 ID、枚举配置往返、自定义文字、主题 ID、命令帮助与开关、中文错误摘要均通过。
-- 隔离 26.2 实例打开模块、设置、配置、HUD 界面，进入新建单人世界并正常退出。
-- 独立发布 JAR 实例通过：101 项官方游戏及 Fabric 启动依赖组成的类路径不含开发源码、资源或外置 Meteor 库；依靠 JAR 内嵌依赖加载并渲染中文界面。
-- 发布元数据版本为 `26.2-zh-cn`，Minecraft 依赖为 `~26.2`；截图与日志见测试证据压缩包。
+- Gradle build 成功；Java 25、Minecraft 26.2、Fabric Loader 0.19.3。
+- 在独立发布 JAR 实例中完成两个进程测试，启动类路径排除开发源码与外置 Meteor 库，依赖由成品 JAR 提供。
+- 英文检查覆盖 167 个模块、1,406 个模块设置及 HUD 元数据；名称、说明、HUD 预设未发现残留中文。
+- 中文 → 英文 → 中文 → NBT 恢复，模块、设置说明和枚举同步变化；切换后新建设置可正确显示，并在后续切换中刷新。
+- 已打开配置界面的即时刷新测试通过，检查中英文配置和模块截图。
+- 独立重启恢复英文选择，再切回中文成功；Minecraft 的语言值不变。
+- 中英文搜索、模块 ID、自定义文字、缓存命令错误的英文反馈均通过。
+- 静态检查：保留 1,664 个原设置 ID、147 个命令语法定义、31 个持久化键访问和 34 个 Mixin 目标；唯一新增设置键为 meteor-language。
+- 中英文各 4,325 项资源，键、格式标记和 Starscript 表达式一致。
+- JAR 元数据版本 26.2-zh-cn-1.0.2，Minecraft 依赖 ~26.2，内嵌 javassist；不含测试入口。
 
 ## 限制
 
-品牌、人名、技术缩写和命令语法保留英文。第三方模组、服务器消息、账号服务错误以及库内部诊断可能仍含英文；未知文本回退原文。未测试真实账号登录、在线服务或每个模块的服务器行为。
-
-上游内部 VERSION 解析仅支持三段版本，版本徽标可能显示 0.0.0；Fabric 元数据和实际运行目标为 26.2。
+第三方模组、服务器消息及在线服务返回的文本可能保留原文。未测试真实账号或线上服务；离线测试日志中的 Realms 授权错误不属于语言切换失败。内部版本徽标仍受上游三段版本解析限制，Fabric 元数据版本正确。
 
 ## 产物
 
-- 安装包：`meteor-client-26.2-zh-cn.jar`
-- SHA-256：`453b8af0ae075a7ef9dea22d361990b9080343a5b2d4007856a068a2335417da`
-- 源码：`meteor-client-26.2-zh-cn-source.zip`，包含当前未提交汉化修改，不含构建缓存、存档及临时测试模组。
-- 测试证据：`zh-cn-26.2-test-evidence.zip`
+- meteor-client-26.2-zh-cn-1.0.2.jar
+- SHA-256：2be16fcfa2356be901afcc9afe08170e164189834ba86604ea270da149f5a637
+- meteor-client-26.2-zh-cn-1.0.2-source.zip
+- 交付目录：D:/codex-project/outputs/meteor-client-26.2-zh-cn-1.0.2
+- 更新前后源码与安装包备份：D:/codex-project/update-backups
 
-## 实际修改及新增文件
+## 相比 1.0.1 修改的源码和文件
 
 - `CHANGELOG.md`
 - `CHINESE_TRANSLATION_REVIEW.md`
-- `LOCALIZATION_SOURCES.md`
 - `README.md`
+- `RELEASE.md`
 - `build.gradle.kts`
 - `src/main/java/meteordevelopment/meteorclient/commands/Command.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/arguments/CommandArgumentType.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/arguments/MacroArgumentType.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/arguments/ModuleArgumentType.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/arguments/PlayerArgumentType.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/arguments/PlayerListEntryArgumentType.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/arguments/ProfileArgumentType.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/arguments/SettingArgumentType.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/arguments/WaypointArgumentType.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/BindsCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/CommandsCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/DamageCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/DisconnectCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/DropCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/EnchantCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/FakePlayerCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/FriendsCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/GiveCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/HelpCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/InputCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/LocateCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/MacroCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/ModulesCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/NameHistoryCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/NbtCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/NotebotCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/PeekCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/ProfilesCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/ReloadCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/ResetCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/SaveMapCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/ServerCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/SpectateCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/SwarmCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/WaspCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/commands/commands/WaypointCommand.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/DefaultSettingsWidgetFactory.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/CommitsScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/EditBookTitleAndAuthorScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/EditSystemScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/ModuleScreen.java`
+- `src/main/java/meteordevelopment/meteorclient/gui/WidgetScreen.java`
 - `src/main/java/meteordevelopment/meteorclient/gui/screens/ModulesScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/NotebotSongsScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/ProxiesImportScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/ProxiesScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/accounts/AccountInfoScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/accounts/AccountsScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/accounts/AddAlteningAccountScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/accounts/AddCrackedAccountScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/accounts/AddMicrosoftAccountScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/accounts/AddSessionAccountScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/BlockDataSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/BlockListSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/BlockSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/ColorSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/EnchantmentListSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/EntityTypeListSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/FontFaceSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/ItemListSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/ItemSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/ModuleListSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/PacketBoolSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/ParticleTypeListSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/PotionSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/ScreenHandlerSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/SoundEventListSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/StatusEffectAmplifierMapSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/StatusEffectListSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/StorageBlockListSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/screens/settings/base/CollectionMapSettingScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/tabs/TabScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/tabs/WindowTabScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/tabs/builtin/GuiTab.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/tabs/builtin/HudTab.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/tabs/builtin/MacrosTab.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/tabs/builtin/ProfilesTab.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/themes/meteor/MeteorGuiTheme.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/themes/meteor/widgets/input/WMeteorDropdown.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/widgets/WAccount.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/widgets/WTooltip.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/widgets/WTopBar.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/widgets/input/WBlockPosEdit.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/widgets/input/WDropdown.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/widgets/input/WTextBox.java`
-- `src/main/java/meteordevelopment/meteorclient/gui/widgets/pressable/WConfirmedButton.java`
-- `src/main/java/meteordevelopment/meteorclient/mixin/AbstractContainerScreenMixin.java`
-- `src/main/java/meteordevelopment/meteorclient/mixin/BookEditScreenMixin.java`
-- `src/main/java/meteordevelopment/meteorclient/mixin/BookViewScreenMixin.java`
-- `src/main/java/meteordevelopment/meteorclient/mixin/ClientPacketListenerMixin.java`
-- `src/main/java/meteordevelopment/meteorclient/mixin/ConnectionMixin.java`
-- `src/main/java/meteordevelopment/meteorclient/mixin/DisconnectedScreenMixin.java`
-- `src/main/java/meteordevelopment/meteorclient/mixin/JoinMultiplayerScreenMixin.java`
-- `src/main/java/meteordevelopment/meteorclient/mixin/ScreenMixin.java`
+- `src/main/java/meteordevelopment/meteorclient/gui/widgets/containers/WWindow.java`
 - `src/main/java/meteordevelopment/meteorclient/settings/Setting.java`
-- `src/main/java/meteordevelopment/meteorclient/settings/StringListSetting.java`
 - `src/main/java/meteordevelopment/meteorclient/systems/config/Config.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/Hud.java`
 - `src/main/java/meteordevelopment/meteorclient/systems/hud/HudElementInfo.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/HudRenderer.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/elements/ActiveModulesHud.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/elements/ArmorHud.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/elements/CombatHud.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/elements/CompassHud.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/elements/HoleHud.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/elements/InventoryHud.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/elements/ItemHud.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/elements/LagNotifierHud.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/elements/MapHud.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/elements/MeteorTextHud.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/elements/ModuleInfosHud.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/elements/PlayerModelHud.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/elements/PlayerRadarHud.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/elements/PotionTimersHud.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/elements/TextHud.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/elements/keyboard/KeyboardHud.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/screens/HudEditorScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/hud/screens/HudElementScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/macros/Macro.java`
 - `src/main/java/meteordevelopment/meteorclient/systems/modules/Module.java`
 - `src/main/java/meteordevelopment/meteorclient/systems/modules/Modules.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/AnchorAura.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/AntiAnchor.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/AntiAnvil.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/AntiBed.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/ArrowDodge.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/AttributeSwap.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/AutoAnvil.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/AutoArmor.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/AutoCity.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/AutoEXP.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/AutoLog.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/AutoTotem.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/AutoTrap.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/AutoWeapon.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/AutoWeb.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/BedAura.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/BowAimbot.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/BowSpam.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/Burrow.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/Criticals.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/CrystalAura.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/Hitboxes.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/HoleFiller.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/KillAura.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/Offhand.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/Quiver.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/SelfTrap.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/SelfWeb.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/combat/Surround.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/misc/AntiPacketKick.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/misc/AutoReconnect.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/misc/BetterChat.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/misc/BookBot.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/misc/DiscordPresence.java`
 - `src/main/java/meteordevelopment/meteorclient/systems/modules/misc/InventoryTweaks.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/misc/MessageAura.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/misc/Notebot.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/misc/Notifier.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/misc/PacketCanceller.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/misc/PacketLogger.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/misc/ServerSpoof.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/misc/SoundBlocker.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/misc/Spam.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/misc/swarm/Swarm.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/misc/swarm/SwarmWorker.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/AirJump.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/Anchor.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/AntiVoid.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/AutoJump.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/AutoWalk.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/AutoWasp.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/Blink.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/ElytraBoost.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/EntityControl.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/FastClimb.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/Flight.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/GUIMove.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/HighJump.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/Jesus.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/LongJump.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/NoFall.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/NoSlow.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/Parkour.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/ReverseStep.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/SafeWalk.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/Scaffold.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/Slippy.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/Sneak.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/Spider.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/Sprint.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/Step.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/TridentBoost.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/Velocity.java`
 - `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/elytrafly/ElytraFly.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/movement/speed/Speed.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/AirPlace.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/AntiAFK.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/AntiHunger.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/AutoClicker.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/AutoEat.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/AutoFish.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/AutoGap.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/AutoMend.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/AutoReplenish.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/AutoTool.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/BreakDelay.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/ChestSwap.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/FakePlayer.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/FastUse.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/InstantRebreak.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/MiddleClickExtra.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/Multitask.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/NameProtect.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/NoInteract.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/NoMiningTrace.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/NoStatusEffects.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/PotionSaver.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/Reach.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/Rotation.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/player/SpeedMine.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/BetterTab.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/BetterTooltips.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/BlockSelection.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/Blur.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/BossStack.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/Breadcrumbs.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/BreakIndicators.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/CameraTweaks.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/Chams.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/CityESP.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/ESP.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/EntityOwner.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/FreeLook.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/Freecam.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/Fullbright.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/HandView.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/HoleESP.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/ItemHighlight.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/ItemPhysics.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/LightOverlay.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/LogoutSpots.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/Nametags.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/NoRender.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/PopChams.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/StorageESP.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/TimeChanger.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/Tracers.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/Trail.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/Trajectories.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/TunnelESP.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/VoidESP.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/WallHack.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/WaypointsModule.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/WeatherChanger.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/Xray.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/Zoom.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/blockesp/BlockESP.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/blockesp/ESPBlockDataScreen.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/marker/BaseMarker.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/marker/CuboidMarker.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/marker/Marker.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/render/marker/Sphere2dMarker.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/Ambience.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/AutoBreed.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/AutoBrewer.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/AutoMount.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/AutoNametag.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/AutoShearer.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/AutoSign.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/AutoSmelter.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/Collisions.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/EChestFarmer.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/EndermanLook.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/Excavator.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/Flamethrower.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/HighwayBuilder.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/InfinityMiner.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/LiquidFiller.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/NoGhostBlocks.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/Nuker.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/PacketMine.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/SpawnProofer.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/StashFinder.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/Timer.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/modules/world/VeinMiner.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/profiles/Profile.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/proxies/Proxies.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/proxies/Proxy.java`
-- `src/main/java/meteordevelopment/meteorclient/systems/waypoints/Waypoint.java`
-- `src/main/java/meteordevelopment/meteorclient/utils/Utils.java`
 - `src/main/java/meteordevelopment/meteorclient/utils/misc/CommandErrors.java`
-- `src/main/java/meteordevelopment/meteorclient/utils/misc/Keybind.java`
 - `src/main/java/meteordevelopment/meteorclient/utils/misc/Localization.java`
-- `src/main/java/meteordevelopment/meteorclient/utils/player/ChatUtils.java`
-- `src/main/java/meteordevelopment/meteorclient/utils/player/TitleScreenCredits.java`
-- `src/main/java/meteordevelopment/meteorclient/utils/render/prompts/OkPrompt.java`
-- `src/main/java/meteordevelopment/meteorclient/utils/render/prompts/Prompt.java`
-- `src/main/java/meteordevelopment/meteorclient/utils/render/prompts/YesNoPrompt.java`
 - `src/main/resources/assets/meteor-client/lang/en_us.json`
 - `src/main/resources/assets/meteor-client/lang/zh_cn.json`
-- `src/main/resources/fabric.mod.json`

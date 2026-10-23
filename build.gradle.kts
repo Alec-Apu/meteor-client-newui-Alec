@@ -10,7 +10,7 @@ base {
     archivesName = archivesBaseName
     group = mavenGroup
 
-    val suffix = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.1")
+    val suffix = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.2")
     version = "${libs.versions.minecraft.get()}-$suffix"
 }
 
@@ -162,7 +162,7 @@ fun toMinecraftCompat(version: String): String {
 
 tasks {
     processResources {
-        val buildNumber = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.1")
+        val buildNumber = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.2")
         val commit = providers.gradleProperty("commit").getOrElse("")
 
         val propertyMap = mapOf(

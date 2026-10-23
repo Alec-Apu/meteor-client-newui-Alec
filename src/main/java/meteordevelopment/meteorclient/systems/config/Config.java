@@ -33,6 +33,21 @@ public class Config extends System<Config> {
 
     // Visual
 
+    private boolean loadingLanguage;
+
+    public final Setting<meteordevelopment.meteorclient.utils.misc.Localization.Language> language = sgVisual.add(new EnumSetting.Builder<meteordevelopment.meteorclient.utils.misc.Localization.Language>()
+        .name("meteor-language")
+        .description("Choose Meteor's display language independently of Minecraft.")
+        .defaultValue(meteordevelopment.meteorclient.utils.misc.Localization.Language.SimplifiedChinese)
+        .onChanged(this::changeLanguage)
+        .build()
+    );
+
+    private void changeLanguage(meteordevelopment.meteorclient.utils.misc.Localization.Language selected) {
+        meteordevelopment.meteorclient.utils.misc.Localization.setLanguage(selected);
+        if (!loadingLanguage && Config.get() == this) save();
+    }
+
     public final Setting<Boolean> customFont = sgVisual.add(new BoolSetting.Builder()
         .name("custom-font")
         .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Use a custom font."))
@@ -217,7 +232,13 @@ public class Config extends System<Config> {
 
     @Override
     public Config fromTag(CompoundTag tag) {
-        if (tag.contains("settings")) settings.fromTag(tag.getCompoundOrEmpty("settings"));
+        loadingLanguage = true;
+        try {
+            if (tag.contains("settings")) settings.fromTag(tag.getCompoundOrEmpty("settings"));
+        } finally {
+            loadingLanguage = false;
+            meteordevelopment.meteorclient.utils.misc.Localization.setLanguage(language.get());
+        }
         if (tag.contains("dontShowAgainPrompts")) dontShowAgainPrompts = listFromTag(tag, "dontShowAgainPrompts");
 
         return this;

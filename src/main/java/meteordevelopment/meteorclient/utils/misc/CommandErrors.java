@@ -32,7 +32,7 @@ public final class CommandErrors {
         else if (type == builtins.literalIncorrect() || type == builtins.readerExpectedSymbol()) label = "Expected a different command token";
         else if (type == builtins.dispatcherParseException()) label = "Could not parse the command";
 
-        String result = Localization.text(label == null ? error.getRawMessage().getString() : label);
+        String result = label == null ? Localization.commandText(error.getRawMessage().getString()) : Localization.text(label);
         if (error.getCursor() >= 0) result += String.format(Localization.text(" at position %d"), error.getCursor());
         if (error.getContext() != null) result += ": " + error.getContext();
         return result;

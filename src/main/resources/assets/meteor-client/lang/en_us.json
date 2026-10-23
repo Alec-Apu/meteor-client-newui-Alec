@@ -4318,5 +4318,10 @@
   "meteor.text.96faa147e7b54579": " at position %d",
   "meteor.text.e3426562e198fc82": "Sneaks for you",
   "meteor.text.41e267ce797fa971": "    What to do when your target is blocking with a shield:\n    - Ignore:   Don't attack them if they are blocking\n    - Break:    Swap to an axe to disable the shield (Only if Auto Switch is enabled)\n    - None:     Attack them as normal\n",
-  "meteor.value.entity_age.both": "Adults and babies"
+  "meteor.value.entity_age.both": "Adults and babies",
+  "meteor.config.language.title": "Meteor Language",
+  "meteor.config.language.description": "Choose Meteor's display language independently of Minecraft.",
+  "meteor.metadata.multiline.0": "The bottom height boundary for pitch40. You must be at least 40 blocks above this boundary when starting the module.\nAfter descending below this boundary you will start pitching upwards.",
+  "meteor.metadata.multiline.1": "The upper height boundary for pitch40. You must be above this boundary when starting the module.\nWhen ascending above this boundary, if you are not already, you will start pitching downwards.",
+  "meteor.metadata.multiline.2": "Changes input handling to work every frame instead of every tick. A very minor effect but may\nmake inputs feel smoother, especially in laggy environments. Will flag anticheats that check packet order (Grim)."
 }

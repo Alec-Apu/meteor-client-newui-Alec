@@ -159,6 +159,7 @@ public class Modules extends System<Modules> {
         for (Module module : this.moduleInstances.values()) {
             String title = module.title;
             int score = Math.min(Utils.searchLevenshteinDefault(title, text, false), Utils.searchLevenshteinDefault(Utils.nameToTitle(module.name), text, false));
+            score = Math.min(score, Utils.searchLevenshteinDefault(meteordevelopment.meteorclient.utils.misc.Localization.chineseText(Utils.nameToTitle(module.name)), text, false));
 
             if (Config.get().moduleAliases.get()) {
                 for (String alias : module.aliases) {
@@ -187,6 +188,7 @@ public class Modules extends System<Modules> {
             for (SettingGroup sg : module.settings) {
                 for (Setting<?> setting : sg) {
                     int score = Math.min(Utils.searchLevenshteinDefault(setting.title, text, false), Utils.searchLevenshteinDefault(Utils.nameToTitle(setting.name), text, false));
+                    score = Math.min(score, Utils.searchLevenshteinDefault(meteordevelopment.meteorclient.utils.misc.Localization.chineseText(Utils.nameToTitle(setting.name)), text, false));
                     if (score < lowest) lowest = score;
                 }
             }

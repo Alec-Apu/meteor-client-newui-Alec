@@ -164,8 +164,7 @@ public class ElytraFly extends Module {
     public final Setting<Double> pitch40lowerBounds = sgGeneral.add(new DoubleSetting.Builder()
         .name("pitch40-lower-bounds")
         .description(
-            meteordevelopment.meteorclient.utils.misc.Localization.text("The bottom height boundary for pitch40. You must be at least 40 blocks above this boundary when starting the module.\n") +
-                meteordevelopment.meteorclient.utils.misc.Localization.text("After descending below this boundary you will start pitching upwards.")
+            meteordevelopment.meteorclient.utils.misc.Localization.text("The bottom height boundary for pitch40. You must be at least 40 blocks above this boundary when starting the module.\nAfter descending below this boundary you will start pitching upwards.")
         )
         .defaultValue(180)
         .min(-128)
@@ -177,8 +176,7 @@ public class ElytraFly extends Module {
     public final Setting<Double> pitch40upperBounds = sgGeneral.add(new DoubleSetting.Builder()
         .name("pitch40-upper-bounds")
         .description(
-            meteordevelopment.meteorclient.utils.misc.Localization.text("The upper height boundary for pitch40. You must be above this boundary when starting the module.\n") +
-                meteordevelopment.meteorclient.utils.misc.Localization.text("When ascending above this boundary, if you are not already, you will start pitching downwards.")
+            meteordevelopment.meteorclient.utils.misc.Localization.text("The upper height boundary for pitch40. You must be above this boundary when starting the module.\nWhen ascending above this boundary, if you are not already, you will start pitching downwards.")
         )
         .defaultValue(220)
         .min(-128)
