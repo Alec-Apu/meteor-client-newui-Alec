@@ -395,7 +395,6 @@ public class Modules extends System<Modules> {
     }
 
     private void initCombat() {
-        add(new AutoMace());
         add(new AnchorAura());
         add(new AntiAnvil());
         add(new AntiBed());
