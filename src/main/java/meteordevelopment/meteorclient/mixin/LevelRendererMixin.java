@@ -6,7 +6,7 @@
 package meteordevelopment.meteorclient.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.mojang.blaze3d.buffers.GpuBufferSlice;
+import com.mojang.renderpearl.api.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.resource.GraphicsResourceAllocator;
 import com.mojang.blaze3d.resource.ResourceHandle;
@@ -78,7 +78,7 @@ public abstract class LevelRendererMixin implements ILevelRenderer {
     // Entity Shaders
 
     @Inject(method = "render", at = @At("HEAD"))
-    private void onRenderLevelHead(GraphicsResourceAllocator resourceAllocator, DeltaTracker deltaTracker, boolean renderOutline, CameraRenderState cameraState, Matrix4fc modelViewMatrix, GpuBufferSlice terrainFog, Vector4f fogColor, boolean shouldRenderSky, CallbackInfo ci) {
+    private void onRenderLevelHead(CallbackInfo ci) {
         PostProcessShaders.beginRender();
     }
 
@@ -130,7 +130,11 @@ public abstract class LevelRendererMixin implements ILevelRenderer {
         meteor$pushEntityOutlineFramebuffer(shader.framebuffer);
         try {
             try (var frame = renderDispatcher.prepareFrame(outlineRenderCommandQueue)) {
-                frame.executeOutline();
+                var encoder = com.mojang.blaze3d.systems.RenderSystem.getDevice().createCommandEncoder();
+                try (var pass = encoder.createRenderPass(() -> "Meteor entity outlines", shader.framebuffer.getColorTextureView(), java.util.Optional.empty(), shader.framebuffer.getDepthTextureView(), java.util.OptionalDouble.empty())) {
+                    frame.executeOutline(pass);
+                }
+                encoder.submit();
             }
         } finally {
             outlineRenderCommandQueue.submitsPerOrder.clear();
@@ -138,7 +142,7 @@ public abstract class LevelRendererMixin implements ILevelRenderer {
         }
     }
 
-    @Inject(method = "lambda$addMainPass$0", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/feature/FeatureRenderDispatcher$PreparedFrame;executeOutline()V", shift = At.Shift.AFTER))
+    @Inject(method = "executeOutline", at = @At("TAIL"))
     private void addMainPass$submitEntityVertices(CallbackInfo ci) {
         PostProcessShaders.submitEntityVertices();
     }

@@ -24,7 +24,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class CommandArgumentType implements ArgumentType<Command> {
     private static final CommandArgumentType INSTANCE = new CommandArgumentType();
-    private static final DynamicCommandExceptionType NO_SUCH_COMMAND = new DynamicCommandExceptionType(name -> Component.literal("Command with name " + name + " doesn't exist."));
+    private static final DynamicCommandExceptionType NO_SUCH_COMMAND = new DynamicCommandExceptionType(name -> Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Command with name ") + name + meteordevelopment.meteorclient.utils.misc.Localization.text(" doesn't exist.")));
     private static final Collection<String> EXAMPLES = Commands.COMMANDS.stream().limit(3).map(Command::getName).toList();
 
     private CommandArgumentType() {

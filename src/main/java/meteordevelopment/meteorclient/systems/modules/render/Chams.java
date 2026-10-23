@@ -26,21 +26,21 @@ public class Chams extends Module {
 
     public final Setting<Set<EntityType<?>>> entities = sgThroughWalls.add(new EntityTypeListSetting.Builder()
         .name("entities")
-        .description("Select entities to show through walls.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Select entities to show through walls."))
         .onlyAttackable()
         .build()
     );
 
     public final Setting<Shader> shader = sgThroughWalls.add(new EnumSetting.Builder<Shader>()
         .name("shader")
-        .description("Renders a shader over of the entities.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Renders a shader over of the entities."))
         .defaultValue(Shader.Image)
         .build()
     );
 
     public final Setting<SettingColor> shaderColor = sgThroughWalls.add(new ColorSetting.Builder()
         .name("color")
-        .description("The color that the shader is drawn with.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color that the shader is drawn with."))
         .defaultValue(new SettingColor(255, 255, 255, 150))
         .visible(() -> shader.get() != Shader.None)
         .build()
@@ -48,7 +48,7 @@ public class Chams extends Module {
 
     public final Setting<Boolean> ignoreSelfDepth = sgThroughWalls.add(new BoolSetting.Builder()
         .name("ignore-self")
-        .description("Ignores yourself drawing the player.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Ignores yourself drawing the player."))
         .defaultValue(true)
         .build()
     );
@@ -57,14 +57,14 @@ public class Chams extends Module {
 
     public final Setting<Boolean> players = sgPlayers.add(new BoolSetting.Builder()
         .name("players")
-        .description("Enables model tweaks for players.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Enables model tweaks for players."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> ignoreSelf = sgPlayers.add(new BoolSetting.Builder()
         .name("ignore-self")
-        .description("Ignores yourself when tweaking player models.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Ignores yourself when tweaking player models."))
         .defaultValue(false)
         .visible(players::get)
         .build()
@@ -72,7 +72,7 @@ public class Chams extends Module {
 
     public final Setting<Boolean> playersTexture = sgPlayers.add(new BoolSetting.Builder()
         .name("texture")
-        .description("Enables player model textures.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Enables player model textures."))
         .defaultValue(false)
         .visible(players::get)
         .build()
@@ -80,7 +80,7 @@ public class Chams extends Module {
 
     public final Setting<SettingColor> playersColor = sgPlayers.add(new ColorSetting.Builder()
         .name("color")
-        .description("The color of player models.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of player models."))
         .defaultValue(new SettingColor(198, 135, 254, 150))
         .visible(players::get)
         .build()
@@ -88,7 +88,7 @@ public class Chams extends Module {
 
     public final Setting<Double> playersScale = sgPlayers.add(new DoubleSetting.Builder()
         .name("scale")
-        .description("Players scale.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Players scale."))
         .defaultValue(1.0)
         .min(0.0)
         .visible(players::get)
@@ -99,14 +99,14 @@ public class Chams extends Module {
 
     public final Setting<Boolean> crystals = sgCrystals.add(new BoolSetting.Builder()
         .name("crystals")
-        .description("Enables model tweaks for end crystals.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Enables model tweaks for end crystals."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Double> crystalsScale = sgCrystals.add(new DoubleSetting.Builder()
         .name("scale")
-        .description("Crystal scale.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Crystal scale."))
         .defaultValue(0.6)
         .min(0)
         .visible(crystals::get)
@@ -115,7 +115,7 @@ public class Chams extends Module {
 
     public final Setting<Double> crystalsBounce = sgCrystals.add(new DoubleSetting.Builder()
         .name("bounce")
-        .description("How high crystals bounce.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How high crystals bounce."))
         .defaultValue(0.6)
         .min(0.0)
         .visible(crystals::get)
@@ -124,7 +124,7 @@ public class Chams extends Module {
 
     public final Setting<Double> crystalsRotationSpeed = sgCrystals.add(new DoubleSetting.Builder()
         .name("rotation-speed")
-        .description("Multiplies the rotation speed of the crystal.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Multiplies the rotation speed of the crystal."))
         .defaultValue(0.3)
         .min(0)
         .visible(crystals::get)
@@ -133,7 +133,7 @@ public class Chams extends Module {
 
     public final Setting<Boolean> crystalsTexture = sgCrystals.add(new BoolSetting.Builder()
         .name("texture")
-        .description("Whether to render crystal model textures.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to render crystal model textures."))
         .defaultValue(true)
         .visible(crystals::get)
         .build()
@@ -141,7 +141,7 @@ public class Chams extends Module {
 
     public final Setting<SettingColor> crystalsColor = sgCrystals.add(new ColorSetting.Builder()
         .name("crystal-color")
-        .description("The color of the of the crystal.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of the of the crystal."))
         .defaultValue(new SettingColor(198, 135, 254, 255))
         .visible(crystals::get)
         .build()
@@ -151,14 +151,14 @@ public class Chams extends Module {
 
     public final Setting<Boolean> hand = sgHand.add(new BoolSetting.Builder()
         .name("enabled")
-        .description("Enables tweaks of hand rendering.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Enables tweaks of hand rendering."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> handTexture = sgHand.add(new BoolSetting.Builder()
         .name("texture")
-        .description("Whether to render hand textures.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to render hand textures."))
         .defaultValue(false)
         .visible(hand::get)
         .build()
@@ -166,7 +166,7 @@ public class Chams extends Module {
 
     public final Setting<SettingColor> handColor = sgHand.add(new ColorSetting.Builder()
         .name("hand-color")
-        .description("The color of your hand.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of your hand."))
         .defaultValue(new SettingColor(198, 135, 254, 150))
         .visible(hand::get)
         .build()

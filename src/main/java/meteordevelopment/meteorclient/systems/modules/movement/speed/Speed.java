@@ -25,7 +25,7 @@ public class Speed extends Module {
 
     public final Setting<SpeedModes> speedMode = sgGeneral.add(new EnumSetting.Builder<SpeedModes>()
         .name("mode")
-        .description("The method of applying speed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The method of applying speed."))
         .defaultValue(SpeedModes.Vanilla)
         .onModuleActivated(speedModesSetting -> onSpeedModeChanged(speedModesSetting.get()))
         .onChanged(this::onSpeedModeChanged)
@@ -34,7 +34,7 @@ public class Speed extends Module {
 
     public final Setting<Double> vanillaSpeed = sgGeneral.add(new DoubleSetting.Builder()
         .name("vanilla-speed")
-        .description("The speed in blocks per second.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The speed in blocks per second."))
         .defaultValue(5.6)
         .min(0)
         .sliderMax(20)
@@ -44,7 +44,7 @@ public class Speed extends Module {
 
     public final Setting<Double> ncpSpeed = sgGeneral.add(new DoubleSetting.Builder()
         .name("strafe-speed")
-        .description("The speed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The speed."))
         .visible(() -> speedMode.get() == SpeedModes.Strafe)
         .defaultValue(1.6)
         .min(0)
@@ -54,7 +54,7 @@ public class Speed extends Module {
 
     public final Setting<Boolean> ncpSpeedLimit = sgGeneral.add(new BoolSetting.Builder()
         .name("speed-limit")
-        .description("Limits your speed on servers with very strict anticheats.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Limits your speed on servers with very strict anticheats."))
         .visible(() -> speedMode.get() == SpeedModes.Strafe)
         .defaultValue(false)
         .build()
@@ -62,7 +62,7 @@ public class Speed extends Module {
 
     public final Setting<Double> timer = sgGeneral.add(new DoubleSetting.Builder()
         .name("timer")
-        .description("Timer override.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Timer override."))
         .defaultValue(1)
         .min(0.01)
         .sliderMin(0.01)
@@ -72,21 +72,21 @@ public class Speed extends Module {
 
     public final Setting<Boolean> inLiquids = sgGeneral.add(new BoolSetting.Builder()
         .name("in-liquids")
-        .description("Uses speed when in lava or water.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Uses speed when in lava or water."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> whenSneaking = sgGeneral.add(new BoolSetting.Builder()
         .name("when-sneaking")
-        .description("Uses speed when sneaking.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Uses speed when sneaking."))
         .defaultValue(false)
         .build()
     );
 
     public final Setting<Boolean> vanillaOnGround = sgGeneral.add(new BoolSetting.Builder()
         .name("only-on-ground")
-        .description("Uses speed only when standing on a block.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Uses speed only when standing on a block."))
         .visible(() -> speedMode.get() == SpeedModes.Vanilla)
         .defaultValue(false)
         .build()

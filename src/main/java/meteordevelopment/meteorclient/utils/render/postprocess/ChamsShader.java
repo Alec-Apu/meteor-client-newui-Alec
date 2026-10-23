@@ -5,11 +5,11 @@
 
 package meteordevelopment.meteorclient.utils.render.postprocess;
 
-import com.mojang.blaze3d.GpuFormat;
+import com.mojang.renderpearl.api.GpuFormat;
 import com.mojang.blaze3d.buffers.Std140Builder;
 import com.mojang.blaze3d.buffers.Std140SizeCalculator;
 import com.mojang.blaze3d.platform.TextureUtil;
-import com.mojang.blaze3d.textures.FilterMode;
+import com.mojang.renderpearl.api.textures.FilterMode;
 import meteordevelopment.meteorclient.MeteorClient;
 import meteordevelopment.meteorclient.events.game.ResourcePacksReloadedEvent;
 import meteordevelopment.meteorclient.renderer.MeshRenderer;
@@ -20,7 +20,7 @@ import meteordevelopment.meteorclient.systems.modules.render.Chams;
 import meteordevelopment.meteorclient.utils.PostInit;
 import meteordevelopment.meteorclient.utils.render.color.Color;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.client.renderer.DynamicUniformStorage;
+import meteordevelopment.meteorclient.renderer.DynamicUniformStorage;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.world.entity.Entity;
 import org.jspecify.annotations.NonNull;

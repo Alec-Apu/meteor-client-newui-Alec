@@ -23,7 +23,6 @@ import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MaceItem;
 import net.minecraft.world.item.TridentItem;
@@ -43,14 +42,14 @@ public class AttributeSwap extends Module {
 
     private final Setting<Mode> mode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("mode")
-        .description("The mode to use.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The mode to use."))
         .defaultValue(Mode.Simple)
         .build()
     );
 
     private final Setting<Integer> targetSlot = sgGeneral.add(new IntSetting.Builder()
         .name("target-slot")
-        .description("Hotbar slot to swap to (1-9).")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Hotbar slot to swap to (1-9)."))
         .defaultValue(1)
         .range(1, 9)
         .visible(() -> mode.get() == Mode.Simple)
@@ -59,7 +58,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> swapOnMiss = sgGeneral.add(new BoolSetting.Builder()
         .name("swap-on-miss")
-        .description("Whether to swap on a missed attack. Useful for quickly lunging with spears.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to swap on a missed attack. Useful for quickly lunging with spears."))
         .defaultValue(false)
         .visible(() -> mode.get() == Mode.Simple)
         .build()
@@ -67,14 +66,14 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> swapBack = sgGeneral.add(new BoolSetting.Builder()
         .name("swap-back")
-        .description("Swap back to the original slot after a delay.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swap back to the original slot after a delay."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Integer> swapBackDelay = sgGeneral.add(new IntSetting.Builder()
         .name("swap-back-delay")
-        .description("Delay in ticks before swapping back.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Delay in ticks before swapping back."))
         .defaultValue(2)
         .min(0)
         .max(100)
@@ -85,7 +84,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> smartShieldBreak = sgSwappingOptions.add(new BoolSetting.Builder()
         .name("shield-breaker")
-        .description("Automatically swaps to an axe if the target is blocking.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically swaps to an axe if the target is blocking."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart)
         .build()
@@ -93,7 +92,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> smartDurability = sgSwappingOptions.add(new BoolSetting.Builder()
         .name("durability-saver")
-        .description("Swaps to a non-damageable item to save durability on the main weapon.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swaps to a non-damageable item to save durability on the main weapon."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart)
         .build()
@@ -101,7 +100,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> swordSwapping = sgSwappingOptions.add(new BoolSetting.Builder()
         .name("sword-swapping")
-        .description("Enables smart swapping for sword enchantments.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Enables smart swapping for sword enchantments."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart)
         .build()
@@ -109,7 +108,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> maceSwapping = sgSwappingOptions.add(new BoolSetting.Builder()
         .name("mace-swapping")
-        .description("Enables smart swapping for mace enchantments.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Enables smart swapping for mace enchantments."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart)
         .build()
@@ -117,7 +116,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> spearSwapping = sgSwappingOptions.add(new BoolSetting.Builder()
         .name("spear-swapping")
-        .description("Enables smart swapping for spear enchantments.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Enables smart swapping for spear enchantments."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart)
         .build()
@@ -125,7 +124,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> otherSwapping = sgSwappingOptions.add(new BoolSetting.Builder()
         .name("other-swapping")
-        .description("Enables smart swapping for other enchantments like Impaling.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Enables smart swapping for other enchantments like Impaling."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart)
         .build()
@@ -133,7 +132,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> enchantFireAspect = sgSwordEnchants.add(new BoolSetting.Builder()
         .name("fire-aspect")
-        .description("Swaps to an item with Fire Aspect to set the target on fire, if target isn't already on fire")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swaps to an item with Fire Aspect to set the target on fire, if target isn't already on fire"))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart && swordSwapping.get())
         .build()
@@ -141,7 +140,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> enchantLooting = sgSwordEnchants.add(new BoolSetting.Builder()
         .name("looting")
-        .description("Swaps to an item with Looting for better drops or more experience. Only prefers for mobs (but fire aspect is priority)")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swaps to an item with Looting for better drops or more experience. Only prefers for mobs (but fire aspect is priority)"))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart && swordSwapping.get())
         .build()
@@ -149,7 +148,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> enchantSharpness = sgSwordEnchants.add(new BoolSetting.Builder()
         .name("sharpness")
-        .description("Swaps to an item with Sharpness for increased damage against all entities.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swaps to an item with Sharpness for increased damage against all entities."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart && swordSwapping.get())
         .build()
@@ -157,7 +156,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> enchantSmite = sgSwordEnchants.add(new BoolSetting.Builder()
         .name("smite")
-        .description("Swaps to an item with Smite for increased damage against undead mobs.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swaps to an item with Smite for increased damage against undead mobs."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart && swordSwapping.get())
         .build()
@@ -165,7 +164,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> enchantBaneOfArthropods = sgSwordEnchants.add(new BoolSetting.Builder()
         .name("bane-of-arthropods")
-        .description("Swaps to an item with Bane of Arthropods for increased damage against arthropods.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swaps to an item with Bane of Arthropods for increased damage against arthropods."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart && swordSwapping.get())
         .build()
@@ -173,7 +172,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> enchantSweepingEdge = sgSwordEnchants.add(new BoolSetting.Builder()
         .name("sweeping-edge")
-        .description("Swaps to an item with Sweeping Edge for increased sweeping attack damage.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swaps to an item with Sweeping Edge for increased sweeping attack damage."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart && swordSwapping.get())
         .build()
@@ -181,7 +180,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> regularMace = sgMaceEnchants.add(new BoolSetting.Builder()
         .name("regular-mace")
-        .description("Swaps to a regular Mace when falling if no better option is available.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swaps to a regular Mace when falling if no better option is available."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart && maceSwapping.get())
         .build()
@@ -189,7 +188,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> enchantDensity = sgMaceEnchants.add(new BoolSetting.Builder()
         .name("density")
-        .description("Swaps to a Mace with Density to deal increased damage when falling.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swaps to a Mace with Density to deal increased damage when falling."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart && maceSwapping.get())
         .build()
@@ -197,7 +196,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> enchantBreach = sgMaceEnchants.add(new BoolSetting.Builder()
         .name("breach")
-        .description("Swaps to a Mace with Breach to reduce the target's armor effectiveness.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swaps to a Mace with Breach to reduce the target's armor effectiveness."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart && maceSwapping.get())
         .build()
@@ -205,7 +204,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> enchantWindBurst = sgMaceEnchants.add(new BoolSetting.Builder()
         .name("wind-burst")
-        .description("Swaps to a Mace with Wind Burst to launch up when hitting while falling.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swaps to a Mace with Wind Burst to launch up when hitting while falling."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart && maceSwapping.get())
         .build()
@@ -213,7 +212,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> enchantImpaling = sgOtherEnchants.add(new BoolSetting.Builder()
         .name("impaling")
-        .description("Swaps to an item with Impaling for increased damage against aquatic mobs.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swaps to an item with Impaling for increased damage against aquatic mobs."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart && otherSwapping.get())
         .build()
@@ -221,7 +220,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> enchantLunge = sgSpearEnchants.add(new BoolSetting.Builder()
         .name("lunge")
-        .description("Swaps to a spear with Lunge for traveling.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swaps to a spear with Lunge for traveling."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart && spearSwapping.get())
         .build()
@@ -229,7 +228,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> spearHitbox = sgSpearEnchants.add(new BoolSetting.Builder()
         .name("hitbox")
-        .description("Swaps to a spear for extended reach when target is far.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swaps to a spear for extended reach when target is far."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart && spearSwapping.get())
         .build()
@@ -237,7 +236,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> excludeLungeFromHitbox = sgSpearEnchants.add(new BoolSetting.Builder()
         .name("exclude-lunge-from-hitbox")
-        .description("Don't use lunge-enchanted spears for hitbox extension.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Don't use lunge-enchanted spears for hitbox extension."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.Smart && spearSwapping.get() && spearHitbox.get())
         .build()
@@ -245,14 +244,14 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> onlyOnWeapon = sgWeapon.add(new BoolSetting.Builder()
         .name("only-on-weapon")
-        .description("Only swaps when holding a selected weapon in hand.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Only swaps when holding a selected weapon in hand."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> sword = sgWeapon.add(new BoolSetting.Builder()
         .name("sword")
-        .description("Works while holding a sword.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Works while holding a sword."))
         .defaultValue(true)
         .visible(onlyOnWeapon::get)
         .build()
@@ -260,7 +259,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> axe = sgWeapon.add(new BoolSetting.Builder()
         .name("axe")
-        .description("Works while holding an axe.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Works while holding an axe."))
         .defaultValue(true)
         .visible(onlyOnWeapon::get)
         .build()
@@ -268,7 +267,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> pickaxe = sgWeapon.add(new BoolSetting.Builder()
         .name("pickaxe")
-        .description("Works while holding a pickaxe.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Works while holding a pickaxe."))
         .defaultValue(true)
         .visible(onlyOnWeapon::get)
         .build()
@@ -276,7 +275,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> shovel = sgWeapon.add(new BoolSetting.Builder()
         .name("shovel")
-        .description("Works while holding a shovel.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Works while holding a shovel."))
         .defaultValue(true)
         .visible(onlyOnWeapon::get)
         .build()
@@ -284,7 +283,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> hoe = sgWeapon.add(new BoolSetting.Builder()
         .name("hoe")
-        .description("Works while holding a hoe.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Works while holding a hoe."))
         .defaultValue(true)
         .visible(onlyOnWeapon::get)
         .build()
@@ -292,7 +291,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> mace = sgWeapon.add(new BoolSetting.Builder()
         .name("mace")
-        .description("Works while holding a mace.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Works while holding a mace."))
         .defaultValue(true)
         .visible(onlyOnWeapon::get)
         .build()
@@ -300,7 +299,7 @@ public class AttributeSwap extends Module {
 
     private final Setting<Boolean> trident = sgWeapon.add(new BoolSetting.Builder()
         .name("trident")
-        .description("Works while holding a trident.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Works while holding a trident."))
         .defaultValue(true)
         .visible(onlyOnWeapon::get)
         .build()
@@ -403,8 +402,8 @@ public class AttributeSwap extends Module {
         ItemStack currentStack = mc.player.getMainHandItem();
 
         if (target != null && smartShieldBreak.get() && target instanceof LivingEntity living && living.isBlocking()) {
-            if (currentStack.getItem() instanceof AxeItem) return -1;
-            int axeSlot = InvUtils.findInHotbar(item -> item.getItem() instanceof AxeItem).slot();
+            if (currentStack.is(net.minecraft.tags.ItemTags.AXES)) return -1;
+            int axeSlot = InvUtils.findInHotbar(item -> item.is(net.minecraft.tags.ItemTags.AXES)).slot();
             if (axeSlot != -1) return axeSlot;
         }
 

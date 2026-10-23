@@ -23,14 +23,14 @@ public class Breadcrumbs extends Module {
 
     private final Setting<SettingColor> color = sgGeneral.add(new ColorSetting.Builder()
         .name("color")
-        .description("The color of the Breadcrumbs trail.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The color of the Breadcrumbs trail."))
         .defaultValue(new SettingColor(225, 25, 25))
         .build()
     );
 
     private final Setting<Integer> maxSections = sgGeneral.add(new IntSetting.Builder()
         .name("max-sections")
-        .description("The maximum number of sections.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The maximum number of sections."))
         .defaultValue(1000)
         .min(1)
         .sliderRange(1, 5000)
@@ -39,7 +39,7 @@ public class Breadcrumbs extends Module {
 
     private final Setting<Double> sectionLength = sgGeneral.add(new DoubleSetting.Builder()
         .name("section-length")
-        .description("The section length in blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The section length in blocks."))
         .defaultValue(0.5)
         .min(0)
         .sliderMax(1)

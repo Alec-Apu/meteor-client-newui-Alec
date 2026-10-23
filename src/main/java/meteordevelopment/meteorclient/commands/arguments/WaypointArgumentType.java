@@ -25,7 +25,7 @@ import java.util.concurrent.CompletableFuture;
 public class WaypointArgumentType implements ArgumentType<String> {
     private static final WaypointArgumentType GREEDY = new WaypointArgumentType(true);
     private static final WaypointArgumentType QUOTED = new WaypointArgumentType(false);
-    private static final DynamicCommandExceptionType NO_SUCH_WAYPOINT = new DynamicCommandExceptionType(name -> Component.literal("Waypoint with name '" + name + "' doesn't exist."));
+    private static final DynamicCommandExceptionType NO_SUCH_WAYPOINT = new DynamicCommandExceptionType(name -> Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Waypoint with name '") + name + meteordevelopment.meteorclient.utils.misc.Localization.text("' doesn't exist.")));
     private final boolean greedyString;
 
     private WaypointArgumentType(boolean greedyString) {

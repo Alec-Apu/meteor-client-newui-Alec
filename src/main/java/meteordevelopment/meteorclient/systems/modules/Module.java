@@ -57,8 +57,8 @@ public abstract class Module implements ISerializable<Module>, Comparable<Module
         this.mc = Minecraft.getInstance();
         this.category = category;
         this.name = name;
-        this.title = Utils.nameToTitle(name);
-        this.description = description;
+        this.title = meteordevelopment.meteorclient.utils.misc.Localization.text(Utils.nameToTitle(name));
+        this.description = meteordevelopment.meteorclient.utils.misc.Localization.text(description);
         this.aliases = aliases;
         this.color = Color.fromHsv(Utils.random(0.0, 360.0), 0.35, 1);
 
@@ -120,7 +120,7 @@ public abstract class Module implements ISerializable<Module>, Comparable<Module
     public void sendToggledMsg() {
         if (Config.get().chatFeedback.get() && chatFeedback) {
             ChatUtils.forceNextPrefixClass(getClass());
-            ChatUtils.sendMsg(this.hashCode(), ChatFormatting.GRAY, "Toggled (highlight)%s(default) %s(default).", title, isActive() ? ChatFormatting.GREEN + "on" : ChatFormatting.RED + "off");
+            ChatUtils.sendMsg(this.hashCode(), ChatFormatting.GRAY, meteordevelopment.meteorclient.utils.misc.Localization.text("Toggled (highlight)%s(default) %s(default)."), title, isActive() ? ChatFormatting.GREEN + meteordevelopment.meteorclient.utils.misc.Localization.text("on") : ChatFormatting.RED + meteordevelopment.meteorclient.utils.misc.Localization.text("off"));
         }
     }
 

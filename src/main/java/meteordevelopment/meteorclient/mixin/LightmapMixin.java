@@ -6,7 +6,7 @@
 package meteordevelopment.meteorclient.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.textures.GpuTexture;
+import com.mojang.renderpearl.api.textures.GpuTexture;
 import meteordevelopment.meteorclient.systems.modules.Modules;
 import meteordevelopment.meteorclient.systems.modules.render.Fullbright;
 import meteordevelopment.meteorclient.systems.modules.render.Xray;
@@ -33,7 +33,11 @@ public abstract class LightmapMixin {
             var profile = Profiler.get();
             profile.push("lightmap");
 
-            RenderSystem.getDevice().createCommandEncoder().clearColorTexture(texture, new Vector4f(1));
+            var encoder = RenderSystem.getDevice().createCommandEncoder();
+
+            encoder.clearColorTexture(texture, new Vector4f(1));
+
+            encoder.submit();
 
             profile.pop();
             ci.cancel();

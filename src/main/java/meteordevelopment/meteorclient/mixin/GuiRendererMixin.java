@@ -62,7 +62,11 @@ public abstract class GuiRendererMixin {
         if ((GuiRenderer) (Object) this instanceof MeteorMcGuiRenderer) return;
         var mc = Minecraft.getInstance();
 
-        RenderSystem.getDevice().createCommandEncoder().clearDepthTexture(mc.gameRenderer.mainRenderTarget().getDepthTexture(), 1.0);
+        var encoder = RenderSystem.getDevice().createCommandEncoder();
+
+        encoder.clearDepthTexture(mc.gameRenderer.mainRenderTarget().getDepthTexture(), 1.0);
+
+        encoder.submit();
 
         if (mc.gui.screen() == null || mc.gui.screen() instanceof WidgetScreen) {
             meteor$render2D(mc);
@@ -73,6 +77,7 @@ public abstract class GuiRendererMixin {
 
     @Unique
     private void meteor$render2D(Minecraft mc) {
+        if (MeteorClient.mc == null) return;
         var mouseX = (int) mc.mouseHandler.getScaledXPos(mc.getWindow());
         var mouseY = (int) mc.mouseHandler.getScaledYPos(mc.getWindow());
         if (Utils.canUpdate() || HudEditorScreen.isOpen()) {

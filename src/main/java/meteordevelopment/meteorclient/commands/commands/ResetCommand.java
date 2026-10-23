@@ -39,7 +39,7 @@ public class ResetCommand extends Command {
         ).then(literal("gui").executes(_ -> {
             GuiThemes.get().clearWindowConfigs();
             GuiThemes.get().settings.reset();
-            ChatUtils.info("Reset all GUI settings.");
+            ChatUtils.info(meteordevelopment.meteorclient.utils.misc.Localization.text("Reset all GUI settings."));
             return SINGLE_SUCCESS;
         })).then(literal("bind")
             .then(argument("module", ModuleArgumentType.create()).executes(context -> {

@@ -23,7 +23,7 @@ import net.minecraft.network.chat.Component;
 import java.util.List;
 
 public abstract class Command {
-    protected static CommandBuildContext REGISTRY_ACCESS = Commands.createValidationContext(VanillaRegistries.createLookup());
+    protected static CommandBuildContext REGISTRY_ACCESS = Commands.createValidationContext(VanillaRegistries.createWorldLookup());
     protected static final int SINGLE_SUCCESS = com.mojang.brigadier.Command.SINGLE_SUCCESS;
     protected static final Minecraft mc = MeteorClient.mc;
 
@@ -34,8 +34,8 @@ public abstract class Command {
 
     public Command(String name, String description, String... aliases) {
         this.name = name;
-        this.title = Utils.nameToTitle(name);
-        this.description = description;
+        this.title = meteordevelopment.meteorclient.utils.misc.Localization.text(Utils.nameToTitle(name));
+        this.description = meteordevelopment.meteorclient.utils.misc.Localization.text(description);
         this.aliases = List.of(aliases);
     }
 
@@ -66,7 +66,7 @@ public abstract class Command {
     }
 
     public String getDescription() {
-        return description;
+        return meteordevelopment.meteorclient.utils.misc.Localization.text(description);
     }
 
     public List<String> getAliases() {

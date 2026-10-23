@@ -88,7 +88,7 @@ public class ServerCommand extends Command {
             if (tps > 17.0f) color = ChatFormatting.GREEN;
             else if (tps > 12.0f) color = ChatFormatting.YELLOW;
             else color = ChatFormatting.RED;
-            info("Current TPS: %s%.2f(default).", color, tps);
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Current TPS: %s%.2f(default)."), color, tps);
             return SINGLE_SUCCESS;
         }));
     }
@@ -97,8 +97,8 @@ public class ServerCommand extends Command {
         if (mc.hasSingleplayerServer()) {
             IntegratedServer server = mc.getSingleplayerServer();
 
-            info("Singleplayer");
-            if (server != null) info("Version: %s", server.getServerVersion());
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Singleplayer"));
+            if (server != null) info(meteordevelopment.meteorclient.utils.misc.Localization.text("Version: %s"), server.getServerVersion());
 
             return;
         }
@@ -106,7 +106,7 @@ public class ServerCommand extends Command {
         ServerData server = mc.getCurrentServer();
 
         if (server == null) {
-            info("Couldn't obtain any server information.");
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Couldn't obtain any server information."));
             return;
         }
 
@@ -122,32 +122,32 @@ public class ServerCommand extends Command {
             ipText = Component.literal(ChatFormatting.GRAY + server.ip);
             ipText.setStyle(ipText.getStyle()
                 .withClickEvent(new ClickEvent.CopyToClipboard(server.ip))
-                .withHoverEvent(new HoverEvent.ShowText(Component.literal("Copy to clipboard")))
+                .withHoverEvent(new HoverEvent.ShowText(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Copy to clipboard"))))
             );
         } else {
             ipText = Component.literal(ChatFormatting.GRAY + server.ip);
             ipText.setStyle(ipText.getStyle()
                 .withClickEvent(new ClickEvent.CopyToClipboard(server.ip))
-                .withHoverEvent(new HoverEvent.ShowText(Component.literal("Copy to clipboard")))
+                .withHoverEvent(new HoverEvent.ShowText(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Copy to clipboard"))))
             );
             MutableComponent ipv4Text = Component.literal(String.format("%s (%s)", ChatFormatting.GRAY, ipv4));
             ipv4Text.setStyle(ipText.getStyle()
                 .withClickEvent(new ClickEvent.CopyToClipboard(ipv4))
-                .withHoverEvent(new HoverEvent.ShowText(Component.literal("Copy to clipboard")))
+                .withHoverEvent(new HoverEvent.ShowText(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Copy to clipboard"))))
             );
             ipText.append(ipv4Text);
         }
         info(
-            Component.literal(String.format("%sIP: ", ChatFormatting.GRAY))
+            Component.literal(String.format(meteordevelopment.meteorclient.utils.misc.Localization.text("%sIP: "), ChatFormatting.GRAY))
                 .append(ipText)
         );
 
-        info("Port: %d", ServerAddress.parseString(server.ip).getPort());
-        info("Type: %s", mc.getConnection().serverBrand() != null ? mc.getConnection().serverBrand() : "unknown");
-        info("Motd: %s", server.motd != null ? server.motd.getString() : "unknown");
-        info("Version: %s", server.version.getString());
-        info("Protocol version: %d", server.protocol);
-        info("Difficulty: %s (Local: %.2f)",
+        info(meteordevelopment.meteorclient.utils.misc.Localization.text("Port: %d"), ServerAddress.parseString(server.ip).getPort());
+        info(meteordevelopment.meteorclient.utils.misc.Localization.text("Type: %s"), mc.getConnection().serverBrand() != null ? mc.getConnection().serverBrand() : "unknown");
+        info(meteordevelopment.meteorclient.utils.misc.Localization.text("Motd: %s"), server.motd != null ? server.motd.getString() : "unknown");
+        info(meteordevelopment.meteorclient.utils.misc.Localization.text("Version: %s"), server.version.getString());
+        info(meteordevelopment.meteorclient.utils.misc.Localization.text("Protocol version: %d"), server.protocol);
+        info(meteordevelopment.meteorclient.utils.misc.Localization.text("Difficulty: %s (Local: %.2f)"),
             mc.level.getDifficulty().getDisplayName().getString(),
             new DifficultyInstance(
                 mc.level.getDifficulty(),
@@ -156,8 +156,8 @@ public class ServerCommand extends Command {
                 DimensionType.MOON_BRIGHTNESS_PER_PHASE[mc.level.environmentAttributes().getValue(EnvironmentAttributes.MOON_PHASE, mc.player.blockPosition()).index()] // lol
             ).getDifficulty()
         );
-        info("Day: %d", mc.level.getGameTime() / 24000L);
-        info("Permission level: %s", formatPerms());
+        info(meteordevelopment.meteorclient.utils.misc.Localization.text("Day: %d"), mc.level.getGameTime() / 24000L);
+        info(meteordevelopment.meteorclient.utils.misc.Localization.text("Permission level: %s"), formatPerms());
     }
 
     public String formatPerms() {
@@ -178,9 +178,9 @@ public class ServerCommand extends Command {
         plugins.replaceAll(this::formatName);
 
         if (!plugins.isEmpty()) {
-            info("Plugins (%d): %s ", plugins.size(), String.join(", ", plugins));
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Plugins (%d): %s "), plugins.size(), String.join(", ", plugins));
         } else {
-            error("No plugins found.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("No plugins found."));
         }
 
         tick = false;
@@ -237,7 +237,7 @@ public class ServerCommand extends Command {
                 Suggestions matches = packet.toSuggestions();
 
                 if (matches.isEmpty()) {
-                    error("An error occurred while trying to find plugins.");
+                    error(meteordevelopment.meteorclient.utils.misc.Localization.text("An error occurred while trying to find plugins."));
                     return;
                 }
 
@@ -249,7 +249,7 @@ public class ServerCommand extends Command {
                 printPlugins();
             }
         } catch (Exception _) {
-            error("An error occurred while trying to find plugins.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("An error occurred while trying to find plugins."));
         }
     }
 

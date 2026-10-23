@@ -35,7 +35,7 @@ public class BowAimbot extends Module {
 
     private final Setting<Double> range = sgGeneral.add(new DoubleSetting.Builder()
         .name("range")
-        .description("The maximum range the entity can be to aim at it.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The maximum range the entity can be to aim at it."))
         .defaultValue(20)
         .range(0, 100)
         .sliderMax(100)
@@ -44,28 +44,28 @@ public class BowAimbot extends Module {
 
     private final Setting<Set<EntityType<?>>> entities = sgGeneral.add(new EntityTypeListSetting.Builder()
         .name("entities")
-        .description("Entities to attack.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Entities to attack."))
         .onlyAttackable()
         .build()
     );
 
     private final Setting<SortPriority> priority = sgGeneral.add(new EnumSetting.Builder<SortPriority>()
         .name("priority")
-        .description("What type of entities to target.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("What type of entities to target."))
         .defaultValue(SortPriority.LowestHealth)
         .build()
     );
 
     private final Setting<Boolean> babies = sgGeneral.add(new BoolSetting.Builder()
         .name("babies")
-        .description("Whether or not to attack baby variants of the entity.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to attack baby variants of the entity."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> nametagged = sgGeneral.add(new BoolSetting.Builder()
         .name("nametagged")
-        .description("Whether or not to attack mobs with a name tag.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to attack mobs with a name tag."))
         .defaultValue(false)
         .build()
     );
@@ -73,7 +73,7 @@ public class BowAimbot extends Module {
 
     private final Setting<Boolean> pauseOnCombat = sgGeneral.add(new BoolSetting.Builder()
         .name("pause-on-combat")
-        .description("Freezes Baritone temporarily until you released the bow.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Freezes Baritone temporarily until you released the bow."))
         .defaultValue(false)
         .build()
     );

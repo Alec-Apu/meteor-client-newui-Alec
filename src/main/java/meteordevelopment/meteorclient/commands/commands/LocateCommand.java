@@ -79,20 +79,20 @@ public class LocateCommand extends Command {
             if (stack.getItem() != Items.FILLED_MAP
                 || stack.get(DataComponents.ITEM_NAME) == null
                 || !stack.get(DataComponents.ITEM_NAME).getString().equals(Component.translatable("filled_map.buried_treasure").getString())) {
-                error("You need to hold a (highlight)buried treasure map(default)!");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("You need to hold a (highlight)buried treasure map(default)!"));
                 return SINGLE_SUCCESS;
             }
 
             MapDecorations mapDecorationsComponent = stack.get(DataComponents.MAP_DECORATIONS);
             if (mapDecorationsComponent == null) {
-                error("Couldn't locate the map icons!");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("Couldn't locate the map icons!"));
                 return SINGLE_SUCCESS;
             }
 
             for (MapDecorations.Entry decoration : mapDecorationsComponent.decorations().values()) {
                 if (decoration.type().value().assetId().toString().equals("minecraft:red_x")) {
                     Vec3 coords = new Vec3(decoration.x(), 62, decoration.z());
-                    MutableComponent text = Component.literal("Buried Treasure located at ");
+                    MutableComponent text = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Buried Treasure located at "));
                     text.append(ChatUtils.formatCoords(coords));
                     text.append(".");
                     info(text);
@@ -100,7 +100,7 @@ public class LocateCommand extends Command {
                 }
             }
 
-            error("Couldn't locate the buried treasure!");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Couldn't locate the buried treasure!"));
             return SINGLE_SUCCESS;
         }));
 
@@ -109,20 +109,20 @@ public class LocateCommand extends Command {
             if (stack.getItem() != Items.FILLED_MAP
                 || stack.get(DataComponents.ITEM_NAME) == null
                 || !stack.get(DataComponents.ITEM_NAME).getString().equals(Component.translatable("filled_map.mansion").getString())) {
-                error("You need to hold a (highlight)woodland explorer map(default)!");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("You need to hold a (highlight)woodland explorer map(default)!"));
                 return SINGLE_SUCCESS;
             }
 
             MapDecorations mapDecorationsComponent = stack.get(DataComponents.MAP_DECORATIONS);
             if (mapDecorationsComponent == null) {
-                error("Couldn't locate the map icons!");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("Couldn't locate the map icons!"));
                 return SINGLE_SUCCESS;
             }
 
             for (MapDecorations.Entry decoration : mapDecorationsComponent.decorations().values()) {
                 if (decoration.type().value().assetId().toString().equals("minecraft:woodland_mansion")) {
                     Vec3 coords = new Vec3(decoration.x(), 62, decoration.z());
-                    MutableComponent text = Component.literal("Mansion located at ");
+                    MutableComponent text = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Mansion located at "));
                     text.append(ChatUtils.formatCoords(coords));
                     text.append(".");
                     info(text);
@@ -130,7 +130,7 @@ public class LocateCommand extends Command {
                 }
             }
 
-            error("Couldn't locate the mansion!");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Couldn't locate the mansion!"));
             return SINGLE_SUCCESS;
         }));
 
@@ -142,14 +142,14 @@ public class LocateCommand extends Command {
 
                 MapDecorations mapDecorationsComponent = stack.get(DataComponents.MAP_DECORATIONS);
                 if (mapDecorationsComponent == null) {
-                    error("Couldn't locate the map icons!");
+                    error(meteordevelopment.meteorclient.utils.misc.Localization.text("Couldn't locate the map icons!"));
                     return SINGLE_SUCCESS;
                 }
 
                 for (MapDecorations.Entry decoration : mapDecorationsComponent.decorations().values()) {
                     if (decoration.type().value().assetId().toString().equals("minecraft:ocean_monument")) {
                         Vec3 coords = new Vec3(decoration.x(), 62, decoration.z());
-                        MutableComponent text = Component.literal("Monument located at ");
+                        MutableComponent text = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Monument located at "));
                         text.append(ChatUtils.formatCoords(coords));
                         text.append(".");
                         info(text);
@@ -157,7 +157,7 @@ public class LocateCommand extends Command {
                     }
                 }
 
-                error("Couldn't locate the monument!");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("Couldn't locate the monument!"));
                 return SINGLE_SUCCESS;
             }
 
@@ -165,17 +165,17 @@ public class LocateCommand extends Command {
             if (BaritoneUtils.IS_AVAILABLE) {
                 Vec3 coords = findByBlockList(monumentBlocks);
                 if (coords == null) {
-                    error("No monument found. Try using an (highlight)ocean explorer map(default) for more success.");
+                    error(meteordevelopment.meteorclient.utils.misc.Localization.text("No monument found. Try using an (highlight)ocean explorer map(default) for more success."));
                     return SINGLE_SUCCESS;
                 }
-                MutableComponent text = Component.literal("Monument located at ");
+                MutableComponent text = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Monument located at "));
                 text.append(ChatUtils.formatCoords(coords));
                 text.append(".");
                 info(text);
                 return SINGLE_SUCCESS;
             }
 
-            error("Locating this structure without an (highlight)ocean explorer map(default) requires Baritone.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Locating this structure without an (highlight)ocean explorer map(default) requires Baritone."));
             return SINGLE_SUCCESS;
         }));
 
@@ -189,19 +189,19 @@ public class LocateCommand extends Command {
                 secondStart = null;
                 secondEnd = null;
                 MeteorClient.EVENT_BUS.subscribe(this);
-                info("Please throw the first Eye of Ender");
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Please throw the first Eye of Ender"));
             } else if (BaritoneUtils.IS_AVAILABLE) {
                 Vec3 coords = findByBlockList(strongholdBlocks);
                 if (coords == null) {
-                    error("No stronghold found nearby. You can use (highlight)Ender Eyes(default) for more success.");
+                    error(meteordevelopment.meteorclient.utils.misc.Localization.text("No stronghold found nearby. You can use (highlight)Ender Eyes(default) for more success."));
                     return SINGLE_SUCCESS;
                 }
-                MutableComponent text = Component.literal("Stronghold located at ");
+                MutableComponent text = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Stronghold located at "));
                 text.append(ChatUtils.formatCoords(coords));
                 text.append(".");
                 info(text);
             } else {
-                error("No Eyes of Ender found in hotbar.");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("No Eyes of Ender found in hotbar."));
             }
 
             return SINGLE_SUCCESS;
@@ -211,21 +211,21 @@ public class LocateCommand extends Command {
 
         builder.then(literal("nether_fortress").executes(_ -> {
             if (mc.level.dimension() != Level.NETHER) {
-                error("You need to be in the nether to locate a nether fortress.");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("You need to be in the nether to locate a nether fortress."));
                 return SINGLE_SUCCESS;
             }
 
             if (!BaritoneUtils.IS_AVAILABLE) {
-                error("Locating this structure requires Baritone.");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("Locating this structure requires Baritone."));
                 return SINGLE_SUCCESS;
             }
 
             Vec3 coords = findByBlockList(netherFortressBlocks);
             if (coords == null) {
-                error("No nether fortress found.");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("No nether fortress found."));
                 return SINGLE_SUCCESS;
             }
-            MutableComponent text = Component.literal("Fortress located at ");
+            MutableComponent text = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Fortress located at "));
             text.append(ChatUtils.formatCoords(coords));
             text.append(".");
             info(text);
@@ -236,21 +236,21 @@ public class LocateCommand extends Command {
 
         builder.then(literal("end_city").executes(_ -> {
             if (mc.level.dimension() != Level.END) {
-                error("You need to be in the end to locate an end city.");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("You need to be in the end to locate an end city."));
                 return SINGLE_SUCCESS;
             }
 
             if (!BaritoneUtils.IS_AVAILABLE) {
-                error("Locating this structure requires Baritone.");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("Locating this structure requires Baritone."));
                 return SINGLE_SUCCESS;
             }
 
             Vec3 coords = findByBlockList(endCityBlocks);
             if (coords == null) {
-                error("No end city found.");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("No end city found."));
                 return SINGLE_SUCCESS;
             }
-            MutableComponent text = Component.literal("End city located at ");
+            MutableComponent text = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("End city located at "));
             text.append(ChatUtils.formatCoords(coords));
             text.append(".");
             info(text);
@@ -262,27 +262,27 @@ public class LocateCommand extends Command {
         builder.then(literal("lodestone").executes(_ -> {
             ItemStack stack = mc.player.getInventory().getSelectedItem();
             if (stack.getItem() != Items.COMPASS) {
-                error("You need to hold a (highlight)lodestone(default) compass!");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("You need to hold a (highlight)lodestone(default) compass!"));
                 return SINGLE_SUCCESS;
             }
             DataComponentMap components = stack.getComponents();
             if (components == null) {
-                error("Couldn't get the components data. Are you holding a (highlight)lodestone(default) compass?");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("Couldn't get the components data. Are you holding a (highlight)lodestone(default) compass?"));
                 return SINGLE_SUCCESS;
             }
             LodestoneTracker lodestoneTrackerComponent = components.get(DataComponents.LODESTONE_TRACKER);
             if (lodestoneTrackerComponent == null) {
-                error("Couldn't get the components data. Are you holding a (highlight)lodestone(default) compass?");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("Couldn't get the components data. Are you holding a (highlight)lodestone(default) compass?"));
                 return SINGLE_SUCCESS;
             }
 
             if (lodestoneTrackerComponent.target().isEmpty()) {
-                error("Couldn't get the lodestone's target!");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("Couldn't get the lodestone's target!"));
                 return SINGLE_SUCCESS;
             }
 
             Vec3 coords = Vec3.atLowerCornerOf(lodestoneTrackerComponent.target().get().pos());
-            MutableComponent text = Component.literal("Lodestone located at ");
+            MutableComponent text = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Lodestone located at "));
             text.append(ChatUtils.formatCoords(coords));
             text.append(".");
             info(text);
@@ -296,7 +296,7 @@ public class LocateCommand extends Command {
     }
 
     private void cancel() {
-        warning("Locate canceled");
+        warning(meteordevelopment.meteorclient.utils.misc.Localization.text("Locate canceled"));
         MeteorClient.EVENT_BUS.unsubscribe(this);
     }
 
@@ -306,7 +306,7 @@ public class LocateCommand extends Command {
             return null;
         }
         if (posList.size() < 3) {
-            warning("Only %d block(s) found. This search might be a false positive.", posList.size());
+            warning(meteordevelopment.meteorclient.utils.misc.Localization.text("Only %d block(s) found. This search might be a false positive."), posList.size());
         }
         return new Vec3(posList.getFirst().getX(), posList.getFirst().getY(), posList.getFirst().getZ());
     }
@@ -335,11 +335,11 @@ public class LocateCommand extends Command {
     }
 
     private void lastPosition(double x, double y, double z) {
-        info("%s Eye of Ender's trajectory saved.", (this.firstEnd == null) ? "First" : "Second");
+        info(meteordevelopment.meteorclient.utils.misc.Localization.text("%s Eye of Ender's trajectory saved."), (this.firstEnd == null) ? meteordevelopment.meteorclient.utils.misc.Localization.text("First") : meteordevelopment.meteorclient.utils.misc.Localization.text("Second"));
         Vec3 pos = new Vec3(x, y, z);
         if (this.firstEnd == null) {
             this.firstEnd = pos;
-            info("Please throw the second Eye Of Ender from a different location.");
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Please throw the second Eye Of Ender from a different location."));
         } else {
             this.secondEnd = pos;
             findStronghold();
@@ -350,7 +350,7 @@ public class LocateCommand extends Command {
         PathManagers.get().stop();
 
         if (this.firstStart == null || this.firstEnd == null || this.secondStart == null || this.secondEnd == null) {
-            error("Missing position data");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Missing position data"));
             cancel();
             return;
         }
@@ -359,14 +359,14 @@ public class LocateCommand extends Command {
         final double[] end = new double[]{this.firstStart.x, this.firstStart.z, this.firstEnd.x, this.firstEnd.z};
         final double[] intersection = calcIntersection(start, end);
         if (Double.isNaN(intersection[0]) || Double.isNaN(intersection[1]) || Double.isInfinite(intersection[0]) || Double.isInfinite(intersection[1])) {
-            error("Unable to calculate intersection.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Unable to calculate intersection."));
             cancel();
             return;
         }
 
         MeteorClient.EVENT_BUS.unsubscribe(this);
         Vec3 coords = new Vec3(intersection[0], 0, intersection[1]);
-        MutableComponent text = Component.literal("Stronghold roughly located at ");
+        MutableComponent text = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Stronghold roughly located at "));
         text.append(ChatUtils.formatCoords(coords));
         text.append(".");
         info(text);

@@ -40,7 +40,7 @@ public class BlockESP extends Module {
 
     private final Setting<List<Block>> blocks = sgGeneral.add(new BlockListSetting.Builder()
         .name("blocks")
-        .description("Blocks to search for.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Blocks to search for."))
         .onChanged(_ -> {
             if (isActive() && Utils.canUpdate()) onActivate();
         })
@@ -49,7 +49,7 @@ public class BlockESP extends Module {
 
     private final Setting<ESPBlockData> defaultBlockConfig = sgGeneral.add(new GenericSetting.Builder<ESPBlockData>()
         .name("default-block-config")
-        .description("Default block config.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Default block config."))
         .defaultValue(
             new ESPBlockData(
                 ShapeMode.Lines,
@@ -64,14 +64,14 @@ public class BlockESP extends Module {
 
     private final Setting<Map<Block, ESPBlockData>> blockConfigs = sgGeneral.add(new BlockDataSetting.Builder<ESPBlockData>()
         .name("block-configs")
-        .description("Config for each block.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Config for each block."))
         .defaultData(defaultBlockConfig)
         .build()
     );
 
     private final Setting<Boolean> tracers = sgGeneral.add(new BoolSetting.Builder()
         .name("tracers")
-        .description("Render tracer lines.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Render tracer lines."))
         .defaultValue(false)
         .build()
     );

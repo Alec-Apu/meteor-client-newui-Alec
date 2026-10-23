@@ -20,7 +20,7 @@ public class WeatherChanger extends Module {
 
     private final Setting<Double> rainLevel = sgGeneral.add(new DoubleSetting.Builder()
         .name("rain-level")
-        .description("The specified rain level to be set.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The specified rain level to be set."))
         .defaultValue(0)
         .sliderRange(0, 1)
         .build()
@@ -28,7 +28,7 @@ public class WeatherChanger extends Module {
 
     private final Setting<Double> thunderLevel = sgGeneral.add(new DoubleSetting.Builder()
         .name("thunder-level")
-        .description("The specified thunder level to be set.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The specified thunder level to be set."))
         .defaultValue(0)
         .sliderRange(0, 1)
         .build()

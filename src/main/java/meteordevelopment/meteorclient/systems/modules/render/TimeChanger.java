@@ -20,7 +20,7 @@ public class TimeChanger extends Module {
 
     private final Setting<Double> time = sgGeneral.add(new DoubleSetting.Builder()
         .name("time")
-        .description("The specified time to be set.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The specified time to be set."))
         .defaultValue(0)
         .sliderRange(-20000, 20000)
         .build()

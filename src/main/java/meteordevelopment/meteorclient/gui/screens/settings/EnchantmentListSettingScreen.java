@@ -18,7 +18,7 @@ import java.util.Set;
 
 public class EnchantmentListSettingScreen extends DynamicRegistryListSettingScreen<Enchantment> {
     public EnchantmentListSettingScreen(GuiTheme theme, Setting<Set<ResourceKey<Enchantment>>> setting) {
-        super(theme, "Select Enchantments", setting, setting.get(), Registries.ENCHANTMENT);
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Select Enchantments"), setting, setting.get(), Registries.ENCHANTMENT);
     }
 
     @Override

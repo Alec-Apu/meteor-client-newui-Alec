@@ -14,8 +14,8 @@ public abstract class WConfirmedButton extends WButton {
     protected String confirmText;
 
     public WConfirmedButton(String text, String confirmText, GuiTexture texture) {
-        super(text, texture);
-        this.confirmText = confirmText;
+        super(meteordevelopment.meteorclient.utils.misc.Localization.text(text), texture);
+        this.confirmText = meteordevelopment.meteorclient.utils.misc.Localization.text(confirmText);
     }
 
     @Override
@@ -42,7 +42,7 @@ public abstract class WConfirmedButton extends WButton {
     }
 
     public void set(String text, String confirmText) {
-        super.set(text);
-        this.confirmText = confirmText;
+        super.set(meteordevelopment.meteorclient.utils.misc.Localization.text(text));
+        this.confirmText = meteordevelopment.meteorclient.utils.misc.Localization.text(confirmText);
     }
 }

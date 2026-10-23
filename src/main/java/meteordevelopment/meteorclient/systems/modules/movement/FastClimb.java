@@ -25,14 +25,14 @@ public class FastClimb extends Module {
 
     private final Setting<Boolean> timerMode = sgGeneral.add(new BoolSetting.Builder()
         .name("timer-mode")
-        .description("Use timer.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Use timer."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Double> speed = sgGeneral.add(new DoubleSetting.Builder()
         .name("climb-speed")
-        .description("Your climb speed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Your climb speed."))
         .defaultValue(0.2872)
         .min(0.0)
         .visible(() -> !timerMode.get())
@@ -41,7 +41,7 @@ public class FastClimb extends Module {
 
     private final Setting<Double> timer = sgGeneral.add(new DoubleSetting.Builder()
         .name("timer")
-        .description("The timer value for Timer.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The timer value for Timer."))
         .defaultValue(1.436)
         .min(1)
         .sliderMin(1)

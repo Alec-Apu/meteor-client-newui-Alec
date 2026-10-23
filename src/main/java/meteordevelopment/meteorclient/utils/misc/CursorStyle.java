@@ -2,29 +2,19 @@
  * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
  * Copyright (c) Meteor Development.
  */
-
 package meteordevelopment.meteorclient.utils.misc;
 
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.cursor.CursorType;
+import com.mojang.blaze3d.platform.cursor.CursorTypes;
 
 public enum CursorStyle {
-    Default,
-    Click,
-    Type;
+    Default, Click, Type;
 
-    private boolean created;
-    private long cursor;
-
-    public long getGlfwCursor() {
-        if (!created) {
-            switch (this) {
-                case Click -> cursor = GLFW.glfwCreateStandardCursor(GLFW.GLFW_HAND_CURSOR);
-                case Type -> cursor = GLFW.glfwCreateStandardCursor(GLFW.GLFW_IBEAM_CURSOR);
-            }
-
-            created = true;
-        }
-
-        return cursor;
+    public CursorType getCursor() {
+        return switch (this) {
+            case Default -> CursorType.DEFAULT;
+            case Click -> CursorTypes.POINTING_HAND;
+            case Type -> CursorTypes.IBEAM;
+        };
     }
 }

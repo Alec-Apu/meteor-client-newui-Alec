@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static meteordevelopment.meteorclient.MeteorClient.mc;
-import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_LEFT;
+import static com.mojang.blaze3d.platform.InputConstants.MOUSE_BUTTON_LEFT;
 
 @Mixin(AbstractContainerScreen.class)
 public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMenu> extends Screen implements MenuAccess<T> {
@@ -71,14 +71,14 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
 
         if (invTweaks.isActive() && invTweaks.showButtons() && invTweaks.canSteal(getMenu())) {
             addRenderableWidget(
-                new Button.Builder(Component.literal("Steal"), _ -> invTweaks.steal(getMenu()))
+                new Button.Builder(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Steal")), _ -> invTweaks.steal(getMenu()))
                     .pos(leftPos, topPos - 22)
                     .size(40, 20)
                     .build()
             );
 
             addRenderableWidget(
-                new Button.Builder(Component.literal("Dump"), _ -> invTweaks.dump(getMenu()))
+                new Button.Builder(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Dump")), _ -> invTweaks.dump(getMenu()))
                     .pos(leftPos + 42, topPos - 22)
                     .size(40, 20)
                     .build()
@@ -89,7 +89,7 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
     // Inventory Tweaks
     @Inject(method = "mouseDragged", at = @At("TAIL"))
     private void onMouseDragged(MouseButtonEvent event, double dx, double dy, CallbackInfoReturnable<Boolean> cir) {
-        if (event.button() != GLFW_MOUSE_BUTTON_LEFT || doubleclick || !Modules.get().get(InventoryTweaks.class).mouseDragItemMove())
+        if (event.button() != MOUSE_BUTTON_LEFT || doubleclick || !Modules.get().get(InventoryTweaks.class).mouseDragItemMove())
             return;
 
         Slot slot = getHoveredSlot(event.x(), event.y());

@@ -38,18 +38,18 @@ public class NameHistoryCommand extends Command {
                 UUID uuid = lookUpTarget.getProfile().id();
 
                 NameHistory history = Http.get("https://laby.net/api/v2/user/" + uuid + "/get-profile")
-                    .exceptionHandler(_ -> error("There was an error fetching that users name history."))
+                    .exceptionHandler(_ -> error(meteordevelopment.meteorclient.utils.misc.Localization.text("There was an error fetching that users name history.")))
                     .sendJson(NameHistory.class);
 
                 if (history == null) {
                     return;
                 } else if (history.username_history == null || history.username_history.length == 0) {
-                    error("There was an error fetching that users name history.");
+                    error(meteordevelopment.meteorclient.utils.misc.Localization.text("There was an error fetching that users name history."));
                 }
 
                 String name = lookUpTarget.getProfile().name();
                 MutableComponent initial = Component.literal(name);
-                initial.append(Component.literal(name.endsWith("s") ? "'" : "'s"));
+                initial.append(Component.literal(name.endsWith("s") ? "'" : meteordevelopment.meteorclient.utils.misc.Localization.text("'s")));
 
                 Color nameColor = PlayerUtils.getPlayerColor(mc.level.getPlayerByUUID(uuid), Utils.WHITE);
 
@@ -60,20 +60,20 @@ public class NameHistoryCommand extends Command {
                         )
                     )
                     .withHoverEvent(new HoverEvent.ShowText(
-                        Component.literal("View on laby.net")
+                        Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("View on laby.net"))
                             .withStyle(ChatFormatting.YELLOW)
                             .withStyle(ChatFormatting.ITALIC)
                     ))
                 );
 
-                info(initial.append(Component.literal(" Username History:").withStyle(ChatFormatting.GRAY)));
+                info(initial.append(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text(" Username History:")).withStyle(ChatFormatting.GRAY)));
 
                 for (Name entry : history.username_history) {
                     MutableComponent nameText = Component.literal(entry.name);
                     nameText.withStyle(ChatFormatting.AQUA);
 
                     if (entry.changed_at != null && entry.changed_at.getTime() != 0) {
-                        MutableComponent changed = Component.literal("Changed at: ");
+                        MutableComponent changed = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Changed at: "));
                         changed.withStyle(ChatFormatting.GRAY);
 
                         DateFormat formatter = new SimpleDateFormat("hh:mm:ss, dd/MM/yyyy");
@@ -85,7 +85,7 @@ public class NameHistoryCommand extends Command {
                     if (!entry.accurate) {
                         MutableComponent text = Component.literal("*").withStyle(ChatFormatting.WHITE);
 
-                        text.setStyle(text.getStyle().withHoverEvent(new HoverEvent.ShowText(Component.literal("This name history entry is not accurate according to laby.net"))));
+                        text.setStyle(text.getStyle().withHoverEvent(new HoverEvent.ShowText(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("This name history entry is not accurate according to laby.net")))));
 
                         nameText.append(text);
                     }

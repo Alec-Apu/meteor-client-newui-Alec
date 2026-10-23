@@ -43,7 +43,7 @@ import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import org.joml.Vector3d;
 import org.jspecify.annotations.Nullable;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 
 public class Freecam extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
@@ -51,7 +51,7 @@ public class Freecam extends Module {
 
     private final Setting<Double> speed = sgGeneral.add(new DoubleSetting.Builder()
         .name("speed")
-        .description("Your speed while in freecam.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Your speed while in freecam."))
         .onChanged(aDouble -> speedValue = aDouble)
         .defaultValue(1.0)
         .min(0.0)
@@ -60,7 +60,7 @@ public class Freecam extends Module {
 
     private final Setting<Double> speedScrollSensitivity = sgGeneral.add(new DoubleSetting.Builder()
         .name("speed-scroll-sensitivity")
-        .description("Allows you to change speed value using scroll wheel. 0 to disable.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Allows you to change speed value using scroll wheel. 0 to disable."))
         .defaultValue(0)
         .min(0)
         .sliderMax(2)
@@ -69,70 +69,70 @@ public class Freecam extends Module {
 
     private final Setting<Boolean> staySneaking = sgGeneral.add(new BoolSetting.Builder()
         .name("stay-sneaking")
-        .description("If you are sneaking when you enter freecam, whether your player should remain sneaking.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("If you are sneaking when you enter freecam, whether your player should remain sneaking."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> toggleOnDamage = sgGeneral.add(new BoolSetting.Builder()
         .name("toggle-on-damage")
-        .description("Disables freecam when you take damage.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Disables freecam when you take damage."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> toggleOnDeath = sgGeneral.add(new BoolSetting.Builder()
         .name("toggle-on-death")
-        .description("Disables freecam when you die.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Disables freecam when you die."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> toggleOnLog = sgGeneral.add(new BoolSetting.Builder()
         .name("toggle-on-log")
-        .description("Disables freecam when you disconnect from a server.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Disables freecam when you disconnect from a server."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> reloadChunks = sgGeneral.add(new BoolSetting.Builder()
         .name("reload-chunks")
-        .description("Disables cave culling.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Disables cave culling."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> renderHands = sgGeneral.add(new BoolSetting.Builder()
         .name("show-hands")
-        .description("Whether or not to render your hands in freecam.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to render your hands in freecam."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> rotate = sgGeneral.add(new BoolSetting.Builder()
         .name("rotate")
-        .description("Rotates to the block or entity you are looking at.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Rotates to the block or entity you are looking at."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> staticView = sgGeneral.add(new BoolSetting.Builder()
         .name("static")
-        .description("Disables settings that move the view.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Disables settings that move the view."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> baritoneClick = sgPathing.add(new BoolSetting.Builder()
         .name("click-to-path")
-        .description("Sets a pathfinding goal to any block/entity you click at.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Sets a pathfinding goal to any block/entity you click at."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> requireDoubleClick = sgPathing.add(new BoolSetting.Builder()
         .name("double-click")
-        .description("Require two clicks to start pathing.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Require two clicks to start pathing."))
         .defaultValue(false)
         .build()
     );
@@ -305,7 +305,7 @@ public class Freecam extends Module {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onKey(KeyInputEvent event) {
-        if (Input.isKeyPressed(GLFW.GLFW_KEY_F3)) return;
+        if (Input.isKeyPressed(InputConstants.KEY_F3)) return;
         if (checkGuiMove()) return;
 
         if (onInput(event.key(), event.action)) event.cancel();
@@ -433,17 +433,17 @@ public class Freecam extends Module {
             Entity entity = mc.level.getEntity(packet.playerId());
             if (entity == mc.player && toggleOnDeath.get()) {
                 toggle();
-                info("Toggled off because you died.");
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Toggled off because you died."));
             }
         } else if (event.packet instanceof ClientboundSetHealthPacket packet) {
             if (mc.player.getHealth() - packet.getHealth() > 0 && toggleOnDamage.get()) {
                 toggle();
-                info("Toggled off because you took damage.");
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Toggled off because you took damage."));
             }
         } else if (event.packet instanceof ClientboundRespawnPacket) {
             if (isActive()) {
                 toggle();
-                info("Toggled off because you changed dimensions.");
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Toggled off because you changed dimensions."));
             }
         }
     }

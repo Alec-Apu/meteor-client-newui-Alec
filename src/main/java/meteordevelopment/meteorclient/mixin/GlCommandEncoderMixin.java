@@ -2,40 +2,25 @@
  * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
  * Copyright (c) Meteor Development.
  */
-
 package meteordevelopment.meteorclient.mixin;
 
-import com.mojang.blaze3d.opengl.GlCommandEncoder;
-import com.mojang.blaze3d.opengl.GlDevice;
-import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.blaze3d.systems.RenderPassBackend;
-import meteordevelopment.meteorclient.mixininterface.IGpuDevice;
-import meteordevelopment.meteorclient.mixininterface.IRenderPipeline;
-import org.spongepowered.asm.mixin.Final;
+import com.mojang.renderpearl.backend.opengl.GlCommandEncoder;
+import com.mojang.renderpearl.backend.opengl.GlRenderPipeline;
+import meteordevelopment.meteorclient.renderer.MeteorRenderPipelines;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
 import static org.lwjgl.opengl.GL11C.*;
 
 @Mixin(GlCommandEncoder.class)
 public abstract class GlCommandEncoderMixin {
-    @Shadow
-    @Final
-    private GlDevice device;
+    @Shadow private GlRenderPipeline lastPipeline;
 
-    @SuppressWarnings("deprecation")
-    @Inject(method = "createRenderPass(Lcom/mojang/blaze3d/systems/RenderPassDescriptor;)Lcom/mojang/blaze3d/systems/RenderPassBackend;", at = @At("RETURN"))
-    private void createRenderPass$iGpuDevice(CallbackInfoReturnable<RenderPassBackend> cir) {
-        ((IGpuDevice) device).meteor$onCreateRenderPass(cir.getReturnValue());
-    }
-
-    @Inject(method = "applyPipelineState", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/opengl/GlStateManager;_polygonMode(II)V"))
-    private void setPipelineAndApplyState$lineSmooth(RenderPipeline pipeline, CallbackInfo ci) {
-        if (((IRenderPipeline) pipeline).meteor$getLineSmooth()) {
+    @Inject(method = "setupDraw", at = @At("RETURN"))
+    private void meteor$lineSmooth(CallbackInfo ci) {
+        if (MeteorRenderPipelines.lineSmooth(lastPipeline)) {
             glEnable(GL_LINE_SMOOTH);
             glLineWidth(1);
         } else {

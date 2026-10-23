@@ -46,14 +46,14 @@ public class BookBot extends Module {
 
     private final Setting<Mode> mode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("mode")
-        .description("What kind of text to write.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("What kind of text to write."))
         .defaultValue(Mode.Random)
         .build()
     );
 
     private final Setting<RandomType> randomType = sgGeneral.add(new EnumSetting.Builder<RandomType>()
         .name("random-type")
-        .description("What kind of random to use.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("What kind of random to use."))
         .defaultValue(RandomType.Utf8)
         .visible(() -> mode.get() == Mode.Random)
         .build()
@@ -61,7 +61,7 @@ public class BookBot extends Module {
 
     private final Setting<Integer> pages = sgGeneral.add(new IntSetting.Builder()
         .name("pages")
-        .description("The number of pages to write per book.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The number of pages to write per book."))
         .defaultValue(50)
         .range(1, 100)
         .sliderRange(1, 100)
@@ -71,7 +71,7 @@ public class BookBot extends Module {
 
     private final Setting<Integer> characters = sgGeneral.add(new IntSetting.Builder()
         .name("characters")
-        .description("How many characters to write per page.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How many characters to write per page."))
         .defaultValue(128)
         .range(1, 1024)
         .sliderRange(1, 1024)
@@ -81,7 +81,7 @@ public class BookBot extends Module {
 
     private final Setting<Integer> delay = sgGeneral.add(new IntSetting.Builder()
         .name("delay")
-        .description("The amount of delay between writing books.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The amount of delay between writing books."))
         .defaultValue(20)
         .min(1)
         .sliderRange(1, 200)
@@ -90,14 +90,14 @@ public class BookBot extends Module {
 
     private final Setting<Boolean> sign = sgGeneral.add(new BoolSetting.Builder()
         .name("sign")
-        .description("Whether to sign the book.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to sign the book."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<String> name = sgGeneral.add(new StringSetting.Builder()
         .name("name")
-        .description("The name you want to give your books.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The name you want to give your books."))
         .defaultValue("Meteor on Crack!")
         .visible(sign::get)
         .build()
@@ -105,7 +105,7 @@ public class BookBot extends Module {
 
     private final Setting<Boolean> count = sgGeneral.add(new BoolSetting.Builder()
         .name("append-count")
-        .description("Whether to append the number of the book to the title.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to append the number of the book to the title."))
         .defaultValue(true)
         .visible(sign::get)
         .build()
@@ -113,7 +113,7 @@ public class BookBot extends Module {
 
     private final Setting<Boolean> wordWrap = sgGeneral.add(new BoolSetting.Builder()
         .name("word-wrap")
-        .description("Prevents words from being cut in the middle of lines.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Prevents words from being cut in the middle of lines."))
         .defaultValue(true)
         .visible(() -> mode.get() == Mode.File)
         .build()
@@ -144,9 +144,9 @@ public class BookBot extends Module {
     public WWidget getWidget(GuiTheme theme) {
         WHorizontalList list = theme.horizontalList();
 
-        WButton selectFile = list.add(theme.button("Select File")).widget();
+        WButton selectFile = list.add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Select File"))).widget();
 
-        WLabel fileName = list.add(theme.label((file != null && file.exists()) ? file.getName() : "No file selected.")).widget();
+        WLabel fileName = list.add(theme.label((file != null && file.exists()) ? file.getName() : meteordevelopment.meteorclient.utils.misc.Localization.text("No file selected."))).widget();
 
         selectFile.action = () -> {
             String path = TinyFileDialogs.tinyfd_openFileDialog(
@@ -169,7 +169,7 @@ public class BookBot extends Module {
     @Override
     public void onActivate() {
         if ((file == null || !file.exists()) && mode.get() == Mode.File) {
-            info("No file selected, please select a file in the GUI.");
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("No file selected, please select a file in the GUI."));
             toggle();
             return;
         }
@@ -222,7 +222,7 @@ public class BookBot extends Module {
         } else if (mode.get() == Mode.File) {
             // Ignore if somehow the file got deleted
             if ((file == null || !file.exists()) && mode.get() == Mode.File) {
-                info("No file selected, please select a file in the GUI.");
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("No file selected, please select a file in the GUI."));
                 toggle();
                 return;
             }
@@ -230,8 +230,8 @@ public class BookBot extends Module {
             // Handle the file being empty
             if (file.length() == 0) {
                 MutableComponent message = Component.literal("");
-                message.append(Component.literal("The bookbot file is empty! ").withStyle(ChatFormatting.RED));
-                message.append(Component.literal("Click here to edit it.")
+                message.append(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("The bookbot file is empty! ")).withStyle(ChatFormatting.RED));
+                message.append(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Click here to edit it."))
                     .setStyle(Style.EMPTY
                         .applyFormats(ChatFormatting.UNDERLINE, ChatFormatting.RED)
                         .withClickEvent(new ClickEvent.OpenFile(file.getAbsolutePath()))
@@ -256,7 +256,7 @@ public class BookBot extends Module {
                 // Write the file string to a book
                 writeBook(file.toString().chars().iterator());
             } catch (IOException _) {
-                error("Failed to read the file.");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("Failed to read the file."));
             }
         }
     }

@@ -22,14 +22,14 @@ public class MessageAura extends Module {
 
     private final Setting<String> message = sgGeneral.add(new StringSetting.Builder()
         .name("message")
-        .description("The specified message sent to the player.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The specified message sent to the player."))
         .defaultValue("Meteor on Crack!")
         .build()
     );
 
     private final Setting<Boolean> ignoreFriends = sgGeneral.add(new BoolSetting.Builder()
         .name("ignore-friends")
-        .description("Will not send any messages to people friended.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Will not send any messages to people friended."))
         .defaultValue(false)
         .build()
     );

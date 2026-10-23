@@ -22,14 +22,14 @@ public class Rotation extends Module {
 
     private final Setting<LockMode> yawLockMode = sgYaw.add(new EnumSetting.Builder<LockMode>()
         .name("yaw-lock-mode")
-        .description("The way in which your yaw is locked.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The way in which your yaw is locked."))
         .defaultValue(LockMode.Simple)
         .build()
     );
 
     private final Setting<Double> yawAngle = sgYaw.add(new DoubleSetting.Builder()
         .name("yaw-angle")
-        .description("Yaw angle in degrees.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Yaw angle in degrees."))
         .defaultValue(0)
         .sliderMax(360)
         .max(360)
@@ -41,14 +41,14 @@ public class Rotation extends Module {
 
     private final Setting<LockMode> pitchLockMode = sgPitch.add(new EnumSetting.Builder<LockMode>()
         .name("pitch-lock-mode")
-        .description("The way in which your pitch is locked.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The way in which your pitch is locked."))
         .defaultValue(LockMode.Simple)
         .build()
     );
 
     private final Setting<Double> pitchAngle = sgPitch.add(new DoubleSetting.Builder()
         .name("pitch-angle")
-        .description("Pitch angle in degrees.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Pitch angle in degrees."))
         .defaultValue(0)
         .range(-90, 90)
         .sliderRange(-90, 90)

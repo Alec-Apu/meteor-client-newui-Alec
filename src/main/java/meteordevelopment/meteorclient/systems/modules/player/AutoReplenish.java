@@ -24,7 +24,7 @@ public class AutoReplenish extends Module {
 
     private final Setting<Integer> minCount = sgGeneral.add(new IntSetting.Builder()
         .name("min-count")
-        .description("Replenish a slot when it reaches this item count.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Replenish a slot when it reaches this item count."))
         .defaultValue(8)
         .min(1)
         .sliderRange(1, 63)
@@ -33,7 +33,7 @@ public class AutoReplenish extends Module {
 
     private final Setting<Integer> tickDelay = sgGeneral.add(new IntSetting.Builder()
         .name("delay")
-        .description("How long in ticks to wait between replenishing your hotbar.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How long in ticks to wait between replenishing your hotbar."))
         .defaultValue(1)
         .min(0)
         .build()
@@ -41,21 +41,21 @@ public class AutoReplenish extends Module {
 
     private final Setting<Boolean> offhand = sgGeneral.add(new BoolSetting.Builder()
         .name("offhand")
-        .description("Whether or not to replenish items in your offhand.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether or not to replenish items in your offhand."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> unstackable = sgGeneral.add(new BoolSetting.Builder()
         .name("unstackable")
-        .description("Replenish unstackable items.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Replenish unstackable items."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> sameEnchants = sgGeneral.add(new BoolSetting.Builder()
         .name("same-enchants")
-        .description("Only replace unstackables with items that have the same enchants.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Only replace unstackables with items that have the same enchants."))
         .defaultValue(true)
         .visible(unstackable::get)
         .build()
@@ -63,14 +63,14 @@ public class AutoReplenish extends Module {
 
     private final Setting<Boolean> searchHotbar = sgGeneral.add(new BoolSetting.Builder()
         .name("search-hotbar")
-        .description("Combine stacks in your hotbar/offhand as a last resort.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Combine stacks in your hotbar/offhand as a last resort."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<List<Item>> excludedItems = sgGeneral.add(new ItemListSetting.Builder()
         .name("excluded-items")
-        .description("Items that won't be replenished.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Items that won't be replenished."))
         .build()
     );
 

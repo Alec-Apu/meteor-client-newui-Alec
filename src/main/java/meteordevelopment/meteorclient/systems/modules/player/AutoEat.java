@@ -42,7 +42,7 @@ public class AutoEat extends Module {
     // General
     public final Setting<List<Item>> blacklist = sgGeneral.add(new ItemListSetting.Builder()
         .name("blacklist")
-        .description("Which items to not eat.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which items to not eat."))
         .defaultValue(
             Items.ENCHANTED_GOLDEN_APPLE,
             Items.GOLDEN_APPLE,
@@ -61,28 +61,28 @@ public class AutoEat extends Module {
 
     private final Setting<Boolean> pauseAuras = sgGeneral.add(new BoolSetting.Builder()
         .name("pause-auras")
-        .description("Pauses all auras when eating.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Pauses all auras when eating."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> pauseBaritone = sgGeneral.add(new BoolSetting.Builder()
         .name("pause-baritone")
-        .description("Pause baritone when eating.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Pause baritone when eating."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> searchInventory = sgGeneral.add(new BoolSetting.Builder()
         .name("search-inventory")
-        .description("Search the full inventory for food, not only the hotbar.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Search the full inventory for food, not only the hotbar."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Priority> prioritise = sgGeneral.add(new EnumSetting.Builder<Priority>()
         .name("food-priority")
-        .description("Which aspect of the food to prioritise selecting for.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which aspect of the food to prioritise selecting for."))
         .defaultValue(Priority.Saturation)
         .build()
     );
@@ -90,14 +90,14 @@ public class AutoEat extends Module {
     // Threshold
     private final Setting<ThresholdMode> thresholdMode = sgThreshold.add(new EnumSetting.Builder<ThresholdMode>()
         .name("threshold-mode")
-        .description("The threshold mode to trigger auto eat.\n'Both' == health AND hunger, 'Any' == health OR hunger")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The threshold mode to trigger auto eat.\n'Both' == health AND hunger, 'Any' == health OR hunger"))
         .defaultValue(ThresholdMode.Any)
         .build()
     );
 
     private final Setting<Double> healthThreshold = sgThreshold.add(new DoubleSetting.Builder()
         .name("health-threshold")
-        .description("The level of health you eat at.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The level of health you eat at."))
         .defaultValue(10)
         .range(1, 19)
         .sliderRange(1, 19)
@@ -107,7 +107,7 @@ public class AutoEat extends Module {
 
     private final Setting<Integer> hungerThreshold = sgThreshold.add(new IntSetting.Builder()
         .name("hunger-threshold")
-        .description("The level of hunger you eat at.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The level of hunger you eat at."))
         .defaultValue(16)
         .range(1, 19)
         .sliderRange(1, 19)

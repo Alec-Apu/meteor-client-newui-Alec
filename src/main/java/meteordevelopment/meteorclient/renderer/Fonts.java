@@ -25,6 +25,10 @@ import static meteordevelopment.meteorclient.MeteorClient.mc;
 
 public class Fonts {
     public static final String[] BUILTIN_FONTS = {"JetBrains Mono", "Comfortaa", "Tw Cen MT", "Pixelation"};
+    private static final String[] CJK_FALLBACK_FAMILIES = {
+        "SimHei", "Microsoft YaHei", "Noto Sans CJK SC", "Noto Sans SC",
+        "PingFang SC", "Hiragino Sans GB", "Malgun Gothic"
+    };
 
     public static String DEFAULT_FONT_FAMILY;
     public static FontFace DEFAULT_FONT;
@@ -65,7 +69,10 @@ public class Fonts {
         }
 
         try {
-            RENDERER = new CustomTextRenderer(fontFace);
+            FontFace fallback = findCjkFallback();
+            RENDERER = new CustomTextRenderer(fontFace, fallback);
+            if (fallback != null) MeteorClient.LOG.info("Using {} as CJK font fallback.", fallback.info.family());
+            else MeteorClient.LOG.warn("No system CJK font was found; unsupported glyphs will use Minecraft's font renderer.");
             MeteorClient.EVENT_BUS.post(CustomFontChangedEvent.get());
         } catch (Exception e) {
             if (fontFace.equals(DEFAULT_FONT)) {
@@ -86,6 +93,18 @@ public class Fonts {
             if (fontFamily.getName().equalsIgnoreCase(name)) {
                 return fontFamily;
             }
+        }
+
+        return null;
+    }
+
+    private static FontFace findCjkFallback() {
+        for (String familyName : CJK_FALLBACK_FAMILIES) {
+            FontFamily family = getFamily(familyName);
+            if (family == null) continue;
+
+            FontFace regular = family.get(FontInfo.Type.Regular);
+            if (regular != null) return regular;
         }
 
         return null;

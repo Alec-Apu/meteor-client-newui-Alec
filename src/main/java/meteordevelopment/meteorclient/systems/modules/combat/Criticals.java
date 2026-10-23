@@ -18,7 +18,6 @@ import meteordevelopment.meteorclient.utils.entity.EntityUtils;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.network.protocol.game.ServerboundAttackPacket;
 import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;
-import net.minecraft.network.protocol.game.ServerboundSwingPacket;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.MaceItem;
@@ -30,14 +29,14 @@ public class Criticals extends Module {
 
     private final Setting<Mode> mode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("mode")
-        .description("The mode on how Criticals will function.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The mode on how Criticals will function."))
         .defaultValue(Mode.Packet)
         .build()
     );
 
     private final Setting<Boolean> ka = sgGeneral.add(new BoolSetting.Builder()
         .name("only-killaura")
-        .description("Only performs crits when using killaura.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Only performs crits when using killaura."))
         .defaultValue(false)
         .visible(() -> mode.get() != Mode.None)
         .build()
@@ -45,14 +44,14 @@ public class Criticals extends Module {
 
     private final Setting<Boolean> mace = sgMace.add(new BoolSetting.Builder()
         .name("smash-attack")
-        .description("Will always perform smash attacks when using a mace.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Will always perform smash attacks when using a mace."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Double> extraHeight = sgMace.add(new DoubleSetting.Builder()
         .name("additional-height")
-        .description("The amount of additional height to spoof. More height means more damage.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The amount of additional height to spoof. More height means more damage."))
         .defaultValue(0.0)
         .min(0)
         .sliderRange(0, 100)
@@ -61,7 +60,6 @@ public class Criticals extends Module {
     );
 
     private ServerboundAttackPacket attackPacket;
-    private ServerboundSwingPacket swingPacket;
     private boolean sendPackets;
     private int sendTimer;
     private double lastY;
@@ -74,7 +72,6 @@ public class Criticals extends Module {
     @Override
     public void onActivate() {
         attackPacket = null;
-        swingPacket = null;
         sendPackets = false;
         sendTimer = 0;
         lastY = 0;
@@ -130,13 +127,6 @@ public class Criticals extends Module {
                     }
                 }
             }
-        } else if (event.packet instanceof ServerboundSwingPacket serverboundSwingPacket && mode.get() != Mode.Packet) {
-            if (skipCrit()) return;
-
-            if (sendPackets && swingPacket == null) {
-                swingPacket = serverboundSwingPacket;
-                event.cancel();
-            }
         }
     }
 
@@ -154,15 +144,13 @@ public class Criticals extends Module {
             }
 
             if (sendTimer <= 0) {
-                if (attackPacket == null || swingPacket == null) {
+                if (attackPacket == null) {
                     sendPackets = false;
                     return;
                 }
                 mc.getConnection().send(attackPacket);
-                mc.getConnection().send(swingPacket);
 
                 attackPacket = null;
-                swingPacket = null;
 
                 sendPackets = false;
             } else {

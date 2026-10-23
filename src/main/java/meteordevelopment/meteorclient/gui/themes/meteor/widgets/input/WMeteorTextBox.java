@@ -17,6 +17,8 @@ import meteordevelopment.meteorclient.gui.widgets.input.WTextBox;
 import meteordevelopment.meteorclient.utils.render.color.Color;
 import net.minecraft.util.Mth;
 
+import static meteordevelopment.meteorclient.gui.themes.meteor.ModernWidgetStyle.isModuleDetails;
+
 public class WMeteorTextBox extends WTextBox implements MeteorWidget {
     private boolean cursorVisible;
     private double cursorTimer;
@@ -25,6 +27,20 @@ public class WMeteorTextBox extends WTextBox implements MeteorWidget {
 
     public WMeteorTextBox(String text, String placeholder, CharFilter filter, Class<? extends Renderer> renderer) {
         super(text, placeholder, filter, renderer);
+    }
+
+    @Override
+    public double pad() {
+        return isModuleDetails() ? theme.scale(8) : super.pad();
+    }
+
+    @Override
+    protected void onCalculateSize() {
+        super.onCalculateSize();
+        if (isModuleDetails()) {
+            width = Math.max(width, theme.scale(72));
+            height = Math.max(height, theme.scale(34));
+        }
     }
 
     @Override

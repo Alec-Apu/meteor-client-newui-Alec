@@ -3,8 +3,9 @@
   "name": "Meteor Client",
   "id": "meteor-client",
   "version": "${version}",
-  "description": "Based utility mod.",
+  "description": "适用于 Minecraft 26.3 的彗星实用客户端（简体中文汉化版）。",
   "authors": [
+    "Alec",
     "MineGame159",
     "squidoodly",
     "seasnail"

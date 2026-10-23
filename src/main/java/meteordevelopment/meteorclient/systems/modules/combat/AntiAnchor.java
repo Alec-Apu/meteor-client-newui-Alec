@@ -23,14 +23,14 @@ public class AntiAnchor extends Module {
 
     private final Setting<Boolean> rotate = sgGeneral.add(new BoolSetting.Builder()
         .name("rotate")
-        .description("Makes you rotate when placing.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Makes you rotate when placing."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> swing = sgGeneral.add(new BoolSetting.Builder()
         .name("swing")
-        .description("Swings your hand when placing.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Swings your hand when placing."))
         .defaultValue(true)
         .build()
     );

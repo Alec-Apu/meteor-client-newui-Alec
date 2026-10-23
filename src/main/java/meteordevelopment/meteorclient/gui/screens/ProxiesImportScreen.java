@@ -26,7 +26,7 @@ public class ProxiesImportScreen extends WindowScreen {
     private final File file;
 
     public ProxiesImportScreen(GuiTheme theme, File file) {
-        super(theme, "Import Proxies");
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text("Import Proxies"));
         this.file = file;
         this.onClosed(() -> {
             if (parent instanceof ProxiesScreen screen) {
@@ -38,8 +38,8 @@ public class ProxiesImportScreen extends WindowScreen {
     @Override
     public void initWidgets() {
         if (file.exists() && file.isFile()) {
-            add(theme.label("Importing proxies from " + file.getName() + "...").color(Color.GREEN));
-            WVerticalList list = add(theme.section("Log", false)).widget().add(theme.verticalList()).expandX().widget();
+            add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Importing proxies from ") + file.getName() + "...").color(Color.GREEN));
+            WVerticalList list = add(theme.section(meteordevelopment.meteorclient.utils.misc.Localization.text("Log"), false)).widget().add(theme.verticalList()).expandX().widget();
             Proxies proxies = Proxies.get();
             try {
                 int success = 0, fail = 0;
@@ -99,14 +99,14 @@ public class ProxiesImportScreen extends WindowScreen {
                     }
 
                     if (proxy == null) {
-                        list.add(theme.label("Unrecognised proxy format: " + line).color(Color.RED));
+                        list.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Unrecognised proxy format: ") + line).color(Color.RED));
                         fail++;
                     } else {
                         if (proxies.add(proxy)) {
-                            list.add(theme.label("Imported proxy: " + proxy.name.get()).color(Color.GREEN));
+                            list.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Imported proxy: ") + proxy.name.get()).color(Color.GREEN));
                             success++;
                         } else {
-                            list.add(theme.label("Proxy already exists: " + proxy.name.get()).color(Color.ORANGE));
+                            list.add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Proxy already exists: ") + proxy.name.get()).color(Color.ORANGE));
                             fail++;
                         }
                     }
@@ -119,16 +119,16 @@ public class ProxiesImportScreen extends WindowScreen {
                 MeteorClient.LOG.error("An error occurred while importing the proxy file", e);
             }
         } else {
-            add(theme.label("Invalid File!"));
+            add(theme.label(meteordevelopment.meteorclient.utils.misc.Localization.text("Invalid File!")));
         }
         add(theme.horizontalSeparator()).expandX();
-        WButton refresh = add(theme.button("Check proxies")).expandX().widget();
+        WButton refresh = add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Check proxies"))).expandX().widget();
         refresh.action = () -> {
             Proxies.get().checkProxies(false);
             onClose();
         };
 
-        WButton btnBack = add(theme.button("Back")).expandX().widget();
+        WButton btnBack = add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Back"))).expandX().widget();
         btnBack.action = this::onClose;
     }
 }

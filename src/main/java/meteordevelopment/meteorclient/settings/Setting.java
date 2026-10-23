@@ -35,8 +35,8 @@ public abstract class Setting<T> implements IGetter<T>, ISerializable<T> {
 
     public Setting(String name, String description, T defaultValue, Consumer<T> onChanged, Consumer<Setting<T>> onModuleActivated, IVisible visible) {
         this.name = name;
-        this.title = Utils.nameToTitle(name);
-        this.description = description;
+        this.title = meteordevelopment.meteorclient.utils.misc.Localization.text(Utils.nameToTitle(name));
+        this.description = meteordevelopment.meteorclient.utils.misc.Localization.text(description);
         this.defaultValue = defaultValue;
         this.onChanged = onChanged;
         this.onModuleActivated = onModuleActivated;
@@ -181,7 +181,7 @@ public abstract class Setting<T> implements IGetter<T>, ISerializable<T> {
         }
 
         public B description(String description) {
-            this.description = description;
+            this.description = meteordevelopment.meteorclient.utils.misc.Localization.text(description);
             return (B) this;
         }
 

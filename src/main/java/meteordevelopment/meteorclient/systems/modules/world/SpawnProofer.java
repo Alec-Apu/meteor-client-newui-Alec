@@ -31,7 +31,7 @@ public class SpawnProofer extends Module {
 
     private final Setting<Integer> placeDelay = sgGeneral.add(new IntSetting.Builder()
         .name("place-delay")
-        .description("The tick delay between placing blocks.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The tick delay between placing blocks."))
         .defaultValue(1)
         .range(0, 10)
         .build()
@@ -39,7 +39,7 @@ public class SpawnProofer extends Module {
 
     private final Setting<Double> placeRange = sgGeneral.add(new DoubleSetting.Builder()
         .name("place-range")
-        .description("How far away from the player you can place a block.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How far away from the player you can place a block."))
         .defaultValue(4.5)
         .min(0)
         .sliderMax(6)
@@ -48,7 +48,7 @@ public class SpawnProofer extends Module {
 
     private final Setting<Double> wallsRange = sgGeneral.add(new DoubleSetting.Builder()
         .name("walls-range")
-        .description("How far away from the player you can place a block behind walls.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How far away from the player you can place a block behind walls."))
         .defaultValue(4.5)
         .min(0)
         .sliderMax(6)
@@ -57,7 +57,7 @@ public class SpawnProofer extends Module {
 
     private final Setting<Integer> blocksPerTick = sgGeneral.add(new IntSetting.Builder()
         .name("blocks-per-tick")
-        .description("How many blocks to place in one tick.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How many blocks to place in one tick."))
         .defaultValue(1)
         .min(1)
         .build()
@@ -65,7 +65,7 @@ public class SpawnProofer extends Module {
 
     private final Setting<Integer> lightLevel = sgGeneral.add(new IntSetting.Builder()
         .name("light-level")
-        .description("Light levels to spawn proof. Old spawning light: 7.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Light levels to spawn proof. Old spawning light: 7."))
         .defaultValue(0)
         .min(0)
         .sliderMax(15)
@@ -74,7 +74,7 @@ public class SpawnProofer extends Module {
 
     private final Setting<List<Block>> blocks = sgGeneral.add(new BlockListSetting.Builder()
         .name("blocks")
-        .description("Block to use for spawn proofing.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Block to use for spawn proofing."))
         .defaultValue(Blocks.TORCH, Blocks.STONE_BUTTON, Blocks.STONE_SLAB)
         .filter(this::filterBlocks)
         .build()
@@ -82,14 +82,14 @@ public class SpawnProofer extends Module {
 
     private final Setting<Mode> mode = sgGeneral.add(new EnumSetting.Builder<Mode>()
         .name("mode")
-        .description("Which spawn types should be spawn proofed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which spawn types should be spawn proofed."))
         .defaultValue(Mode.Both)
         .build()
     );
 
     private final Setting<Boolean> rotate = sgGeneral.add(new BoolSetting.Builder()
         .name("rotate")
-        .description("Rotates towards the blocks being placed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Rotates towards the blocks being placed."))
         .defaultValue(true)
         .build()
     );
@@ -109,7 +109,7 @@ public class SpawnProofer extends Module {
         // Find slot
         boolean foundBlock = InvUtils.testInHotbar(itemStack -> blocks.get().contains(Block.byItem(itemStack.getItem())));
         if (!foundBlock) {
-            error("Found none of the chosen blocks in hotbar.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Found none of the chosen blocks in hotbar."));
             toggle();
             return;
         }
@@ -144,7 +144,7 @@ public class SpawnProofer extends Module {
         // Find slot
         FindItemResult block = InvUtils.findInHotbar(itemStack -> blocks.get().contains(Block.byItem(itemStack.getItem())));
         if (!block.found()) {
-            error("Found none of the chosen blocks in hotbar.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Found none of the chosen blocks in hotbar."));
             toggle();
             return;
         }

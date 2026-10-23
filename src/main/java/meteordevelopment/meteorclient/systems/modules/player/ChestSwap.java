@@ -25,21 +25,21 @@ public class ChestSwap extends Module {
 
     private final Setting<Chestplate> chestplate = sgGeneral.add(new EnumSetting.Builder<Chestplate>()
         .name("chestplate")
-        .description("Which type of chestplate to swap to.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which type of chestplate to swap to."))
         .defaultValue(Chestplate.PreferNetherite)
         .build()
     );
 
     private final Setting<Boolean> stayOn = sgGeneral.add(new BoolSetting.Builder()
         .name("stay-on")
-        .description("Stays on and activates when you turn it off.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Stays on and activates when you turn it off."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> closeInventory = sgGeneral.add(new BoolSetting.Builder()
         .name("close-inventory")
-        .description("Sends inventory close after swap.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Sends inventory close after swap."))
         .defaultValue(true)
         .build()
     );
@@ -138,7 +138,7 @@ public class ChestSwap extends Module {
     @Override
     public void sendToggledMsg() {
         if (stayOn.get()) super.sendToggledMsg();
-        else if (Config.get().chatFeedback.get() && chatFeedback) info("Triggered (highlight)%s(default).", title);
+        else if (Config.get().chatFeedback.get() && chatFeedback) info(meteordevelopment.meteorclient.utils.misc.Localization.text("Triggered (highlight)%s(default)."), title);
     }
 
     public enum Chestplate {

@@ -27,28 +27,28 @@ public class AutoFish extends Module {
 
     private final Setting<Boolean> autoSwitch = sgGeneral.add(new BoolSetting.Builder()
         .name("auto-switch")
-        .description("Automatically switch to a fishing rod.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically switch to a fishing rod."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> antiBreak = sgGeneral.add(new BoolSetting.Builder()
         .name("anti-break")
-        .description("Avoid using rods that would break if they were cast.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Avoid using rods that would break if they were cast."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> autoCast = sgGeneral.add(new BoolSetting.Builder()
         .name("auto-cast")
-        .description("Automatically cast the fishing rod.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically cast the fishing rod."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Integer> castDelay = sgGeneral.add(new IntSetting.Builder()
         .name("cast-delay")
-        .description("How long to wait between recasts if the bobber fails to land in water.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How long to wait between recasts if the bobber fails to land in water."))
         .defaultValue(14)
         .min(1)
         .sliderMax(60)
@@ -57,7 +57,7 @@ public class AutoFish extends Module {
 
     private final Setting<Integer> castDelayVariance = sgGeneral.add(new IntSetting.Builder()
         .name("cast-delay-variance")
-        .description("Maximum amount of randomness added to cast delay.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Maximum amount of randomness added to cast delay."))
         .defaultValue(0)
         .min(0)
         .sliderMax(30)
@@ -66,7 +66,7 @@ public class AutoFish extends Module {
 
     private final Setting<Integer> catchDelay = sgGeneral.add(new IntSetting.Builder()
         .name("catch-delay")
-        .description("How long to wait after hooking a fish to reel it in.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How long to wait after hooking a fish to reel it in."))
         .defaultValue(6)
         .min(1)
         .sliderMax(20)
@@ -75,7 +75,7 @@ public class AutoFish extends Module {
 
     private final Setting<Integer> catchDelayVariance = sgGeneral.add(new IntSetting.Builder()
         .name("catch-delay-variance")
-        .description("Maximum amount of randomness added to catch delay.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Maximum amount of randomness added to catch delay."))
         .defaultValue(0)
         .min(0)
         .sliderMax(10) // Since the shortest Java edition catch window is 20 ticks, this is the highest possible variance that won't miss fish.

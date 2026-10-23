@@ -5,14 +5,14 @@
 
 package meteordevelopment.meteorclient.systems.modules.render;
 
-import com.mojang.blaze3d.GpuFormat;
-import com.mojang.blaze3d.buffers.GpuBufferSlice;
+import com.mojang.renderpearl.api.GpuFormat;
+import com.mojang.renderpearl.api.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.buffers.Std140Builder;
 import com.mojang.blaze3d.buffers.Std140SizeCalculator;
-import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.renderpearl.api.pipeline.RenderPipeline;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.textures.FilterMode;
-import com.mojang.blaze3d.textures.GpuTextureView;
+import com.mojang.renderpearl.api.textures.FilterMode;
+import com.mojang.renderpearl.api.textures.GpuTextureView;
 import it.unimi.dsi.fastutil.ints.IntFloatImmutablePair;
 import meteordevelopment.meteorclient.MeteorClient;
 import meteordevelopment.meteorclient.events.game.ResolutionChangedEvent;
@@ -33,7 +33,7 @@ import meteordevelopment.orbit.listeners.ConsumerListener;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.DynamicUniformStorage;
+import meteordevelopment.meteorclient.renderer.DynamicUniformStorage;
 import org.jspecify.annotations.NonNull;
 
 import java.nio.ByteBuffer;
@@ -69,7 +69,7 @@ public class Blur extends Module {
     // General
     private final Setting<Integer> strength = sgGeneral.add(new IntSetting.Builder()
         .name("strength")
-        .description("How strong the blur should be.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How strong the blur should be."))
         .defaultValue(5)
         .min(1)
         .max(20)
@@ -79,7 +79,7 @@ public class Blur extends Module {
 
     private final Setting<Integer> fadeTime = sgGeneral.add(new IntSetting.Builder()
         .name("fade-time")
-        .description("How long the fade will last in milliseconds.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How long the fade will last in milliseconds."))
         .defaultValue(100)
         .min(0)
         .sliderMax(500)
@@ -90,27 +90,27 @@ public class Blur extends Module {
 
     private final Setting<Boolean> meteor = sgScreens.add(new BoolSetting.Builder()
         .name("meteor")
-        .description("Applies blur to Meteor screens.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Applies blur to Meteor screens."))
         .defaultValue(true)
         .build());
 
     private final Setting<Boolean> inventories = sgScreens.add(new BoolSetting.Builder()
         .name("inventories")
-        .description("Applies blur to inventory screens.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Applies blur to inventory screens."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> chat = sgScreens.add(new BoolSetting.Builder()
         .name("chat")
-        .description("Applies blur when in chat.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Applies blur when in chat."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> other = sgScreens.add(new BoolSetting.Builder()
         .name("other")
-        .description("Applies blur to all other screen types.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Applies blur to all other screen types."))
         .defaultValue(true)
         .build()
     );

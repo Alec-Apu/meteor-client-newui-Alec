@@ -42,13 +42,13 @@ public class NbtCommand extends Command {
     private static final DynamicCommandExceptionType MALFORMED_ITEM_EXCEPTION = new DynamicCommandExceptionType(
         error -> Component.translatableEscape("arguments.item.malformed", error)
     );
-    private final MutableComponent copyButton = Component.literal("NBT").setStyle(Style.EMPTY
+    private final MutableComponent copyButton = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("NBT")).setStyle(Style.EMPTY
         .applyFormat(ChatFormatting.UNDERLINE)
         .withClickEvent(new MeteorClickEvent(
             this.toString("copy")
         ))
         .withHoverEvent(new HoverEvent.ShowText(
-            Component.literal("Copy the NBT data to your clipboard.")
+            Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Copy the NBT data to your clipboard."))
         )));
 
     public NbtCommand() {
@@ -202,7 +202,7 @@ public class NbtCommand extends Command {
                 int count = IntegerArgumentType.getInteger(context, "count");
                 stack.setCount(count);
                 setStack(stack);
-                info("Set mainhand stack count to %s.", count);
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Set mainhand stack count to %s."), count);
             }
 
             return SINGLE_SUCCESS;
@@ -215,12 +215,12 @@ public class NbtCommand extends Command {
 
     private boolean validBasic(ItemStack stack) {
         if (!mc.player.getAbilities().instabuild) {
-            error("Creative mode only.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("Creative mode only."));
             return false;
         }
 
         if (stack == ItemStack.EMPTY) {
-            error("You must hold an item in your main hand.");
+            error(meteordevelopment.meteorclient.utils.misc.Localization.text("You must hold an item in your main hand."));
             return false;
         }
         return true;

@@ -14,7 +14,6 @@ import meteordevelopment.meteorclient.utils.player.InvUtils;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 
 public class AutoWeapon extends Module {
@@ -22,21 +21,21 @@ public class AutoWeapon extends Module {
 
     private final Setting<Weapon> weapon = sgGeneral.add(new EnumSetting.Builder<Weapon>()
         .name("weapon")
-        .description("What type of weapon to use.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("What type of weapon to use."))
         .defaultValue(Weapon.Sword)
         .build()
     );
 
     private final Setting<Integer> threshold = sgGeneral.add(new IntSetting.Builder()
         .name("threshold")
-        .description("If the non-preferred weapon produces this much damage this will favor it over your preferred weapon.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("If the non-preferred weapon produces this much damage this will favor it over your preferred weapon."))
         .defaultValue(4)
         .build()
     );
 
     private final Setting<Boolean> antiBreak = sgGeneral.add(new BoolSetting.Builder()
         .name("anti-break")
-        .description("Prevents you from breaking your weapon.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Prevents you from breaking your weapon."))
         .defaultValue(false)
         .build()
     );
@@ -68,7 +67,7 @@ public class AutoWeapon extends Module {
                     damageS = currentDamageS;
                     slotS = i;
                 }
-            } else if (stack.getItem() instanceof AxeItem
+            } else if (stack.is(net.minecraft.tags.ItemTags.AXES)
                 && (!antiBreak.get() || (stack.getMaxDamage() - stack.getDamageValue()) > 10)) {
                 currentDamageA = DamageUtils.getAttackDamage(mc.player, target, stack);
                 if (currentDamageA > damageA) {

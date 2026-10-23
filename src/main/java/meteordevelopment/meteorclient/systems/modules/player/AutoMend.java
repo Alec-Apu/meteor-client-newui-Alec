@@ -27,7 +27,7 @@ public class AutoMend extends Module {
 
     private final Setting<List<Item>> blacklist = sgGeneral.add(new ItemListSetting.Builder()
         .name("blacklist")
-        .description("Item blacklist.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Item blacklist."))
         .filter(item -> item.components().get(DataComponents.DAMAGE) != null)
         .bypassFilterWhenSavingAndLoading()                                                        
         .build()
@@ -35,14 +35,14 @@ public class AutoMend extends Module {
 
     private final Setting<Boolean> force = sgGeneral.add(new BoolSetting.Builder()
         .name("force")
-        .description("Replaces item in offhand even if there is some other non-repairable item.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Replaces item in offhand even if there is some other non-repairable item."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Boolean> autoDisable = sgGeneral.add(new BoolSetting.Builder()
         .name("auto-disable")
-        .description("Automatically disables when there are no more items to repair.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Automatically disables when there are no more items to repair."))
         .defaultValue(true)
         .build()
     );
@@ -66,7 +66,7 @@ public class AutoMend extends Module {
 
         if (slot == -1) {
             if (autoDisable.get()) {
-                info("Repaired all items, disabling");
+                info(meteordevelopment.meteorclient.utils.misc.Localization.text("Repaired all items, disabling"));
 
                 if (didMove) {
                     int emptySlot = getEmptySlot();

@@ -47,12 +47,12 @@ public abstract class WAccount extends WHorizontalList {
 
         // Info
         if (account instanceof TokenAccount) {
-            WButton info = add(theme.button("Info")).widget();
+            WButton info = add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Info"))).widget();
             info.action = () -> mc.gui.setScreen(new AccountInfoScreen(theme, account));
         }
 
         // Login
-        WButton login = add(theme.button("Login")).widget();
+        WButton login = add(theme.button(meteordevelopment.meteorclient.utils.misc.Localization.text("Login"))).widget();
         login.action = () -> {
             login.minWidth = login.width;
             login.set("...");

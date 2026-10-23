@@ -25,21 +25,21 @@ public class BossStack extends Module {
 
     public final Setting<Boolean> stack = sgGeneral.add(new BoolSetting.Builder()
         .name("stack")
-        .description("Stacks boss bars and adds a counter to the text.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Stacks boss bars and adds a counter to the text."))
         .defaultValue(true)
         .build()
     );
 
     public final Setting<Boolean> hideName = sgGeneral.add(new BoolSetting.Builder()
         .name("hide-name")
-        .description("Hides the names of boss bars.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Hides the names of boss bars."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Double> spacing = sgGeneral.add(new DoubleSetting.Builder()
         .name("bar-spacing")
-        .description("The spacing reduction between each boss bar.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("The spacing reduction between each boss bar."))
         .defaultValue(10)
         .min(0)
         .build()

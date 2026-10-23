@@ -35,49 +35,49 @@ public class AutoWasp extends Module {
 
     private final Setting<Double> horizontalSpeed = sgGeneral.add(new DoubleSetting.Builder()
         .name("horizontal-speed")
-        .description("Horizontal elytra speed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Horizontal elytra speed."))
         .defaultValue(2.0)
         .build()
     );
 
     private final Setting<Double> verticalSpeed = sgGeneral.add(new DoubleSetting.Builder()
         .name("vertical-speed")
-        .description("Vertical elytra speed.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Vertical elytra speed."))
         .defaultValue(3.0)
         .build()
     );
 
     private final Setting<Boolean> avoidLanding = sgGeneral.add(new BoolSetting.Builder()
         .name("avoid-landing")
-        .description("Will try to avoid landing if your target is on the ground.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Will try to avoid landing if your target is on the ground."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> predictMovement = sgGeneral.add(new BoolSetting.Builder()
         .name("predict-movement")
-        .description("Tries to predict the targets position according to their movement.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Tries to predict the targets position according to their movement."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> onlyFriends = sgGeneral.add(new BoolSetting.Builder()
         .name("only-friends")
-        .description("Will only follow friends.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Will only follow friends."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Action> action = sgGeneral.add(new EnumSetting.Builder<Action>()
         .name("action-on-target-loss")
-        .description("What to do if you lose the target.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("What to do if you lose the target."))
         .defaultValue(Action.TOGGLE)
         .build()
     );
 
     private final Setting<Vector3d> offset = sgGeneral.add(new Vector3dSetting.Builder()
         .name("offset")
-        .description("How many blocks offset to wasp at from the target.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How many blocks offset to wasp at from the target."))
         .defaultValue(0, 0, 0)
         .build()
     );
@@ -100,10 +100,10 @@ public class AutoWasp extends Module {
             }, SortPriority.LowestDistance);
 
             if (target == null) {
-                error("No valid targets.");
+                error(meteordevelopment.meteorclient.utils.misc.Localization.text("No valid targets."));
                 toggle();
                 return;
-            } else info(target.getName().getString() + " set as target.");
+            } else info(target.getName().getString() + meteordevelopment.meteorclient.utils.misc.Localization.text(" set as target."));
         }
 
         jumpTimer = 0;
@@ -118,13 +118,13 @@ public class AutoWasp extends Module {
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         if (target.isRemoved()) {
-            warning("Lost target!");
+            warning(meteordevelopment.meteorclient.utils.misc.Localization.text("Lost target!"));
 
             switch (action.get()) {
                 case CHOOSE_NEW_TARGET -> onActivate();
                 case TOGGLE -> toggle();
                 case DISCONNECT ->
-                    mc.player.connection.handleDisconnect(new ClientboundDisconnectPacket(Component.literal("%s[%sAuto Wasp%s] Lost target.".formatted(ChatFormatting.GRAY, ChatFormatting.BLUE, ChatFormatting.GRAY))));
+                    mc.player.connection.handleDisconnect(new ClientboundDisconnectPacket(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("%s[%sAuto Wasp%s] Lost target.").formatted(ChatFormatting.GRAY, ChatFormatting.BLUE, ChatFormatting.GRAY))));
             }
 
             if (!isActive()) return;

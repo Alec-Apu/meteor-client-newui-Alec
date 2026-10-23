@@ -32,27 +32,27 @@ public class PotionTimersHud extends HudElement {
 
     private final Setting<List<MobEffect>> hiddenEffects = sgGeneral.add(new StatusEffectListSetting.Builder()
         .name("hidden-effects")
-        .description("Which effects not to show in the list.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Which effects not to show in the list."))
         .build()
     );
 
     private final Setting<Boolean> showAmbient = sgGeneral.add(new BoolSetting.Builder()
         .name("show-ambient")
-        .description("Whether to show ambient effects like from beacons and conduits.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Whether to show ambient effects like from beacons and conduits."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<ColorMode> colorMode = sgGeneral.add(new EnumSetting.Builder<ColorMode>()
         .name("color-mode")
-        .description("What color to use for effects.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("What color to use for effects."))
         .defaultValue(ColorMode.Effect)
         .build()
     );
 
     private final Setting<SettingColor> flatColor = sgGeneral.add(new ColorSetting.Builder()
         .name("flat-color")
-        .description("Color for flat color mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color for flat color mode."))
         .defaultValue(new SettingColor(225, 25, 25))
         .visible(() -> colorMode.get() == ColorMode.Flat)
         .build()
@@ -60,7 +60,7 @@ public class PotionTimersHud extends HudElement {
 
     private final Setting<Double> rainbowSpeed = sgGeneral.add(new DoubleSetting.Builder()
         .name("rainbow-speed")
-        .description("Rainbow speed of rainbow color mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Rainbow speed of rainbow color mode."))
         .defaultValue(0.05)
         .sliderMin(0.01)
         .sliderMax(0.2)
@@ -71,7 +71,7 @@ public class PotionTimersHud extends HudElement {
 
     private final Setting<Double> rainbowSpread = sgGeneral.add(new DoubleSetting.Builder()
         .name("rainbow-spread")
-        .description("Rainbow spread of rainbow color mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Rainbow spread of rainbow color mode."))
         .defaultValue(0.01)
         .sliderMin(0.001)
         .sliderMax(0.05)
@@ -82,7 +82,7 @@ public class PotionTimersHud extends HudElement {
 
     private final Setting<Double> rainbowSaturation = sgGeneral.add(new DoubleSetting.Builder()
         .name("rainbow-saturation")
-        .description("Saturation of rainbow color mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Saturation of rainbow color mode."))
         .defaultValue(1.0d)
         .sliderRange(0.0d, 1.0d)
         .visible(() -> colorMode.get() == ColorMode.Rainbow)
@@ -91,7 +91,7 @@ public class PotionTimersHud extends HudElement {
 
     private final Setting<Double> rainbowBrightness = sgGeneral.add(new DoubleSetting.Builder()
         .name("rainbow-brightness")
-        .description("Brightness of rainbow color mode.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Brightness of rainbow color mode."))
         .defaultValue(1.0d)
         .sliderRange(0.0d, 1.0d)
         .visible(() -> colorMode.get() == ColorMode.Rainbow)
@@ -100,21 +100,21 @@ public class PotionTimersHud extends HudElement {
 
     private final Setting<Boolean> shadow = sgGeneral.add(new BoolSetting.Builder()
         .name("shadow")
-        .description("Renders shadow behind text.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Renders shadow behind text."))
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Alignment> alignment = sgGeneral.add(new EnumSetting.Builder<Alignment>()
         .name("alignment")
-        .description("Horizontal alignment.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Horizontal alignment."))
         .defaultValue(Alignment.Auto)
         .build()
     );
 
     private final Setting<Integer> border = sgGeneral.add(new IntSetting.Builder()
         .name("border")
-        .description("How much space to add around the element.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("How much space to add around the element."))
         .defaultValue(0)
         .build()
     );
@@ -123,14 +123,14 @@ public class PotionTimersHud extends HudElement {
 
     private final Setting<Boolean> customScale = sgScale.add(new BoolSetting.Builder()
         .name("custom-scale")
-        .description("Applies a custom scale to this hud element.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Applies a custom scale to this hud element."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Double> scale = sgScale.add(new DoubleSetting.Builder()
         .name("scale")
-        .description("Custom scale.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Custom scale."))
         .visible(customScale::get)
         .defaultValue(1)
         .min(0.5)
@@ -142,14 +142,14 @@ public class PotionTimersHud extends HudElement {
 
     private final Setting<Boolean> background = sgBackground.add(new BoolSetting.Builder()
         .name("background")
-        .description("Displays background.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Displays background."))
         .defaultValue(false)
         .build()
     );
 
     private final Setting<SettingColor> backgroundColor = sgBackground.add(new ColorSetting.Builder()
         .name("background-color")
-        .description("Color used for the background.")
+        .description(meteordevelopment.meteorclient.utils.misc.Localization.text("Color used for the background."))
         .visible(background::get)
         .defaultValue(new SettingColor(25, 25, 25, 50))
         .build()
@@ -175,7 +175,7 @@ public class PotionTimersHud extends HudElement {
     @Override
     public void tick(HudRenderer renderer) {
         if (mc.player == null || (isInEditor() && hasNoVisibleEffects())) {
-            setSize(renderer.textWidth("Potion Timers 0:00", shadow.get(), getScale()), renderer.textHeight(shadow.get(), getScale()));
+            setSize(renderer.textWidth(meteordevelopment.meteorclient.utils.misc.Localization.text("Potion Timers 0:00"), shadow.get(), getScale()), renderer.textHeight(shadow.get(), getScale()));
             return;
         }
 
@@ -206,7 +206,7 @@ public class PotionTimersHud extends HudElement {
         }
 
         if (mc.player == null || (isInEditor() && hasNoVisibleEffects())) {
-            renderer.text("Potion Timers 0:00", x, y, Color.WHITE, shadow.get(), getScale());
+            renderer.text(meteordevelopment.meteorclient.utils.misc.Localization.text("Potion Timers 0:00"), x, y, Color.WHITE, shadow.get(), getScale());
             return;
         }
 

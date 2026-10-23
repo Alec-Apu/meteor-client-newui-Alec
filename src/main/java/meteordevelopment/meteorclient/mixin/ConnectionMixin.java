@@ -58,7 +58,7 @@ public abstract class ConnectionMixin {
     @Inject(method = "disconnect(Lnet/minecraft/network/chat/Component;)V", at = @At("HEAD"))
     private void disconnect(Component reason, CallbackInfo ci) {
         if (Modules.get().get(HighwayBuilder.class).isActive()) {
-            MutableComponent text = Component.literal("%n%n%s[%sHighway Builder%s] Statistics:%n".formatted(ChatFormatting.GRAY, ChatFormatting.BLUE, ChatFormatting.GRAY));
+            MutableComponent text = Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("%n%n%s[%sHighway Builder%s] Statistics:%n").formatted(ChatFormatting.GRAY, ChatFormatting.BLUE, ChatFormatting.GRAY));
             text.append(Modules.get().get(HighwayBuilder.class).getStatsText());
 
             ((MutableComponent) reason).append(text);

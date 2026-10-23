@@ -26,11 +26,11 @@ public class WaypointCommand extends Command {
     @Override
     public void build(LiteralArgumentBuilder<ClientSuggestionProvider> builder) {
         builder.then(literal("list").executes(_ -> {
-            if (Waypoints.get().isEmpty()) error("No created waypoints.");
+            if (Waypoints.get().isEmpty()) error(meteordevelopment.meteorclient.utils.misc.Localization.text("No created waypoints."));
             else {
-                info(ChatFormatting.WHITE + "Created Waypoints:");
+                info(ChatFormatting.WHITE + meteordevelopment.meteorclient.utils.misc.Localization.text("Created Waypoints:"));
                 for (Waypoint waypoint : Waypoints.get()) {
-                    info("Name: (highlight)'%s'(default), Dimension: (highlight)%s(default), Pos: (highlight)%s(default)", waypoint.name.get(), waypoint.dimension.get(), waypointPos(waypoint));
+                    info(meteordevelopment.meteorclient.utils.misc.Localization.text("Name: (highlight)'%s'(default), Dimension: (highlight)%s(default), Pos: (highlight)%s(default)"), waypoint.name.get(), waypoint.dimension.get(), waypointPos(waypoint));
                 }
             }
             return SINGLE_SUCCESS;
@@ -38,10 +38,10 @@ public class WaypointCommand extends Command {
 
         builder.then(literal("get").then(argument("waypoint", WaypointArgumentType.create()).executes(context -> {
             Waypoint waypoint = WaypointArgumentType.get(context);
-            info("Name: " + ChatFormatting.WHITE + waypoint.name.get());
-            info("Actual Dimension: " + ChatFormatting.WHITE + waypoint.dimension.get());
-            info("Position: " + ChatFormatting.WHITE + waypointFullPos(waypoint));
-            info("Visible: " + (waypoint.visible.get() ? ChatFormatting.GREEN + "True" : ChatFormatting.RED + "False"));
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Name: ") + ChatFormatting.WHITE + waypoint.name.get());
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Actual Dimension: ") + ChatFormatting.WHITE + waypoint.dimension.get());
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Position: ") + ChatFormatting.WHITE + waypointFullPos(waypoint));
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("Visible: ") + (waypoint.visible.get() ? ChatFormatting.GREEN + meteordevelopment.meteorclient.utils.misc.Localization.text("True") : ChatFormatting.RED + meteordevelopment.meteorclient.utils.misc.Localization.text("False")));
             return SINGLE_SUCCESS;
         })));
 
@@ -56,7 +56,7 @@ public class WaypointCommand extends Command {
         builder.then(literal("delete").then(argument("waypoint", WaypointArgumentType.create()).executes(context -> {
             Waypoint waypoint = WaypointArgumentType.get(context);
 
-            info("The waypoint (highlight)'%s'(default) has been deleted.", waypoint.name.get());
+            info(meteordevelopment.meteorclient.utils.misc.Localization.text("The waypoint (highlight)'%s'(default) has been deleted."), waypoint.name.get());
 
             Waypoints.get().remove(waypoint);
 
@@ -92,7 +92,7 @@ public class WaypointCommand extends Command {
 
         Waypoints.get().add(waypoint);
 
-        info("Created waypoint with name: (highlight)%s(default)", waypoint.name.get());
+        info(meteordevelopment.meteorclient.utils.misc.Localization.text("Created waypoint with name: (highlight)%s(default)"), waypoint.name.get());
         return SINGLE_SUCCESS;
     }
 }

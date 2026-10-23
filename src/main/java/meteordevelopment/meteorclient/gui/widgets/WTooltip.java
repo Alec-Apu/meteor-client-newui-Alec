@@ -19,7 +19,24 @@ public abstract class WTooltip extends WContainer implements WRoot {
 
     @Override
     public void init() {
-        add(theme.label(text)).pad(4);
+        // Wrap by code point and measured width, including text without spaces.
+        var lines = add(theme.verticalList()).pad(4).widget();
+        double maxWidth = Math.max(80, Math.min(theme.scale(420),
+            meteordevelopment.meteorclient.utils.Utils.getWindowWidth() * 0.6));
+        for (String paragraph : text.split("\n", -1)) {
+            StringBuilder line = new StringBuilder();
+            for (int offset = 0; offset < paragraph.length();) {
+                int cp = paragraph.codePointAt(offset);
+                String character = new String(Character.toChars(cp));
+                if (!line.isEmpty() && theme.textWidth(line + character) > maxWidth) {
+                    lines.add(theme.label(line.toString()));
+                    line.setLength(0);
+                }
+                line.append(character);
+                offset += Character.charCount(cp);
+            }
+            lines.add(theme.label(line.toString()));
+        }
     }
 
     @Override

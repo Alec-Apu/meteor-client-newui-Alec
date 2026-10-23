@@ -21,7 +21,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
 import org.spongepowered.asm.mixin.Mixin;
@@ -57,7 +57,7 @@ public abstract class BookViewScreenMixin extends Screen {
     @Inject(method = "init", at = @At("TAIL"))
     private void onInit(CallbackInfo ci) {
         addRenderableWidget(
-            new Button.Builder(Component.literal("Copy"), _ -> {
+            new Button.Builder(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Copy")), _ -> {
                 ListTag listTag = new ListTag();
                 for (int i = 0; i < bookAccess.getPageCount(); i++)
                     listTag.add(StringTag.valueOf(bookAccess.getPage(i).getString()));
@@ -81,9 +81,9 @@ public abstract class BookViewScreenMixin extends Screen {
                 long size = MemoryUtil.memLengthUTF8(encoded, true);
 
                 if (size > available) {
-                    ChatUtils.error("Could not copy to clipboard: Out of memory.");
+                    ChatUtils.error(meteordevelopment.meteorclient.utils.misc.Localization.text("Could not copy to clipboard: Out of memory."));
                 } else {
-                    GLFW.glfwSetClipboardString(mc.getWindow().handle(), encoded);
+                    mc.keyboardHandler.setClipboard(encoded);
                 }
             })
                 .pos(4, 4)
@@ -105,7 +105,7 @@ public abstract class BookViewScreenMixin extends Screen {
         InteractionHand hand2 = hand; // Honestly
 
         addRenderableWidget(
-            new Button.Builder(Component.literal("Edit title & author"), _ -> mc.gui.setScreen(new EditBookTitleAndAuthorScreen(GuiThemes.get(), book, hand2)))
+            new Button.Builder(Component.literal(meteordevelopment.meteorclient.utils.misc.Localization.text("Edit title & author")), _ -> mc.gui.setScreen(new EditBookTitleAndAuthorScreen(GuiThemes.get(), book, hand2)))
                 .pos(4, 4 + 20 + 2)
                 .size(120, 20)
                 .build()

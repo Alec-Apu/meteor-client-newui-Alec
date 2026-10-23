@@ -17,7 +17,25 @@
     <img src="https://img.shields.io/endpoint?url=https://ghloc.vercel.app/api/MeteorDevelopment/meteor-client/badge?filter=.java$&label=lines%20of%20code&color=blue" alt="GitHub lines of code"/>
 </div>
 
+## Minecraft 26.3 更新
+
+本分支已从 Minecraft 26.2 适配至 **26.3**，保留自定义界面。运行环境：Java 25、Fabric Loader 0.19.3 或更新版本。
+
+维护者：[Alec（Alec-Apu）](https://github.com/Alec-Apu)。
+
+上游 Meteor Client 的版权、贡献者署名和 GPL-3.0 许可证继续保留。
+
+更新内容见 [更新日志](CHANGELOG.md)，安装、测试范围和已知限制见 [26.3 适配说明](MIGRATION_26.3.md)。
+
 ## Usage
+
+### 26.3 简体中文本地版
+
+本分支 `minecraft-26.3-zh-cn` 提供简体中文界面，语言资源为 UTF-8。模块和设置的内部 ID、英文命令语法与配置键保持原样；模块搜索支持中文名称和英文名称。汉化版默认显示中文，不依赖 Minecraft 本身的语言选择。
+
+使用 Java 25 执行 `./gradlew build -Pbuild_number=zh-cn-1.0.1`，构建文件为 `build/libs/meteor-client-26.3-zh-cn-1.0.1.jar`。安装时以此文件替换原 Meteor JAR，放入 Minecraft 26.3 Fabric 实例的 `mods` 目录。
+
+完整清单见 [CHINESE_TRANSLATION.md](CHINESE_TRANSLATION.md)，测试范围和保留项见 [CHINESE_TRANSLATION_REVIEW.md](CHINESE_TRANSLATION_REVIEW.md)，译文来源见 [LOCALIZATION_SOURCES.md](LOCALIZATION_SOURCES.md)。本次汉化尚未上传 GitHub。
 
 ### Building
 - Clone this repository

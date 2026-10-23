@@ -14,7 +14,7 @@ public abstract class TabScreen extends WidgetScreen {
     public final Tab tab;
 
     public TabScreen(GuiTheme theme, Tab tab) {
-        super(theme, tab.name);
+        super(theme, meteordevelopment.meteorclient.utils.misc.Localization.text(tab.name));
 
         this.tab = tab;
     }

@@ -41,7 +41,7 @@ public class SayCommand extends Command {
                     ClientPacketListener handler = mc.getConnection();
                     LastSeenMessagesTracker.Update lastSeenMessages = ((ClientPacketListenerAccessor) handler).meteor$getLastSeenMessages().generateAndApplyUpdate();
                     MessageSignature messageSignatureData = ((ClientPacketListenerAccessor) handler).meteor$getSignedMessageEncoder().pack(new SignedMessageBody(message, instant, l, lastSeenMessages.lastSeen()));
-                    handler.send(new ServerboundChatPacket(message, instant, l, messageSignatureData, lastSeenMessages.update()));
+                    handler.send(new ServerboundChatPacket(message, instant, l, java.util.Optional.ofNullable(messageSignatureData), lastSeenMessages.update()));
                 }
             }
 

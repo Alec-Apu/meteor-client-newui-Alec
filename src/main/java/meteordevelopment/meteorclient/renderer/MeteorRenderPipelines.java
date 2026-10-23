@@ -5,15 +5,15 @@
 
 package meteordevelopment.meteorclient.renderer;
 
-import com.mojang.blaze3d.pipeline.BindGroupLayout;
-import com.mojang.blaze3d.pipeline.BlendFunction;
-import com.mojang.blaze3d.PrimitiveTopology;
-import com.mojang.blaze3d.pipeline.ColorTargetState;
-import com.mojang.blaze3d.pipeline.DepthStencilState;
-import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.blaze3d.platform.CompareOp;
-import com.mojang.blaze3d.shaders.UniformType;
-import com.mojang.blaze3d.systems.GpuDevice;
+import com.mojang.renderpearl.api.pipeline.BindGroupLayout;
+import com.mojang.renderpearl.api.pipeline.BlendFunction;
+import com.mojang.renderpearl.api.pipeline.PrimitiveTopology;
+import com.mojang.renderpearl.api.pipeline.ColorTargetState;
+import com.mojang.renderpearl.api.pipeline.DepthStencilState;
+import com.mojang.renderpearl.api.pipeline.RenderPipeline;
+import com.mojang.renderpearl.api.pipeline.CompareOp;
+import com.mojang.renderpearl.api.pipeline.UniformType;
+import com.mojang.renderpearl.api.device.GpuDevice;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import meteordevelopment.meteorclient.MeteorClient;
@@ -90,7 +90,7 @@ public abstract class MeteorRenderPipelines {
     // UI
 
     public static final RenderPipeline UI_COLORED = add(new ExtendedRenderPipelineBuilder(MESH_UNIFORMS)
-        .withLocation(MeteorClient.identifier("pipeline/ui_colored"))
+        .withShaderDefine("METEOR_UI").withLocation(MeteorClient.identifier("pipeline/ui_colored"))
         .withVertexBinding(0, MeteorVertexFormats.POS2_COLOR).withPrimitiveTopology(PrimitiveTopology.TRIANGLES)
         .withVertexShader(MeteorClient.identifier("shaders/pos_color.vert"))
         .withFragmentShader(MeteorClient.identifier("shaders/pos_color.frag"))
@@ -101,7 +101,7 @@ public abstract class MeteorRenderPipelines {
     );
 
     public static final RenderPipeline UI_COLORED_LINES = add(new ExtendedRenderPipelineBuilder(MESH_UNIFORMS)
-        .withLocation(MeteorClient.identifier("pipeline/ui_colored_lines"))
+        .withShaderDefine("METEOR_UI").withLocation(MeteorClient.identifier("pipeline/ui_colored_lines"))
         .withVertexBinding(0, MeteorVertexFormats.POS2_COLOR).withPrimitiveTopology(PrimitiveTopology.DEBUG_LINES)
         .withVertexShader(MeteorClient.identifier("shaders/pos_color.vert"))
         .withFragmentShader(MeteorClient.identifier("shaders/pos_color.frag"))
@@ -116,7 +116,7 @@ public abstract class MeteorRenderPipelines {
         .withVertexBinding(0, MeteorVertexFormats.POS2_TEXTURE_COLOR).withPrimitiveTopology(PrimitiveTopology.TRIANGLES)
         .withVertexShader(MeteorClient.identifier("shaders/pos_tex_color.vert"))
         .withFragmentShader(MeteorClient.identifier("shaders/pos_tex_color.frag"))
-        .withBindGroupLayout(BindGroupLayout.builder().withSampler("u_Texture").build())
+        .withBindGroupLayout(BindGroupLayout.builder().withUniform("u_Texture", UniformType.COMBINED_IMAGE_SAMPLER).build())
         .withDepthStencilState(new DepthStencilState(CompareOp.ALWAYS_PASS, false))
         .withColorTargetState(new ColorTargetState(BlendFunction.TRANSLUCENT))
         .withCull(true)
@@ -128,7 +128,7 @@ public abstract class MeteorRenderPipelines {
         .withVertexBinding(0, MeteorVertexFormats.POS2_TEXTURE_COLOR).withPrimitiveTopology(PrimitiveTopology.TRIANGLES)
         .withVertexShader(MeteorClient.identifier("shaders/text.vert"))
         .withFragmentShader(MeteorClient.identifier("shaders/text.frag"))
-        .withBindGroupLayout(BindGroupLayout.builder().withSampler("u_Texture").build())
+        .withBindGroupLayout(BindGroupLayout.builder().withUniform("u_Texture", UniformType.COMBINED_IMAGE_SAMPLER).build())
         .withDepthStencilState(new DepthStencilState(CompareOp.ALWAYS_PASS, false))
         .withColorTargetState(new ColorTargetState(BlendFunction.TRANSLUCENT))
         .withCull(true)
@@ -143,7 +143,7 @@ public abstract class MeteorRenderPipelines {
         .withVertexShader(MeteorClient.identifier("shaders/post-process/base.vert"))
         .withFragmentShader(MeteorClient.identifier("shaders/post-process/outline.frag"))
         .withBindGroupLayout(BindGroupLayout.builder()
-            .withSampler("u_Texture")
+            .withUniform("u_Texture", UniformType.COMBINED_IMAGE_SAMPLER)
             .withUniform("PostData", UniformType.UNIFORM_BUFFER)
             .withUniform("OutlineData", UniformType.UNIFORM_BUFFER)
             .build())
@@ -159,8 +159,8 @@ public abstract class MeteorRenderPipelines {
         .withVertexShader(MeteorClient.identifier("shaders/post-process/base.vert"))
         .withFragmentShader(MeteorClient.identifier("shaders/post-process/image.frag"))
         .withBindGroupLayout(BindGroupLayout.builder()
-            .withSampler("u_Texture")
-            .withSampler("u_TextureI")
+            .withUniform("u_Texture", UniformType.COMBINED_IMAGE_SAMPLER)
+            .withUniform("u_TextureI", UniformType.COMBINED_IMAGE_SAMPLER)
             .withUniform("PostData", UniformType.UNIFORM_BUFFER)
             .withUniform("ImageData", UniformType.UNIFORM_BUFFER)
             .build())
@@ -178,7 +178,7 @@ public abstract class MeteorRenderPipelines {
         .withVertexShader(MeteorClient.identifier("shaders/blur.vert"))
         .withFragmentShader(MeteorClient.identifier("shaders/blur_down.frag"))
         .withBindGroupLayout(BindGroupLayout.builder()
-            .withSampler("u_Texture")
+            .withUniform("u_Texture", UniformType.COMBINED_IMAGE_SAMPLER)
             .withUniform("BlurData", UniformType.UNIFORM_BUFFER)
             .build())
         .withDepthStencilState(new DepthStencilState(CompareOp.ALWAYS_PASS, false))
@@ -193,7 +193,7 @@ public abstract class MeteorRenderPipelines {
         .withVertexShader(MeteorClient.identifier("shaders/blur.vert"))
         .withFragmentShader(MeteorClient.identifier("shaders/blur_up.frag"))
         .withBindGroupLayout(BindGroupLayout.builder()
-            .withSampler("u_Texture")
+            .withUniform("u_Texture", UniformType.COMBINED_IMAGE_SAMPLER)
             .withUniform("BlurData", UniformType.UNIFORM_BUFFER)
             .build())
         .withDepthStencilState(new DepthStencilState(CompareOp.ALWAYS_PASS, false))
@@ -203,11 +203,11 @@ public abstract class MeteorRenderPipelines {
     );
 
     public static final RenderPipeline BLUR_PASSTHROUGH = add(new ExtendedRenderPipelineBuilder(MESH_UNIFORMS)
-        .withLocation(MeteorClient.identifier("pipeline/blur/up"))
+        .withLocation(MeteorClient.identifier("pipeline/blur/passthrough"))
         .withVertexBinding(0, MeteorVertexFormats.POS2).withPrimitiveTopology(PrimitiveTopology.TRIANGLES)
         .withVertexShader(MeteorClient.identifier("shaders/passthrough.vert"))
         .withFragmentShader(MeteorClient.identifier("shaders/passthrough.frag"))
-        .withBindGroupLayout(BindGroupLayout.builder().withSampler("u_Texture").build())
+        .withBindGroupLayout(BindGroupLayout.builder().withUniform("u_Texture", UniformType.COMBINED_IMAGE_SAMPLER).build())
         .withDepthStencilState(new DepthStencilState(CompareOp.ALWAYS_PASS, false))
         .withColorTargetState(new ColorTargetState(BlendFunction.TRANSLUCENT))
         .withCull(false)
@@ -219,23 +219,43 @@ public abstract class MeteorRenderPipelines {
         return pipeline;
     }
 
-    public static void precompile() {
-        GpuDevice device = RenderSystem.getDevice();
-        ResourceManager resources = Minecraft.getInstance().getResourceManager();
+    private static com.mojang.blaze3d.pipeline.PipelineCache cache;
+    private static final java.util.Map<Object, Boolean> LINE_SMOOTH = new java.util.IdentityHashMap<>();
 
-        for (RenderPipeline pipeline : PIPELINES) {
-            device.precompilePipeline(pipeline, (identifier, _) -> {
-                var resource = resources.getResource(identifier).get();
+    public static boolean lineSmooth(Object backend) { return LINE_SMOOTH.getOrDefault(backend, false); }
 
-                try (var in = resource.open()) {
-                    return IOUtils.toString(in, StandardCharsets.UTF_8);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-        }
+    public static com.mojang.renderpearl.api.pipeline.CompiledRenderPipeline compiled(RenderPipeline pipeline) {
+        return cache.get(pipeline);
     }
 
+    public static void precompile() {
+        if (cache != null) cache.close();
+        ResourceManager resources = Minecraft.getInstance().getResourceManager();
+        var includes = net.minecraft.client.renderer.ShaderManager.listAllIncludes(resources);
+        cache = new com.mojang.blaze3d.pipeline.PipelineCache(RenderSystem.getDevice(), new com.mojang.renderpearl.api.pipeline.ShaderSource() {
+            @Override
+            public String getShader(net.minecraft.resources.Identifier identifier, com.mojang.renderpearl.api.pipeline.ShaderType type) {
+                try (var in = resources.getResourceOrThrow(identifier).open()) {
+                    return IOUtils.toString(in, StandardCharsets.UTF_8);
+                } catch (IOException e) {
+                    throw new RuntimeException("Failed to load Meteor shader " + identifier, e);
+                }
+            }
+
+            @Override
+            public CachedIncludeSource getInclude(net.minecraft.resources.Identifier identifier) {
+                return includes.get(identifier);
+            }
+
+            @Override
+            public void close() {}
+        });
+        LINE_SMOOTH.clear();
+        for (RenderPipeline pipeline : PIPELINES) {
+            var compiled = (com.mojang.renderpearl.frontend.FrontendRenderPipeline) cache.get(pipeline);
+            LINE_SMOOTH.put(compiled.backendRenderPipeline(), ((meteordevelopment.meteorclient.mixininterface.IRenderPipeline) pipeline).meteor$getLineSmooth());
+        }
+    }
     private MeteorRenderPipelines() {
     }
 }
