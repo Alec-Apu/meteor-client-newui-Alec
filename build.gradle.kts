@@ -10,7 +10,7 @@ base {
     archivesName = archivesBaseName
     group = mavenGroup
 
-    val suffix = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.2")
+    val suffix = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.3")
     version = "${libs.versions.minecraft.get()}-$suffix"
 }
 
@@ -47,6 +47,23 @@ val jij = configurations.create("jij")
 val launcher = sourceSets.create("launcher") {
     java.srcDir("src/launcher/java")
 }
+
+// Dependency-free regression runner for the Minecraft-independent Auto Mace state machine.
+val autoMaceTest = sourceSets.create("autoMaceTest") {
+    compileClasspath += sourceSets.main.get().output
+    runtimeClasspath += output + compileClasspath
+}
+val testAutoMace = tasks.register<JavaExec>("testAutoMace") {
+    group = "verification"
+    description = "Runs Auto Mace decision and lifecycle regression tests."
+    dependsOn(autoMaceTest.classesTaskName)
+    classpath = autoMaceTest.runtimeClasspath
+    mainClass.set("meteordevelopment.meteorclient.systems.modules.combat.mace.AutoMaceControllerTest")
+    javaLauncher.set(javaToolchains.launcherFor {
+        languageVersion.set(JavaLanguageVersion.of(libs.versions.jdk.get().toInt()))
+    })
+}
+tasks.named("check") { dependsOn(testAutoMace) }
 
 configurations {
     // include mods
@@ -162,7 +179,7 @@ fun toMinecraftCompat(version: String): String {
 
 tasks {
     processResources {
-        val buildNumber = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.2")
+        val buildNumber = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.3")
         val commit = providers.gradleProperty("commit").getOrElse("")
 
         val propertyMap = mapOf(

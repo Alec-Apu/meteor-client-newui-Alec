@@ -1,13 +1,15 @@
 ## Minecraft 26.2 简体中文汉化版
 
-当前版本：1.0.2。右 Shift 打开界面 → 配置 → 视觉 → **Meteor 语言**，选择「简体中文」或「English」，立即刷新并保存；与 Minecraft 语言独立。
+当前版本：1.0.3。右 Shift 打开界面 → 配置 → 视觉 → **Meteor 语言**，选择「简体中文」或「English」，立即刷新并保存；与 Minecraft 语言独立。
+
+新增战斗模块 **Auto Mace（自动重锤）**：右 Shift → 战斗，详细设置、实际测试和限制见 [AUTO_MACE.md](AUTO_MACE.md)。风弹和连击默认关闭。
 
 维护者：Alec。此版由原始 26.2 源码适配汉化，保留上游版权与 GPL-3.0 许可证。
 
 - 环境：Minecraft 26.2、Java 25、Fabric Loader 0.19.3 或更新兼容版本。
-- 安装：将 `meteor-client-26.2-zh-cn-1.0.2.jar` 放入 **26.2 实例**的 `mods` 文件夹，替换该实例已有的 Meteor JAR；右 Shift 打开界面。
+- 安装：将 `meteor-client-26.2-zh-cn-1.0.3.jar` 放入 **26.2 实例**的 `mods` 文件夹，替换该实例已有的 Meteor JAR；右 Shift 打开界面。
 - 本包只适用于 26.2，请勿放入 26.3 实例。
-- 构建：使用 JDK 25 执行 `./gradlew build -Pbuild_number=zh-cn-1.0.2`；输出位于 `build/libs`。
+- 构建：使用 JDK 25 执行 `./gradlew build -Pbuild_number=zh-cn-1.0.3`；输出位于 `build/libs`。
 - 汉化覆盖模块、设置、描述、界面、HUD、命令帮助与反馈；命令语法、配置键和自定义文字保留原值。
 - 本地测试结果及逐文件变更见 `CHINESE_TRANSLATION_REVIEW.md`；尚未上传 GitHub。
 
