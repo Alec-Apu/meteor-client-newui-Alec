@@ -10,7 +10,7 @@ base {
     archivesName = archivesBaseName
     group = mavenGroup
 
-    val suffix = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.5")
+    val suffix = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.6")
     version = "${libs.versions.minecraft.get()}-$suffix"
 }
 
@@ -164,7 +164,7 @@ fun toMinecraftCompat(version: String): String {
 
 tasks {
     processResources {
-        val buildNumber = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.5")
+        val buildNumber = providers.gradleProperty("build_number").getOrElse("zh-cn-1.0.6")
         val commit = providers.gradleProperty("commit").getOrElse("")
 
         val propertyMap = mapOf(
@@ -271,3 +271,20 @@ val autoMacePolicyTest = tasks.register<JavaExec>("autoMacePolicyTest") {
     })
 }
 tasks.named("check") { dependsOn(autoMacePolicyTest) }
+
+val commandBookTests = sourceSets.create("commandBookTests") {
+    java.srcDir("src/test-command-book/java")
+    compileClasspath += sourceSets.main.get().output
+    runtimeClasspath += sourceSets.main.get().output
+}
+val commandBookTest = tasks.register<JavaExec>("commandBookTest") {
+    group = "verification"
+    description = "Runs command notebook privacy, scope, history and dispatch regression tests."
+    dependsOn(tasks.named(commandBookTests.classesTaskName))
+    classpath = commandBookTests.runtimeClasspath
+    mainClass.set("meteordevelopment.meteorclient.systems.commandbook.CommandNotebookTest")
+    javaLauncher.set(javaToolchains.launcherFor {
+        languageVersion.set(JavaLanguageVersion.of(libs.versions.jdk.get().toInt()))
+    })
+}
+tasks.named("check") { dependsOn(commandBookTest) }

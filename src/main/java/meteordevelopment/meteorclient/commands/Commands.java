@@ -80,6 +80,8 @@ public class Commands {
     }
 
     public static void dispatch(String message) throws CommandSyntaxException {
+        var commandBook = meteordevelopment.meteorclient.systems.commandbook.CommandBook.get();
+        if (commandBook != null) commandBook.record(meteordevelopment.meteorclient.systems.config.Config.get().prefix.get() + message);
         DISPATCHER.execute(message, mc.getConnection().getSuggestionsProvider());
     }
 
